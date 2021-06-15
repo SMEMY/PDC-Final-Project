@@ -13,6 +13,5 @@ when ever you have clone the project for the first time, so your Laravel (php ar
 # 2- npm install
 # 3- cp .env.example .env
 # 4- php artisan key:generate
-
-* ofter all configuration, test the command (php artisan serve).
+# After all configuration, test the command (php artisan serve).
 * #NOTE: these requires when you clon the project for the first time.
