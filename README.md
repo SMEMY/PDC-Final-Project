@@ -16,6 +16,10 @@
 * git clone https://github.com/SMEMY/PDC-Final-Project.git
 # Add remote repositry
 * git remote add origin https://github.com/SMEMY/PDC-Project.git
+# making new branch.
+* git branch (new branch name)
+# change the branche for using.
+* git checkout (type the new created branch that you want to use it for development)
 # How to add files and folders to be trace by git?
 * git add . (this cammand used for all new changes that did with files)
 # OR
