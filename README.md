@@ -12,6 +12,12 @@
 * git config --global user.email "Email@gmail.com"
 # How to make git folder locally in computer?
 * git init
+# How to add files and folders to be trace by git?
+* git add . (this cammand used for all new changes that did with files)
+# OR
+* git add --a (this cammand used for all new changes that did with files)
+# After adding all files for tracing, these files should be commited(mean should clearify what changes done to the files?)
+* git commit -m "the message you should write."
 # How to clone the remote git repositry?
 * git clone https://github.com/SMEMY/PDC-Final-Project.git
 # 
