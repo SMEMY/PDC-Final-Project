@@ -10,6 +10,8 @@
 # How to setup git in local computer?
 * git config --global user.name "name"
 * git config --global user.email "Email@gmail.com"
+# How to make git folder locally in computer?
+* git init
 # How to clone the remote git repositry?
 * git clone https://github.com/SMEMY/PDC-Final-Project.git
 # 
