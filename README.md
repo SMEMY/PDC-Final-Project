@@ -16,6 +16,13 @@
 * git clone https://github.com/SMEMY/PDC-Final-Project.git
 # Add remote repositry
 * git remote add origin https://github.com/SMEMY/PDC-Project.git
+when ever you have clone the project for the first time, so your Laravel (php artisan serve) command don't work. beacuse i just upload the project code not the laravel frame work code.  soooooooooo if you want to the laravel project. then type these commands in your CMD or terminal step by step. (be sure that you are connected with the #Internet.)
+# 1- composer install
+# 2- npm install
+# 3- cp .env.example .env
+# 4- php artisan key:generate
+# After all configuration, test the command (php artisan serve).
+* NOTE: these steps requires when you are cloning the project for the first time.
 # making new branch.
 * git branch (new branch name)
 # change the branche for using.
@@ -31,10 +38,3 @@
 # Now you able to push the new changes to the remote repositry.
 * git push -u origin (current using branch name)
 
-when ever you have clone the project for the first time, so your Laravel (php artisan serve) command don't work. beacuse i just upload the project code not the laravel frame work code.  soooooooooo if you want to the laravel project. then type these commands in your CMD or terminal step by step. (be sure that you are connected with the #Internet.)
-# 1- composer install
-# 2- npm install
-# 3- cp .env.example .env
-# 4- php artisan key:generate
-# After all configuration, test the command (php artisan serve).
-* NOTE: these steps requires when you are cloning the project for the first time.
