@@ -7,6 +7,9 @@
 * Install npm (node package manager)
 * * https://nodejs.org/en/
 
+# How to clone the remote git repositry?
+* git clone https://github.com/SMEMY/PDC-Final-Project.git
+# 
 
 when ever you have clone the project for the first time, so your Laravel (php artisan serve) command don't work. beacuse i just upload the project code not the laravel frame work code.  soooooooooo if you want to the laravel project. then type these commands in your CMD or terminal step by step. (be sure that you are connected with the #Internet.)
 # 1- composer install
