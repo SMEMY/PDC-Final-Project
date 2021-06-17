@@ -12,15 +12,20 @@
 * git config --global user.email "Email@gmail.com"
 # How to make git folder locally in computer?
 * git init
+# How to clone the remote git repositry?
+* git clone https://github.com/SMEMY/PDC-Final-Project.git
+# Add remote repositry
+* git remote add origin https://github.com/SMEMY/PDC-Project.git
 # How to add files and folders to be trace by git?
 * git add . (this cammand used for all new changes that did with files)
 # OR
 * git add --a (this cammand used for all new changes that did with files)
+# OR adding every file at once.
+* git add (fileName)
 # After adding all files for tracing, these files should be commited(mean should clearify what changes done to the files?)
 * git commit -m "the message you should write."
-# How to clone the remote git repositry?
-* git clone https://github.com/SMEMY/PDC-Final-Project.git
-# 
+# Now you able to push the new changes to the remote repositry.
+* git push -u origin (current using branch name)
 
 when ever you have clone the project for the first time, so your Laravel (php artisan serve) command don't work. beacuse i just upload the project code not the laravel frame work code.  soooooooooo if you want to the laravel project. then type these commands in your CMD or terminal step by step. (be sure that you are connected with the #Internet.)
 # 1- composer install
