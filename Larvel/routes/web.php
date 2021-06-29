@@ -14,11 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('program-enrollment');
+});
 
-Route::view('/','welcome');
+
+
+
+
+
+
+
+
+
+
+
+// Route::view('/','test');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
