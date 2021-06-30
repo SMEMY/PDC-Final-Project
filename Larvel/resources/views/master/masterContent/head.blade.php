@@ -31,6 +31,15 @@
 
 	<!-- Main CSS -->
 	<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+		
+	<!-- Select2 CSS -->
+	<link rel="stylesheet" href="assets/css/select2.min.css">
+
+	<!-- Datetimepicker CSS -->
+	<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+		
+	<!-- Tagsinput CSS -->
+	<link rel="stylesheet" href="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
