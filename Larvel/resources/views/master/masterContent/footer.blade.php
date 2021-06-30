@@ -11,6 +11,13 @@
 	<script src="{{asset('assets/js/chart.js')}}"></script>
 	<!-- Custom JS -->
 	<script src="{{asset('assets/js/app.js')}}"></script>
+	<!-- Datetimepicker JS -->
+	<script src="assets/js/moment.min.js"></script>
+	<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+	<!-- Select2 JS -->
+	<script src="assets/js/select2.min.js"></script>
+	<!-- Tagsinput JS -->
+	<script src="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 
 
 

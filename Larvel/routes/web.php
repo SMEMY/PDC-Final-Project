@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\programshowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,24 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('program-enrollment');
+    return view('program-files-download');
 });
+
+
+Route::resource('/showprograms', programshowController::class);
+// Route::resource('/login', userloingController::class);
+// Route::resource('/adminregister', );
+// Route::resource('/', );
+// Route::resource('/', );
+// Route::resource('/', );
+// Route::resource('/', );
+// Route::resource('/', );
+// Route::resource('/', );
+// Route::resource('/', );
+// Route::resource('/', );
+// Route::resource('/', );
+// Route::resource('/', );
+// Route::resource('/', );
 
 
 
