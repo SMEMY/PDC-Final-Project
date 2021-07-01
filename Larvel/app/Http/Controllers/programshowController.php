@@ -17,8 +17,8 @@ class programshowController extends Controller
     public function index()
     {
         // return Photo::all();
-        
-            return Program::find(2)->getPhoto;
+        return view('admin-registeration');
+            // return Program::find(2)->getPhoto;
     }
 
     /**
@@ -40,6 +40,17 @@ class programshowController extends Controller
     public function store(Request $request)
     {
         //
+        $admin = new Admin_info;
+        $admin->name = $request->name;
+        $admin->last_name = $request->last_name;
+        $admin->email = $request->email;
+        $admin->phone_number = $request->phone_number;
+        $admin->password = $request->password;
+        $admin->save();
+
+
+
+        return view('notenrolled-program');
     }
 
     /**

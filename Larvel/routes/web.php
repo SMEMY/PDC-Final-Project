@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 
-Route::resource('/showprograms', programshowController::class);
+Route::resource('/admin', programshowController::class);
 // Route::resource('/login', userloingController::class);
 // Route::resource('/adminregister', );
 // Route::resource('/', );
