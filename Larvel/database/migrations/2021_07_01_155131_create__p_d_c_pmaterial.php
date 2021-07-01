@@ -13,13 +13,13 @@ class CreatePDCPmaterial extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_pmaterial', function (Blueprint $table) {
+        Schema::create('materials', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('type');
             $table->text('path');
             $table->unsignedInteger('program_id');	
-            $table->foreign('program_id')->references('id')->on('_p_d_c_program')->onDelete('cascade');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreatePDCPmaterial extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_pmaterial');
+        Schema::dropIfExists('materials');
     }
 }

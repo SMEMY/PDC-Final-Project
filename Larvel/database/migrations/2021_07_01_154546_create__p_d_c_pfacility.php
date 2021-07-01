@@ -13,11 +13,11 @@ class CreatePDCPfacility extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_pfacility', function (Blueprint $table) {
+        Schema::create('facilities', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('facility');
             $table->unsignedInteger('program_id');	
-            $table->foreign('program_id')->references('id')->on('_p_d_c_program')->onDelete('cascade');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreatePDCPfacility extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_pfacility');
+        Schema::dropIfExists('facilities');
     }
 }

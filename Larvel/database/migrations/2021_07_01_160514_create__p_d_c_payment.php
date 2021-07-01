@@ -13,14 +13,14 @@ class CreatePDCPayment extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_payment', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
             $table->decimal('payment_amount', 10, 5);	
             $table->decimal('payment_discount', 10, 5);	
             $table->unsignedInteger('program_id');
-            $table->foreign('program_id')->references('id')->on('_p_d_c_program')->onDelete('cascade');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->unsignedInteger('participant_id');
-            $table->foreign('participant_id')->references('id')->on('_p_d_c_facilitatorandparticipant')->onDelete('cascade');
+            $table->foreign('participant_id')->references('id')->on('facilitatorsandparticipants')->onDelete('cascade');
             
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ class CreatePDCPayment extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_payment');
+        Schema::dropIfExists('payments');
     }
 }

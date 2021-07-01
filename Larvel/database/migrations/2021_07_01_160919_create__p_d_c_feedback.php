@@ -13,13 +13,13 @@ class CreatePDCFeedback extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_feedback', function (Blueprint $table) {
+        Schema::create('feedbacks', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('comment');
             $table->unsignedInteger('program_id');
-            $table->foreign('program_id')->references('id')->on('_p_d_c_program')->onDelete('cascade');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->unsignedInteger('participant_id');
-            $table->foreign('participant_id')->references('id')->on('_p_d_c_facilitatorandparticipant')->onDelete('cascade');
+            $table->foreign('participant_id')->references('id')->on('facilitatorsandparticipants')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreatePDCFeedback extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_feedback');
+        Schema::dropIfExists('feedbacks');
     }
 }

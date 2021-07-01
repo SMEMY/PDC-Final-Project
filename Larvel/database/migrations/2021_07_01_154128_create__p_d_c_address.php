@@ -13,7 +13,7 @@ class CreatePDCAddress extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_address', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('campus_name', 30);	
             $table->string('block_name', 30);
@@ -30,6 +30,6 @@ class CreatePDCAddress extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_address');
+        Schema::dropIfExists('addresses');
     }
 }

@@ -13,12 +13,12 @@ class CreatePDCProgramparticipant extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_programparticipant', function (Blueprint $table) {
+        Schema::create('programsparticipants', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('participant_id');
-            $table->foreign('participant_id')->references('id')->on('_p_d_c_facilitatorandparticipant')->onDelete('cascade');
+            $table->foreign('participant_id')->references('id')->on('facilitatorsandparticipants')->onDelete('cascade');
             $table->unsignedInteger('program_id');
-            $table->foreign('program_id')->references('id')->on('_p_d_c_program')->onDelete('cascade');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreatePDCProgramparticipant extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_programparticipant');
+        Schema::dropIfExists('programsparticipants');
     }
 }

@@ -13,7 +13,7 @@ class CreatePDCAdminInfo extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_admin_info', function (Blueprint $table) {
+        Schema::create('admin_infos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('last_name');
@@ -32,6 +32,6 @@ class CreatePDCAdminInfo extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_admin_info');
+        Schema::dropIfExists('admin_infos');
     }
 }
