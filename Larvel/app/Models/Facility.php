@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Facility extends Model
 {
     use HasFactory;
+    function program()
+    {
+        return $this->belongsTo('App\Models\Program');
+    }
 }

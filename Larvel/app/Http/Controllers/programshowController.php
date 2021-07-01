@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Http\Request;
+use App\Models\Admin_info;
+use App\Models\Program;
+use App\Models\Photo;
 
 class programshowController extends Controller
 {
@@ -14,13 +16,9 @@ class programshowController extends Controller
      */
     public function index()
     {
-        //
-        $users = DB::table('test')->get();
-        // foreach ($users as $user) {
-        //     echo $user->name;
-        // }
-
-        return view('notenrolled-program', ['users' => $users]);
+        // return Photo::all();
+        
+            return Program::find(2)->getPhoto;
     }
 
     /**
