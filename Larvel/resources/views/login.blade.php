@@ -53,7 +53,7 @@
 						<form action="index.html">
 							<div class="form-group">
 								<label>برېښنالیک</label>
-								<input class="form-control" type="text">
+								<input class="form-control" type="text" name="user_name">
 							</div>
 							<div class="form-group">
 								<div class="row">
@@ -66,7 +66,7 @@
 										</a>
 									</div>
 								</div>
-								<input class="form-control" type="password">
+								<input class="form-control" type="password" name="user_password">
 							</div>
 							<div class="form-group text-center col-md-4 m-auto">
 								<button class="btn btn-primary  account-btn col-md-12" type="submit">داخلېدل</button>

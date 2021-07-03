@@ -58,13 +58,13 @@ label {
     <div class="row filter-row">
         <div class="col-sm-6 col-md-5">
             <div class="form-group form-focus">
-                <input type="text" class="form-control floating">
+                <input type="text" class="form-control floating" name="search_name">
                 <label class="focus-label">د پروګرام نوم</label>
             </div>
         </div>
         <div class="col-sm-6 col-md-5">
             <div class="form-group form-focus">
-                <input type="text" class="form-control floating">
+                <input type="text" class="form-control floating" name="search_id">
                 <label class="focus-label">د پروګرام ایډي</label>
             </div>
         </div>
@@ -262,14 +262,14 @@ label {
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>د پروګرام نوم</label>
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" name="name">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>د پروګرام ډول</label>
                                 <select class="custom-select"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
+                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="type">
                                     <option>ورکشاپ</option>
                                     <option>سیمینار</option>
                                     <option>سمفوزیم</option>
@@ -285,7 +285,7 @@ label {
                             <div class="form-group">
                                 <label>د پروګرام سپانسر</label>
                                 <!-- <div class="cal-icon"> -->
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" name="sponsor">
                                 <!-- </div> -->
                             </div>
                         </div>
@@ -293,7 +293,7 @@ label {
                             <div class="form-group">
                                 <label>د پروګرام حمایه کوونکی</label>
                                 <!-- <div class="cal-icon"> -->
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" name="supporter">
                                 <!-- </div> -->
                             </div>
                         </div>
@@ -304,7 +304,7 @@ label {
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>د پروګرام تنظیمونکی</label>
-                                <input placeholder="" class="form-control" type="text">
+                                <input placeholder="" class="form-control" type="text" name="manager">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -321,7 +321,7 @@ label {
                             <div class="form-group">
                                 <label class="">د پروګرام تسهیلونک</label>
                                 <select class="custom-select"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
+                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="facilitator">
                                     <option selected="">تسهیلونکی انتخاب کړی</option>
                                     <option value="1">سید احمد محبوبي</option>
                                     <option value="2">محمد یاسر مجاهد</option>
@@ -333,13 +333,13 @@ label {
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>د پروګرام د ګډون والو کچه</label>
-                                <input placeholder="" class="form-control" type="number">
+                                <input placeholder="" class="form-control" type="number" name="amount">
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>د پروګرام یودیجه</label>
-                                <input placeholder="$" class="form-control" type="number">
+                                <input placeholder="$" class="form-control" type="number" name="fund">
                             </div>
                         </div>
                         <!-- <h3 class="col-md-12 m-auto">د پروګرام ادرس</h3> -->
@@ -351,7 +351,7 @@ label {
                                 <label class="col-form-label">آیا پروګرام د فیس درلودونکی دی؟<span
                                         class="text-danger">*</span></label>
                                 <select class="custom-select rankS"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
+                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="fee_able">
                                     <option selected>مبلغ</option>
                                     <option value="0">یا</option>
                                     <option value="1">هو</option>
@@ -361,12 +361,12 @@ label {
                         </div>
                     </div>
                     <hr !important>
-
+                   
                     <div class="row">
                         <div class="form-group col-md-12" id="facilities">
                             <div class="form-group">
                                 <label>د پروګرام سهولتونه</label>
-                                <input placeholder="1" class="form-control" type="text">
+                                <input placeholder="1" class="form-control" type="text" name="facility1">
                             </div>
 
                         </div>
@@ -385,7 +385,7 @@ label {
                         <div class="form-group col-md-12" id="agendas">
                             <div class="form-group">
                                 <label>د پروګرام اجنډا</label>
-                                <input placeholder="1" class="form-control" type="text">
+                                <input placeholder="1" class="form-control" type="text" name="agenda1">
                             </div>
 
                         </div>
@@ -404,19 +404,25 @@ label {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د رامنځته کولو ساحه</label>
-                                <input placeholder="" class="form-control" type="text">
+                                <input placeholder="" class="form-control" type="text" name="address_campus">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د رامنځته کولو تعمیر نوم</label>
-                                <input placeholder="" class="form-control" type="text">
+                                <input placeholder="" class="form-control" type="text" name="address_building_name">
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>د پروګرام د رامنځته کولو تعمیر نوم</label>
+                                <input placeholder="" class="form-control" type="text" name="address_building_number">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د اطاق نمبر</label>
-                                <input placeholder="" class="form-control" type="number">
+                                <input placeholder="" class="form-control" type="number" name="room_number">
                             </div>
                         </div>
                     </div>
@@ -425,30 +431,28 @@ label {
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>د پېل کېدو نېټه</label>
-                                <input placeholder="" class="form-control" type="date">
+                                <input placeholder="" class="form-control" type="date" name="start_date">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>دشروع کېدو وخت</label>
-                                <input placeholder="" class="form-control" type="time">
+                                <input placeholder="" class="form-control" type="time" name="start_time">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>د ختمېدو وخت</label>
-                                <input placeholder="" class="form-control" type="time">
+                                <input placeholder="" class="form-control" type="time" name="end_time">
                             </div>
                         </div>
                     </div>
                     <hr !important>
                     <div class="row " id="files">
-                        <!-- <div class="form-group col-12" id="files"> -->
-                        <!-- <div class="form-group col-md-12"> -->
                         <div class=" col-md-6">
                             <div class="form-group custom-file ">
                                 <input type="file" class="custom-file-input" id="customFile" name="filename"
-                                    onchange="nameShow(this)">
+                                    onchange="nameShow(this)" name="file_path">
                                 <label class="custom-file-label" for="customFile">د پروګرام اړونده
                                     فایل
                                     انتخاب کړی</label>
@@ -457,7 +461,7 @@ label {
                         <div class=" col-md-6 mb-3" id="">
                             <div class="form-group">
                                 <select class="custom-select"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
+                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="file_type">
                                     <option selected>د فایل ډول انتخاب کړی</option>
                                     <option value="0">پریشینټېشن</option>
                                     <option value="1">وډیو</option>
@@ -465,8 +469,6 @@ label {
 
                             </div>
                         </div>
-                        <!-- </div> -->
-                        <!-- </div> -->
 
 
                     </div>
@@ -487,7 +489,7 @@ label {
                                 <span class="input-group-text">د پروګرام په اړه معلومات</span>
                             </div>
                             <textarea class="form-control" style="height: 100px;"
-                                aria-label="With textarea"></textarea>
+                                aria-label="With textarea" name="discreption"></textarea>
                         </div>
                     </div>
 
@@ -541,7 +543,7 @@ label {
 				`
 				<div class="form-group">
 										
-										<input placeholder="${count}" class="form-control" type="text">
+										<input placeholder="${count}" class="form-control" type="text" name="facility${count}">
 									</div>`;
 
 			$("#facilities").children().last().after(txt1);
@@ -566,7 +568,7 @@ label {
 				`
 				<div class="form-group">
 										
-										<input placeholder="${count1}" class="form-control" type="text">
+										<input placeholder="${count1}" class="form-control" type="text" name="agenda${count1}">
 									</div>`;
 
 			$("#agendas").children().last().after(txt1);

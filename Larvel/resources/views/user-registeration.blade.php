@@ -54,124 +54,127 @@
 				</div>
 				<!-- /Account Logo -->
 
-				<div class="account-box border board-danger" style="width: 1000px;">
+				<div class="account-box border board-danger mb-5" style="width: 1000px;">
 					<div class="account-wrapper" style="">
 						<h3 class="account-title">د تسهیلونکی د ثبتولو پاڼه</h3>
 						<!-- <p class="account-subtitle"></p> -->
 
 						<!-- Account Form -->
 						<form action="index.html">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class="col-form-label">نوم <span class="text-danger">*</span></label>
-										<input class="form-control" type="text" value="laksdjflasdk">
+						<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="col-form-label">نوم <span class="text-danger">*</span></label>
+											<input class="form-control" type="text" value="" name="name">
+										</div>
 									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class="col-form-label">تخلص</label>
-										<input class="form-control " type="text">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="col-form-label">تخلص</label>
+											<input class="form-control " type="text" name="last_name">
+										</div>
 									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="col-form-label">ټلیفون شمېره<span
-												class="text-danger">*</span></label>
-										<input class="form-control" type="tel" pattern="[0-9]+">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-form-label">ټلیفون شمېره<span
+													class="text-danger">*</span></label>
+											<input class="form-control" type="tel" pattern="[0-9]+" name="phone_number">
+										</div>
 									</div>
-								</div>
-								<div class=" col-md-12">
-									<div class="form-group">
-										<label class="col-form-label">برېښنالیک<span
-												class="text-danger">*</span></label>
-										<input class="form-control" type="email">
+									<div class=" col-md-12">
+										<div class="form-group">
+											<label class="col-form-label">برېښنالیک<span
+													class="text-danger">*</span></label>
+											<input class="form-control" type="email" name="email">
+										</div>
 									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="col-form-label">جنسیت<span class="text-danger">*</span></label>
-										<select class="form-control">
-											<!-- <option selected="">جنسیت</option> -->
-											<option value="1">نارینه</option>
-											<option value="2">ښځینه</option>
-											<option value="3">یو بل شی</option>
-										</select>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-form-label">جنسیت<span
+													class="text-danger">*</span></label>
+											<select class="form-control" name="gender">
+												<!-- <option selected="">جنسیت</option> -->
+												<option value="1">نارینه</option>
+												<option value="2">ښځینه</option>
+												<option value="3">یو بل شی</option>
+											</select>
 
+										</div>
 									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-form-label">کاري دفتر<span
+													class="text-danger">*</span></label>
+											<select class="form-control" name="office_campus">
+												<!-- <option selected="">جنسیت</option> -->
+												<option value="1">کمپیوټر ساینس</option>
+												<option value="2">محصلینو چارو معاونیت</option>
+												<option value="3">یو بل شی</option>
+											</select>
+
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-form-label">کاري شعبه</label>
+											<input class="form-control" type="text" name="office_department">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-form-label">کاري منصب<span
+													class="text-danger">*</span></label>
+											<select class="form-control" name="office_position">
+												<!-- <option selected="">جنسیت</option> -->
+												<option value="1">رئیس</option>
+												<option value="2">مرستیال</option>
+												<option value="3">ښوونکی</option>
+												<option value="3">اداري کارمند</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12" id="rank">
+										<div class="form-group">
+											<label class="col-form-label"> کاري برخه<span
+													class="text-danger">*</span></label>
+											<select class="form-control rankS" name="office_position_category">
+												<!-- <option selected="">جنسیت</option> -->
+												<option value="1">اداری</option>
+												<option value="2">تدریسي</option>
+												<option value="3">اداري او تدریسي</option>
+												<!-- <option value="3">اداري کارمند</option> -->
+											</select>
+
+										</div>
+									</div>
+									<!-- this part has been hidden just for DB Facilitator role -->
+									<div class="col-md-12 d-none">
+										<div class="form-group">
+											<label class="col-form-label">role in program<span
+													class="text-danger">*</span></label>
+											<input type="text" class="form-control" name="role_in_program" id="role"
+												value="Facilitator">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-form-label">پاسورډ<span
+													class="text-danger">*</span></label>
+											<input class="form-control" type="password" name="password">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-form-label">پاسورډ تائید کړی<span
+													class="text-danger">*</span></label>
+											<input class="form-control input-sm" type="password">
+										</div>
+									</div>
+
+
 								</div>
 
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="col-form-label">کاري دفتر<span
-												class="text-danger">*</span></label>
-										<select class="form-control">
-											<option value="1">کمپیوټر ساینس</option>
-											<option value="2">محصلینو چارو معاونیت</option>
-											<option value="3">یو بل شی</option>
-										</select>
-
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="col-form-label">کاري شعبه</label>
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="col-form-label">کاري منصب<span
-												class="text-danger">*</span></label>
-										<select class="form-control">
-											<!-- <option selected="">جنسیت</option> -->
-											<option value="1">رئیس</option>
-											<option value="2">مرستیال</option>
-											<option value="3">ښوونکی</option>
-											<option value="3">اداري کارمند</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-12" id="rank">
-									<div class="form-group">
-										<label class="col-form-label"> کاري برخه<span
-												class="text-danger">*</span></label>
-										<select class="form-control rankS">
-											<!-- <option selected="">جنسیت</option> -->
-											<option value="1">اداری</option>
-											<option value="2">تدریسي</option>
-											<option value="3">اداري او تدریسي</option>
-											<!-- <option value="3">اداري کارمند</option> -->
-										</select>
-
-									</div>
-								</div>
-								<!-- this part has been hidden just for DB Facilitator role -->
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="col-form-label">په يروګرام کي دنده<span
-												class="text-danger">*</span></label>
-										<select class="form-control">
-											<!-- <option selected="">جنسیت</option> -->
-											<option value="1">ستاسي دنده</option>
-											<option value="1">تسهیلونکی</option>
-											<option value="2">ګډونوال</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="col-form-label">پاسورډ<span class="text-danger">*</span></label>
-										<input class="form-control" type="password">
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="col-form-label">پاسورډ تائید کړی<span
-												class="text-danger">*</span></label>
-										<input class="form-control input-sm" type="password">
-									</div>
-								</div>
 
 
 							</div>
@@ -179,7 +182,7 @@
 								<button class="btn btn-primary  account-btn col-md-12" type="submit">تسهیلونکی ثبت
 									کړی</button>
 							</div>
-							<div class="account-footer mt-3">
+							<div class="account-footer my-5">
 								<p>آیا تر مخه مو حساب کړی دی؟ <a href="login.html">لاګ ان</a></p>
 							</div>
 						</form>

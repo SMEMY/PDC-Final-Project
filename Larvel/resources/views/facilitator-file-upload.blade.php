@@ -73,7 +73,7 @@
 										<div class=" col-md-6">
 											<div class="form-group custom-file ">
 												<input type="file" class="custom-file-input" id="customFile"
-													name="filename" onchange="nameShow(this)">
+													 onchange="nameShow(this)" name="file_path1">
 												<label class="custom-file-label" for="customFile">د پروګرام اړونده
 													فایل
 													انتخاب کړی</label>
@@ -82,7 +82,7 @@
 										<div class=" col-md-6 mb-3" id="">
 											<div class="form-group">
 												<select class="custom-select"
-													style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
+													style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="file_type1">
 													<option selected>د فایل ډول انتخاب کړی</option>
 													<option value="0">پریشینټېشن</option>
 													<option value="1">وډیو</option>
@@ -173,7 +173,7 @@
 				`	<div class=" col-md-6" >
 												<div class="form-group custom-file ">
 													<input type="file" class="custom-file-input" id="customFile"
-														name="filename">
+														name="file_path${count4}">
 													<label class="custom-file-label" for="customFile">د پروګرام اړونده
 														فایل
 														انتخاب کړی</label>
@@ -182,7 +182,7 @@
 											<div class=" col-md-6 mb-3" id="">
 												<div class="form-group">
 													<select class="custom-select"
-														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
+														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="file_type${count4}">
 														<option selected>د فایل ډول انتخاب کړی</option>
 														<option value="0">پریشینټېشن</option>
 														<option value="1">وډیو</option>

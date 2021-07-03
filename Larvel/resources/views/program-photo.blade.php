@@ -68,7 +68,7 @@
 										<div class=" col-md-12">
 											<div class="form-group custom-file ">
 												<input type="file" class="custom-file-input" id="customFile"
-													name="filename" onchange="nameShow()">
+													name="program_photo1" onchange="nameShow()">
 												<label class="custom-file-label" for="customFile">د پروګرام اړونده عکس
 													انتخاب کړي</label>
 											</div>
@@ -140,7 +140,7 @@
 				`	<div class=" col-md-12 mt-3" >
 														<div class="form-group custom-file ">
 															<input type="file" class="custom-file-input" id="customFile"
-																name="filename">
+																name="program_photo${count4}">
 															<label class="custom-file-label" for="customFile">د پروګرام اړونده
 																فایل
 																انتخاب کړی</label>

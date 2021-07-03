@@ -52,13 +52,13 @@ input:focus{
 				<div class="row filter-row">
 					<div class="col-sm-6 col-md-3">
 						<div class="form-group form-focus">
-							<input type="text" class="form-control floating">
+							<input type="text" class="form-control floating" name="search_name">
 							<label class="focus-label">د تسهیلونکی نوم</label>
 						</div>
 					</div>
 					<div class="col-sm-6 col-md-3">
 						<div class="form-group form-focus">
-							<input type="text" class="form-control floating">
+							<input type="text" class="form-control floating" name="search_phone_number">
 							<label class="focus-label">د تسهبلونکی د ټلیفون شمېره</label>
 						</div>
 					</div>
@@ -271,34 +271,34 @@ input:focus{
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="col-form-label">نوم <span class="text-danger">*</span></label>
-											<input class="form-control" type="text" value="laksdjflasdk">
+											<input class="form-control" type="text" value="" name="name">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="col-form-label">تخلص</label>
-											<input class="form-control " type="text">
+											<input class="form-control " type="text" name="last_name">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<label class="col-form-label">ټلیفون شمېره<span
 													class="text-danger">*</span></label>
-											<input class="form-control" type="tel" pattern="[0-9]+">
+											<input class="form-control" type="tel" pattern="[0-9]+" name="phone_number">
 										</div>
 									</div>
 									<div class=" col-md-12">
 										<div class="form-group">
 											<label class="col-form-label">برېښنالیک<span
 													class="text-danger">*</span></label>
-											<input class="form-control" type="email">
+											<input class="form-control" type="email" name="email">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<label class="col-form-label">جنسیت<span
 													class="text-danger">*</span></label>
-											<select class="form-control">
+											<select class="form-control" name="gender">
 												<!-- <option selected="">جنسیت</option> -->
 												<option value="1">نارینه</option>
 												<option value="2">ښځینه</option>
@@ -312,7 +312,7 @@ input:focus{
 										<div class="form-group">
 											<label class="col-form-label">کاري دفتر<span
 													class="text-danger">*</span></label>
-											<select class="form-control">
+											<select class="form-control" name="office_campus">
 												<!-- <option selected="">جنسیت</option> -->
 												<option value="1">کمپیوټر ساینس</option>
 												<option value="2">محصلینو چارو معاونیت</option>
@@ -324,14 +324,14 @@ input:focus{
 									<div class="col-md-12">
 										<div class="form-group">
 											<label class="col-form-label">کاري شعبه</label>
-											<input class="form-control" type="text">
+											<input class="form-control" type="text" name="office_department">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<label class="col-form-label">کاري منصب<span
 													class="text-danger">*</span></label>
-											<select class="form-control">
+											<select class="form-control" name="office_position">
 												<!-- <option selected="">جنسیت</option> -->
 												<option value="1">رئیس</option>
 												<option value="2">مرستیال</option>
@@ -344,7 +344,7 @@ input:focus{
 										<div class="form-group">
 											<label class="col-form-label"> کاري برخه<span
 													class="text-danger">*</span></label>
-											<select class="form-control rankS">
+											<select class="form-control rankS" name="office_position_category">
 												<!-- <option selected="">جنسیت</option> -->
 												<option value="1">اداری</option>
 												<option value="2">تدریسي</option>
@@ -359,7 +359,7 @@ input:focus{
 										<div class="form-group">
 											<label class="col-form-label">role in program<span
 													class="text-danger">*</span></label>
-											<input type="text" class="form-control" name="" id="role"
+											<input type="text" class="form-control" name="role_in_program" id="role"
 												value="Facilitator">
 										</div>
 									</div>
@@ -367,7 +367,7 @@ input:focus{
 										<div class="form-group">
 											<label class="col-form-label">پاسورډ<span
 													class="text-danger">*</span></label>
-											<input class="form-control" type="password">
+											<input class="form-control" type="password" name="password">
 										</div>
 									</div>
 									<div class="col-md-12">
