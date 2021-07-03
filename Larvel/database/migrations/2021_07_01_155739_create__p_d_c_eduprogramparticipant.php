@@ -13,11 +13,11 @@ class CreatePDCEduprogramparticipant extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_eduprogramparticipant', function (Blueprint $table) {
+        Schema::create('eduprogramparticipants', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('amount');
             $table->unsignedInteger('eduprogram_id');
-            $table->foreign('eduprogram_id')->references('id')->on('_p_d_c_eduprogram')->onDelete('cascade');
+            $table->foreign('eduprogram_id')->references('id')->on('eduprograms')->onDelete('cascade');
 
         });
     }
@@ -29,6 +29,6 @@ class CreatePDCEduprogramparticipant extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_eduprogramparticipant');
+        Schema::dropIfExists('eduprogramparticipants');
     }
 }

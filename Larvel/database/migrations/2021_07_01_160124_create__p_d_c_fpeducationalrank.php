@@ -13,11 +13,11 @@ class CreatePDCFpeducationalrank extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_fpeducationalrank', function (Blueprint $table) {
+        Schema::create('fpeducationalranks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('educational_rank', 30);
             $table->unsignedInteger('p_f_id');	
-            $table->foreign('p_f_id')->references('id')->on('_p_d_c_facilitatorandparticipant')->onDelete('cascade');
+            $table->foreign('p_f_id')->references('id')->on('facilitatorsandparticipants')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreatePDCFpeducationalrank extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_fpeducationalrank');
+        Schema::dropIfExists('fpeducationalranks');
     }
 }

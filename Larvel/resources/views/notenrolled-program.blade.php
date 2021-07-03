@@ -63,11 +63,9 @@
                     <h3 class="page-title">د مسلکي پرمختیایي مرکز پروګرامونه</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        @foreach($users as $user)
 
-                        <li class="breadcrumb-item active">{{ $user->name}}</li>
+                        <li class="breadcrumb-item active">پروګرامونه</li>
 
-                        @endforeach
                     </ul>
                 </div>
             </div>

@@ -13,13 +13,13 @@ class CreatePDCPopenspeaker extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_popenspeaker', function (Blueprint $table) {
+        Schema::create('openerspeakers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('last_name');
             $table->string('position');
             $table->unsignedInteger('program_id');	
-            $table->foreign('program_id')->references('id')->on('_p_d_c_program')->onDelete('cascade');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreatePDCPopenspeaker extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_popenspeaker');
+        Schema::dropIfExists('openerspeakers');
     }
 }

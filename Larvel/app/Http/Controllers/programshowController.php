@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Http\Request;
+use App\Models\Admin_info;
+use App\Models\Program;
+use App\Models\Photo;
 
 class programshowController extends Controller
 {
@@ -14,13 +16,9 @@ class programshowController extends Controller
      */
     public function index()
     {
-        //
-        $users = DB::table('test')->get();
-        // foreach ($users as $user) {
-        //     echo $user->name;
-        // }
-
-        return view('notenrolled-program', ['users' => $users]);
+        // return Photo::all();
+        return view('admin-registeration');
+            // return Program::find(2)->getPhoto;
     }
 
     /**
@@ -42,6 +40,17 @@ class programshowController extends Controller
     public function store(Request $request)
     {
         //
+        $admin = new Admin_info;
+        $admin->name = $request->name;
+        $admin->last_name = $request->last_name;
+        $admin->email = $request->email;
+        $admin->phone_number = $request->phone_number;
+        $admin->password = $request->password;
+        $admin->save();
+
+
+
+        return view('notenrolled-program');
     }
 
     /**

@@ -13,11 +13,11 @@ class CreatePDCFanswer extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_fanswer', function (Blueprint $table) {
+        Schema::create('fanswers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('answer', 30);
             $table->unsignedInteger('question_id');
-            $table->foreign('question_id')->references('id')->on('_p_d_c_fquestionnaire')->onDelete('cascade');
+            $table->foreign('question_id')->references('id')->on('fquestionnaires')->onDelete('cascade');
            
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreatePDCFanswer extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_fanswer');
+        Schema::dropIfExists('fanswers');
     }
 }

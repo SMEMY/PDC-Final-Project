@@ -13,7 +13,7 @@ class CreatePDCEduprogram extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_eduprogram', function (Blueprint $table) {
+        Schema::create('eduprograms', function (Blueprint $table) {
             $table->increments('id');
             $table->string('topic');
             $table->string('type');
@@ -25,9 +25,9 @@ class CreatePDCEduprogram extends Migration
             $table->string('current_edicational_position');
             $table->string('achieving_edicational_position');
             $table->unsignedInteger('address_id');	
-            $table->foreign('address_id')->references('id')->on('_p_d_c_address')->onDelete('cascade');
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
             $table->unsignedInteger('time_id');
-            $table->foreign('time_id')->references('id')->on('_p_d_c_time')->onDelete('cascade');
+            $table->foreign('time_id')->references('id')->on('times')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -40,6 +40,6 @@ class CreatePDCEduprogram extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_eduprogram');
+        Schema::dropIfExists('eduprograms');
     }
 }

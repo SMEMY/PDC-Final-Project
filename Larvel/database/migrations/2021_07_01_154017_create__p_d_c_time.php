@@ -13,7 +13,7 @@ class CreatePDCTime extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_time', function (Blueprint $table) {
+        Schema::create('times', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('year');
             $table->integer('month');
@@ -34,6 +34,6 @@ class CreatePDCTime extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_time');
+        Schema::dropIfExists('times');
     }
 }

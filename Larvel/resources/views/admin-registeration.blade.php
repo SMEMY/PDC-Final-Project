@@ -59,22 +59,27 @@
 						<!-- <p class="account-subtitle"></p> -->
 
 						<!-- Account Form -->
-						<form action="index.html">
+						<form action="/admin" method="POST">
+							@csrf
 							<div class="form-group">
 								<label>نوم</label>
-								<input class="form-control" type="text" placeholder="داډمېن نوم">
+								<input class="form-control" name="name" type="text" placeholder="داډمېن نوم">
 							</div>
 							<div class="form-group">
 								<label>تخلص</label>
-								<input class="form-control" type="text" placeholder="داډمېن تخلص">
+								<input class="form-control" name="last_name" type="text" placeholder="داډمېن تخلص">
 							</div>
 							<div class="form-group">
 								<label>برېښنالیک</label>
-								<input class="form-control" type="email" placeholder="داډمېن برېښنالیک">
+								<input class="form-control" name="email" type="email" placeholder="داډمېن برېښنالیک">
+							</div>
+							<div class="form-group">
+								<label>ټلیفون شمېره</label>
+								<input class="form-control" name="phone_number" type="text" placeholder="داډمېن برېښنالیک">
 							</div>
 							<div class="form-group">
 								<label>پاسورډ</label>
-								<input class="form-control" type="password" placeholder="نوی پاسورډ">
+								<input class="form-control" name="password" type="password" placeholder="نوی پاسورډ">
 							</div>
 							<div class="form-group">
 								<label>پاسورډ تائید کړئ</label>

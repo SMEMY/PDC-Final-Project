@@ -13,11 +13,11 @@ class CreatePDCPresult extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_presult', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('result');
             $table->unsignedInteger('program_id');	
-            $table->foreign('program_id')->references('id')->on('_p_d_c_program')->onDelete('cascade');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreatePDCPresult extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_presult');
+        Schema::dropIfExists('results');
     }
 }

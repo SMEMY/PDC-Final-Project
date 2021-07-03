@@ -13,7 +13,7 @@ class CreatePDCFacilitatorandparticipant extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_facilitatorandparticipant', function (Blueprint $table) {
+        Schema::create('facilitatorsandparticipants', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 30);	
             $table->string('last_name', 30);	
@@ -38,6 +38,6 @@ class CreatePDCFacilitatorandparticipant extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_facilitatorandparticipant');
+        Schema::dropIfExists('facilitatorsandparticipants');
     }
 }

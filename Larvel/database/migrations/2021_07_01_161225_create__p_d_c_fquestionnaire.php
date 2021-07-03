@@ -13,12 +13,12 @@ class CreatePDCFquestionnaire extends Migration
      */
     public function up()
     {
-        Schema::create('_p_d_c_fquestionnaire', function (Blueprint $table) {
+        Schema::create('fquestionnaires', function (Blueprint $table) {
             $table->increments('id');
             $table->string('question_category', 100);
             $table->longText('question');
             $table->unsignedInteger('program_id');
-            $table->foreign('program_id')->references('id')->on('_p_d_c_program')->onDelete('cascade');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreatePDCFquestionnaire extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_p_d_c_fquestionnaire');
+        Schema::dropIfExists('fquestionnaires');
     }
 }
