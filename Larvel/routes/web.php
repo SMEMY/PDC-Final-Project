@@ -16,7 +16,7 @@ use App\Http\Controllers\programshowController;
 
 
 Route::get('/', function () {
-    return view('program-files-download');
+    return view('user-registeration');
 });
 
 

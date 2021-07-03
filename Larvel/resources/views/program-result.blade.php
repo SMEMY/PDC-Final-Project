@@ -72,7 +72,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">د پروګرام پایله</span>
                                             </div>
-                                            <textarea class="form-control" aria-label="With textarea"></textarea>
+                                            <textarea class="form-control" aria-label="With textarea" name="program_resul1"></textarea>
                                         </div>
                                     </div>
 									<div class="row mt-3">
@@ -143,7 +143,7 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text">د پروګرام پایله</span>
 				</div>
-				<textarea class="form-control" aria-label="With textarea"></textarea>
+				<textarea class="form-control" aria-label="With textarea" name="program_result${count4}"></textarea>
 			</div>`;
 
 			$("#files").children().last().after(txt1);

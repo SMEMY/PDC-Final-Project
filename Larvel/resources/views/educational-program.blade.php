@@ -64,13 +64,13 @@ label {
     <div class="row filter-row">
         <div class="col-sm-6 col-md-5">
             <div class="form-group form-focus">
-                <input type="text" class="form-control floating">
+                <input type="text" class="form-control floating" name="search_topic">
                 <label class="focus-label">د علمي کنفرانفس/ سیمینار موضوع</label>
             </div>
         </div>
         <div class="col-sm-6 col-md-5">
             <div class="form-group form-focus">
-                <input type="text" class="form-control floating">
+                <input type="text" class="form-control floating" name="search_type">
                 <label class="focus-label">د تقرري/ علمي ترفېع ډول</label>
             </div>
         </div>
@@ -137,14 +137,14 @@ label {
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>د علمي کنفرانفس/ سیمینار موضوع</label>
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" name="topic">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>د تقرري/ علمي ترفېع ډول</label>
                                 <select class="custom-select"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
+                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="type">
                                     <option>ورکشاپ</option>
                                     <option>سیمینار</option>
                                     <option>سمفوزیم</option>
@@ -160,7 +160,7 @@ label {
                             <div class="form-group">
                                 <label>د استاد نوم</label>
                                 <!-- <div class="cal-icon"> -->
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" name="teacher_name">
                                 <!-- </div> -->
                             </div>
                         </div>
@@ -168,7 +168,7 @@ label {
                             <div class="form-group">
                                 <label>د استاد تخلص</label>
                                 <!-- <div class="cal-icon"> -->
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" name="teacher_last_name">
                                 <!-- </div> -->
                             </div>
                         </div>
@@ -180,7 +180,7 @@ label {
                             <div class="form-group">
                                 <label>د استاد پوهنتون</label>
                                 <select class="custom-select"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
+                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="university">
                                     <option selected="">تسهیلونکی انتخاب کړی</option>
                                     <option value="1">سید احمد محبوبي</option>
                                     <option value="2">محمد یاسر مجاهد</option>
@@ -193,7 +193,7 @@ label {
                             <div class="form-group">
                                 <label>د استاد پوهنځۍ </label>
                                 <select class="custom-select"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
+                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="faculty">
                                     <option selected="">تسهیلونکی انتخاب کړی</option>
                                     <option value="1">سید احمد محبوبي</option>
                                     <option value="2">محمد یاسر مجاهد</option>
@@ -210,7 +210,7 @@ label {
                             <div class="form-group">
                                 <label class="">د استاد څانکه</label>
                                 <select class="custom-select"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
+                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="department">
                                     <option selected="">تسهیلونکی انتخاب کړی</option>
                                     <option value="1">سید احمد محبوبي</option>
                                     <option value="2">محمد یاسر مجاهد</option>
@@ -223,7 +223,7 @@ label {
                             <div class="form-group">
                                 <label>د استاد اوسنی علمي رتبه</label>
                                 <select class="custom-select"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
+                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="current_educational_position">
                                     <option selected="">تسهیلونکی انتخاب کړی</option>
                                     <option value="1">سید احمد محبوبي</option>
                                     <option value="2">محمد یاسر مجاهد</option>
@@ -236,13 +236,14 @@ label {
                             <div class="form-group">
                                 <label>د استاد ترلاسه کېدونکې علمي رتبه</label>
                                 <select class="custom-select"
-                                style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
-                                <option selected="">تسهیلونکی انتخاب کړی</option>
-                                <option value="1">سید احمد محبوبي</option>
-                                <option value="2">محمد یاسر مجاهد</option>
-                                <option value="3">عبدالواحد وثیق</option>
-                                <option value="3">میرام ګل</option>
-                            </select>										</div>
+                                style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="achieving_educational_position">
+                                    <option selected="">تسهیلونکی انتخاب کړی</option>
+                                    <option value="1">سید احمد محبوبي</option>
+                                    <option value="2">محمد یاسر مجاهد</option>
+                                    <option value="3">عبدالواحد وثیق</option>
+                                    <option value="3">میرام ګل</option>
+                                </select>										
+                            </div>
                         </div>
                         <!-- <h3 class="col-md-12 m-auto">د پروګرام ادرس</h3> -->
                     </div>
@@ -254,19 +255,19 @@ label {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د رامنځته کولو ساحه</label>
-                                <input placeholder="" class="form-control" type="text">
+                                <input placeholder="" class="form-control" type="text" name="campus">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د رامنځته کولو تعمیر نوم</label>
-                                <input placeholder="" class="form-control" type="text">
+                                <input placeholder="" class="form-control" type="text" name="building">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>د پروګرام د اطاق نمبر</label>
-                                <input placeholder="" class="form-control" type="number">
+                                <input placeholder="" class="form-control" type="number" name="room_number">
                             </div>
                         </div>
                     </div>
@@ -275,19 +276,19 @@ label {
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>د پېل کېدو نېټه</label>
-                                <input placeholder="" class="form-control" type="date">
+                                <input placeholder="" class="form-control" type="date" name="start_date">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>دشروع کېدو وخت</label>
-                                <input placeholder="" class="form-control" type="time">
+                                <input placeholder="" class="form-control" type="time" name="start_time">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>د ختمېدو وخت</label>
-                                <input placeholder="" class="form-control" type="time">
+                                <input placeholder="" class="form-control" type="time" name="end_time">
                             </div>
                         </div>
                     </div>
@@ -296,7 +297,7 @@ label {
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>د پروګرام د ګدون والو شمېر</label>
-                                <input placeholder="" class="form-control" type="number">
+                                <input placeholder="" class="form-control" type="number" name="participant_amount">
                             </div>
                         </div>
                     </div>
