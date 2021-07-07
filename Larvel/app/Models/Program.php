@@ -8,20 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Program extends Model
 {
     use HasFactory;
+    public $timestamp=false;
     // These are (ONE - TO - MANY) relationships
     function getPhoto()
     {
         return $this->hasMany('App\Models\Photo');
     }
-    function getResult()
+    function getResults()
     {
         return $this->hasMany('App\Models\Result');
     }
-    function getFacility()
+    function getFacilities()
     {
         return $this->hasMany('App\Models\Facility');
     }
-    function getAgenda()
+    function getAgendas()
     {
         return $this->hasMany('App\Models\Agenda');
     }
@@ -59,13 +60,13 @@ class Program extends Model
 
 
     // These are Reverse (ONE - TO - MANY) relationships
-    function time()
-    {
-        return $this->belongsTo('App\Models\Time');
-    }
-    function address()
-    {
-        return $this->belongsTo('App\Models\Address');
-    }
+    // function time()
+    // {
+    //     return $this->belongsTo('App\Models\Time');
+    // }
+    // function address()
+    // {
+    //     return $this->belongsTo('App\Models\Address');
+    // }
 
 }

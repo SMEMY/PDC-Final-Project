@@ -5,36 +5,36 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Facilitatorsandparticipant extends Model
+class Facilandpart extends Model
 {
     use HasFactory;
 
     // These are (ONE - TO - MANY) relationships
-    function getAttendance()
+    function getAttendances()
     {
         return $this->hasMany('App\Models\Attendance');
     }
-    function getPayment()
+    function getPayments()
     {
         return $this->hasMany('App\Models\Payment');
     }
-    function getProgramFacilitator()
+    function getProgramFacilitators()
     {
         return $this->hasMany('App\Models\Programsfacilitator');
     }
-    function getProgramsParticipant()
+    function getProgramsParticipants()
     {
         return $this->hasMany('App\Models\Programsparticipant');
     }
-    function getProgramsFeedback()
+    function getProgramsFeedbacks()
     {
         return $this->hasMany('App\Models\Feedbak');
     }
 
     // These are (ONE - TO - ONE) relationships
-    function getProgramParticipantAndFacilitatorEducationalRank()
-    {
-        return $this->hasOne('App\Models\Fpeducationalrank');
-    }
+    // function getProgramParticipantAndFacilitatorEducationalRank()
+    // {
+    //     return $this->hasOne('App\Models\Fpeducationalrank');
+    // }
 
 }

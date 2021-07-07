@@ -11,12 +11,12 @@ class Address extends Model
 
 
     // These are (ONE - TO - MANY) relationships
-    function getProgram()
-    {
-        return $this->hasMany('App\Models\Program');
-    }
-    function getEducationalProgram()
-    {
-        return $this->hasMany('App\Models\Eduprogram');
-    }
+    // function getProgram()
+    // {
+    //     return $this->hasMany('App\Models\Program');
+    // }
+    // function getEducationalProgram()
+    // {
+    //     return $this->hasMany('App\Models\Eduprogram');
+    // }
 }

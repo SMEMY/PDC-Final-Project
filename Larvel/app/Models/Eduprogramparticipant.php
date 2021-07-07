@@ -10,8 +10,8 @@ class Eduprogramparticipant extends Model
     use HasFactory;
 
     // These are Reverse (ONE - TO - ONE) relationships
-    function EducationalProgram()
-    {
-        return $this->belongsTo('App\Models\Eduprogram');
-    }
+    // function EducationalProgram()
+    // {
+    //     return $this->belongsTo('App\Models\Eduprogram');
+    // }
 }

@@ -25,14 +25,26 @@ class CreatePDCProgram extends Migration
             $table->boolean('fee_able');	
             $table->decimal('fee', 10, 5);	
             $table->string('fee_type',20);	
+            $table->string('info_mobile_number');	
             $table->longText('program_description');	
             $table->decimal('participant_amount', 5,0);
             $table->text('facilitator_code');	
             $table->text('participant_code');
-            $table->unsignedInteger('address_id');	
-            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
-            $table->unsignedInteger('time_id');	
-            $table->foreign('time_id')->references('id')->on('times')->onDelete('cascade');
+            $table->integer('end_day');
+            $table->string('start_date');
+            $table->string('end_date');
+            $table->string('start_time');
+            $table->string('end_time');
+            $table->integer('days_duration');
+            $table->integer('hours_duration');
+            $table->string('campus_name', 30);	
+            $table->string('block_name', 30);
+            $table->integer('block_number');	
+            $table->integer('room_number');	
+            // $table->unsignedInteger('address_id');	
+            // $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
+            // $table->unsignedInteger('time_id');	
+            // $table->foreign('time_id')->references('id')->on('times')->onDelete('cascade');
         });
     }
 

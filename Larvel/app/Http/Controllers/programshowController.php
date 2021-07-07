@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Admin_info;
 use App\Models\Program;
 use App\Models\Photo;
+use Illuminate\Support\Facades\DB;
 
 class programshowController extends Controller
 {
@@ -16,8 +16,13 @@ class programshowController extends Controller
      */
     public function index()
     {
+        return view('enrolled-program');
         // return Photo::all();
-        return view('admin-registeration');
+        $programs = DB::table('programs')->where('programs.id', $id)
+            ->join('addresses', 'addresses.id', '=', 'programs.address_id')
+            ->join('times', 'times.id', '=', 'programs.time_id')
+            ->select('programs.*', 'addresses.*', 'times.*')->get();
+        return view('program-info', ["programs"=> $programs]);
             // return Program::find(2)->getPhoto;
     }
 
@@ -62,6 +67,11 @@ class programshowController extends Controller
     public function show($id)
     {
         //
+        $programs = DB::table('programs')->where('id',2)->get();
+        // return $programs;
+
+        return view('program-info', ['programs'=>$progrms]);
+
     }
 
     /**

@@ -16,12 +16,12 @@ class Eduprogram extends Model
     }
 
     // These are Reverse (ONE - TO - MANY) relationships
-    function time()
-    {
-        return $this->belongsTo('App\Models\Time');
-    }
-    function address()
-    {
-        return $this->belongsTo('App\Models\Address');
-    }
+    // function time()
+    // {
+    //     return $this->belongsTo('App\Models\Time');
+    // }
+    // function address()
+    // {
+    //     return $this->belongsTo('App\Models\Address');
+    // }
 }

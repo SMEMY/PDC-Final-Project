@@ -18,9 +18,9 @@
 	<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
 	<!-- Fontawesome CSS -->
-	<!-- <link  href="asset('assets/css/font-awesome.min.css')" rel="stylesheet"> -->
+	<link  href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
 
-    <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <!-- <link type="text/css" rel="stylesheet" href="{{mix('css/app.css')}}"> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" /> -->
 
 	<!-- Lineawesome CSS -->
@@ -48,7 +48,10 @@
 		<![endif]-->
         
         <style>
-            
+            a{
+				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
+			}
             
             @yield('custom-css')
     </style>

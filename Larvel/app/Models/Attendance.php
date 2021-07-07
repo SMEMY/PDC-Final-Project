@@ -16,7 +16,7 @@ class Attendance extends Model
     }
     function programParticipantAndFacilitator()
     {
-        return $this->belongsTo('App\Models\Facilitatorsandparticipant');
+        return $this->belongsTo('App\Models\Facilandpart');
     }
 
 }
