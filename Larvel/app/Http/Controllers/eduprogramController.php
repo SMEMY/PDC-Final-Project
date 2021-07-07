@@ -47,8 +47,8 @@ class eduprogramController extends Controller
         $program->university = $request->university;
         $program->faculty = $request->faculty;
         $program->department = $request->department;
-        $program->current_edicational_position = $request->current_educational_position;
-        $program->achieving_edicational_position = $request->achieving_educational_position;
+        $program->current_educational_position = $request->current_educational_position;
+        $program->achieving_educational_position = $request->achieving_educational_position;
         $program->participant_amount = $request->participant_amount;
         $program->year = $request->year;
         $program->month = $request->month;
@@ -73,8 +73,9 @@ class eduprogramController extends Controller
     public function show($id)
     {
         //
+        
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -83,7 +84,9 @@ class eduprogramController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $program = Eduprogram::find($id);
+        return view('editEducationalProgram', compact('program'));
     }
 
     /**
@@ -95,7 +98,32 @@ class eduprogramController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // return $request->input('topic');
+        $program = Eduprogram::find($id);
+        $program->topic = $request->topic;
+        $program->type = $request->type;
+        $program->teacher_name = $request->teacher_name;
+        $program->father_name = $request->father_name;
+        $program->teacher_last_name = $request->teacher_last_name;
+        $program->university = $request->university;
+        $program->faculty = $request->faculty;
+        $program->department = $request->department;
+        $program->current_educational_position = $request->current_educational_position;
+        $program->achieving_educational_position = $request->achieving_educational_position;
+        $program->participant_amount = $request->participant_amount;
+        $program->year = $request->year;
+        $program->month = $request->month;
+        $program->start_day = $request->start_day;
+        $program->start_time = $request->start_time;
+        $program->campus_name = $request->campus_name;
+        $program->block_name = $request->block_name;
+        $program->block_number = $request->block_number;
+        $program->room_number = $request->room_number;
+        $program->save();
+
+        return redirect('educationalProgramList');
+
+
     }
 
     /**
@@ -106,6 +134,10 @@ class eduprogramController extends Controller
      */
     public function destroy($id)
     {
+        $program = Eduprogram::find($id);
+        $program->delete();
+        return redirect('educationalProgramList');
+
         //
     }
 }

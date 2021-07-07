@@ -44,7 +44,7 @@ class progController extends Controller
     function edit($id)
     {
        $program = Eduprogram::find($id);
-    //    return $program[0]->getAgendas;
+    //    return $program->achieving_educational_position;
        return view('editEducationalProgram', compact('program'));
     }
 

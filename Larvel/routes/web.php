@@ -43,15 +43,16 @@ Route::resource('/pdcProgramList', programController::class);
 
 
 
+Route::view('/addEduProgram', 'addEducationalProgram');
 Route::resource('/educationalProgramList', eduprogramController::class);
-Route::view('login', 'admin-registeration');
-Route::view('addEduProgeam', 'add-educational-program');
-// Route::resource('/programInfo/{id}', programController::class);
+Route::resource('/educationalProgramList/{id}', eduprogramController::class);
+Route::resource('/educationalProgramList/{id}/edit', eduprogramController::class);
 
 
 
 // Route::get('program-list', [progController::class,'programList']);
-Route::get('/editPdcProgram/{id}/edit', [progController::class,'edit']);
+// Route::get('/editPdcProgram/{id}/edit', [progController::class,'edit']);
+Route::view('login', 'admin-registeration');
 
 // Route::resource('/testt/{id}', programshowController::class);
 // Route::resource('/n-enroll/{id}', programController::class)->only(['index', 'show']);

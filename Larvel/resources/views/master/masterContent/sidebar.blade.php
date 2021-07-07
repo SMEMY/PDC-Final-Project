@@ -15,7 +15,7 @@
 									<a href="#" class="active"><span> پروګرام ثبتول</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
 										<li><a href="addProgram" dir="rtl">د (پي ډي سي) پروګرام ثبتول</a></li>
-										<li><a href="addEduProgeam">دعلمي ترفېع/ تقرر پروګرام ثبتول</a></li>
+										<li><a href="addEduProgram">دعلمي ترفېع/ تقرر پروګرام ثبتول</a></li>
 									</ul>
 								</li>
 								<li class="submenu">

@@ -23,8 +23,8 @@ class CreatePDCEduprogram extends Migration
             $table->string('university');
             $table->string('faculty');
             $table->string('department');
-            $table->string('current_edicational_position');
-            $table->string('achieving_edicational_position');
+            $table->string('current_educational_position');
+            $table->string('achieving_educational_position');
             $table->integer('participant_amount');
             $table->integer('year');
             $table->integer('month');

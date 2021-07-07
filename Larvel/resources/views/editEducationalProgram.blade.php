@@ -71,8 +71,9 @@ label {
                         <hr !important>
 
 						<!-- Account Form -->
-			<form action="/educationalProgramList" method="POST" enctype="multipart/form-data">
-                        @csrf
+			<form action="/educationalProgramList/{{$program->id}}" method="post" >
+            {{ method_field('PUT') }}
+            {{ csrf_field() }}
                         <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -88,9 +89,15 @@ label {
                                     <option></option>
                                     @if($program->type == 'علمي ترفېع')
                                     <option selected value="علمي ترفېع">علمي ترفېع</option>
+                                    <option  value="ارتقاء">ارتقاء</option>
+                                    <option  value="تقرر">تقرر</option>
                                     @elseif($program->type == 'ارتقاء')
+                                    <option  value="علمي ترفېع">علمي ترفېع</option>
                                     <option selected value="ارتقاء">ارتقاء</option>
+                                    <option  value="تقرر">تقرر</option>
                                     @else
+                                    <option  value="علمي ترفېع">علمي ترفېع</option>
+                                    <option  value="ارتقاء">ارتقاء</option>
                                     <option selected value="تقرر">تقرر</option>
                                     @endif
                                 </select>
@@ -149,28 +156,142 @@ label {
                                     <option ></option>
                                     @if($program->faculty === 'طب')
                                     <option selected value="طب">طب</option>
+                                    <option  value="انجنیري">انجنیري</option>
+                                    <option  value="کمپیوټر ساینس">کمپیوټر ساینس</option>
+                                    <option  value="حقوق">حقوق</option>
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
+                                    <option  value="ژورنالیزم">ژورنالیزم</option>
+                                    <option  value="اقتصاد">اقتصاد</option>
+                                    <option  value="زراعت">زراعت</option>
+                                    <option  value="شرعیات">شرعیات</option>
+                                    <option  value="ادبیات">ادبیات</option>
+                                    <option  value="ساینس">ساینس</option>
+
                                     @elseif($program->faculty === 'انجنیري')
+                                    <option  value="طب">طب</option>
                                     <option selected value="انجنیري">انجنیري</option>
-                                    @elseif($program->faculty === 'کمپیوټر ساینس')
-                                    <option selected value="کمپیوټر ساینس">کمپیوټر ساینس</option>
+                                    <option  value="کمپیوټر ساینس">کمپیوټر ساینس</option>
+                                    <option  value="حقوق">حقوق</option>
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
+                                    <option  value="ژورنالیزم">ژورنالیزم</option>
+                                    <option  value="اقتصاد">اقتصاد</option>
+                                    <option  value="زراعت">زراعت</option>
+                                    <option  value="شرعیات">شرعیات</option>
+                                    <option  value="ادبیات">ادبیات</option>
+                                    <option  value="ساینس">ساینس</option>                                   
+                                    <option  value="تعلیم او تربیه">تعلیم او تربیه</option>
                                     @elseif($program->faculty === 'حقوق')
-                                    <option selected value="حقوق">حقوق</option>
-                                    @elseif($program->faculty === 'اداره ئې عامه')
+                                    <option  value="طب">طب</option>
+                                    <option  value="انجنیري">انجنیري</option>
+                                    <option  selected value="کمپیوټر ساینس">کمپیوټر ساینس</option>
+                                    <option  value="حقوق">حقوق</option>
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
+                                    <option  value="ژورنالیزم">ژورنالیزم</option>
+                                    <option  value="اقتصاد">اقتصاد</option>
+                                    <option  value="زراعت">زراعت</option>
+                                    <option  value="شرعیات">شرعیات</option>
+                                    <option  value="ادبیات">ادبیات</option>
+                                    <option  value="ساینس">ساینس</option>                                   
+                                    <option  value="تعلیم او تربیه">تعلیم او تربیه</option>                                    
                                     <option selected value="اداره ئې عامه">اداره ئې عامه</option>
                                     @elseif($program->faculty === 'ژورنالیزم')
-                                    <option selected value="ژورنالیزم">ژورنالیزم</option>
+                                    <option  value="طب">طب</option>
+                                    <option  value="انجنیري">انجنیري</option>
+                                    <option  selected value="کمپیوټر ساینس">کمپیوټر ساینس</option>
+                                    <option  value="حقوق">حقوق</option>
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
+                                    <option  selected value="ژورنالیزم">ژورنالیزم</option>
+                                    <option  value="اقتصاد">اقتصاد</option>
+                                    <option  value="زراعت">زراعت</option>
+                                    <option  value="شرعیات">شرعیات</option>
+                                    <option  value="ادبیات">ادبیات</option>
+                                    <option  value="ساینس">ساینس</option>                                    
+                                    <option  value="تعلیم او تربیه">تعلیم او تربیه</option>                                  
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
                                     @elseif($program->faculty === 'اقتصاد')
-                                    <option selected value="اقتصاد">اقتصاد</option>
+                                    <option  value="طب">طب</option>
+                                    <option  value="انجنیري">انجنیري</option>
+                                    <option  selected value="کمپیوټر ساینس">کمپیوټر ساینس</option>
+                                    <option  value="حقوق">حقوق</option>
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
+                                    <option  value="ژورنالیزم">ژورنالیزم</option>
+                                    <option  selected value="اقتصاد">اقتصاد</option>
+                                    <option   value="زراعت">زراعت</option>
+                                    <option  value="شرعیات">شرعیات</option>
+                                    <option  value="ادبیات">ادبیات</option>
+                                    <option  value="ساینس">ساینس</option>                                
+                                    <option  value="تعلیم او تربیه">تعلیم او تربیه</option>                                    
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>                                   
                                     @elseif($program->faculty === 'زراعت')
-                                    <option selected value="زراعت">زراعت</option>
-                                    @elseif($program->faculty === 'شرعیات')
-                                    <option selected value="شرعیات">شرعیات</option>
+                                    <option  value="طب">طب</option>
+                                    <option  value="انجنیري">انجنیري</option>
+                                    <option   value="کمپیوټر ساینس">کمپیوټر ساینس</option>
+                                    <option  value="حقوق">حقوق</option>
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
+                                    <option  value="ژورنالیزم">ژورنالیزم</option>
+                                    <option  value="اقتصاد">اقتصاد</option>
+                                    <option  selected value="زراعت">زراعت</option>
+                                    <option  value="شرعیات">شرعیات</option>
+                                    <option  value="ادبیات">ادبیات</option>
+                                    <option  value="ساینس">ساینس</option>                                   
+                                    <option  value="تعلیم او تربیه">تعلیم او تربیه</option>                                   
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>                                   
                                     @elseif($program->faculty === 'ادبیات')
-                                    <option selected value="ادبیات">ادبیات</option>
+                                    <option  value="طب">طب</option>
+                                    <option  value="انجنیري">انجنیري</option>
+                                    <option   value="کمپیوټر ساینس">کمپیوټر ساینس</option>
+                                    <option  value="حقوق">حقوق</option>
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
+                                    <option  value="ژورنالیزم">ژورنالیزم</option>
+                                    <option  value="اقتصاد">اقتصاد</option>
+                                    <option   value="زراعت">زراعت</option>
+                                    <option   value="شرعیات">شرعیات</option>
+                                    <option  selected value="ادبیات">ادبیات</option>
+                                    <option  value="ساینس">ساینس</option>                                  
+                                    <option  value="تعلیم او تربیه">تعلیم او تربیه</option>                                  
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>  
                                     @elseif($program->faculty === 'ساینس')
-                                    <option selected value="ساینس">ساینس</option>
+                                    <option  value="طب">طب</option>
+                                    <option  value="انجنیري">انجنیري</option>
+                                    <option   value="کمپیوټر ساینس">کمپیوټر ساینس</option>
+                                    <option  value="حقوق">حقوق</option>
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
+                                    <option  value="ژورنالیزم">ژورنالیزم</option>
+                                    <option  value="اقتصاد">اقتصاد</option>
+                                    <option   value="زراعت">زراعت</option>
+                                    <option   value="شرعیات">شرعیات</option>
+                                    <option  value="ادبیات">ادبیات</option>
+                                    <option  selected value="ساینس">ساینس</option>                                    
+                                    <option  value="تعلیم او تربیه">تعلیم او تربیه</option>                                   
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
+                                    @elseif($program->faculty === 'تعلیم او تربیه')
+                                    <option  value="طب">طب</option>
+                                    <option  value="انجنیري">انجنیري</option>
+                                    <option   value="کمپیوټر ساینس">کمپیوټر ساینس</option>
+                                    <option  value="حقوق">حقوق</option>
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
+                                    <option  value="ژورنالیزم">ژورنالیزم</option>
+                                    <option  value="اقتصاد">اقتصاد</option>
+                                    <option   value="زراعت">زراعت</option>
+                                    <option   value="شرعیات">شرعیات</option>
+                                    <option  value="ادبیات">ادبیات</option>
+                                    <option   value="ساینس">ساینس</option>                                   
+                                    <option  selected value="تعلیم او تربیه">تعلیم او تربیه</option>                                    
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
                                     @else
-                                    <option selected value="تعلیم او تربیه">تعلیم او تربیه</option>
+                                    <option  value="طب">طب</option>
+                                    <option  value="انجنیري">انجنیري</option>
+                                    <option   value="کمپیوټر ساینس">کمپیوټر ساینس</option>
+                                    <option  value="حقوق">حقوق</option>
+                                    <option  value="اداره ئې عامه">اداره ئې عامه</option>
+                                    <option  value="ژورنالیزم">ژورنالیزم</option>
+                                    <option  value="اقتصاد">اقتصاد</option>
+                                    <option   value="زراعت">زراعت</option>
+                                    <option   value="شرعیات">شرعیات</option>
+                                    <option  value="ادبیات">ادبیات</option>
+                                    <option   value="ساینس">ساینس</option>                                   
+                                    <option   value="تعلیم او تربیه">تعلیم او تربیه</option>                                    
+                                    <option  selected value="اداره ئې عامه">اداره ئې عامه</option>
                                     @endif
                                 </select>
                             </div>
@@ -179,10 +300,10 @@ label {
                     <hr !important>
 
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="">د استاد دیپارټمنټ</label>
-                                <input class="form-control" type="text" name="department">
+                                <input class="form-control" type="text" name="department" value="{{$program->department}}">
 
                             </div>
                         </div>
@@ -191,31 +312,65 @@ label {
                                 <label>د استاد اوسنی علمي رتبه</label>
                                 <select class="custom-select"
                                     style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="current_educational_position">
-                                    <option selected=""></option>
-                                    <option value="پوهیالی">پوهیالی</option>
-                                    <option value="پوهنیار">پوهنیار</option>
-                                    <option value="پوهنمل">پوهنمل</option>
-                                    <option value="پوهاند">پوهاند</option>
+                                    <option ></option>
+                                    @if($program->current_educational_position === 'پوهیالی')
+                                    <option selected value="پوهیالی">پوهیالی</option>
+                                    <option  value="پوهنیار">پوهنیار</option>
+                                    <option  value="پوهنمل">پوهنمل</option>
+                                    <option  value="پوهاند">پوهاند</option>
+                                    @elseif($program->current_educational_position === 'پوهنیار')
+                                    <option  value="پوهیالی">پوهیالی</option>
+                                    <option  selecte dvalue="پوهنیار">پوهنیار</option>
+                                    <option  value="پوهنمل">پوهنمل</option>
+                                    <option  value="پوهاند">پوهاند</option>
+                                    @elseif($program->current_educational_position === 'پوهنمل')
+                                    <option  value="پوهیالی">پوهیالی</option>
+                                    <option   value="پوهنیار">پوهنیار</option>
+                                    <option  selected value="پوهنمل">پوهنمل</option>
+                                    <option  value="پوهاند">پوهاند</option>
+                                    @else
+                                    <option  value="پوهیالی">پوهیالی</option>
+                                    <option  value="پوهنیار">پوهنیار</option>
+                                    <option  value="پوهنمل">پوهنمل</option>
+                                    <option  selected value="پوهاند">پوهاند</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label>د استاد ترلاسه کېدونکې علمي رتبه</label>
                                 <select class="custom-select"
                                 style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="achieving_educational_position">
-                                <option selected=""></option>
-                                    <option value="پوهیالی">پوهیالی</option>
-                                    <option value="پوهنیار">پوهنیار</option>
-                                    <option value="پوهنمل">پوهنمل</option>
-                                    <option value="پوهاند">پوهاند</option>
+                                <option ></option>
+                                @if($program->achieving_educational_position === 'پوهیالی')
+                                <option selected value="پوهیالی">پوهیالی</option>
+                                <option  value="پوهنیار">پوهنیار</option>
+                                <option  value="پوهنمل">پوهنمل</option>
+                                <option  value="پوهاند">پوهاند</option>
+                                @elseif($program->achieving_educational_position === 'پوهنیار')
+                                <option  value="پوهیالی">پوهیالی</option>
+                                <option  selected value="پوهنیار">پوهنیار</option>
+                                <option  value="پوهنمل">پوهنمل</option>
+                                <option  value="پوهاند">پوهاند</option>
+                                @elseif($program->achieving_educational_position === 'پوهنمل')
+                                <option  value="پوهیالی">پوهیالی</option>
+                                <option   value="پوهنیار">پوهنیار</option>
+                                <option  selected value="پوهنمل">پوهنمل</option>
+                                <option  value="پوهاند">پوهاند</option>
+                                @else
+                                <option  value="پوهیالی">پوهیالی</option>
+                                <option  value="پوهنیار">پوهنیار</option>
+                                <option  value="پوهنمل">پوهنمل</option>
+                                <option  selected value="پوهاند">پوهاند</option>
+                                @endif
                                 </select>										
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="">د غونډي د ګډونوالو شمېر</label>
-                                <input class="form-control" type="number" name="participant_amount">
+                                <input class="form-control" type="number" name="participant_amount" value="{{$program->participant_amount}}">
                             </div>
                         </div>
                         <!-- <h3 class="col-md-12 m-auto">د پروګرام ادرس</h3> -->
@@ -228,25 +383,25 @@ label {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د رامنځته کولو ساحه</label>
-                                <input placeholder="" class="form-control" type="text" name="campus_name">
+                                <input placeholder="" class="form-control" type="text" name="campus_name" value="{{$program->campus_name}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د رامنځته کولو تعمیر نوم</label>
-                                <input placeholder="" class="form-control" type="text" name="block_name">
+                                <input placeholder="" class="form-control" type="text" name="block_name" value="{{$program->block_name}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د رامنځته کولو د ودانۍ شمېره</label>
-                                <input placeholder="" class="form-control" type="number" name="block_number">
+                                <input placeholder="" class="form-control" type="number" name="block_number" value="{{$program->block_number}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د اطاق نمبر</label>
-                                <input placeholder="" class="form-control" type="number" name="room_number">
+                                <input placeholder="" class="form-control" type="number" name="room_number" value="{{$program->room_number}}">
                             </div>
                         </div>
                     </div>
@@ -254,26 +409,26 @@ label {
                     <div class="row my-5">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>د پېل کېدو کېدو کال</label>
-                                <input placeholder="" class="form-control" type="number" name="year">
+                                <label>د پېل کېدو کال</label>
+                                <input placeholder="" class="form-control" type="number" name="year" value="{{$program->year}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>د پېل کېدو کېدو میاشت</label>
-                                <input placeholder="" class="form-control" type="number" name="month">
+                                <label>د پېل کېدو میاشت</label>
+                                <input placeholder="" class="form-control" type="number" name="month" value="{{$program->month}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>د پېل کېدو کېدو  ورځ</label>
-                                <input placeholder="" class="form-control" type="number" name="start_day">
+                                <label>د پېل کېد  ورځ</label>
+                                <input placeholder="" class="form-control" type="number" name="start_day" value="{{$program->start_day}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>دشروع کېدو وخت</label>
-                                <input placeholder="" class="form-control" type="time" name="start_time">
+                                <input placeholder="" class="form-control" type="time" name="start_time" value="{{$program->start_time}}">
                             </div>
                         </div>
                     </div>
