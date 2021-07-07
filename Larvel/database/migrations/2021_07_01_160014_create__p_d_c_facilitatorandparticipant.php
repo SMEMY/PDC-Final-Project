@@ -19,12 +19,13 @@ class CreatePDCFacilitatorandparticipant extends Migration
             $table->string('last_name', 30);	
             $table->string('phone_number', 30);	
             $table->string('email', 50);	
-            $table->binary('gender');	
-            $table->string('affice_campus', 30);	
+            $table->string('gender');	
+            $table->string('office_campus', 30);	
             $table->string('office_building', 30);
             $table->string('office_department', 30);
             $table->string('office_position', 30);
             $table->string('office_position_category', 30);
+            $table->string('educational_rank', 30);
             $table->string('role_in_program', 30);
             $table->string('password');
             $table->timestamps();

@@ -10,8 +10,8 @@ class Fanswer extends Model
     use HasFactory;
 
     // These are reverse (ONE - TO - ONE) relationships
-    function feedbackQuestionAnswer()
-    {
-        return $this->belongsTo('App\Models\Fquestionnaire');
-    }
+    // function feedbackQuestionAnswer()
+    // {
+    //     return $this->belongsTo('App\Models\Fquestionnaire');
+    // }
 }

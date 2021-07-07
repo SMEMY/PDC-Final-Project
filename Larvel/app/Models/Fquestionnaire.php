@@ -16,8 +16,8 @@ class Fquestionnaire extends Model
     }
 
      // These are (ONE - TO - ONE) relationships
-     function getFeedbackQuestionAnswer()
-     {
-         return $this->hasOne('App\Models\Fanswer');
-     }
+    //  function getFeedbackQuestionAnswer()
+    //  {
+    //      return $this->hasOne('App\Models\Fanswer');
+    //  }
 }

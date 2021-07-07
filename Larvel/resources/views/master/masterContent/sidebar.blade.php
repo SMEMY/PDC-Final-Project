@@ -3,17 +3,64 @@
 			<div class="sidebar-inner slimscroll">
 				<div id="sidebar-menu" class="sidebar-menu">
 					<ul>
-						<li class="menu-title">
-							<span>Main</span>
+						<li class="menu-title" >
+							<span>اصلي مېنو</span>
 						</li>
 						<li class="submenu">
-							<a href="#"> <span> Dashboard</span> <i class="la la-dashboard"></i> <span class="menu-arrow"></span></a>
+							<a href="#"> <span> پروګرامونه</span> <i class="la la-dashboard"></i> <span class="menu-arrow"></span></a>
 							<ul style="display: none;">
-								<li><a class="active" href="index.html">Admin Dashboard</a></li>
-								<li><a href="employee-dashboard.html">Employee Dashboard</a></li>
+								<!-- <li><a class="active" href="test">پروګرامونه</a></li> -->
+
+								<li class="submenu">
+									<a href="#" class="active"><span> پروګرام ثبتول</span> <span class="menu-arrow"></span></a>
+									<ul style="display: none;">
+										<li><a href="addProgram" dir="rtl">د (پي ډي سي) پروګرام ثبتول</a></li>
+										<li><a href="addEduProgeam">دعلمي ترفېع/ تقرر پروګرام ثبتول</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="#" class=""><span> پروګرامونو لیست</span> <span class="menu-arrow"></span></a>
+									<ul style="display: none;">
+										<li><a href="pdcProgramList" dir="rtl">د (پي ډي سي) پروګرامونه</a></li>
+										<li><a href="educationalProgramList">دعلمي ترفېع/ تقرر پروګرامونه</a></li>
+									</ul>
+								</li>
+								<!-- <li><a href="addProgram">پروګرام ثبتول</a></li>
+								<li><a href="addEduProgeam">دعلمي ترفېع/ تقرر پروګرام ثبتول </a></li> -->
+							</ul>
+
+							
+						</li>
+						<li class="submenu">
+							<a href="#"> <span> ګدونوال</span> <i class="la la-dashboard"></i> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<!-- <li><a class="active" href="test">پروګرامونه</a></li> -->
+								<li class="submenu">
+									<a href="#" class=""><span>ګدونوال ثبتول</span> <span class="menu-arrow"></span></a>
+									<ul style="display: none;">
+										<li><a href="addProgram" dir="rtl">د پروګرام تسهیلونکی ثبتول</a></li>
+										<li><a href="addEduProgeam">د پروګرام ګډونوال ثبتول</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="#" class=""><span>ګدونوالو لیست</span> <span class="menu-arrow"></span></a>
+									<ul style="display: none;">
+										<li><a href="addProgram" dir="rtl">د پروګرام تسهیلونکي </a></li>
+										<li><a href="addEduProgeam">د پروګرام ګډونوال</a></li>
+									</ul>
+								</li>
+								<!-- <li><a href="addProgram">پروګرام ثبتول</a></li>
+								<li><a href="addEduProgeam">دعلمي ترفېع/ تقرر پروګرام ثبتول </a></li> -->
 							</ul>
 						</li>
-						<li class="submenu">
+						<!-- <li class="submenu">
+							<a href="#"> <span> ګدونوال</span> <i class="la la-user"></i> <span class="menu-arrow"></span> </a>
+							<ul style="display: none;">
+								<li><a class="" href="index.html">د پروګرام تسهیلونکی ثبتول</a></li>
+								<li><a class="" href="index.html">د پروګرام ګډونوال ثبتول</a></li>
+							</ul>
+						</li> -->
+						<!-- <li class="submenu">
 							<a href="#"> <span> Apps</span> <i class="la la-cube"></i><span
 									class="menu-arrow"></span></a>
 							<ul style="display: none;">
@@ -72,7 +119,7 @@
 						<li>
 							<a href="tickets.html"> <span>Tickets</span><i class="la la-ticket"></i></a>
 						</li>
-					
+					 -->
 	
 					</ul>
 				</div>

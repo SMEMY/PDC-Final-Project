@@ -33,8 +33,28 @@
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 		}
 
+		select:focus {
+			box-shadow: 0px 0px 2px #000 !important;
+			
+			transition: all 0.1s;
+			transform: scale(1.01);
+		}
+
 		input:focus {
-			border-color: #00c5fb !important;
+			box-shadow: 0px 0px 2px #000 !important;
+			transition: all 0.1s;
+			transform: scale(1.02);
+		}
+
+		textarea:focus {
+			box-shadow: 0px 0px 2px #000 !important;
+		}
+        input {
+			background: #f0fcff !important;
+		}
+		textarea{
+			background: #f0fcff !important;
+
 		}
 	</style>
 </head>
@@ -53,7 +73,7 @@
 				</div>
 				<!-- /Account Logo -->
 
-				<div class="account-box " style="width: 800px;">
+				<div class="account-box " style="width: 1000px;">
 					<div class="account-wrapper" style="">
 						<h3 class="account-title">د اډمین راجسټر پاڼه</h3>
 						<!-- <p class="account-subtitle"></p> -->

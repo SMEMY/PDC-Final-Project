@@ -60,7 +60,8 @@
 						<!-- <p class="account-subtitle"></p> -->
 
 						<!-- Account Form -->
-						<form action="index.html">
+						<form action="/programInfo" method="POST">
+						@csrf
 						<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -94,9 +95,10 @@
 													class="text-danger">*</span></label>
 											<select class="form-control" name="gender">
 												<!-- <option selected="">جنسیت</option> -->
-												<option value="1">نارینه</option>
-												<option value="2">ښځینه</option>
-												<option value="3">یو بل شی</option>
+												<option ></option>
+
+												<option value="نارینه">نارینه</option>
+												<option value="ښځینه">ښځینه</option>
 											</select>
 
 										</div>
@@ -104,13 +106,28 @@
 
 									<div class="col-md-12">
 										<div class="form-group">
-											<label class="col-form-label">کاري دفتر<span
+											<label class="col-form-label">کاري ساحې نوم<span
 													class="text-danger">*</span></label>
 											<select class="form-control" name="office_campus">
 												<!-- <option selected="">جنسیت</option> -->
-												<option value="1">کمپیوټر ساینس</option>
-												<option value="2">محصلینو چارو معاونیت</option>
-												<option value="3">یو بل شی</option>
+												<option ></option>
+
+												<option value="کندهار پوهتون" > کندهار پوهنتون</option>
+											</select>
+
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-form-label">کاري دفتر<span
+													class="text-danger">*</span></label>
+											<select class="form-control" name="office_building">
+												<!-- <option selected="">جنسیت</option> -->
+												<option ></option>
+
+												<option value="کمپیوټر ساینس">کمپیوټر ساینس</option>
+												<option value="محصلینو چارو معاونیت">محصلینو چارو معاونیت</option>
+												<option value="انجنیري">انجنیري</option>
 											</select>
 
 										</div>
@@ -127,10 +144,12 @@
 													class="text-danger">*</span></label>
 											<select class="form-control" name="office_position">
 												<!-- <option selected="">جنسیت</option> -->
-												<option value="1">رئیس</option>
-												<option value="2">مرستیال</option>
-												<option value="3">ښوونکی</option>
-												<option value="3">اداري کارمند</option>
+												<option ></option>
+
+												<option value="رئیس">رئیس</option>
+												<option value="مرستیال">مرستیال</option>
+												<option value="ښوونکی">ښوونکی</option>
+												<option value="اداري کارمند">اداري کارمند</option>
 											</select>
 										</div>
 									</div>
@@ -140,21 +159,27 @@
 													class="text-danger">*</span></label>
 											<select class="form-control rankS" name="office_position_category">
 												<!-- <option selected="">جنسیت</option> -->
-												<option value="1">اداری</option>
-												<option value="2">تدریسي</option>
-												<option value="3">اداري او تدریسي</option>
+												<option ></option>
+
+												<option value="اداري">اداري</option>
+												<option value="تدریسي">تدریسي</option>
+												<option value="اداري او تدریسي">اداري او تدریسي</option>
 												<!-- <option value="3">اداري کارمند</option> -->
 											</select>
 
 										</div>
 									</div>
 									<!-- this part has been hidden just for DB Facilitator role -->
-									<div class="col-md-12 d-none">
+									<div class="col-md-12">
 										<div class="form-group">
-											<label class="col-form-label">role in program<span
+											<label class="col-form-label">په پروګرام کي ستاسي نقش<span
 													class="text-danger">*</span></label>
-											<input type="text" class="form-control" name="role_in_program" id="role"
-												value="Facilitator">
+											<select class="form-control" name="role_in_program">
+												<!-- <option selected="">جنسیت</option> -->
+												<option ></option>
+												<option value="تسهیلونکی">تسهیلونکی</option>
+												<option value="ګډونوال">ګډونوال</option>
+											</select>
 										</div>
 									</div>
 									<div class="col-md-12">
@@ -168,7 +193,7 @@
 										<div class="form-group">
 											<label class="col-form-label">پاسورډ تائید کړی<span
 													class="text-danger">*</span></label>
-											<input class="form-control input-sm" type="password">
+											<input class="form-control input-sm" type="password" name="password_confirm">
 										</div>
 									</div>
 
@@ -211,17 +236,17 @@
 			var state = $(this).children("option:selected").val();
 			// alert("You have selected the country - " + state);
 			console.log(typeof state);
-			if ((state === "2" || state === "3") && s === true) {
+			if ((state === "تدریسي" || state === "اداري او تدریسي") && s === true) {
 				var txt1 =
 					`<div class="col-md-12" id="temp">
 						<div class="form-group">
 							<label class="col-form-label">علمي رتبه<span class="text-danger">*</span></label>
-								<select class="form-control">
+								<select class="form-control" name="educational_rank">
 								<!-- <option selected="">جنسیت</option> -->
-								<option value="1">پوهایالی</option>
-								<option value="2">پوهنیار</option>
-								<option value="3">پوهنمل</option>
-								<option value="3">پوهاند</option>
+								<option value="پوهایالی">پوهایالی</option>
+								<option value="پوهنیار">پوهنیار</option>
+								<option value="پوهنمل">پوهنمل</option>
+								<option value="پوهاند">پوهاند</option>
 								<!-- <option value="3">اداري کارمند</option> -->
 							</select>
 
@@ -231,7 +256,7 @@
 				$("#rank").after(txt1);
 				s = false;
 			}
-			else if (state === "1" && s === false) {
+			else if (state === "اداري" && s === false) {
 				$("#temp").remove();
 				s = true
 			}

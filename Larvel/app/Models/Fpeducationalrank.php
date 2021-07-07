@@ -9,8 +9,8 @@ class Fpeducationalrank extends Model
 {
     use HasFactory;
 
-    function participantAndFacilitator()
-    {
-        return $this->belongsTo('App\Models\Facilitatorsandparticipant');
-    }
+    // function participantAndFacilitator()
+    // {
+    //     return $this->belongsTo('App\Models\Facilitatorsandparticipant');
+    // }
 }
