@@ -14,14 +14,14 @@
 								<li class="submenu">
 									<a href="#" class="active"><span> پروګرام ثبتول</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="addProgram" dir="rtl">د (پي ډي سي) پروګرام ثبتول</a></li>
+										<li><a href="addPdcProgram" dir="rtl">د (پي ډي سي) پروګرام ثبتول</a></li>
 										<li><a href="addEduProgram">دعلمي ترفېع/ تقرر پروګرام ثبتول</a></li>
 									</ul>
 								</li>
 								<li class="submenu">
 									<a href="#" class=""><span> پروګرامونو لیست</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="pdcProgramList" dir="rtl">د (پي ډي سي) پروګرامونه</a></li>
+										<li><a href="pdcProgramList" >د (پي ډي سي) پروګرامونه</a></li>
 										<li><a href="educationalProgramList">دعلمي ترفېع/ تقرر پروګرامونه</a></li>
 									</ul>
 								</li>
@@ -38,15 +38,15 @@
 								<li class="submenu">
 									<a href="#" class=""><span>ګدونوال ثبتول</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="addProgram" dir="rtl">د پروګرام تسهیلونکی ثبتول</a></li>
-										<li><a href="addEduProgeam">د پروګرام ګډونوال ثبتول</a></li>
+										<li><a href="facilitatorRegisteration" >د پروګرام تسهیلونکی ثبتول</a></li>
+										<li><a href="participantRegisteration">د پروګرام ګډونوال ثبتول</a></li>
 									</ul>
 								</li>
 								<li class="submenu">
 									<a href="#" class=""><span>ګدونوالو لیست</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="addProgram" dir="rtl">د پروګرام تسهیلونکي </a></li>
-										<li><a href="addEduProgeam">د پروګرام ګډونوال</a></li>
+										<li><a href="facilitatorList" dir="rtl">د پروګرام تسهیلونکي </a></li>
+										<li><a href="participantList">د پروګرام ګډونوال</a></li>
 									</ul>
 								</li>
 								<!-- <li><a href="addProgram">پروګرام ثبتول</a></li>

@@ -6,6 +6,8 @@ use App\Http\Controllers\programshowController;
 use App\Http\Controllers\progController;
 use App\Http\Controllers\eduprogramController;
 use App\Http\Controllers\facilitatorandparticipantController;
+use App\Http\Controllers\programparticipantController;
+use App\Http\Controllers\programfacilitatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,61 +21,58 @@ use App\Http\Controllers\facilitatorandparticipantController;
 */
 
 
-Route::get('/', function () {
-    return view('add-edit-delete-facilitator');
-});
+// Route::get('/', function () {
+//     return view('add-edit-delete-facilitator');
+// });
 
 
-// Route::get('/info', [progController::class,'showInfo']);
+Route::view('/registration', 'facilitatorParticipantRegisteration');
+Route::view('/showPrograms', 'enrolled-program');
+Route::view('/addPdcProgram', 'addProgram');
+Route::view('/addEduProgram', 'addEducationalProgram');
+Route::view('/facilitatorRegisteration', 'addFacilitator');
+Route::view('/participantRegisteration', 'addParticipant');
 
-// Route::resource('/addProgram', programController::class);
-Route::view('/addProgram', 'addProgram');
+
+// Route::resource('/addFacilitator', facilitatorandparticipantController::class);
+
+Route::resource('/participantList', programparticipantController::class);
+Route::resource('/facilitatorList', programfacilitatorController::class);
+Route::resource('/educationalProgramList', eduprogramController::class);
 Route::resource('/pdcProgramList', programController::class);
 
-// Route::resource('/editPdcProgram/{id}/edit', programController::class)->only([
-//     'edit',
-// ]);
-
-// Route::resource('/pdcProgramList/{id}/edit', programController::class);
-
-// Route::resource('/editPdcProgram/{id}/edit', programController::class)->only([
-//     'edit'
-// ]);
 
 
 
 
-Route::view('/addEduProgram', 'addEducationalProgram');
-Route::resource('/educationalProgramList', eduprogramController::class);
-Route::resource('/educationalProgramList/{id}', eduprogramController::class);
+
+Route::resource('/facilitatorList/{id}/edit', programfacilitatorController::class);
 Route::resource('/educationalProgramList/{id}/edit', eduprogramController::class);
 
 
 
-// Route::get('program-list', [progController::class,'programList']);
-// Route::get('/editPdcProgram/{id}/edit', [progController::class,'edit']);
-Route::view('login', 'admin-registeration');
-
-// Route::resource('/testt/{id}', programshowController::class);
-// Route::resource('/n-enroll/{id}', programController::class)->only(['index', 'show']);
-// Route::resource('/show', programshowController::class);
-// Route::resource('/show/{id?}', programshowController::class);
-// Route::resource('/login', userloingController::class);
-// Route::resource('/adminregister', );
-// Route::resource('/', );
-// Route::resource('/', );
-// Route::resource('/', );
-// Route::resource('/', );
-// Route::resource('/', );
-// Route::resource('/', );
-// Route::resource('/', );
-// Route::resource('/', );
-// Route::resource('/', );
-// Route::resource('/', );
-// Route::resource('/', );
+Route::resource('/participantList/{id}', programparticipantController::class);
+Route::resource('/facilitatorList/{id}', programfacilitatorController::class);
+Route::resource('/educationalProgramList/{id}', eduprogramController::class);
 
 
 
+
+
+
+
+
+Route::resource('/participantFacilitatorStore', facilitatorandparticipantController::class);
+Route::resource('/facilitatorStore', facilitatorandparticipantController::class);
+Route::resource('/participantStore', facilitatorandparticipantController::class);
+
+
+
+/*   Educational programs ROUTES    */
+
+
+
+/*   Facilitators And Participants ROUTES    */
 
 
 
@@ -83,6 +82,33 @@ Route::view('login', 'admin-registeration');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Route::view('login', 'admin-registeration');
 // Route::view('/','test');
 
 // Route::get('/dashboard', function () {

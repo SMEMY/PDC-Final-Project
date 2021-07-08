@@ -20,7 +20,7 @@
 
 <!-- Header Title -->
 <div class="page-title-box">
-    <h3>Dreamguy's Technologies</h3>
+    <h3 style="font-size:25px">مسلکي پرمختائي مرکز</h3>
 </div>
 <!-- /Header Title -->
 <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>

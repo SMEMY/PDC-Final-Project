@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Program;
 use App\Models\Result;
+use App\Models\Facility;
 use App\Models\Agenda;
 use App\Models\Material;
 Use Illuminate\Support\Facades\DB;
@@ -47,10 +48,7 @@ class programController extends Controller
    
     public function store(Request $request)
     {
-        //
-        // $programs = Program::where('name', $request->search_name)->get();
-        // return view('add-edit-delete-program', compact("programs"));
-        // $doc = $request->file_path;
+        // this part is belongs to Program Model
         $addProgram = new Program;
         $addProgram->name = $request->name;
         $addProgram->type = $request->type;
@@ -80,8 +78,25 @@ class programController extends Controller
         $addProgram->block_number = $request->block_number;
         $addProgram->room_number = $request->room_number;
         $addProgram->save();
-        return redirect('test');
-
+        // this part belongs to Facility Model
+        foreach ($request->facility as  $value) {
+            $programFacility = new Facility;
+            $programFacility->facility = $value;
+            $programFacility->program_id = Program::max('id');
+            $programFacility->save();
+        }
+        // this part belongs to Agenda Model
+        foreach ($request->agenda as  $value) {
+            $programAgenda = new Agenda;
+            $programAgenda->agenda = $value;
+            $programAgenda->program_id = Program::max('id');
+            $programAgenda->save();
+        }
+      
+        
+        // return "done";
+        return redirect('pdcProgramList');
+        
         
 
         // $add_program->name = 

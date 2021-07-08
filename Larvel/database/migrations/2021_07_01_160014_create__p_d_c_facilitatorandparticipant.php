@@ -26,7 +26,6 @@ class CreatePDCFacilitatorandparticipant extends Migration
             $table->string('office_position', 30);
             $table->string('office_position_category', 30);
             $table->string('educational_rank', 30);
-            $table->string('role_in_program', 30);
             $table->string('password');
             $table->timestamps();
         });

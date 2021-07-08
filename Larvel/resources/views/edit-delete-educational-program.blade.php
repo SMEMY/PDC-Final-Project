@@ -101,7 +101,7 @@ label {
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="/educationalProgramList/{{$program->id}}/edit"  ><i
                                 class="fa fa-pencil m-r-5"></i> Edit</a>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i
+                        <a class="dropdown-item" href="/educationalProgramList/{{$program->id}}" data-toggle="modal" data-target="#delete_project" id="path" onclick="pathFinder(this)"><i
                                 class="fa fa-trash-o m-r-5"></i> Delete</a>
                     </div>
                 </div>
@@ -152,7 +152,7 @@ label {
                 <div class="modal-btn delete-action">
                     <div class="row">
                         <div class="col-6">
-                            <form action="/educationalProgramList/{{$program->id}}" method="post">
+                            <form action="" method="post"  id="pathGetter">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-primary continue-btn col-md-12">Delet</button>
@@ -177,6 +177,13 @@ label {
 
 @section('cutom-js')
 <script>
+
+function pathFinder(num)
+	{
+		console.log(num.href);
+		document.getElementById("pathGetter").action = num.href;
+
+	}
 		var count = 2;
 		function afterText() {
 			var txt1 =
