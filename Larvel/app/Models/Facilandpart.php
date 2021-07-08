@@ -20,11 +20,11 @@ class Facilandpart extends Model
     }
     function getProgramFacilitators()
     {
-        return $this->hasMany('App\Models\Programsfacilitator');
+        return $this->belongsToMany(Program::class, 'programsfacilitators');
     }
     function getProgramsParticipants()
     {
-        return $this->hasMany('App\Models\Programsparticipant');
+        return $this->belongsToMany(Program::class, 'programsparticipants');
     }
     function getProgramsFeedbacks()
     {

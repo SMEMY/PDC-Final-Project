@@ -10,12 +10,5 @@ class Programsparticipant extends Model
     use HasFactory;
 
     // These are Reverse (ONE - TO - MANY) relationships
-    function program()
-    {
-        return $this->belongsTo('App\Models\Program');
-    }
-    function programParticipantAndFacilitator()
-    {
-        return $this->belongsTo('App\Models\Facilandpart');
-    }
+    protected $table = 'programsparticipants';
 }

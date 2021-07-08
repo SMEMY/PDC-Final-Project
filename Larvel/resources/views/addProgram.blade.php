@@ -7,6 +7,7 @@ label {
 	}
     h3{
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            
 
         }
         input{
@@ -62,7 +63,7 @@ label {
 
 				<div class="account-box" style="width: 1100px; margin-top: 75px; margin-right:140px;" id="for">
 					<div class="account-wrapper mt-3" style="">
-						<h3 class="account-title mb-5">پروګرام ثبت کړی</h3>
+						<h3 class="account-title mb-5" style="font-size:35px !important; font-weight: bolder;">د مسلکي پرمختیائي مرکز پروګرام ثبت پاڼه</h3>
 						<!-- <p class="account-subtitle"></p> -->
 <hr !important>
 						<!-- Account Form -->
@@ -266,7 +267,7 @@ label {
                         <div class="form-group col-md-12" id="facilities">
                             <div class="form-group">
                                 <label>د پروګرام سهولتونه</label>
-                                <input placeholder="1" class="form-control" type="text" name="facility1">
+                                <input placeholder="1" class="form-control" type="text" name="facility[0]">
                             </div>
 
                         </div>
@@ -285,7 +286,7 @@ label {
                         <div class="form-group col-md-12" id="agendas">
                             <div class="form-group">
                                 <label>د پروګرام اجنډا</label>
-                                <input placeholder="1" class="form-control" type="text" name="agenda1">
+                                <input placeholder="1" class="form-control" type="text" name="agenda[0]">
                             </div>
 
                         </div>
@@ -305,8 +306,8 @@ label {
                     <div class="row " id="files">
                         <div class=" col-md-6">
                             <div class="form-group custom-file ">
-                                <input type="file" class="custom-file-input" id="customFile" name="filename"
-                                    onchange="nameShow(this)" name="file_path">
+                                <input type="file" class="custom-file-input" id="customFile"
+                                    onchange="nameShow(this)" name="filename[0]">
                                 <label class="custom-file-label" for="customFile">د پروګرام اړونده
                                     فایل
                                     انتخاب کړی</label>
@@ -315,10 +316,11 @@ label {
                         <div class=" col-md-6 mb-3" id="">
                             <div class="form-group">
                                 <select class="custom-select"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="file_type">
-                                    <option selected>د فایل ډول انتخاب کړی</option>
-                                    <option value="0">پریشینټېشن</option>
-                                    <option value="1">وډیو</option>
+                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="filetype[0]">
+                                    <option selected></option>
+                                    <option value="پریشینټېشن">پریشینټېشن</option>
+                                    <option value="وډیو">وډیو</option>
+                                    <option value="آډیو">آډیو</option>
                                 </select>
 
                             </div>
@@ -368,17 +370,19 @@ label {
 	<script>
 		$('#addProgram').addClass('active');
 		var count = 2;
+        var index = 1;
 		function afterText() {
 			var txt1 =
 				`
 				<div class="form-group">
 										
-										<input placeholder="${count}" class="form-control" type="text" name="facility${count}">
+										<input placeholder="${count}" class="form-control" type="text" name="facility[${index}]">
 									</div>`;
 
 			$("#facilities").children().last().after(txt1);
 			$('#times').removeClass('d-none');
-			count++;   // Insert new elements after img
+			count++;  
+            index++; // Insert new elements after img
 		}
 		function rmv() {
 
@@ -393,17 +397,19 @@ label {
 
 		}
 		var count1 = 2;
+        var indexAgenda = 1;
 		function addAgenda() {
 			var txt1 =
 				`
 				<div class="form-group">
 										
-										<input placeholder="${count1}" class="form-control" type="text" name="agenda${count1}">
+										<input placeholder="${count1}" class="form-control" type="text" name="agenda[${indexAgenda}]">
 									</div>`;
 
 			$("#agendas").children().last().after(txt1);
 			$('#remove-agenda').removeClass('d-none');
 			count1++;   // Insert new elements after img
+            indexAgenda++;
 		}
 		function removeAgenda() {
 
@@ -465,12 +471,13 @@ label {
 		});
 
 		var count4 = 2;
+        var indexFile = 1;
 		function addFile() {
 			var txt1 =
 				`	<div class=" col-md-6" >
 												<div class="form-group custom-file ">
 													<input type="file" class="custom-file-input" id="customFile"
-														name="filename">
+														name="filename[${indexFile}]">
 													<label class="custom-file-label" for="customFile">د پروګرام اړونده
 														فایل
 														انتخاب کړی</label>
@@ -479,10 +486,11 @@ label {
 											<div class=" col-md-6 mb-3" id="">
 												<div class="form-group">
 													<select class="custom-select"
-														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
-														<option selected>د فایل ډول انتخاب کړی</option>
-														<option value="0">پریشینټېشن</option>
-														<option value="1">وډیو</option>
+														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="filetype[${indexFile}]">
+                                                        <option selected></option>
+                                    <option value="پریشینټېشن">پریشینټېشن</option>
+                                    <option value="وډیو">وډیو</option>
+                                    <option value="آډیو">آډیو</option>
 													</select>
 
 												</div>
@@ -491,6 +499,7 @@ label {
 			$("#files").children().last().after(txt1);
 			$('#file-remover').removeClass('d-none');
 			count4++;   // Insert new elements after img
+            indexFile++;
 		}
 		function removeFile() {
 

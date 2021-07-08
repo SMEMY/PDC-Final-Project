@@ -15,7 +15,7 @@ class facilitatorandparticipantController extends Controller
      */
     public function index()
     {
-        return view('user-registeration');
+        
 
 
         //
@@ -56,13 +56,24 @@ class facilitatorandparticipantController extends Controller
         if ( $request->educational_rank != null) {
             $facilitator_participant->educational_rank = $request->educational_rank;
         }
-        $facilitator_participant->role_in_program = $request->role_in_program;
         if ($request->password == $request->password_confirm) {
             $facilitator_participant->password = $request->password;
         }
         $facilitator_participant->save();
 
-        return "data saved";
+        // return "data saved";
+        if($request->return === 'facilitator')
+        {
+            return redirect('participantList');
+        }
+        else if($request->return === 'participant')
+        {
+            return redirect('facilitatorList');
+
+        }
+        else{
+            return redirect('showPrograms');
+        }
         
 
 
@@ -88,6 +99,7 @@ class facilitatorandparticipantController extends Controller
     public function edit($id)
     {
         //
+       
     }
 
     /**

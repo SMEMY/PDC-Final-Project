@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Facilandpart;
+use App\Models\Program;
+use App\Models\Programsfacilitator;
+use Illuminate\Support\Facades\DB;
+
+
+
 
 class programfacilitatorController extends Controller
 {
@@ -14,6 +21,14 @@ class programfacilitatorController extends Controller
     public function index()
     {
         //
+        // return Pr
+        // return Programsfacilitator::all();
+        $members =  DB::table('facilandparts')
+        ->join('programsfacilitators', 'facilandparts.id', '=', 'programsfacilitators.facilitator_id')
+        ->select('facilandparts.*')
+        ->get();
+        $path = 'facilitator';
+        return view('ListfacilitatorAndParticipant', compact('members', 'path'));
     }
 
     /**
@@ -57,6 +72,8 @@ class programfacilitatorController extends Controller
     public function edit($id)
     {
         //
+        $facilitator = Facilandpart::find($id);
+        return view('editFacilitator', compact('facilitator'));
     }
 
     /**
@@ -69,6 +86,27 @@ class programfacilitatorController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $facilitator_participant = Facilandpart::find($id);
+        // return $request->last_name;
+        $facilitator_participant->name = $request->name;
+        $facilitator_participant->last_name = $request->last_name;
+        $facilitator_participant->phone_number = $request->phone_number;
+        $facilitator_participant->email = $request->email;
+        $facilitator_participant->gender = $request->gender;
+        $facilitator_participant->office_campus = $request->office_campus;
+        $facilitator_participant->office_building = $request->office_building;
+        $facilitator_participant->office_department = $request->office_department;
+        $facilitator_participant->office_position = $request->office_position;
+        $facilitator_participant->office_position_category = $request->office_position_category;
+        if ( $request->educational_rank != null) {
+            $facilitator_participant->educational_rank = $request->educational_rank;
+        }
+        if ($request->password == $request->password_confirm) {
+            $facilitator_participant->password = $request->password;
+        }
+        $facilitator_participant->save();
+        return redirect('facilitatorList');
+
     }
 
     /**
@@ -80,5 +118,8 @@ class programfacilitatorController extends Controller
     public function destroy($id)
     {
         //
+        $deleteFacilitator = Facilandpart::find($id);
+        $deleteFacilitator->delete();
+        return redirect('facilitatorList');
     }
 }
