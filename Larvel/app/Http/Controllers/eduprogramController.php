@@ -16,7 +16,8 @@ class eduprogramController extends Controller
     public function index()
     {
         $programs =  Eduprogram::orderBy('id', 'desc')->get();
-        return view('edit-delete-educational-program', compact('programs'));
+        $path = '/educationalProgramList';
+        return view('list-pdc-program', compact('programs', 'path'));
     }
 
     /**

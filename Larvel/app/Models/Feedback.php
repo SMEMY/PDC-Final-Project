@@ -8,21 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Feedback extends Model
 {
     use HasFactory;
-
-     // These are (ONE - TO - MANY) relationships
-     function getFeedbackQuestion()
-     {
-         return $this->hasMany('App\Models\Fquestionnaire');
-     }
-
-    // These are reverse (ONE - TO - MANY) relationships
-    function program()
+    // These are (ONE - TO - MANY) relationships
+    function getFeedbackQuestions()
     {
-        return $this->belongsTo('App\Models\Program');
-    }
-    function programParticipantAndFacilitator()
-    {
-        return $this->belongsTo('App\Models\Facilitatorsandparticipant');
+        return $this->hasMany('App\Models\Fquestionnaire');
     }
 
+   // These are reverse (ONE - TO - MANY) relationships
+   function program()
+   {
+       return $this->belongsTo('App\Models\Program');
+   }
+   function programParticipantAndFacilitator()
+   {
+       return $this->belongsTo('App\Models\Facilitatorsandparticipant');
+   }
 }

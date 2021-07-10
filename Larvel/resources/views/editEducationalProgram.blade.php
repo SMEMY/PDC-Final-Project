@@ -64,7 +64,7 @@ label {
 				</div> -->
 				<!-- /Account Logo -->
 
-				<div class="account-box" style="width: 1200px; margin-top: 75px; margin-right:70px;" id="for">
+				<div class="account-box" style="width: 1170px; margin-top: 75px; margin-right:70px;" id="for">
 					<div class="account-wrapper mt-3" style="">
 						<h3 class="account-title mb-5">د تقرر/علمي رتبې پروګرام ثبت کړی</h3>
 						<!-- <p class="account-subtitle"></p> -->

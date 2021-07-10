@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Facilandpart;
 use App\Models\Program;
 use App\Models\Programsfacilitator;
+use App\Models\Facilitatorsandparticipant;
 use Illuminate\Support\Facades\DB;
 
 
@@ -23,9 +23,9 @@ class programfacilitatorController extends Controller
         //
         // return Pr
         // return Programsfacilitator::all();
-        $members =  DB::table('facilandparts')
-        ->join('programsfacilitators', 'facilandparts.id', '=', 'programsfacilitators.facilitator_id')
-        ->select('facilandparts.*')
+         $members =  DB::table('facilitatorsandparticipants')
+        ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
+        ->select('facilitatorsandparticipants.*')
         ->get();
         $path = 'facilitator';
         return view('ListfacilitatorAndParticipant', compact('members', 'path'));
@@ -72,7 +72,7 @@ class programfacilitatorController extends Controller
     public function edit($id)
     {
         //
-        $facilitator = Facilandpart::find($id);
+        $facilitator = Facilitatorsandparticipant::find($id);
         return view('editFacilitator', compact('facilitator'));
     }
 

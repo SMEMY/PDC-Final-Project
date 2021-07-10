@@ -13,6 +13,7 @@ class materialController extends Controller
      */
     public function index()
     {
+        return "material controller!";
         //
     }
 
@@ -46,6 +47,7 @@ class materialController extends Controller
     public function show($id)
     {
         //
+        return view('files-download', compact('id'));
     }
 
     /**

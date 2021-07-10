@@ -2,29 +2,44 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-	<meta name="description" content="Smarthr - Bootstrap Admin Template">
-	<meta name="keywords"
-		content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
-	<meta name="author" content="Dreamguys - Bootstrap Admin Template">
-	<meta name="robots" content="noindex, nofollow">
-	<title>File Manager - HRMS admin template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="Smarthr - Bootstrap Admin Template">
+    <meta name="keywords"
+        content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
+    <meta name="author" content="Dreamguys - Bootstrap Admin Template">
+    <meta name="robots" content="noindex, nofollow">
+    <title>feedback</title>
 
-	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
-	<!-- Fontawesome CSS -->
-	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <!-- Fontawesome CSS -->
+    <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
 
-	<!-- Lineawesome CSS -->
-	<link rel="stylesheet" href="assets/css/line-awesome.min.css">
+    <!-- <link type="text/css" rel="stylesheet" href="{{mix('css/app.css')}}"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" /> -->
 
-	<!-- Main CSS -->
-	<link rel="stylesheet" href="assets/css/style.css">
+    <!-- Lineawesome CSS -->
+    <link rel="stylesheet" href="{{asset('assets/css/line-awesome.min.css')}}">
+
+    <!-- Chart CSS -->
+    <link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="assets/css/select2.min.css">
+
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+
+    <!-- Tagsinput CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -39,70 +54,11 @@
 </head>
 
 <body>
+	
 	<!-- Main Wrapper -->
 	<div class="main-wrapper">
+	<a href="/comAllPrograms/{{$id}}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
 
-		<!-- Header -->
-		<div class="header">
-
-			<!-- Logo -->
-			<div class="header-left">
-				<a href="index.html" class="logo">
-					<img src="assets/img/logo.png" width="40" height="40" alt="">
-				</a>
-			</div>
-			<!-- /Logo -->
-
-
-
-			<!-- Header Title -->
-			<div class="page-title-box">
-				<h3>bbbbbbbbbb</h3>
-			</div>
-			<!-- /Header Title -->
-
-			<a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
-
-			<!-- Header Menu -->
-			<ul class="nav user-menu">
-
-
-
-
-
-
-
-
-
-				<li class="nav-item dropdown has-arrow main-drop">
-					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-						<span class="user-img"><img src="assets/img/profiles/avatar-21.jpg" alt="">
-							<span class="status online"></span></span>
-						<span>Admin</span>
-					</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="profile.html">زما پروفایل</a>
-						<a class="dropdown-item" href="settings.html">تنظیمونه</a>
-						<a class="dropdown-item" href="login.html">وتل له حسابه</a>
-					</div>
-				</li>
-			</ul>
-			<!-- /Header Menu -->
-
-			<!-- Mobile Menu -->
-			<div class="dropdown mobile-user-menu">
-				<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-						class="fa fa-ellipsis-v"></i></a>
-				<div class="dropdown-menu dropdown-menu-right">
-					<a class="dropdown-item" href="profile.html">زما پروفایل</a>
-					<a class="dropdown-item" href="settings.html">تنظیمونه</a>
-					<a class="dropdown-item" href="login.html">وتل له حسابه</a>>
-				</div>
-			</div>
-			<!-- /Mobile Menu -->
-
-		</div>
-		<!-- /Header -->
 
 
 		<!-- Page Wrapper -->
@@ -295,18 +251,25 @@
 	</div>
 	<!-- /Main Wrapper -->
 
-	<!-- jQuery -->
-	<script src="assets/js/jquery-3.2.1.min.js"></script>
-
-	<!-- Bootstrap Core JS -->
-	<script src="assets/js/popper.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-
-	<!-- Slimscroll JS -->
-	<script src="assets/js/jquery.slimscroll.min.js"></script>
-
-	<!-- Custom JS -->
-	<script src="assets/js/app.js"></script>
+	<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+    <!-- Bootstrap Core JS -->
+    <script src="{{asset('assets/js/popper.min.js')}}"></script>
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <!-- Slimscroll JS -->
+    <script src="{{asset('assets/js/jquery.slimscroll.min.js')}}"></script>
+    <!-- Chart JS -->
+    <script src="{{asset('assets/plugins/morris/morris.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/raphael/raphael.min.js')}}"></script>
+    <script src="{{asset('assets/js/chart.js')}}"></script>
+    <!-- Custom JS -->
+    <script src="{{asset('assets/js/app.js')}}"></script>
+    <!-- Datetimepicker JS -->
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- Select2 JS -->
+    <script src="assets/js/select2.min.js"></script>
+    <!-- Tagsinput JS -->
+    <script src="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 
 </body>
 

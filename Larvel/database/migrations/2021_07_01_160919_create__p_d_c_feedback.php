@@ -18,8 +18,6 @@ class CreatePDCFeedback extends Migration
             $table->longText('comment');
             $table->unsignedInteger('program_id');
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
-            $table->unsignedInteger('participant_id');
-            $table->foreign('participant_id')->references('id')->on('facilitatorsandparticipants')->onDelete('cascade');
             $table->timestamps();
         });
     }

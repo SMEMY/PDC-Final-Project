@@ -14,6 +14,7 @@ class feeedbackController extends Controller
     public function index()
     {
         //
+        return "feedback index";
     }
 
     /**
@@ -46,6 +47,7 @@ class feeedbackController extends Controller
     public function show($id)
     {
         //
+        return "feednback Page!";
     }
 
     /**

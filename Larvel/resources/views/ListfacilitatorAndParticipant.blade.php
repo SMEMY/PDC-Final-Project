@@ -79,7 +79,7 @@ input:focus{
 					<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3" >
 						<div class="profile-widget" style="box-shadow: 0px 0px 2px 1px #89d0e5;">
 							<div class="profile-img">
-								<a href="client-profile.html" class="avatar"><i class="mt-2 la la-user text-info" style="font-size:60px; margin-left:4px;     "></i></a>
+								<a href="client-profile.html" class="avatar"><i class="mt-2 fa fa-user-o text-info" style="font-size:60px; margin-left:0px;     "></i></a>
 							</div>
 							<div class="dropdown profile-action" dir="rtl">
 								<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"

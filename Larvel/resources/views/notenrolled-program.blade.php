@@ -41,9 +41,28 @@
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
     <style>
-        body {
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+      li {
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 16px !important;
+
+	}
+    h3{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 25px !important;
         }
+        p{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+        }
+        h4{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+        }
+        p {
+     max-width: 1030px;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+}
+      
     </style>
 </head>
 
@@ -74,24 +93,22 @@
         <div class="row">
         @foreach($programs as $program)
             <div class="col-md-12">
-                <a class="job-list" href="program_details.html">
+                <a class="job-list  border border-info" href="/comAllPrograms/{{$program->id}}">
                     <div class="job-list-det">
                         <div class="job-list-desc">
                             <h3 class="job-list-title">{{$program->name}}</h3>
                             <br>
                             <h4 class="job-department"><strong>د پروګرام ډول: </strong>{{ $program->type }}</h4>
+                            <br !important>
+                            <p class="text-muted"><strong>د پروګرام معلومات: </strong>{{$program->program_description}}</p>
                         </div>
-                        <div class="job-type-info">
-                        <a href="/n-enroll/{{ $program->id }}">
-                            <span class="job-types">نور معلومات</span>
-                        </a>
-                        </div>
+                       
                     </div>
-                    <div class="job-list-footer">
+                    <div class="job-list-footer" style="background:#ddedef;">
                         <ul>
-                            <li class="mb-2 ml-3"><i class="fa fa-map-signs"></i> <strong>ادرس: </strong>{{ $program->campus_name }}</li>
-                            <li class="mb-2 ml-3"><i class="fa fa-money"></i> <strong>د پروګرام فیس: </strong>{{ $program->fee }} {{ $program->fee_type }}</li>
-                            <li class="mb-2 ml-3"><i class="fa fa-clock-o"></i> <strong>د پروګرام دوام: </strong>{{ $program->days_duration }} ورځي</li>
+                            <li class="mb-2 ml-3"><i class="fa fa-map-signs text-info"></i> <strong>ادرس: </strong>{{ $program->campus_name }}</li>
+                            <li class="mb-2 ml-3"><i class="fa fa-money text-info"></i> <strong>د پروګرام فیس: </strong>{{ $program->fee }} {{ $program->fee_type }}</li>
+                            <li class="mb-2 ml-3"><i class="fa fa-clock-o text-info"></i> <strong>د پروګرام دوام: </strong>{{ $program->days_duration }} ورځي</li>
                         </ul>
                     </div>
                 </a>

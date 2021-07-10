@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePDCFquestionnaire extends Migration
+class CreateFeedbackanswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreatePDCFquestionnaire extends Migration
      */
     public function up()
     {
-        Schema::create('fquestionnaires', function (Blueprint $table) {
+        Schema::create('feedbachanswers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('question_category', 100);
-            $table->longText('question');
-            $table->unsignedInteger('feedback_form_id');
-            $table->foreign('feedback_form_id')->references('id')->on('feedbacks')->onDelete('cascade');
+            $table->string('answer');
+            $table->unsignedInteger('question_id');	
+            $table->foreign('question_id')->references('id')->on('fquestionnaires')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreatePDCFquestionnaire extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fquestionnaires');
+        Schema::dropIfExists('feedbachanswers');
     }
 }
