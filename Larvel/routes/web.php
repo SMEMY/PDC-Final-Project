@@ -5,9 +5,12 @@ use App\Http\Controllers\programController;
 use App\Http\Controllers\programshowController;
 use App\Http\Controllers\progController;
 use App\Http\Controllers\eduprogramController;
-use App\Http\Controllers\facilitatorandparticipantController;
+// use App\Http\Controllers\facilitatorandparticipantController;
 use App\Http\Controllers\programparticipantController;
 use App\Http\Controllers\programfacilitatorController;
+use App\Http\Controllers\materialController;
+use App\Http\Controllers\feedBackController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +30,11 @@ use App\Http\Controllers\programfacilitatorController;
 
 
 Route::view('/registration', 'facilitatorParticipantRegisteration');
-Route::view('/showPrograms', 'enrolled-program');
 Route::view('/addPdcProgram', 'addProgram');
 Route::view('/addEduProgram', 'addEducationalProgram');
 Route::view('/facilitatorRegisteration', 'addFacilitator');
 Route::view('/participantRegisteration', 'addParticipant');
+Route::view('/programEnrollment', 'enroll-program-info');
 
 
 // Route::resource('/addFacilitator', facilitatorandparticipantController::class);
@@ -40,6 +43,10 @@ Route::resource('/participantList', programparticipantController::class);
 Route::resource('/facilitatorList', programfacilitatorController::class);
 Route::resource('/educationalProgramList', eduprogramController::class);
 Route::resource('/pdcProgramList', programController::class);
+Route::resource('/comAllPrograms', programController::class);
+Route::resource('/materials', materialController::class);
+Route::resource('/feedback', feedBackController::class);
+
 
 
 
@@ -47,13 +54,26 @@ Route::resource('/pdcProgramList', programController::class);
 
 
 Route::resource('/facilitatorList/{id}/edit', programfacilitatorController::class);
+Route::resource('/participantList/{id}/edit', programparticipantController::class);
 Route::resource('/educationalProgramList/{id}/edit', eduprogramController::class);
+Route::resource('/materials/{id}/edit', materialController::class);
+
+
+// show pagers with specific ID  methid:: edit()
+Route::resource('/materials/{id}', materialController::class);
+Route::resource('/comAllPrograms/{id}', programController::class);
+Route::resource('/feedback/{id}', feedBackController::class);
+Route::resource('/materials/{id}', materialController::class);
+
+
 
 
 
 Route::resource('/participantList/{id}', programparticipantController::class);
 Route::resource('/facilitatorList/{id}', programfacilitatorController::class);
 Route::resource('/educationalProgramList/{id}', eduprogramController::class);
+
+
 
 
 

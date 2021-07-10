@@ -18,13 +18,25 @@ class programController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        
+        // return $request->path();
        $programs =  Program::orderBy('id', 'desc')->get();
        
-        return view('edit-delete-pdc-program', compact('programs'));
+       $path = '/pdcProgramList';
+
+       if($request->path() === 'pdcProgramList')
+       {
+           return view('list-pdc-program', compact('programs', 'path'));
+       }
+       else if($request->path() === 'comAllPrograms')
+       {
+        return view('enrolled-program', compact('programs'));
+       }
+       else{
+        return "path not matched!";
+       }
 
 
     }
@@ -108,9 +120,14 @@ class programController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        
+        // return $request->path();
+        $programs = Program::with('getFacilities', 'getResults')->find($id);
+        if($request->path() === 'comAllPrograms/'.$id)
+       {
+        return view('enroll-program-info', compact('programs'));
+       }
     }
 
     /**

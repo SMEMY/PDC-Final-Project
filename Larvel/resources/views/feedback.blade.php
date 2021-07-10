@@ -9,19 +9,37 @@
         content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
-    <title>Feedback-Facilitator and Participant</title>
+    <title>feedback</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
+
+    <!-- <link type="text/css" rel="stylesheet" href="{{mix('css/app.css')}}"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" /> -->
+
+    <!-- Lineawesome CSS -->
+    <link rel="stylesheet" href="{{asset('assets/css/line-awesome.min.css')}}">
+
+    <!-- Chart CSS -->
+    <link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="assets/css/select2.min.css">
+
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+
+    <!-- Tagsinput CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -29,144 +47,235 @@
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
     <style>
-        * {
+        label {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
+        }
+        
+        h4 {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
+
         }
 
-        input:focus {
-            border-color: #00c5fb !important;
+        p {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
+        }
+
+        h3 {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
+        }
+
+        select {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 17px !important;
+
+            height: 44px !important;
+            border-radius: 3px !important;
+            outline: none;
+            background-color: #f0fcff !important;
+            border: 1px solid #e3e3e3 !important;
+
+        }
+select:hover{
+    /* background-color: black !important; */
+
+}
+        select:focus {
+            box-shadow: 0px 0px 15px #c7f5ff !important;
+    /* background-color: black !important; */
+
+        }
+
+        input:hover {
+            box-shadow: 0px 0px 15px #c7f5ff !important;
+        }
+
+        input {
+            background: #f0fcff !important;
+
+            font-size: 23px !important;
         }
     </style>
+
 </head>
 
 <body class="account-page">
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-        <a href="programs-list.html" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
+        <a href="/comAllPrograms/{{$program_id}}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
         <div class="account-content">
             <!-- <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a> -->
             <div class="container ">
 
                 <!-- Account Logo -->
                 <div class="account-logo mt-5">
-                    <a href="index.html"><img src="assets/img/logo2.png" alt="Dreamguy's Technologies"></a>
+                    <a href="index.html"><img src="{{asset('assets/img/logo2.png')}}" alt="Dreamguy's Technologies"></a>
                 </div>
                 <!-- /Account Logo -->
 
                 <div class="account-box border board-danger" style="width: 1000px;">
                     <div class="account-wrapper" style="">
-                        <h3 class="account-title">د پروګرام اړونده پوښتنلیک</h3>
+                        <h3 class="account-title" style=" font-size: 35px">د پروګرام اړونده پوښتنلیک</h3>
                         <h4 class="mt-5 mb-5">د مهربانی له مخي په لاندي درکړل سوي لیسټ کي سوالونه په (X) سره په نښه کړئ!
                         </h4>
                         <hr>
                         <!-- <p class="account-subtitle"></p> -->
 
                         <!-- Account Form -->
-                        <form action="index.html">
-                            <div class="row">
-                                <h4 class="m-auto"> <strong> د ورکشاپ/ټرېنینګ مواد</strong></h4>
-                                <div class="col-md-12">
+                        <form action="/feedback" method="POST">
+                            {{ method_field('POST') }}
+                            {{ csrf_field() }}
+
+                            <input class="d-none" type="text" name="program_id" id="" value="{{$program_id}}">
+                            <input class="d-none" type="text" name="feedback_form_id" id="" value="{{$materials[0]->feedbackFormId}}">
+
+                            <h4 class="" style="margin:30px auto; font-size: 30px;width: fit-content;"> <strong> د
+                                    ورکشاپ/ټرېنینګ مواد</strong></h4>
+
+                            @foreach($materials as $material)
+                            @if( $material->question_category === 'د ورکشاپ/ټرېنینګ مواد')
+
+                            <div class="row mb-5" style="border-bottom:1px solid rgba(0,0,0,.1) !important;">
+                                <div class="col-md-9">
                                     <div class="">
-                                        <div class="form-group">
-                                            <label class="col-form-label">نوم <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="text" value="laksdjflasdk"  readonly="readonly">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-    
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Default radio
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Default radio
-                                            </label>
-                                        </div>
-                                        <div class="form-check col-md-3">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Default radio
-                                            </label>
-                                        </div>
-                                        <div class="form-check col-md-3">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault2" checked>
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                Default checked radio
-                                            </label>
+                                        <div class="form-group mb-2">
+                                            <input class="d-none" type="text" name="materials[{{$loop->index}}]" id=""
+                                                value="{{$material->id}}">
+                                            <p class="mb-0 p-3 " style="background:#d7e5ff;border-radius:5px;"><i
+                                                    class="fa fa-hand-o-left"></i> {{$material->question}} </p>
                                         </div>
                                     </div>
 
                                 </div>
-                                
-                                <!-- <hr> -->
-                                <h4 class="m-auto"> <strong>اسانتیاوي</strong></h4>
-                                <div class="mb-5"></div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="col-form-label">نوم <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" value="laksdjflasdk"
-                                            readonly="readonly">
-                                    </div>
+                                <div class="mb-5 col-md-3 pb-3">
+                                    <select class="custom-select" name="materials_answer[{{$loop->index}}]" onchange="colorChanger(this)">
+                                        <!-- <option selected=""></option> -->
+                                        <option>ځواب انتخاب کړئ</option>
+                                        <option value="بد">بد</option>
+                                        <option value="متوسط">متوسط</option>
+                                        <option value="ښه">ښه</option>
+                                        <option value="ډېر ښه">ډېرښه</option>
+                                    </select>
                                 </div>
-                                <div class="col-md-12 mb-3">
+                                <hr>
+                            </div>
+                            @endif
+                            @endforeach
+                            <h4 class="" style="margin:30px auto; font-size: 30px;    width: fit-content"> <strong>
+                                    آســـــــــــــــانتیـــــــــــــــاوي</strong></h4>
 
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Default radio
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Default radio
-                                        </label>
-                                    </div>
-                                    <div class="form-check col-md-3">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Default radio
-                                        </label>
-                                    </div>
-                                    <div class="form-check col-md-3">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            Default checked radio
-                                        </label>
-                                    </div>
-                                </div>
-                               
-                                <h4 class="m-auto"> <strong>ستاسي وړاندیز د پروګرام په اړه</strong></h4>
+                            @foreach($facilities as $facility)
+                            @if( $facility->question_category === 'آسانتیاوي')
 
-                                <div class="form-group col-md-12 mt-5">
-                                    <div class="input-group ">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">ستاسي نظر</span>
+                            <div class="row mb-5" style="border-bottom:1px solid rgba(0,0,0,.1) !important;">
+                                <div class="col-md-9">
+                                    <div class="">
+                                        <div class="form-group mb-2">
+                                            <input class="d-none" type="text" name="facilities[{{$loop->index}}]" id=""
+                                                value="{{$facility->id}}">
+                                            <p class="mb-0 p-3 " style="background:#d7e5ff;border-radius:5px;"><i
+                                                    class="fa fa-hand-o-left"></i> {{$facility->question}} </p>
                                         </div>
-                                        <textarea class="form-control" aria-label="With textarea"
-                                            style="height: 150px;"></textarea>
                                     </div>
+
                                 </div>
+                                <div class="mb-5 col-md-3 pb-3">
+                                    <select class="custom-select" name="facilities_answer[{{$loop->index}}]" onchange="colorChanger(this)">
+                                        <!-- <option selected=""></option> -->
+                                        <option>ځواب انتخاب کړئ</option>
+                                        <option value="بد">بد</option>
+                                        <option value="متوسط">متوسط</option>
+                                        <option value="ښه">ښه</option>
+                                        <option value="ډېر ښه">ډېرښه</option>
+                                    </select>
+                                </div>
+                                <hr>
+                            </div>
+                            @endif
+                            @endforeach
 
+                            <h4 class="" style="margin:30px auto; font-size: 30px;    width: fit-content"> <strong>
+                                    ځـــــــــاي</strong></h4>
 
+                            @foreach($locations as $location)
+                            @if( $location->question_category === 'ځاي')
 
+                            <div class="row mb-5" style="border-bottom:1px solid rgba(0,0,0,.1) !important;">
+                                <div class="col-md-9">
+                                    <div class="">
+                                        <div class="form-group mb-2">
+                                            <input class="d-none" type="text" name="locations[{{$loop->index}}]" id=""
+                                                value="{{$location->id}}">
+                                            <p class="mb-0 p-3 " style="background:#d7e5ff;border-radius:5px;"><i
+                                                    class="fa fa-hand-o-left"></i> {{$location->question}} </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="mb-5 col-md-3 pb-3">
+                                    <select class="custom-select" name="locations_answer[{{$loop->index}}]" onchange="colorChanger(this)"
+                                        <!-- <option selected=""></option> -->
+                                        <option>ځواب انتخاب کړئ</option>
+                                        <option value="بد">بد</option>
+                                        <option value="متوسط">متوسط</option>
+                                        <option value="ښه">ښه</option>
+                                        <option value="ډېر ښه">ډېرښه</option>
+                                    </select>
+                                </div>
+                                <hr>
+                            </div>
+                            @endif
+                            @endforeach
+
+                            <h4 class="" style="margin:30px auto; font-size: 30px;    width: fit-content"> <strong>
+                                    عمومي نظر</strong></h4>
+
+                            @foreach($comments as $comment)
+                            @if( $comment->question_category === 'عمومي نظر')
+
+                            <div class="row mb-5" style="border-bottom:1px solid rgba(0,0,0,.1) !important;">
+                                <div class="col-md-9">
+                                    <div class="">
+                                        <div class="form-group mb-2">
+                                            <input class="d-none" type="text" name="opinions[{{$loop->index}}]" id=""
+                                                value="{{$comment->id}}">
+                                            <p class="mb-0 p-3 " style="background:#d7e5ff;border-radius:5px;"><i
+                                                    class="fa fa-hand-o-left"></i> {{$comment->question}} </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="mb-3 col-md-3 pb-3">
+                                    <select class="custom-select" name="opinions_answer[{{$loop->index}}]" onchange="colorChanger(this)">
+                                        <!-- <option selected=""></option> -->
+                                        <option>ځواب انتخاب کړئ</option>
+                                        <option value="بد">بد</option>
+                                        <option value="متوسط">متوسط</option>
+                                        <option value="ښه">ښه</option>
+                                        <option value="ډېر ښه">ډېرښه</option>
+                                    </select>
+                                </div>
+                                <hr>
+                            </div>
+                            @endif
+                            @endforeach
+                            <div class="row mt-5">
+                                <div class="input-group col-md-12">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">د پروګرام په اړه معلومات</span>
+                                    </div>
+                                    <textarea class="form-control" style="height: 100px;" aria-label="With textarea"
+                                        name="comment"></textarea>
+                                </div>
                             </div>
                             <div class="mt-4"></div>
                             <div class="form-group text-center col-md-4  m-auto">
-                                <button class="btn btn-primary  account-btn col-md-12" type="submit">پوښتنلیک واستوی</button>
+                                <button class="btn btn-primary  account-btn col-md-12" type="submit">پوښتنلیک
+                                    واستوی</button>
                             </div>
                         </form>
                         <!-- /Account Form -->
@@ -179,15 +288,34 @@
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-
+    <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
     <!-- Bootstrap Core JS -->
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-
+    <script src="{{asset('assets/js/popper.min.js')}}"></script>
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <!-- Slimscroll JS -->
+    <script src="{{asset('assets/js/jquery.slimscroll.min.js')}}"></script>
+    <!-- Chart JS -->
+    <script src="{{asset('assets/plugins/morris/morris.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/raphael/raphael.min.js')}}"></script>
+    <script src="{{asset('assets/js/chart.js')}}"></script>
     <!-- Custom JS -->
-    <script src="assets/js/app.js"></script>
-    
+    <script src="{{asset('assets/js/app.js')}}"></script>
+    <!-- Datetimepicker JS -->
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- Select2 JS -->
+    <script src="assets/js/select2.min.js"></script>
+    <!-- Tagsinput JS -->
+    <script src="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script>
+
+
+        function colorChanger(option){
+            $(option).addClass('bg-primary');
+          
+        }
+    </script>
+
 </body>
 
 </html>

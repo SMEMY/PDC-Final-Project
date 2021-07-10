@@ -46,7 +46,7 @@ class Program extends Model
     {
         return $this->belongsToMany(Facilandpart::class, 'programsfacilitators');
     }
-    function getProgramsFeedback()
+    function getProgramsFeedbacks()
     {
         return $this->hasMany('App\Models\Feedbak');
     }

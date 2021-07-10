@@ -1140,7 +1140,7 @@ table.dataTable thead > tr > td.sorting {
 .header .header-left {
 	float: right;
 	height: 60px;
-	padding: 0 20px;
+	padding: 0 130px;
 	position: relative;
 	text-align: center;
 	width: 230px;
@@ -1302,7 +1302,7 @@ table.dataTable thead > tr > td.sorting {
     position: fixed;
     top: 60px;
     transition: all 0.2s ease-in-out 0s;
-    width: 230px;
+    width: 260px;
     z-index: 1001;
 	direction: rtl;
 }
@@ -1329,11 +1329,13 @@ table.dataTable thead > tr > td.sorting {
 .sidebar-menu li a {
 	color: #b7c0cd;
 	display: block;
-	font-size: 15px;
+	font-size: 18px !important;
 	height: auto;
 	padding: 0 20px;
 	direction: ltr;
 }
+
+
 .sidebar-menu li a:hover {
 	color: #fff;
 }
@@ -1555,7 +1557,8 @@ table.dataTable thead > tr > td.sorting {
 	transition: all 0.2s ease-in-out;
 }
 .page-wrapper > .content {
-	padding: 30px;
+	padding: 70px;
+	padding-left: 40px;
 }
 .page-header {
 	margin-bottom: 1.875rem;

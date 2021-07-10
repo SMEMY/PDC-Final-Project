@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Facilandpart;
 use App\Models\Program;
+use App\Models\Facilitatorsandparticipant;
 use Illuminate\Support\Facades\DB;
 
 
@@ -18,9 +19,9 @@ class programparticipantController extends Controller
     public function index()
     {
         //
-        $members =  DB::table('facilandparts')
-        ->join('programsparticipants', 'facilandparts.id', '=', 'programsparticipants.participant_id')
-        ->select('facilandparts.*')
+        $members =  DB::table('facilitatorsandparticipants')
+        ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+        ->select('facilitatorsandparticipants.*')
         ->get();
 
         $path = 'participant';
@@ -68,7 +69,9 @@ class programparticipantController extends Controller
     public function edit($id)
     {
         //
-        $participant = Facilandpart::find($id);
+
+        // return $id;
+        $participant = Facilitatorsandparticipant::find($id);
         return view('editParticipant', compact('participant'));
     }
 

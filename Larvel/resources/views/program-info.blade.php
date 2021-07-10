@@ -120,7 +120,7 @@
 						</ul>
 					</div>
 
-					<a class="btn job-btn mt-4" href="#" data-toggle="modal" data-target="#apply_job">Enroll</a>
+					<a class="btn job-btn mt-4" href="programEnrollment" >ځان ثبت کړئ</a>
 				</div>
 			</div>
 			<div class="col-md-4 ">
