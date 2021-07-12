@@ -114,7 +114,7 @@
                     aria-labelledby="nav-enroll-tab">
                 @foreach($enrolledPrograms as $program)
                 <div class="col-md-12">
-                     <a class="job-list  border border-info" href="/facilitatorEnrolledPrograms/{{$program->id}}">
+                     <a class="job-list  border border-info" href="/enrolledPdcProgramInfo/{{$program->id}}">
                         <div class="job-list-det">
                             <div class="job-list-desc">
                                 <h3 class="job-list-title">{{$program->name}}</h3>

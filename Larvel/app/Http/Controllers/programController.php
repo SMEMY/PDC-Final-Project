@@ -127,7 +127,7 @@ class programController extends Controller
         if($request->path() === 'comAllPrograms/'.$id)
         {
             $programs = Program::with('getFacilities', 'getResults')->find($id);
-            return view('program-info', compact('programs'));
+            return view('not-enreolled-program-info', compact('programs'));
        }
         //participantEnrolledPrograms
        elseif($request->path() === 'participantEnrolledPrograms/'.$id)
@@ -147,7 +147,7 @@ class programController extends Controller
         ->select('programs.*')
         ->whereNotIn('id', $programsID)
         ->get();
-        return view('enrolled-program', compact('enrolledPrograms','notEnrolledPrograms'));
+        return view('facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
 
        }
         //facilitatorEnrolledPrograms
@@ -168,13 +168,18 @@ class programController extends Controller
         ->select('programs.*')
         ->whereNotIn('id', $programsID)
         ->get();
-        return view('enrolled-program', compact('enrolledPrograms','notEnrolledPrograms'));
+        return view('facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
 
        }
        elseif($request->path() == 'pdcProgramInfo/'.$id){
-        $programs = Program::with('getFacilities', 'getResults', 'getEvaluations')->find($id);
+        $programs = Program::with('getFacilities', 'getResults', 'getEvaluations', 'getAgendas')->find($id);
 
         return view('pdc-program-info', compact('programs'));
+       }
+       elseif($request->path() == 'enrolledPdcProgramInfo/'.$id){
+        $programs = Program::with('getFacilities', 'getResults', 'getEvaluations')->find($id);
+        return view('facil-part-enroll-program-info', compact('programs'));
+
        }
        elseif($request->path() === 'pdcProgramAttendance/'.$id){
         $participants =  DB::table('facilitatorsandparticipants')
@@ -185,6 +190,7 @@ class programController extends Controller
         $programID = $id;
         return view('pdc-program-attendance', compact('participants', 'programID'));
        }
+
        else{
            return "path not found!";
        }

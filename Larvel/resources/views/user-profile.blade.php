@@ -16,6 +16,10 @@ hahahaha
     body{
         <!-- background: green !important; -->
     }
+    h1, h2, h3, h4, h5, h6, p, li{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
+    }
 @endsection
 
 
@@ -30,11 +34,8 @@ hahahaha
                 <div class="page-header">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h3 class="page-title">Profile</h3>
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Profile</li>
-                            </ul>
+                            <h3 class="page-title">د ګډونوال معلومات</h3>
+                            
                         </div>
                     </div>
                 </div>
@@ -47,19 +48,15 @@ hahahaha
                                 <div class="profile-view">
                                     <div class="profile-img-wrap">
                                         <div class="profile-img">
-                                            <a href="#"><img alt="" src="assets/img/profiles/avatar-02.jpg"></a>
+                                           <img alt="" src="{{asset('assets/img/profiles/avatar-02.jpg')}}">
                                         </div>
                                     </div>
                                     <div class="profile-basic">
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <div class="profile-info-left">
-                                                    <h3 class="user-name m-t-0 mb-0">John Doe</h3>
-                                                    <h6 class="text-muted">UI/UX Design Team</h6>
-                                                    <small class="text-muted">Web Designer</small>
-                                                    <div class="staff-id">Employee ID : FT-0001</div>
-                                                    <div class="small doj text-muted">Date of Join : 1st Jan 2013</div>
-                                                    <div class="staff-msg"><a class="btn btn-custom" href="chat.html">Send Message</a></div>
+                                                <div class="profile-info-left pt-5">
+                                                    <h3 class="user-name m-t-0 mb-0">{{$userProgfile[0]->name}} {{$userProgfile[0]->last_name}}</h3>
+                                                   
                                                 </div>
                                             </div>
                                             <div class="col-md-7">

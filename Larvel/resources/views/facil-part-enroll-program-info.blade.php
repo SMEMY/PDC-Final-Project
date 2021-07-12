@@ -1,12 +1,16 @@
-@extends('master.master')
+@extends('mastercommon.master')
 
-<!-- @section('page-title', 'hahahahah') -->
+<!-- @section('page-title', 'hahahahah')
 @section('page-title')
 hahahaha
 @endsection
 <!-- here we add css custom style -->
-@section('custom-css')
-h4 {
+@section('custom-css') -->
+*{
+			transition: all  0.5s;
+
+		}
+		h4 {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-size:30px !important;
 		}
@@ -25,9 +29,9 @@ h4 {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 
 		}
-		#save_info a:hover{
-			transform: scale(1.08);
-			transition: all  0.4s;
+		a{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
 		}
 		#date, #address{
 			transition: all  0.3s;
@@ -43,16 +47,11 @@ h4 {
 @section('content')
 <!-- Page Wrapper -->
 <div class="page-wrapper">
-	
-	<!-- Page Content -->
+        <!-- Account Logo -->
 	<div class="content">
-
-
-		<!-- Account Logo -->
-		
-		<!-- /Account Logo -->
-		<div class="row col-md-12">
-			<div class="col-md-7">
+        <!-- /Account Logo -->
+        <div class="row col-md-12">
+        <div class="col-md-7">
 				<div class="job-info job-widget">
 				<h4 class="m-auto " style="width: fit-content"><i class="pr-2 fa fa-"></i>د اړونده پروګرام په اړه معلومات</h4>
 					<br>
@@ -76,14 +75,10 @@ h4 {
 
 						<li class="col-md-12"><i class="pr-2 fa fa-money"></i>د پروګرام بودیجه: <span
 								class="text-blue">{{ $programs->fund }}</span></li>
-						<li class="col-md-12"><i class="pr-2 fa fa-users"></i>په پروګرام کي د ګډونوالو شمېر: <span
+						<li class="col-md-12"><i class="pr-2 fa fa-eye"></i>په پروګرام کي د ګډونوالو شمېر: <span
 								class="text-blue">{{$programs->participant_amount}}</span></li>
-						<li class="col-md-12"><i class="pr-2 fa fa-money"></i>د پروګرام فیس: <span
+								<li class="col-md-12"><i class="pr-2 fa fa-eye"></i>د پروګرام فیس: <span
 								class="text-blue">{{$programs->fee}}</span></li>
-						<li class="col-md-12"><i class="pr-2 fa fa-qrcode"></i>د پروګرام کوډ د ګډونوالو لپاره: <span
-								class="text-white bg-info p-1" style="border-radius: 5px; font-weight:bold">(- {{$programs->participant_code}} -)</span></li>
-						<li class="col-md-12"><i class="pr- fa fa-qrcode"></i> د پروګرام کوډ د تسهیلونکو لپاره : <span
-								class="text-white bg-info p-1" style="border-radius: 5px; font-weight:bold">(- {{$programs->facilitator_code}} -)</span></li>		
 					</ul>
 				</div>
 				<div class="job-content job-widget">
@@ -133,38 +128,26 @@ h4 {
 							@endforeach
 						</ul>
 					</div>
-					<div class="job-desc-title">
-						<h4>د پروګرام  اجنډا: </h4>
-					</div>
-					<div class="job-description">
-						<ul class="square-list">
-					
 
-							@foreach( $programs->getAgendas as $agenda)
-							<li> {{ $agenda->agenda }} </li>
-							
-							@endforeach
-						</ul>
-					</div>
 					
 				</div>
 			</div>
-			<div class="col-md-5">
+            <div class="col-md-5">
 				<div class="job-det-info job-widget" style="border-radius: 5px; box-shadow:1px 0px 5px 0px #00beff" id="date">
 					<h4 class="account-title">نېټه</h4>
-					
+					<br>
 					<ul class="job-post-det col-md-12">
 						<li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د جوړېدو نېټه: </strong><span class="text-blue">{{ $programs->year }} - {{$programs->month}} - {{$programs->start_day}}</span></li>
-						<li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د جوړېدو نېټه: </strong><span class="text-blue">{{ $programs->year }} - {{$programs->month}} - {{$programs->end_day}}</span></li>
+						<li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د ختمېدو نېته: </strong><span class="text-blue">{{ $programs->year }} - {{$programs->month}} - {{$programs->end_day}}</span></li>
 						<li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د شروع کېدو وخت: </strong><span class="text-blue">{{ $programs->start_time }}</span></li>
-						<li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د شروع کېدو وخت: </strong><span class="text-blue">{{ $programs->end_time }}</span></li>
+						<li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د ختمېدو وخت: </strong><span class="text-blue">{{ $programs->end_time }}</span></li>
 					
 					</ul>
 					<!-- <a class="btn job-btn" href="#" data-toggle="modal" data-target="#apply_job">Enroll</a> -->
 				</div>
 				<div class="job-det-info job-widget" style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="address">
 					<h4 class="account-title">پته   </h4>
-				
+					<br>
 					<ul class="job-post-det col-md-12">
 						<li class="col-md-12"><i class="pr-2 fa fa-university"></i><strong>د ساحې نوم:  </strong><span class="text-blue">{{ $programs->campus_name }}</span></li>
 						<li class="col-md-12"><i class="pr-2 fa fa-building"></i><strong> د ودانۍ نوم:  </strong><span class="text-blue">{{ $programs->block_name }}</span></li>
@@ -174,19 +157,16 @@ h4 {
 					</ul>
 					<!-- <a class="btn job-btn" href="#" data-toggle="modal" data-target="#apply_job">Enroll</a> -->
 				</div>
-				<div class="job-det-info job-widget" style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="save_info">
-					<h4 class="account-title">د پروګرام  نور معلومات ثبتول</h4>
-<br>
-					<a class="btn job-btn mt-3 p-2" href="/pdcProgramAttendance/{{$programs->id}}" >د پروګرام د ګډونوالو حاضري ثبت ول</a>
-					<a class="btn job-btn mt-3 p-2" href="/pdcProgramEvaluation/{{$programs->id}}" >د پروګرام ارزوني ثبتول</a>
-					<a class="btn job-btn mt-3 p-2" href="/pdcProgramResult/{{$programs->id}}" >د پروګرام پایلي ثبتول</a>
-					<a class="btn job-btn mt-3 p-2" href="//{{$programs->id}}" >د پروګرام تفرقه ثبتول</a>
-				</div>
+			
 			</div>
-		</div>
-	</div>
-<!-- /Page Content -->
+        </div>
+    </div>
+    <!-- /Page Content -->
+    </div>
 </div>
 <!-- /Page Wrapper -->
 @endsection
 
+@section('cutom-js')
+
+@endsection
