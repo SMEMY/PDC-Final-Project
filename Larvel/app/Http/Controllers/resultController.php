@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Result;
 
 class resultController extends Controller
 {
@@ -35,6 +36,14 @@ class resultController extends Controller
     public function store(Request $request)
     {
         //
+        for($index=0; $index<count($request->program_result); $index++)
+        {
+            $result = new Result;
+            $result->result = $request->program_result[$index];
+            $result->program_id = $request->program_id;
+            $result->save();
+        }
+        return redirect('pdcProgramInfo/'.$request->program_id);
     }
 
     /**
@@ -46,6 +55,8 @@ class resultController extends Controller
     public function show($id)
     {
         //
+        $programID = $id;
+        return view('pdc-program-result', compact('programID'));
     }
 
     /**

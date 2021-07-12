@@ -1,71 +1,193 @@
 @extends('master.master')
+
+<!-- @section('page-title', 'hahahahah') -->
+@section('page-title')
+hahahaha
+@endsection
+<!-- here we add css custom style -->
 @section('custom-css')
 label {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-            font-size: 20px !important;
-
-	}
-    h3{
-			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-        }
-        input{
-			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-            font-size: 20px !important;
 		}
-        select{
+        h4 {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-            font-size: 20px !important;
+		}
+        p {
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+		}
+        li {
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+		}
+        h3 {
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 		}
 		select:focus {
-			box-shadow: 0px 0px 2px #000 !important;
-			
-			transition: all 0.1s;
-			transform: scale(1.01);
+			box-shadow: 0px 0px 15px #c7f5ff;
 		}
 
 		input:focus {
-			box-shadow: 0px 0px 2px #000 !important;
-			transition: all 0.1s;
-			transform: scale(1.02);
-		}
-
-		textarea:focus {
-			box-shadow: 0px 0px 2px #000 !important;
+			box-shadow: 0px 0px 15px #c7f5ff !important;
 		}
         input {
 			background: #f0fcff !important;
 		}
-		textarea{
-			background: #f0fcff !important;
-
-		}
-		#for{
-			transition:all 0.3s;
-		}
 @endsection
 
-
-
+<!-- here we add dynamic content -->
 @section('content')
-	<!-- Main Wrapper -->
-	<div class="main-wrapper">
-		<div class="account-content">
-			<!-- <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a> -->
-			<div class="container ">
+<!-- Page Wrapper -->
+<div class="page-wrapper">
 
-				<!-- Account Logo -->
-				<!-- <div class="account-logo mt-5" style="width: 1150px;">
-					<a href="index.html"><img src="assets/img/logo2.png" alt="Dreamguy's Technologies"></a>
-				</div> -->
-				<!-- /Account Logo -->
+<!-- Page Content -->
+<div class="content container-fluid">
 
-				<div class="account-box" style="width: 1100px; margin-top: 75px; margin-right:140px;" id="for">
-					<div class="account-wrapper mt-3" style="">
-						<h3 class="account-title mb-5" style="font-size:35px !important; font-weight: bolder;">د مسلکي پرمختیائي مرکز پروګرام ثبت پاڼه</h3>
-						<!-- <p class="account-subtitle"></p> -->
-<hr !important>
-						<!-- Account Form -->
-						<form action="/pdcProgramList" method="POST" enctype="multipart/form-data">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">پروګرامونه</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">آدمېن پاڼه</a></li>
+                    <li class="breadcrumb-item active">پروګرامونه</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <!-- <a href="#" class="btn add-btn px-4" data-toggle="modal" data-target="#create_project"><i
+                        class="fa fa-plus"></i>پروګرام ثبت کړی</a>
+                <div class="view-icons">
+                    <a href="projects.html" class="grid-view btn btn-link active"><i
+                            class="fa fa-th"></i></a>
+                    <a href="project-list.html" class="list-view btn btn-link"><i
+                            class="fa fa-bars"></i></a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!-- Search Filter -->
+    <form action="/test" method="POST">
+        {{ method_field('POST') }}
+      	{{ csrf_field() }}
+
+    <div class="row filter-row">
+        <div class="col-sm-6 col-md-5">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="search_name">
+                <label class="focus-label">د پروګرام نوم</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-5">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="search_id">
+                <label class="focus-label">د پروګرام ایډي</label>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-2">
+            <!-- <a href="#" class="btn btn-success btn-block p-0 pt-2" style="font-size: 25px;">پلټنه </a> -->
+            <button class="btn btn-success btn-block p-0 pt-2 ">پلټنه</button>
+
+        </div>
+    </div>
+    </form>
+    <!-- Search Filter -->
+    @foreach($programs as $program)
+    <div class="row p-3">
+        <div class="card col-md-12 p-0">
+            <div class="card-body p-0">
+                <div class="dropdown dropdown-action profile-action">
+                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                            class="material-icons">more_vert</i></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{{$path}}/{{$program->id}}/edit"  ><i
+                                class="fa fa-pencil m-r-5"></i> Edit</a>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i
+                                class="fa fa-trash-o m-r-5"></i> Delete</a>
+                    </div>
+                </div>
+                <a href="/educationalPrograminfo/{{$program->id}}">
+                    <div class="job-list-desc" style="padding: 20px">
+                        <h3 class="job-list-title"> {{$program->topic}} </h3>
+                        <br>
+                        <h4 class="job-department "><strong>د ارائه کوونکي استاد نوم:  </strong> {{$program->teacher_name}} </h4>
+                        <h4 class="job-department "><strong>د پروګرام ډول: </strong> {{$program->type}} </h4>
+                       
+                        <!-- <p class="text-muted mt-4 col-md-12"><strong>پوهنتون: </strong> {{$program->university}}
+                        <p class="text-muted mt-4 col-md-12"><strong>پوهنځۍ: </strong> {{$program->faculty}} -->
+                        </p>
+                    </div>
+
+                    <div class="job-list-footer p-0" >
+                        <ul class="m-0" style="padding:20px; background: linear-gradient(to left, #88e5ff 0%, #3687ff 120%); border-radius: 0 0 4px 4px;">
+                            <li class="d-inline-block"><i class="fa fa-map-signs text-dark"></i> <strong>ادرس: </strong>
+                            {{$program->campus_name}}
+                        </li>
+                        <li class="ml-3 d-inline-block "><i class="fa fa-calendar text-dark"></i> <strong> نېټه:
+                            </strong> {{$program->year}} - {{$program->month}} - {{$program->start_day}}</li>
+                            <li class="ml-3 d-inline-block"><i class="fa fa fa-clock-o text-dark" aria-hidden="true"></i> <strong>د پروګرام د شروع کېدو وخت: </strong>
+                                {{$program->start_time}}</li>
+                        </ul>
+                    </div>            
+                </a>
+
+            </div>
+        </div>
+        <!-- <div class="col-md-12 p-3 ">
+                    <div class="dropdown profile-action" dir="rtl">
+							<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
+								aria-expanded="false"><i class="material-icons">more_vert</i></a>
+						<div class="sel dropdown-menu dropdown-menu-right">
+							<a class="dropdown-item" href="#" data-toggle="modal" data-target="#add_client"><i
+											class="fa fa-pencil m-r-5"></i> Edit</a>
+							<a class="dropdown-item" href="#" data-toggle="modal"
+										data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+						</div>
+					</div>
+            <a class="job-list border border-info" href="/programInfo">
+                <div class="job-list-det">
+                    <div class="job-list-desc">
+                        <h3 class="job-list-title"> {{$program->name}} </h3>
+                        <br>
+                        <h4 class="job-department "><strong>د پروګرام ډول: </strong> {{$program->type}} </h4>
+                        <h4 class="job-department mt-4"><strong>د پروګرام تسهیلونکی: </strong> {{$program->facilitator}} </h4>
+                        <p class="text-muted mt-4 col-md-12"><strong>معلومات: </strong> {{$program->program_description}}
+                        </p>
+                    </div>
+                    <div class="job-type-info">
+                        <span class="job-types">نور معلومات</span>
+                        
+                    </div>
+                </div>
+                <div class="job-list-footer">
+                    <ul>
+                        <li class="mb-2 ml-3"><i class="fa fa-map-signs"></i> <strong>ادرس: </strong> {{$program->campus_name}}
+                        </li>
+                        <li class="mb-2 ml-3"><i class="fa fa-money"></i> <strong>د پروګرام فیس: </strong> {{$program->fee}} {{$program->fee_type}} </li>
+                        <li class="mb-2 ml-3"><i class="fa fa-clock-o"></i> <strong>د پروګرام دوام:
+                            </strong> {{$program->days_duration}} ورځي</li>
+                    </ul>
+                </div>
+            </a>
+        </div> -->
+
+    </div>
+    @endforeach
+</div>
+<!-- /Page Content -->
+
+<!-- Create Project Modal -->
+<div id="create_project" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content style=" width: 1000px !important;"">
+            <div class="modal-header">
+                <h5 class="modal-title">پروګرام ثبت کړی</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/programInfo" method="POST" enctype="multipart/form-data">
                         @csrf
                     <div class="row">
                         <div class="col-sm-6">
@@ -265,7 +387,7 @@ label {
                         <div class="form-group col-md-12" id="facilities">
                             <div class="form-group">
                                 <label>د پروګرام سهولتونه</label>
-                                <input placeholder="1" class="form-control" type="text" name="facility[0]">
+                                <input placeholder="1" class="form-control" type="text" name="facility1">
                             </div>
 
                         </div>
@@ -284,7 +406,7 @@ label {
                         <div class="form-group col-md-12" id="agendas">
                             <div class="form-group">
                                 <label>د پروګرام اجنډا</label>
-                                <input placeholder="1" class="form-control" type="text" name="agenda[0]">
+                                <input placeholder="1" class="form-control" type="text" name="agenda1">
                             </div>
 
                         </div>
@@ -304,8 +426,8 @@ label {
                     <div class="row " id="files">
                         <div class=" col-md-6">
                             <div class="form-group custom-file ">
-                                <input type="file" class="custom-file-input" id="customFile"
-                                    onchange="nameShow(this)" name="filename[0]">
+                                <input type="file" class="custom-file-input" id="customFile" name="filename"
+                                    onchange="nameShow(this)" name="file_path">
                                 <label class="custom-file-label" for="customFile">د پروګرام اړونده
                                     فایل
                                     انتخاب کړی</label>
@@ -314,11 +436,10 @@ label {
                         <div class=" col-md-6 mb-3" id="">
                             <div class="form-group">
                                 <select class="custom-select"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="filetype[0]">
-                                    <option selected></option>
-                                    <option value="پریشینټېشن">پریشینټېشن</option>
-                                    <option value="وډیو">وډیو</option>
-                                    <option value="آډیو">آډیو</option>
+                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="file_type">
+                                    <option selected>د فایل ډول انتخاب کړی</option>
+                                    <option value="0">پریشینټېشن</option>
+                                    <option value="1">وډیو</option>
                                 </select>
 
                             </div>
@@ -351,36 +472,58 @@ label {
                         <button class="btn btn-primary submit-btn">Submit</button>
                     </div>
                 </form>
-						<!-- /Account Form -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Create Project Modal -->
 
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /Main Wrapper -->
+
+
+<!-- Delete Project Modal -->
+<div class="modal custom-modal fade" id="delete_project" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-header">
+                    <h3>Delete Project</h3>
+                    <p>Are you sure want to delete?</p>
+                </div>
+                <div class="modal-btn delete-action">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="javascript:void(0);" data-dismiss="modal"
+                                class="btn btn-primary cancel-btn">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Delete Project Modal -->
+
+</div>
+<!-- /Page Wrapper -->
 @endsection
 
-
-
-
 @section('cutom-js')
-	<script>
-		$('#addProgram').addClass('active');
+<script>
 		var count = 2;
-        var index = 1;
 		function afterText() {
 			var txt1 =
 				`
 				<div class="form-group">
 										
-										<input placeholder="${count}" class="form-control" type="text" name="facility[${index}]">
+										<input placeholder="${count}" class="form-control" type="text" name="facility${count}">
 									</div>`;
 
 			$("#facilities").children().last().after(txt1);
 			$('#times').removeClass('d-none');
-			count++;  
-            index++; // Insert new elements after img
+			count++;   // Insert new elements after img
 		}
 		function rmv() {
 
@@ -395,19 +538,17 @@ label {
 
 		}
 		var count1 = 2;
-        var indexAgenda = 1;
 		function addAgenda() {
 			var txt1 =
 				`
 				<div class="form-group">
 										
-										<input placeholder="${count1}" class="form-control" type="text" name="agenda[${indexAgenda}]">
+										<input placeholder="${count1}" class="form-control" type="text" name="agenda${count1}">
 									</div>`;
 
 			$("#agendas").children().last().after(txt1);
 			$('#remove-agenda').removeClass('d-none');
 			count1++;   // Insert new elements after img
-            indexAgenda++;
 		}
 		function removeAgenda() {
 
@@ -469,13 +610,12 @@ label {
 		});
 
 		var count4 = 2;
-        var indexFile = 1;
 		function addFile() {
 			var txt1 =
 				`	<div class=" col-md-6" >
 												<div class="form-group custom-file ">
 													<input type="file" class="custom-file-input" id="customFile"
-														name="filename[${indexFile}]">
+														name="filename">
 													<label class="custom-file-label" for="customFile">د پروګرام اړونده
 														فایل
 														انتخاب کړی</label>
@@ -484,11 +624,10 @@ label {
 											<div class=" col-md-6 mb-3" id="">
 												<div class="form-group">
 													<select class="custom-select"
-														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="filetype[${indexFile}]">
-                                                        <option selected></option>
-                                    <option value="پریشینټېشن">پریشینټېشن</option>
-                                    <option value="وډیو">وډیو</option>
-                                    <option value="آډیو">آډیو</option>
+														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;">
+														<option selected>د فایل ډول انتخاب کړی</option>
+														<option value="0">پریشینټېشن</option>
+														<option value="1">وډیو</option>
 													</select>
 
 												</div>
@@ -497,7 +636,6 @@ label {
 			$("#files").children().last().after(txt1);
 			$('#file-remover').removeClass('d-none');
 			count4++;   // Insert new elements after img
-            indexFile++;
 		}
 		function removeFile() {
 
@@ -514,18 +652,6 @@ label {
 
 		}
 
-
-		$( "#toggle_btn" ).click(function() {
-            if($('#for').css('width') === '1100px' && $('#for').css('margin-right') === '140px')
-            {
-                console.log("alkfjlakfd");
-                $("#for").css("width", "1200px");
-                $("#for").css("margin-right", "0px");
-            }
-            else{
-                $("#for").css("width", "1100px");
-                $("#for").css("margin-right", "140px");
-            }
-        });
 	</script>
-@endsection
+
+    @endsection

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Evaluation;
 use Illuminate\Http\Request;
 
 class evaluationController extends Controller
@@ -35,6 +35,14 @@ class evaluationController extends Controller
     public function store(Request $request)
     {
         //
+        for($index=0; $index<count($request->program_evaluation); $index++)
+        {
+            $evaluation = new Evaluation;
+            $evaluation->evaluation = $request->program_evaluation[$index];
+            $evaluation->program_id = $request->program_id;
+            $evaluation->save();
+        }
+        return redirect('pdcProgramInfo/'.$request->program_id);
     }
 
     /**
@@ -46,6 +54,8 @@ class evaluationController extends Controller
     public function show($id)
     {
         //
+        $programID = $id;
+        return view('pdc-program-evaluation', compact('programID'));
     }
 
     /**

@@ -11,29 +11,35 @@
     <meta name="robots" content="noindex, nofollow">
     <title>PDC Programs</title>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+   <!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
-    <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<!-- Fontawesome CSS -->
+<link  href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
 
-    <!-- Lineawesome CSS -->
-    <link rel="stylesheet" href="assets/css/line-awesome.min.css">
+<!-- <link type="text/css" rel="stylesheet" href="{{mix('css/app.css')}}"> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" /> -->
 
-    <!-- Datatable CSS -->
-    <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+<!-- Lineawesome CSS -->
+<link rel="stylesheet" href="{{asset('assets/css/line-awesome.min.css')}}">
 
-    <!-- Select2 CSS -->
-    <link rel="stylesheet" href="assets/css/select2.min.css">
+<!-- Chart CSS -->
+<link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
 
-    <!-- Datetimepicker CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+<!-- Main CSS -->
+<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    
+<!-- Select2 CSS -->
+<link rel="stylesheet" href="{{asset('assets/css/select2.min.css')}}">
 
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+<!-- Datetimepicker CSS -->
+<link rel="stylesheet" href="{{asset('assets/css/bootstrap-datetimepicker.min.css')}}">
+    
+<!-- Tagsinput CSS -->
+<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -41,9 +47,30 @@
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
     <style>
-        body {
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+        li {
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 16px !important;
+
+	}
+    h3{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 25px !important;
         }
+        p{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+        }
+        a{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+        }
+        h4{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+        }
+        p {
+     max-width: 1030px;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+}
     </style>
 </head>
 
@@ -55,7 +82,7 @@
     <div class="content container">
         <!-- Account Logo -->
         <div class="account-logo mt-5">
-            <a href="index.html"><img src="assets/img/logo2.png" alt="Dreamguy's Technologies"></a>
+            <a href="index.html"><img src="{{asset('assets/img/logo2.png')}}" alt="Dreamguy's Technologies"></a>
         </div>
         <!-- Page Header -->
         <div class="page-header mt-5">
@@ -85,174 +112,56 @@
 
                 <div class="row tab-pane fade  show active" id="nav-enroll" role="tabpanel"
                     aria-labelledby="nav-enroll-tab">
-
-                    <div class="col-md-12">
-                        <a class="job-list" href="program_details.html">
-                            <div class="job-list-det">
-                                <div class="job-list-desc">
-                                    <h3 class="job-list-title">د HLMS په اړه لارښونه </h3>
-                                    <br>
-                                    <h4 class="job-department"><strong>د پروګرام ډول: </strong>ورکشاپ</h4>
-                                </div>
-                                <div class="job-type-info">
-                                    <span class="job-types">نور معلومات</span>
-                                </div>
+                @foreach($enrolledPrograms as $program)
+                <div class="col-md-12">
+                     <a class="job-list  border border-info" href="/facilitatorEnrolledPrograms/{{$program->id}}">
+                        <div class="job-list-det">
+                            <div class="job-list-desc">
+                                <h3 class="job-list-title">{{$program->name}}</h3>
+                                <br>
+                                <h4 class="job-department"><strong>د پروګرام ډول: </strong>{{ $program->type }}</h4>
+                                <br !important>
+                                <p class="text-muted"><strong>د پروګرام معلومات: </strong>{{$program->program_description}}</p>
                             </div>
-                            <div class="job-list-footer">
-                                <ul>
-                                    <li class="mb-2 ml-3"><i class="fa fa-map-signs"></i> <strong>ادرس: </strong>کندهار
-                                        پوهنتون
-                                    </li>
-                                    <li class="mb-2 ml-3"><i class="fa fa-money"></i> <strong>د پروګرام فیس: </strong>
-                                        500
-                                        افغانۍ</li>
-                                    <li class="mb-2 ml-3"><i class="fa fa-clock-o"></i> <strong>د پروګرام دوام:
-                                        </strong> درې
-                                        ورخي</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-12">
-                        <a class="job-list" href="program_details.html">
-                            <div class="job-list-det">
-                                <div class="job-list-desc">
-                                    <h3 class="job-list-title">د HLMS په اړه لارښونه </h3>
-                                    <br>
-                                    <h4 class="job-department"><strong>د پروګرام ډول: </strong>ورکشاپ</h4>
-                                </div>
-                                <div class="job-type-info">
-                                    <span class="job-types">نور معلومات</span>
-                                </div>
-                            </div>
-                            <div class="job-list-footer">
-                                <ul>
-                                    <li class="mb-2 ml-3"><i class="fa fa-map-signs"></i> <strong>ادرس: </strong>کندهار
-                                        پوهنتون
-                                    </li>
-                                    <li class="mb-2 ml-3"><i class="fa fa-money"></i> <strong>د پروګرام فیس: </strong>
-                                        500
-                                        افغانۍ</li>
-                                    <li class="mb-2 ml-3"><i class="fa fa-clock-o"></i> <strong>د پروګرام دوام:
-                                        </strong> درې
-                                        ورخي</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-12">
-                        <a class="job-list" href="program_details.html">
-                            <div class="job-list-det">
-                                <div class="job-list-desc">
-                                    <h3 class="job-list-title">د HLMS په اړه لارښونه </h3>
-                                    <br>
-                                    <h4 class="job-department"><strong>د پروګرام ډول: </strong>ورکشاپ</h4>
-                                </div>
-                                <div class="job-type-info">
-                                    <span class="job-types">نور معلومات</span>
-                                </div>
-                            </div>
-                            <div class="job-list-footer">
-                                <ul>
-                                    <li class="mb-2 ml-3"><i class="fa fa-map-signs"></i> <strong>ادرس: </strong>کندهار
-                                        پوهنتون
-                                    </li>
-                                    <li class="mb-2 ml-3"><i class="fa fa-money"></i> <strong>د پروګرام فیس: </strong>
-                                        500
-                                        افغانۍ</li>
-                                    <li class="mb-2 ml-3"><i class="fa fa-clock-o"></i> <strong>د پروګرام دوام:
-                                        </strong> درې
-                                        ورخي</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-12">
-                        <a class="job-list" href="program_details.html">
-                            <div class="job-list-det">
-                                <div class="job-list-desc">
-                                    <h3 class="job-list-title">د HLMS په اړه لارښونه </h3>
-                                    <br>
-                                    <h4 class="job-department"><strong>د پروګرام ډول: </strong>ورکشاپ</h4>
-                                </div>
-                                <div class="job-type-info">
-                                    <span class="job-types">نور معلومات</span>
-                                </div>
-                            </div>
-                            <div class="job-list-footer">
-                                <ul>
-                                    <li class="mb-2 ml-3"><i class="fa fa-map-signs"></i> <strong>ادرس: </strong>کندهار
-                                        پوهنتون
-                                    </li>
-                                    <li class="mb-2 ml-3"><i class="fa fa-money"></i> <strong>د پروګرام فیس: </strong>
-                                        500
-                                        افغانۍ</li>
-                                    <li class="mb-2 ml-3"><i class="fa fa-clock-o"></i> <strong>د پروګرام دوام:
-                                        </strong> درې
-                                        ورخي</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </div>
-
-
+                        
+                        </div>
+                        <div class="job-list-footer" style="background:#bde3fdc7;">
+                            <ul>
+                                <li class="mb-2 ml-3"><i class="fa fa-map-signs text-info"></i> <strong>ادرس: </strong>{{ $program->campus_name }}</li>
+                                <li class="mb-2 ml-3"><i class="fa fa-money text-info"></i> <strong>د پروګرام فیس: </strong>{{ $program->fee }} {{ $program->fee_type }}</li>
+                                <li class="mb-2 ml-3"><i class="fa fa-clock-o text-info"></i> <strong>د پروګرام دوام: </strong>{{ $program->days_duration }} ورځي</li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
                 </div>
                 <div class="row tab-pane fade show " id="nav-unenroll" role="tabpanel"
                     aria-labelledby="nav-unenroll-tab">
-                    <div class="col-md-12 ">
-                        <a class="job-list" href="program_details.html">
-                            <div class="job-list-det bg-light">
-                                <div class="job-list-desc">
-                                    <h3 class="job-list-title">Want to enroll for a Program </h3>
-                                    <br>
-                                    <h4 class="job-department"><strong>د پروګرام ډول: </strong>ورکشاپ</h4>
-                                </div>
-                                <div class="job-type-info">
-                                    <span class="job-types">نور معلومات</span>
-                                </div>
+                @foreach($notEnrolledPrograms as $program)
+
+                <div class="col-md-12">
+                     <a class="job-list  border border-info" href="/comAllPrograms/{{$program->id}}">
+                        <div class="job-list-det">
+                            <div class="job-list-desc">
+                                <h3 class="job-list-title">{{$program->name}}</h3>
+                                <br>
+                                <h4 class="job-department"><strong>د پروګرام ډول: </strong>{{ $program->type }}</h4>
+                                <br !important>
+                                <p class="text-muted"><strong>د پروګرام معلومات: </strong>{{$program->program_description}}</p>
                             </div>
-                            <div class="job-list-footer bg-dark text-danger">
-                                <ul class="">
-                                    <li class="mb-2 ml-3 text-danger"><i class="fa fa-map-signs text-danger"></i> <strong>ادرس: </strong>کندهار
-                                        پوهنتون
-                                    </li>
-                                    <li class="mb-2 ml-3 text-danger"><i class="fa fa-money text-danger"></i> <strong>د پروګرام فیس: </strong>
-                                        500
-                                        افغانۍ</li>
-                                    <li class="mb-2 ml-3 text-danger"><i class="fa fa-clock-o text-danger"></i> <strong>د پروګرام دوام:
-                                        </strong> درې
-                                        ورخي</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-12">
-                        <a class="job-list" href="program_details.html">
-                            <div class="job-list-det">
-                                <div class="job-list-desc">
-                                    <h3 class="job-list-title">د HLMS په اړه لارښونه </h3>
-                                    <br>
-                                    <h4 class="job-department"><strong>د پروګرام ډول: </strong>ورکشاپ</h4>
-                                </div>
-                                <div class="job-type-info">
-                                    <span class="job-types">نور معلومات</span>
-                                </div>
-                            </div>
-                            <div class="job-list-footer">
-                                <ul>
-                                    <li class="mb-2 ml-3"><i class="fa fa-map-signs"></i> <strong>ادرس: </strong>کندهار
-                                        پوهنتون
-                                    </li>
-                                    <li class="mb-2 ml-3"><i class="fa fa-money"></i> <strong>د پروګرام فیس: </strong>
-                                        500
-                                        افغانۍ</li>
-                                    <li class="mb-2 ml-3"><i class="fa fa-clock-o"></i> <strong>د پروګرام دوام:
-                                        </strong> درې
-                                        ورخي</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </div>
+                        
+                        </div>
+                        <div class="job-list-footer" style="background:#ddedef;">
+                            <ul>
+                                <li class="mb-2 ml-3"><i class="fa fa-map-signs text-info"></i> <strong>ادرس: </strong>{{ $program->campus_name }}</li>
+                                <li class="mb-2 ml-3"><i class="fa fa-money text-info"></i> <strong>د پروګرام فیس: </strong>{{ $program->fee }} {{ $program->fee_type }}</li>
+                                <li class="mb-2 ml-3"><i class="fa fa-clock-o text-info"></i> <strong>د پروګرام دوام: </strong>{{ $program->days_duration }} ورځي</li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
                    
                 </div>
             </div>
@@ -266,20 +175,20 @@
 
 
         <!-- jQuery -->
-        <script src="assets/js/jquery-3.2.1.min.js"></script>
+        <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
 
         <!-- Bootstrap Core JS -->
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="{{asset('assets/js/popper.min.js')}}"></script>
+        <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 
         <!-- Slimscroll JS -->
-        <script src="assets/js/jquery.slimscroll.min.js"></script>
+        <script src="{{asset('assets/js/jquery.slimscroll.min.js')}}"></script>
 
         <!-- Select2 JS -->
-        <script src="assets/js/select2.min.js"></script>
+        <script src="{{asset('assets/js/select2.min.js')}}"></script>
 
         <!-- Custom JS -->
-        <script src="assets/js/app.js"></script>
+        <script src="{{asset('assets/js/app.js')}}"></script>
         <script>
             function tabChanger() {
                 if ($('#nav-enroll-tab').hasClass('active')) {

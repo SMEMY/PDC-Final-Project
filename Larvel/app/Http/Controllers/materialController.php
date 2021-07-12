@@ -13,7 +13,7 @@ class materialController extends Controller
      */
     public function index()
     {
-        return "material controller!";
+        return "material ";
         //
     }
 
@@ -36,6 +36,10 @@ class materialController extends Controller
     public function store(Request $request)
     {
         //
+        // return $request->filename;
+         
+        $request->filename->store('public');;
+        return "file saved!";
     }
 
     /**
@@ -44,10 +48,19 @@ class materialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
         //
-        return view('files-download', compact('id'));
+        // return $request->path()
+        if($request->path() === 'materials/'.$id)
+        {
+            return view('files-download', compact('id'));
+
+        }
+        elseif($request->path() === 'facilitatorMaterials/'.$id)
+        {
+            return view('facilitator-programs-materials', compact('id'));
+        }
     }
 
     /**
