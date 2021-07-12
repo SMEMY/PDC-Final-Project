@@ -26,7 +26,7 @@ class Program extends Model
     {
         return $this->hasMany('App\Models\Agenda');
     }
-    function getEvaluation()
+    function getEvaluations()
     {
         return $this->hasMany('App\Models\Evaluation');
     }

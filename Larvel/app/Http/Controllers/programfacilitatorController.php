@@ -61,6 +61,15 @@ class programfacilitatorController extends Controller
     public function show($id)
     {
         //
+        // return "asdfasdf";
+        $userProfile = DB::table('facilitatorsandparticipants')
+        ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
+        ->select('facilitatorsandparticipants.*')
+        ->where('programsfacilitators.facilitator_id', $id)
+        ->get();
+        $name = 'تسهیلونکی';
+        return view('pdc-user-info', compact('userProfile', 'name'));
+
     }
 
     /**

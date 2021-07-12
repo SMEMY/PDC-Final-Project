@@ -23,6 +23,7 @@ class programController extends Controller
 
         // return $request->path();
        $programs =  Program::orderBy('id', 'desc')->get();
+     
        
        $path = '/pdcProgramList';
 
@@ -32,7 +33,7 @@ class programController extends Controller
        }
        else if($request->path() === 'comAllPrograms')
        {
-        return view('enrolled-program', compact('programs'));
+        return view('notenrolled-program', compact('programs'));
        }
        else{
         return "path not matched!";
@@ -122,11 +123,76 @@ class programController extends Controller
      */
     public function show(Request $request, $id)
     {
-        // return $request->path();
-        $programs = Program::with('getFacilities', 'getResults')->find($id);
+        // comAllPrograms
         if($request->path() === 'comAllPrograms/'.$id)
+        {
+            $programs = Program::with('getFacilities', 'getResults')->find($id);
+            return view('not-enreolled-program-info', compact('programs'));
+       }
+        //participantEnrolledPrograms
+       elseif($request->path() === 'participantEnrolledPrograms/'.$id)
        {
-        return view('enroll-program-info', compact('programs'));
+         $enrolledPrograms = DB::table('programs')
+        ->join('programsparticipants', 'programs.id', '=', 'programsparticipants.program_id')
+        ->select('programs.*')
+        ->where('programsparticipants.participant_id','=' ,$id)
+        ->get();
+        $programsID = array();
+        $rec = DB::table('programsparticipants')->where('programsparticipants.participant_id', $id)->select('program_id')->get();
+        foreach ($rec as $r)
+        {
+           array_push( $programsID, $r->program_id);
+        }
+        $notEnrolledPrograms = DB::table('programs')
+        ->select('programs.*')
+        ->whereNotIn('id', $programsID)
+        ->get();
+        return view('facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
+
+       }
+        //facilitatorEnrolledPrograms
+       elseif($request->path() === 'facilitatorEnrolledPrograms/'.$id)
+       {
+         $enrolledPrograms = DB::table('programs')
+        ->join('programsfacilitators', 'programs.id', '=', 'programsfacilitators.program_id')
+        ->select('programs.*')
+        ->where('programsfacilitators.facilitator_id','=' ,$id)
+        ->get();
+        $programsID = array();
+        $rec = DB::table('programsfacilitators')->where('programsfacilitators.facilitator_id', $id)->select('program_id')->get();
+        foreach ($rec as $r)
+        {
+           array_push( $programsID, $r->program_id);
+        }
+        $notEnrolledPrograms = DB::table('programs')
+        ->select('programs.*')
+        ->whereNotIn('id', $programsID)
+        ->get();
+        return view('facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
+
+       }
+       elseif($request->path() == 'pdcProgramInfo/'.$id){
+        $programs = Program::with('getFacilities', 'getResults', 'getEvaluations', 'getAgendas')->find($id);
+
+        return view('pdc-program-info', compact('programs'));
+       }
+       elseif($request->path() == 'enrolledPdcProgramInfo/'.$id){
+        $programs = Program::with('getFacilities', 'getResults', 'getEvaluations')->find($id);
+        return view('facil-part-enroll-program-info', compact('programs'));
+
+       }
+       elseif($request->path() === 'pdcProgramAttendance/'.$id){
+        $participants =  DB::table('facilitatorsandparticipants')
+        ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+        ->where('programsparticipants.program_id', $id)
+        ->select('facilitatorsandparticipants.*')
+        ->get();
+        $programID = $id;
+        return view('pdc-program-attendance', compact('participants', 'programID'));
+       }
+
+       else{
+           return "path not found!";
        }
     }
 

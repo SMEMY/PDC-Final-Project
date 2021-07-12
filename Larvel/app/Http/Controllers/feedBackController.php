@@ -122,7 +122,8 @@ class feedBackController extends Controller
         $program_id = $id;
         //
         // $programs = DB::table('programs')->get();
-        return view('feedback', compact('materials','facilities','locations','comments', 'program_id'));
+        // return $facilities;
+        return view('pdc-feedback', compact('materials','facilities','locations','comments', 'program_id'));
         return "i am feed show function()";
     }
 

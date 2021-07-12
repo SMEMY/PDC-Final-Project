@@ -9,9 +9,9 @@
 </head>
 <body>
     
-<form action="/programInfo" method="POST">
+<form action="/facilitatorMaterials" method="POST" enctype="multipart/data-form">
 @csrf
-        <input placeholder="1" class="form-control" type="text" name="agenda">
+        <input placeholder="1" class="form-control" type="file" name="filename">
         <br>
         <input placeholder="1" class="form-control" type="text" name="agenda">
         <br>

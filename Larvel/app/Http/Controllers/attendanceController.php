@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+Use Illuminate\Support\Facades\DB;
+use App\Models\Attendance;
 
 use Illuminate\Http\Request;
 
@@ -35,6 +37,19 @@ class attendanceController extends Controller
     public function store(Request $request)
     {
         //
+        // return $request->program_id;
+        for($index = 0; $index<count($request->participant_id); $index++){
+            $participantAttendance = new Attendance;
+            $participantAttendance->presence_days = $request->presence[$index];
+            $participantAttendance->absence_days = $request->absence[$index];
+            $participantAttendance->participant_id = $request->participant_id[$index];
+            $participantAttendance->program_id = $request->program_id;
+            $participantAttendance->total_days = $request->presence[$index] +$request->absence[$index];
+            $participantAttendance->save();
+
+        }
+
+        return redirect('pdcProgramInfo/'.$request->program_id);
     }
 
     /**

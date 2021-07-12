@@ -1551,7 +1551,8 @@ table.dataTable thead > tr > td.sorting {
 
 .page-wrapper {
 	right: 0;
-	margin-right: 230px;
+	margin-right: 260px;
+	padding: 30px;
 	padding-top: 60px;
 	position: relative;
 	transition: all 0.2s ease-in-out;

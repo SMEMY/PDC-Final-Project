@@ -67,7 +67,9 @@ label {
 
     <!-- Search Filter -->
     <form action="/test" method="POST">
-    @csrf
+        {{ method_field('POST') }}
+      	{{ csrf_field() }}
+
     <div class="row filter-row">
         <div class="col-sm-6 col-md-5">
             <div class="form-group form-focus">
@@ -104,27 +106,29 @@ label {
                                 class="fa fa-trash-o m-r-5"></i> Delete</a>
                     </div>
                 </div>
-                <div class="job-list-desc" style="padding: 20px">
-                    <h3 class="job-list-title"> {{$program->name}} </h3>
-                    <br>
-                    <h4 class="job-department "><strong>د پروګرام ډول: </strong> {{$program->type}} </h4>
-                    <h4 class="job-department mt-4"><strong>د پروګرام تسهیلونکی: </strong> {{$program->facilitator}}
-                    </h4>
-                    <p class="text-muted mt-4 col-md-12"><strong>معلومات: </strong> {{$program->program_description}}
-                    </p>
-                </div>
+                <a href="/pdcProgramInfo/{{$program->id}}">
+                    <div class="job-list-desc" style="padding: 20px">
+                        <h3 class="job-list-title"> {{$program->name}} </h3>
+                        <br>
+                        <h4 class="job-department "><strong>د پروګرام ډول: </strong> {{$program->type}} </h4>
+                        <h4 class="job-department mt-4"><strong>د پروګرام تسهیلونکی: </strong> {{$program->facilitator}}
+                        </h4>
+                        <p class="text-muted mt-4 col-md-12"><strong>معلومات: </strong> {{$program->program_description}}
+                        </p>
+                    </div>
 
-                <div class="job-list-footer p-0" >
-                    <ul class="m-0" style="padding:20px; background: linear-gradient(to left, #88e5ff 0%, #3687ff 120%); border-radius: 0 0 4px 4px;">
-                        <li class="d-inline-block"><i class="fa fa-map-signs"></i> <strong>ادرس: </strong>
-                        {{$program->campus_name}}
-                    </li>
-                    <li class="ml-3 d-inline-block "><i class="fa fa-clock-o "></i> <strong>د پروګرام دوام:
-                        </strong> {{$program->days_duration}} ورځي</li>
-                        <li class="ml-3 d-inline-block"><i class="fa fa-money text-dark" aria-hidden="true"></i> <strong>د پروګرام فیس: </strong>
-                            {{$program->fee}} {{$program->fee_type}} </li>
-                    </ul>
-                </div>
+                    <div class="job-list-footer p-0" >
+                        <ul class="m-0" style="padding:20px; background: linear-gradient(to left, #88e5ff 0%, #3687ff 120%); border-radius: 0 0 4px 4px;">
+                            <li class="d-inline-block"><i class="fa fa-map-signs"></i> <strong>ادرس: </strong>
+                            {{$program->campus_name}}
+                        </li>
+                        <li class="ml-3 d-inline-block "><i class="fa fa-clock-o "></i> <strong>د پروګرام دوام:
+                            </strong> {{$program->days_duration}} ورځي</li>
+                            <li class="ml-3 d-inline-block"><i class="fa fa-money text-dark" aria-hidden="true"></i> <strong>د پروګرام فیس: </strong>
+                                {{$program->fee}} {{$program->fee_type}} </li>
+                        </ul>
+                    </div>            
+                </a>
 
             </div>
         </div>
