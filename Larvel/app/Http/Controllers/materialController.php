@@ -54,7 +54,7 @@ class materialController extends Controller
         // return $request->path()
         if($request->path() === 'materials/'.$id)
         {
-            return view('files-download', compact('id'));
+            return view('facilitator-programs-materials', compact('id'));
 
         }
         elseif($request->path() === 'facilitatorMaterials/'.$id)

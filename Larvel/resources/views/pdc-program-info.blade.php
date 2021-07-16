@@ -156,7 +156,7 @@ h4 {
 				</div>
 			</div>
 			<div class="col-md-4" id="small"> 
-				<div class="job-det-info job-widget" style="border-radius: 5px; box-shadow:1px 0px 3px 0px #00beff" id="date">
+				<div class="job-det-info job-widget" style="padding:10px; border-radius: 5px; box-shadow:1px 0px 3px 0px #00beff" id="date">
 					<h4 class="account-title">نېټه</h4>
 					
 					<ul class="job-post-det col-md-12">
@@ -168,7 +168,7 @@ h4 {
 					</ul>
 					<!-- <a class="btn job-btn" href="#" data-toggle="modal" data-target="#apply_job">Enroll</a> -->
 				</div>
-				<div class="job-det-info job-widget" style=" box-shadow:1px 0px 3px 0px #00beff; border-radius: 5px; " id="address">
+				<div class="job-det-info job-widget" style="padding:10px; box-shadow:1px 0px 3px 0px #00beff; border-radius: 5px; " id="address">
 					<h4 class="account-title">پته   </h4>
 				
 					<ul class="job-post-det col-md-12">
@@ -180,16 +180,17 @@ h4 {
 					</ul>
 					<!-- <a class="btn job-btn" href="#" data-toggle="modal" data-target="#apply_job">Enroll</a> -->
 				</div>
-				<div class="job-det-info job-widget" style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="save_info">
-					<h4 class="account-title">د پروګرام  نور معلومات ثبتول</h4>
+				<div class="job-det-info job-widget" style="padding:20px; box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="save_info">
+					<h4 class="account-title">معلومات ثبتول</h4>
 
 					<a class="btn job-btn mt-3 p-2" href="/pdcProgramAttendance/{{$programs->id}}" >د پروګرام د ګډونوالو حاضري ثبتول</a>
 					<a class="btn job-btn mt-3 p-2" href="/pdcProgramEvaluation/{{$programs->id}}" >د پروګرام ارزوني ثبتول</a>
 					<a class="btn job-btn mt-3 p-2" href="/pdcProgramResult/{{$programs->id}}" >د پروګرام پایلي ثبتول</a>
-					<a class="btn job-btn mt-3 p-2 bg-danger" href="/pdcProgramPhoto/{{$programs->id}}" >د پروګرام تفرقه ثبتول</a>
+					<a class="btn job-btn mt-3 p-2" href="/pdcProgramPhoto/{{$programs->id}}" >د پروګرام تفرقه ثبتول</a>
+					<a class="btn job-btn mt-3 p-2 bg-danger" href="/materials/{{$programs->id}}" >د پروګرام درسي موادو ثبتول</a>
 					<a class="btn job-btn mt-3 p-2" href="/feedbackFormInsertion/{{$programs->id}}" >د پروګرام پوښتنلیک ثبتول</a>
 				</div>
-				<div class="job-det-info job-widget" style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="save_info">
+				<div class="job-det-info job-widget" style="padding:20px; box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="save_info">
 					<h4 class="account-title">د پروګرام  نور معلومات </h4>
 
 					<a class="btn job-btn mt-3 p-2" href="" >د پروګرام تسهیلونکی</a>
