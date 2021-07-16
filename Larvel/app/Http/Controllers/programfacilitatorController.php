@@ -95,7 +95,7 @@ class programfacilitatorController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $facilitator_participant = Facilandpart::find($id);
+        $facilitator_participant = Facilitatorsandparticipant::find($id);
         // return $request->last_name;
         $facilitator_participant->name = $request->name;
         $facilitator_participant->last_name = $request->last_name;
@@ -126,9 +126,12 @@ class programfacilitatorController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $deleteFacilitator = Facilandpart::find($id);
+        $deleteFacilitator = Facilitatorsandparticipant::find($id);
         $deleteFacilitator->delete();
         return redirect('facilitatorList');
+
+    //    $deleteParticipant = Programsfacilitator::where('facilitator_id', $id)->get();
+    //     $deleteParticipant->delete();
+    //     return redirect('facilitatorList');
     }
 }

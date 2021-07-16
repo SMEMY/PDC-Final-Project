@@ -80,9 +80,10 @@ h4 {
 				<div class="job-det-info job-widget" style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; ">
 					<h4 class="account-title">د پروګرام  نور معلومات ثبتول</h4>
 <br>
-					<a class="btn job-btn mt-3 p-2" href="/pdcProgramAttendance/{{$userProfile[0]->id}}" >د {{$name}} پروګرامونه</a>
-					<a class="btn job-btn mt-3 p-2" href="/pdcProgramAttendance/{{$userProfile[0]->id}}" >د {{$name}} معلومات اصلاح کول</a>
-					<a class="btn job-btn mt-3 p-2" href="/pdcProgramAttendance/{{$userProfile[0]->id}}" > {{$name}} پروګرام ته شاملول</a>
+					<a class="btn job-btn mt-3 p-2 bg-danger" href="" >د {{$name}} پروګرامونه</a>
+					<a class="btn job-btn mt-3 p-2 bg-danger" href="" > {{$name}} پروګرام ته شاملول</a>
+					<a class="btn job-btn mt-3 p-2 bg-danger" href="" >د {{$name}} معلومات اصلاح کول</a>
+					<a class="btn job-btn mt-3 p-2 bg-danger" href="" > {{$name}} له منځه وړل</a>
 				</div>
 			</div>
 		</div>

@@ -278,7 +278,7 @@ label {
 
 
 
-@section('cutom-js')
+@section('custom-js')
 	<script>
         console.log($('#for').css('margin-right'));
 		$( "#toggle_btn" ).click(function() {

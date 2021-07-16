@@ -36,7 +36,6 @@ class CreatePDCProgram extends Migration
             $table->string('start_time');
             $table->string('end_time');
             $table->integer('days_duration');
-            $table->integer('hours_duration');
             $table->string('campus_name', 30);	
             $table->string('block_name', 30);
             $table->integer('block_number');	

@@ -13,9 +13,53 @@ hahahaha
 
 @section('custom-css')
 
-    body{
-        <!-- background: green !important; -->
-    }
+h4 {
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			font-size:30px !important;
+		}
+        p, h5 {
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			font-size: 20px !important;
+		}
+		a{
+			font-size:20px !important;
+		}
+        li {
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			font-size: 20px !important;
+		}
+        h3 {
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
+		}
+		input, select, label, button{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			font-size:20px !important;
+			
+
+		}
+		input{
+			background: #f0fcff !important;
+		}
+		select:focus {
+			box-shadow: 0px 0px 2px #000 !important;
+			
+			transition: all 0.1s;
+			transform: scale(1.01);
+		}
+
+		input:focus {
+			box-shadow: 0px 0px 2px #000 !important;
+			transition: all 0.1s;
+			transform: scale(1.02);
+		}
+		select{
+			height: 44px  !important; 
+			border-radius: 3px  !important; 
+			outline: none;
+			background-color:#f0fcff  !important; 
+			border:1px solid #e3e3e3  !important;
+		}
 @endsection
 
 
@@ -33,44 +77,30 @@ hahahaha
 					<div class="col-md-10">
 						<div class="card">
 							<div class="card-header p-lg-5">
-								<h4 class="card-title mb-0">Address Form</h4>
+								<h4 class="card-title mb-0">د اړونده پروګرام د کیفیت لپاره پوښټنلیک رامنځته کړی</h4>
 							</div>
 							<div class="card-body">
-								<form action="#">
-									<!-- <div class="form-group row mb-0">
-										<label class="col-form-label col-lg-2">Two Addons</label>
-										<div class="col-lg-12">
-											<div class="input-group">
-												<input type="text" class="form-control" placeholder="Right dropdown">
-												<div class="input-group-append">
-													<button type="button" class="btn btn-white dropdown-toggle"
-														data-toggle="dropdown">Categories</button>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#">Action</a>
-														<a class="dropdown-item" href="#">Another action</a>
-														<a class="dropdown-item" href="#">Something else here</a>
-														<div role="separator" class="dropdown-divider"></div>
-														<a class="dropdown-item" href="#">Separated link</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div> -->
+								<form action="feedbackFormInsertion" method="POST">
+								{{ method_field('POST') }}
+                            	{{ csrf_field() }}
+								<input class="d-none" type="text" name="program_id" id="" value="{{$programID}}">
                                     <div class="row" id="files">
                                         <div class="form-group col-md-12">
-                                            <label for="exampleInputEmail1">Email address</label>
-                                            <input type="text" class="form-control " id="exampleInputEmail1"
-                                                aria-describedby="emailHelp" placeholder="Enter email">
+                                            <input type="text" class="form-control "  placeholder="پوښتنه ولیکی" name="feedback_question[0]">
                                         </div>
                                         <div class="input-group mb-5 col-md-12">
-                                            <select class="custom-select" id="inputGroupSelect02">
-                                                <option selected>Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                            <select class="custom-select" id="inputGroupSelect02" name="feedback_question_category[0]">
+                                                <!-- <option selected>د پوښتني کټګوري انتخاب کړی</option> -->
+                                                <option selected></option>
+                                                <option value="د ورکشاپ/ټرېنینګ مواد">د ورکشاپ/ټرېنینګ مواد</option>
+                                                <option value="آسانتیاوي">آسانتیاوي</option>
+                                                <option value="ځاي">ځاي</option>
+                                                <option value="عمومي نظر">عمومي نظر</option>
                                             </select>
                                             <div class="input-group-append">
-                                                <label class="input-group-text" for="inputGroupSelect02">Options</label>
+                                                <label class="input-group-text" for="inputGroupSelect02">
+													د پوښتني کټهګوري
+												</label>
                                             </div>
                                         </div>
                                     </div>
@@ -87,7 +117,7 @@ hahahaha
 
 									<div class="text-right mt-5">
 										<button type="submit" class="btn btn-primary w-25"
-											onclick="afterText()">Submit</button>
+											onclick="afterText()">پوښتلیک ثبت کړی</button>
 									</div>
 								</form>
 							</div>
@@ -108,28 +138,33 @@ hahahaha
 <script>
 
 		var count4 = 2;
+		index = 1;
 		function addFile() {
-			var txt1 =
-				`<div class="form-group col-md-12 ">
-                                            <label for="exampleInputEmail1">Email address</label>
-                                            <input type="text" class="form-control " id="exampleInputEmail1"
-                                                aria-describedby="emailHelp" placeholder="Enter email">
+			var txt1 =			   `
+                                        <div class="form-group col-md-12">
+                                            <input type="text" class="form-control "  placeholder="پوښتنه ولیکی" name="feedback_question[${index}]">
                                         </div>
                                         <div class="input-group mb-5 col-md-12">
-                                            <select class="custom-select" id="inputGroupSelect02">
-                                                <option selected>Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                            <select class="custom-select" id="inputGroupSelect02" name="feedback_question_category[${index}]">
+                                                <!-- <option selected>د پوښتني کټګوري انتخاب کړی</option> -->
+                                                <option selected></option>
+                                                <option value="د ورکشاپ/ټرېنینګ مواد">د ورکشاپ/ټرېنینګ مواد</option>
+                                                <option value="آسانتیاوي">آسانتیاوي</option>
+                                                <option value="ځاي">ځاي</option>
+                                                <option value="عمومي نظر">عمومي نظر</option>
                                             </select>
                                             <div class="input-group-append">
-                                                <label class="input-group-text" for="inputGroupSelect02">Options</label>
+                                                <label class="input-group-text" for="inputGroupSelect02">
+													د پوښتني کټهګوري
+												</label>
                                             </div>
-                                        </div>`;
+                                        </div>
+                                    `;
 
 			$("#files").children().last().after(txt1);
 			$('#file-remover').removeClass('d-none');
 			count4++;   // Insert new elements after img
+			index++;
 		}
 		function removeFile() {
 

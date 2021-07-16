@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Photo;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class photoController extends Controller
@@ -34,7 +35,31 @@ class photoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return count($request->image);
+        // $photos = $request->file('image');
+        $request->validate([
+            'image' => 'required',
+            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+        ]);
+      
+        foreach($request->file('image') as $photo)
+        {
+            if( !empty( $photo ) && is_uploaded_file( $photo ) )
+            {     
+                echo $imageName = time().'.'.$photo->extension();
+                echo "<br>"; 
+                $photo->storeAs('images', $imageName);
+                sleep(1);   
+                $imageSave = new Photo;
+                $imageSave->program_id = $request->program_id;
+                $imageSave->path = $imageName;
+                $imageSave->save();
+            }
+            else{
+                echo "error!";
+            }
+        }
+        return redirect('pdcProgramInfo/'.$request->program_id);
     }
 
     /**
@@ -46,6 +71,10 @@ class photoController extends Controller
     public function show($id)
     {
         //
+        $programID=$id;
+        return view('program-photo', compact('programID'));
+        
+        return "i am photo!";
     }
 
     /**

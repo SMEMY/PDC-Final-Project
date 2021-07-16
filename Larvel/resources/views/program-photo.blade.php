@@ -9,32 +9,38 @@
 		content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
 	<meta name="author" content="Dreamguys - Bootstrap Admin Template">
 	<meta name="robots" content="noindex, nofollow">
-	<title>Projects - HRMS admin template</title>
+	<title>@yield('page-title')</title>
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+	<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
-	<!-- Fontawesome CSS -->
-	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<!-- Fontawesome CSS -->
+<link  href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
 
-	<!-- Lineawesome CSS -->
-	<link rel="stylesheet" href="assets/css/line-awesome.min.css">
+<!-- <link type="text/css" rel="stylesheet" href="{{mix('css/app.css')}}"> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" /> -->
 
-	<!-- Select2 CSS -->
-	<link rel="stylesheet" href="assets/css/select2.min.css">
+<!-- Lineawesome CSS -->
+<link rel="stylesheet" href="{{asset('assets/css/line-awesome.min.css')}}">
 
-	<!-- Datetimepicker CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+<!-- Chart CSS -->
+<link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
 
-	<!-- Summernote CSS -->
-	<link rel="stylesheet" href="assets/plugins/summernote/dist/summernote-bs4.css">
+<!-- Main CSS -->
+<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    
+<!-- Select2 CSS -->
+<link rel="stylesheet" href="{{asset('assets/css/select2.min.css')}}">
 
-	<!-- Main CSS -->
-	<link rel="stylesheet" href="assets/css/style.css">
-
+<!-- Datetimepicker CSS -->
+<link rel="stylesheet" href="{{asset('assets/css/bootstrap-datetimepicker.min.css')}}">
+    
+<!-- Tagsinput CSS -->
+<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
+	
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -50,7 +56,7 @@
 
 		<!-- Logo -->
 		<div class="account-logo mt-5">
-			<a href="index.html"><img src="assets/img/logo2.png" alt="Dreamguy's Technologies"></a>
+			<a href="index.html"><img src="{{asset('assets/img/logo2.png')}}" alt="Dreamguy's Technologies"></a>
 		</div>
 		<!-- /Logo -->
 
@@ -63,12 +69,16 @@
 								<h4 class="card-title mb-0">د اوړنده پروکرام په اړه د انځورونو پاڼه</h4>
 							</div>
 							<div class="card-body">
-								<form action="#">
+								<form action="/pdcProgramPhoto" method="POST" enctype="multipart/form-data" name="formName">
+
+									{{ method_field('POST') }}
+									{{ csrf_field() }}
+									<input class="d-none" type="text" name="program_id" id="" value="{{$programID}}">
 									<div class="row " id="files">
 										<div class=" col-md-12">
 											<div class="form-group custom-file ">
-												<input type="file" class="custom-file-input" id="customFile"
-													name="program_photo1" onchange="nameShow()">
+												<input type="file" class="custom-file-input" id="image"
+													name="image[0]" onchange="nameShow()">
 												<label class="custom-file-label" for="customFile">د پروګرام اړونده عکس
 													انتخاب کړي</label>
 											</div>
@@ -110,37 +120,38 @@
 
 
 
-	<!-- jQuery -->
-	<script src="assets/js/jquery-3.2.1.min.js"></script>
 
+
+		<!-- jQuery -->
+		<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
 	<!-- Bootstrap Core JS -->
-	<script src="assets/js/popper.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-
+	<script src="{{asset('assets/js/popper.min.js')}}"></script>
+	<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 	<!-- Slimscroll JS -->
-	<script src="assets/js/jquery.slimscroll.min.js"></script>
-
-	<!-- Select2 JS -->
-	<script src="assets/js/select2.min.js"></script>
-
-	<!-- Datetimepicker JS -->
-	<script src="assets/js/moment.min.js"></script>
-	<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-
-	<!-- Summernote JS -->
-	<script src="assets/plugins/summernote/dist/summernote-bs4.min.js"></script>
-
+	<script src="{{asset('assets/js/jquery.slimscroll.min.js')}}"></script>
+	<!-- Chart JS -->
+	<script src="{{asset('assets/plugins/morris/morris.min.js')}}"></script>
+	<script src="{{asset('assets/plugins/raphael/raphael.min.js')}}"></script>
+	<script src="{{asset('assets/js/chart.js')}}"></script>
 	<!-- Custom JS -->
-	<script src="assets/js/app.js"></script>
+	<script src="{{asset('assets/js/app.js')}}"></script>
+	<!-- Datetimepicker JS -->
+	<script src="{{asset('assets/js/moment.min.js')}}"></script>
+	<script src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
+	<!-- Select2 JS -->
+	<script src="{{asset('assets/js/select2.min.js')}}"></script>
+	<!-- Tagsinput JS -->
+	<script src="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}"></script>
 	<script>
 
 		var count4 = 2;
+		var index =1;
 		function addFile() {
 			var txt1 =
 				`	<div class=" col-md-12 mt-3" >
 														<div class="form-group custom-file ">
 															<input type="file" class="custom-file-input" id="customFile"
-																name="program_photo${count4}">
+																name="image[${index}]">
 															<label class="custom-file-label" for="customFile">د پروګرام اړونده
 																فایل
 																انتخاب کړی</label>
@@ -150,12 +161,14 @@
 			$("#files").children().last().after(txt1);
 			$('#file-remover').removeClass('d-none');
 			count4++;   // Insert new elements after img
+			index++;
 		}
 		function removeFile() {
 
 			if (count4 != 2) {
 				$('#files').children().last().remove();
 				count4--;
+				index--;
 			}
 			if (count4 == 2) {
 				$('#file-remover').addClass('d-none');

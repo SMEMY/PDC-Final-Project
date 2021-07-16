@@ -15,10 +15,10 @@ class CreatePDCAttendance extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('total_days');
-            $table->integer('presence_days');
-            $table->integer('absence_days');
-            $table->unsignedInteger('participant_id');	
+            $table->integer('total_days')->nullable();
+            $table->integer('presence_days')->nullable();
+            $table->integer('absence_days')->nullable();
+            $table->unsignedInteger('participant_id')->nullable();	
             $table->foreign('participant_id')->references('id')->on('facilitatorsandparticipants')->onDelete('cascade');
             $table->unsignedInteger('program_id');
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');

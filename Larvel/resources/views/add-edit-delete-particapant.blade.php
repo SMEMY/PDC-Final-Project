@@ -423,7 +423,7 @@ input:focus{
         @endsection
 
 
-@section('cutom-js')
+@section('custom-js')
 <script>
 		// function afterText() {
 		var s = true;

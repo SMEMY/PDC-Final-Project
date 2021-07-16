@@ -510,7 +510,7 @@ label {
 <!-- /Page Wrapper -->
 @endsection
 
-@section('cutom-js')
+@section('custom-js')
 <script>
 		var count = 2;
 		function afterText() {

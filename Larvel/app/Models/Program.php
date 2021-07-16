@@ -10,7 +10,7 @@ class Program extends Model
     use HasFactory;
     public $timestamp=false;
     // These are (ONE - TO - MANY) relationships
-    function getPhoto()
+    function getPhotos()
     {
         return $this->hasMany('App\Models\Photo');
     }

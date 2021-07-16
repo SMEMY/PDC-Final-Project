@@ -274,7 +274,7 @@ label {
 
 
 
-@section('cutom-js')
+@section('custom-js')
 	<script>
 		var s = true;
 		$("select.rankS").change(function () {
