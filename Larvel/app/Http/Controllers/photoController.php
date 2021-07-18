@@ -36,7 +36,7 @@ class photoController extends Controller
     public function store(Request $request)
     {
         // return count($request->image);
-        // $photos = $request->file('image');
+        // return $photos = $request->file('image');
         $request->validate([
             'image' => 'required',
             'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
@@ -48,7 +48,7 @@ class photoController extends Controller
             {     
                 echo $imageName = time().'.'.$photo->extension();
                 echo "<br>"; 
-                $photo->storeAs('images', $imageName);
+                $photo->storeAs('public/images', $imageName);
                 sleep(1);   
                 $imageSave = new Photo;
                 $imageSave->program_id = $request->program_id;

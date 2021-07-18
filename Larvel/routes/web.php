@@ -65,14 +65,16 @@ Route::resource('/educationalProgramList', eduprogramController::class);
 Route::resource('/educationalPrograminfo', eduprogramController::class);
 Route::resource('/pdcProgramList', programController::class);
 Route::resource('/pdcProgramInfo', programController::class);
+Route::resource('/programEnrollmentForFacilitator', programfacilitatorController::class);
 Route::resource('/enrolledPdcProgramInfo', programController::class);
 Route::resource('/pdcProgramAttendance', programController::class);
 Route::resource('/pdcProgramAttendanceReport', attendanceController::class);
 Route::resource('/pdcProgramAttendancePaper', attendanceController::class);
 Route::resource('/comAllPrograms', programController::class);
-Route::resource('/participantEnrolledPrograms', programController::class);
-Route::resource('/facilitatorEnrolledPrograms', programController::class);
+Route::resource('/participantEnrolledPrograms', programparticipantController::class);
+Route::resource('/facilitatorEnrolledPrograms', programfacilitatorController::class);
 Route::resource('/facilitatorMaterials', materialController::class);
+Route::resource('/storeMaterials', materialController::class);
 Route::resource('/materials', materialController::class);
 Route::resource('/feedback', feedBackController::class);
 Route::resource('/feedbackFormInsertion', fquestionnaireController::class);
@@ -104,6 +106,8 @@ Route::resource('/pdcProgramAttendanceEntry/{id}/edit', attendanceController::cl
 Route::resource('/pdcProgramAttendancePaper/{id}/edit', attendanceController::class);
 Route::resource('/pdcProgramAttendanceReport/{id}/edit', attendanceController::class);
 Route::resource('/pdcProgramPhoto/{id}/edit', photoController::class);
+Route::resource('/storeMaterials/{id}/edit', materialController::class);
+Route::resource('/materials/{id}/edit', materialController::class);
 
 
 
@@ -111,10 +115,10 @@ Route::resource('/pdcProgramPhoto/{id}/edit', photoController::class);
 
 
 // show pagers with specific ID  methid:: edit()
-Route::resource('/materials/{id}', materialController::class);
+Route::resource('/storeMaterials/{id}', materialController::class);
 Route::resource('/comAllPrograms/{id}', programController::class);
-Route::resource('/participantEnrolledPrograms/{id}', programController::class);
-Route::resource('/facilitatorEnrolledPrograms/{id}', programController::class);
+Route::resource('/participantEnrolledPrograms/{id}', programparticipantController::class);
+Route::resource('/facilitatorEnrolledPrograms/{id}', programfacilitatorController::class);
 Route::resource('/feedback/{id}', feedBackController::class);
 Route::resource('/facilitatorMaterials/{id}', materialController::class);
 Route::resource('/educationalPrograminfo/{id}', eduprogramController::class);
@@ -130,6 +134,7 @@ Route::resource('/programSpecificParticipant/{id}', programparticipantController
 Route::resource('/pdcProgramAttendancePaper/{id}', attendanceController::class);
 Route::resource('/pdcProgramAttendanceReport/{id}', attendanceController::class);
 Route::resource('/pdcProgramPhoto/{id}', photoController::class);
+Route::resource('/materials/{id}', materialController::class);
 
 
 

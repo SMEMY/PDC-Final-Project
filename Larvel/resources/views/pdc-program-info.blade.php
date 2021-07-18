@@ -27,11 +27,21 @@ h4 {
 		}
 		#save_info a:hover{
 			transform: scale(1.05);
-			transition: all  0.3s;
+			transition: all  0.2s;
 			<!-- font-size: 16px !important; -->
 		}
 		#small li, #small a{
-			font-size: 15px !important;
+			font-size: 17px !important;
+			font-wieght: bold;
+			border-radius: 15px !important;
+		}
+		i{
+			color: green;
+
+		}
+		#images img{
+			width: 95% !important;
+			height: 350px !important;
 		}
 		
 @endsection
@@ -146,10 +156,14 @@ h4 {
 					<div class="job-desc-title">
 						<h4>د پروګرام  انځورونه: </h4>
 					</div>
-					<div>
-						@foreach($programs->getPhotos as $photo)
-						<img src="{{ asset('/storage/app/images/'.$photo->path) }}" alt="none" sizes="100" srcset="">
-						@endforeach
+					<div id="images">
+						<ul class="square-list">
+							@foreach($programs->getPhotos as $photo)
+							<li>
+								 <img src="{{ asset( 'storage/images/'.$photo->path) }}" alt="none" class="img-fluid rounded  mx-auto d-block  m-1" srcset="">
+							</li>
+							@endforeach
+						</ul>
 					</div>
 					
 					
@@ -187,17 +201,18 @@ h4 {
 					<a class="btn job-btn mt-3 p-2" href="/pdcProgramEvaluation/{{$programs->id}}" >د پروګرام ارزوني ثبتول</a>
 					<a class="btn job-btn mt-3 p-2" href="/pdcProgramResult/{{$programs->id}}" >د پروګرام پایلي ثبتول</a>
 					<a class="btn job-btn mt-3 p-2" href="/pdcProgramPhoto/{{$programs->id}}" >د پروګرام تفرقه ثبتول</a>
-					<a class="btn job-btn mt-3 p-2 bg-danger" href="/materials/{{$programs->id}}" >د پروګرام درسي موادو ثبتول</a>
+					<a class="btn job-btn mt-3 p-2" href="/storeMaterials/{{$programs->id}}" >د پروګرام درسي موادو ثبتول</a>
 					<a class="btn job-btn mt-3 p-2" href="/feedbackFormInsertion/{{$programs->id}}" >د پروګرام پوښتنلیک ثبتول</a>
 				</div>
 				<div class="job-det-info job-widget" style="padding:20px; box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="save_info">
 					<h4 class="account-title">د پروګرام  نور معلومات </h4>
 
-					<a class="btn job-btn mt-3 p-2" href="" >د پروګرام تسهیلونکی</a>
+					<a class="btn job-btn mt-3 p-2 bg-danger" href="" >د پروګرام تسهیلونکی</a>
 					<a class="btn job-btn mt-3 p-2" href="/specificeProgramParticipants/{{$programs->id}}" >د پروګرام د ګډونوالو لیست</a>
 					<a class="btn job-btn mt-3 p-2 bg-danger" href="/pdcProgramAttendancePaper/{{$programs->id}}" >د پروګرام د ګډونوالو حاضري پاڼه</a>
 					<a class="btn job-btn mt-3 p-2 " href="/pdcProgramAttendanceReport/{{$programs->id}}" >د پروګرام د ګډونوالو د سوبتیا راپور </a>
-					<a class="btn job-btn mt-3 p-2" href="/feedback/{{$programs->id}}" >د پروګرام پوښتنلیک</a>
+					<a class="btn job-btn mt-3 p-2" href="/feedback/{{$programs->id}}" >د پروګرام پوښتنلیک ډوکول</a>
+					<a class="btn job-btn mt-3 p-2 bg-danger" href="/" >د پروګرام پوښتنلیک اوسط</a>
 					<a class="btn job-btn mt-3 p-2 bg-danger" href="/materials/{{$programs->id}}" >د پروګرام تدریسي مواد</a>
 
 				</div>

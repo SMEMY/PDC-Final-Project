@@ -26,16 +26,21 @@ h4 {
 
 		}
 		a:hover{
-			transform: scale(1.08);
-			transition: all  0.4s;
+			transform: scale(1.05);
+			transition: all  0.2s;
 		}
 		#date, #address{
-			transition: all  0.3s;
+			transition: all  0.2s;
 
 		}
 		#date:hover, #address:hover{
 			transform: scale(1.04);
-			transition: all  0.4s;
+			transition: all  0.2s;
+		}
+		#small li, #small a{
+			font-size: 17px !important;
+			font-wieght: bold;
+			border-radius: 15px !important;
 		}
 @endsection
 
@@ -52,7 +57,7 @@ h4 {
 		
 		<!-- /Account Logo -->
 		<div class="row col-md-12">
-			<div class="col-md-7">
+			<div class="col-md-8">
 				<div class="job-info job-widget">
 				<h4 class="m-auto " style="width: fit-content"><i class="pr-2 fa fa-"></i>د اړونده {{$name}} په اړه بشپړ معلومات</h4>
 					<br>
@@ -67,7 +72,8 @@ h4 {
 						<li class="col-md-12"><i class="pr-2 fa fa-female"></i>د {{$name}} جنسیت: <span class="text-blue">{{ $userProfile[0]->gender }}</span></li>
 						@endif
 						<li class="col-md-12"><i class="pr-2 fa fa-university"></i>د {{$name}} کاري ځاي: <span class="text-blue">{{ $userProfile[0]->office_campus }}</span></li>
-						<li class="col-md-12"><i class="pr-2 fa fa-graduation-cap"></i>د {{$name}} کاري دیپارټمنټ: <span class="text-blue">{{ $userProfile[0]->office_department }}</span></li>
+						<li class="col-md-12"><i class="pr-2 fa fa-building"></i>د {{$name}} کاري بلاک: <span class="text-blue">{{ $userProfile[0]->office_building }}</span></li>
+						<li class="col-md-12"><i class="pr-2 fa fa-graduation-cap"></i>د {{$name}} کاري شعبه: <span class="text-blue">{{ $userProfile[0]->office_department }}</span></li>
 						<li class="col-md-12"><i class="pr-2 fa fa-pencil-square-o"></i>د {{$name}} کاري رتبه: <span class="text-blue">{{ $userProfile[0]->office_position }}</span></li>
 						<li class="col-md-12"><i class="pr-2 fa fa-pencil"></i>د {{$name}} علمي رتبه: <span class="text-blue">{{ $userProfile[0]->educational_rank }}</span></li>
 
@@ -75,15 +81,13 @@ h4 {
 				</div>
 				
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-4">
 				
-				<div class="job-det-info job-widget" style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; ">
-					<h4 class="account-title">د پروګرام  نور معلومات ثبتول</h4>
+				<div class="job-det-info job-widget" style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="small">
+					<h4 class="account-title">  معلومات ثبتول</h4>
 <br>
-					<a class="btn job-btn mt-3 p-2 bg-danger" href="" >د {{$name}} پروګرامونه</a>
-					<a class="btn job-btn mt-3 p-2 bg-danger" href="" > {{$name}} پروګرام ته شاملول</a>
-					<a class="btn job-btn mt-3 p-2 bg-danger" href="" >د {{$name}} معلومات اصلاح کول</a>
-					<a class="btn job-btn mt-3 p-2 bg-danger" href="" > {{$name}} له منځه وړل</a>
+					<a class="btn job-btn mt-3 p-2 " href="/facilitatorEnrolledPrograms/{{$userProfile[0]->program_id}}" >د {{$name}} پروګرامونه</a>
+					<a class="btn job-btn mt-3 p-2 " href="/programEnrollmentForFacilitator/{{$userProfile[0]->id}}" > {{$name}} پروګرام ته شاملول</a>
 				</div>
 			</div>
 		</div>

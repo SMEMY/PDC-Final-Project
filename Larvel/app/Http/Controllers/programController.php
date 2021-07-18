@@ -133,47 +133,7 @@ class programController extends Controller
             return view('not-enreolled-program-info', compact('programs'));
        }
         //participantEnrolledPrograms
-       elseif($request->path() === 'participantEnrolledPrograms/'.$id)
-       {
-         $enrolledPrograms = DB::table('programs')
-        ->join('programsparticipants', 'programs.id', '=', 'programsparticipants.program_id')
-        ->select('programs.*')
-        ->where('programsparticipants.participant_id','=' ,$id)
-        ->get();
-        $programsID = array();
-        $rec = DB::table('programsparticipants')->where('programsparticipants.participant_id', $id)->select('program_id')->get();
-        foreach ($rec as $r)
-        {
-           array_push( $programsID, $r->program_id);
-        }
-        $notEnrolledPrograms = DB::table('programs')
-        ->select('programs.*')
-        ->whereNotIn('id', $programsID)
-        ->get();
-        return view('facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
-
-       }
-        //facilitatorEnrolledPrograms
-       elseif($request->path() === 'facilitatorEnrolledPrograms/'.$id)
-       {
-         $enrolledPrograms = DB::table('programs')
-        ->join('programsfacilitators', 'programs.id', '=', 'programsfacilitators.program_id')
-        ->select('programs.*')
-        ->where('programsfacilitators.facilitator_id','=' ,$id)
-        ->get();
-        $rec = DB::table('programsfacilitators')->where('programsfacilitators.facilitator_id', $id)->select('program_id')->get();
-        $programsID = array();
-        foreach ($rec as $r)
-        {
-           array_push( $programsID, $r->program_id);
-        }
-        $notEnrolledPrograms = DB::table('programs')
-        ->select('programs.*')
-        ->whereNotIn('id', $programsID)
-        ->get();
-        return view('facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
-
-       }
+      
        elseif($request->path() == 'pdcProgramInfo/'.$id){
         $programs = Program::with('getFacilities', 'getResults', 'getEvaluations', 'getAgendas', 'getPhotos')->find($id);
         return view('pdc-program-info', compact('programs'));

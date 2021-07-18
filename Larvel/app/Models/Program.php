@@ -14,6 +14,10 @@ class Program extends Model
     {
         return $this->hasMany('App\Models\Photo');
     }
+    function getMaterials()
+    {
+        return $this->hasMany('App\Models\Material');
+    }
     function getResults()
     {
         return $this->hasMany('App\Models\Result');

@@ -106,6 +106,27 @@ class programparticipantController extends Controller
                 return view('pdc-program-participants-list', compact('participants', 'programID'));
             }
         }
+        
+        elseif($request->path() === 'participantEnrolledPrograms/'.$id)
+        {
+          $enrolledPrograms = DB::table('programs')
+         ->join('programsparticipants', 'programs.id', '=', 'programsparticipants.program_id')
+         ->select('programs.*')
+         ->where('programsparticipants.participant_id','=' ,$id)
+         ->get();
+         $programsID = array();
+         $rec = DB::table('programsparticipants')->where('programsparticipants.participant_id', $id)->select('program_id')->get();
+         foreach ($rec as $r)
+         {
+            array_push( $programsID, $r->program_id);
+         }
+         $notEnrolledPrograms = DB::table('programs')
+         ->select('programs.*')
+         ->whereNotIn('id', $programsID)
+         ->get();
+         return view('facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
+ 
+        }
         else{
             return "no path matched!";
         }

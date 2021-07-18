@@ -61,7 +61,7 @@
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-size: 20px !important;
 		}
-		select {
+		select, input {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-size: 17px !important;
 		}
@@ -70,7 +70,7 @@
 
 <body>
 	<!-- Main Wrapper -->
-	<a href="/comAllPrograms/{{$id}}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
+	<a href="/pdcProgramInfo/{{$program_id}}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
 	<div class="main-wrapper m-auto col-md-8">
 
 
@@ -86,27 +86,34 @@
 				<div class="card-header p-3">
 					<h4 class="card-title mb-0">د اوړنده پروکرام اړونده فایلونه اپلوډ کړئ</h4>
 				</div>
-				<form action="/facilitatorMaterials" method="post" enctype="multipart/data-form">
+				<form action="/materials" method="POST" enctype="multipart/form-data" name="formName">
 					{{ method_field('POST') }}
       				{{ csrf_field() }}
-
+						<input class="d-none" type="text" name="program_id" id="" value="{{$program_id}}">
 					  <div class="row mt-5" id="files">
-						  <div class=" col-md-9">
+						  <div class=" col-md-6">
 							  <div class="form-group custom-file ">
 								  <input type="file" class="custom-file-input" id="customFile" onchange="nameShow(this)"
-									  name="filename">
+									  name="materials[0]">
 								  <label class="custom-file-label" for="customFile">د پروګرام اړونده
 									  فایل
 									  انتخاب کړی</label>
+							  </div>
+						  </div>
+						  <div class=" col-md-3">
+							  <div class="form-group">
+								  <input type="text" class="form-control" id="material" placeholder="د فایل نوم"  name="file_name[0]">
 							  </div>
 						  </div>
 						  <div class=" col-md-3 mb-3" id="">
 							  <div class="form-group">
 								  <select class="custom-select"
 									  style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;"
-									  name="filetype[0]">
-									  <option selected>د پروګرام ډول انتخاب کړی</option>
-									  <option value="پریشینټېشن">پریشینټېشن</option>
+									  name="file_type[0]">
+									  <option selected>د فایل ډول  </option>
+									  <option value="لکچر">لکچر</option>
+									  <option value="کتاب">کتاب</option>
+									  <option value="انځور">انځور</option>
 									  <option value="وډیو">وډیو</option>
 									  <option value="آډیو">آډیو</option>
 								  </select>
@@ -165,23 +172,31 @@
 		var indexFileType = 1;
 		function addFile() {
 			var txt1 =
-				`	<div class=" col-md-9" >
+				`							<div class=" col-md-6" >
 												<div class="form-group custom-file ">
-													<input type="file" class="custom-file-input" id="customFile"
-														name="filename[${indexFile}]">
+													<input type="file" class="custom-file-input" id="material"
+														name="materials[${indexFile}]">
 													<label class="custom-file-label" for="customFile">د پروګرام اړونده
 														فایل
 														انتخاب کړی</label>
 												</div>
 											</div>
+											<div class=" col-md-3">
+												<div class="form-group custom-file ">
+													<input type="text" class="form-control" id="customFile"	  name="file_name[${indexFile}]" placeholder="د فایل نوم">
+												</div>
+											</div>
 											<div class=" col-md-3 mb-3" id="">
 												<div class="form-group">
 													<select class="custom-select"
-														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="filetype[${indexFileType}]">
-                                                        <option selected></option>
-                                    <option value="پریشینټېشن">پریشینټېشن</option>
-                                    <option value="وډیو">وډیو</option>
-                                    <option value="آډیو">آډیو</option>
+														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="file_type[${indexFileType}]">
+                                                        <option selected>د فایل ډول</option>
+														<option selected>د فایل ډول  </option>
+									  <option value="لکچر">لکچر</option>
+									  <option value="کتاب">کتاب</option>
+									  <option value="انځور">انځور</option>
+									  <option value="وډیو">وډیو</option>
+									  <option value="آډیو">آډیو</option>
 													</select>
 
 												</div>
@@ -198,7 +213,9 @@
 			if (count4 != 2) {
 				$('#files').children().last().remove();
 				$('#files').children().last().remove();
-
+				$('#files').children().last().remove();
+				indexFile--;
+			indexFileType--;
 				count4--;
 			}
 			if (count4 == 2) {
