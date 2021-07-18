@@ -157,7 +157,7 @@ label {
                     </div>
                     <hr !important>
                     <div class="row">
-                        <div class="col-md-12" id="rank">
+                        <div class="col-md-12 rankS" id="rank">
                             <div class="form-group">
                                 <label class="col-form-label">آیا پروګرام د فیس درلودونکی دی؟<span
                                         class="text-danger">*</span></label>
@@ -222,37 +222,43 @@ label {
                     </div>
                     <hr !important>
                     <div class="row my-5">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پېل کېدو کال</label>
                                 <input placeholder="" class="form-control" type="number" name="year">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پېل کېدو میاشت</label>
                                 <input placeholder="" class="form-control" type="number" name="month">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پېل کېدو ورځ</label>
                                 <input placeholder="" class="form-control" type="number" name="start_day">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>د ختم کېدو ورځ</label>
                                 <input placeholder="" class="form-control" type="number" name="end_day">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>د پروګرام د ورځو شمېر</label>
+                                <input placeholder="" class="form-control" type="number" name="days_duration">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>دشروع کېدو ساعت</label>
                                 <input placeholder="" class="form-control" type="time" name="start_time">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>د ختم کېدو ساعت</label>
                                 <input placeholder="" class="form-control" type="time" name="end_time">
@@ -364,7 +370,7 @@ label {
 
 
 
-@section('cutom-js')
+@section('custom-js')
 	<script>
 		$('#addProgram').addClass('active');
 		var count = 2;
@@ -430,14 +436,6 @@ label {
 			console.log("hi");
 				$("#fee").removeClass('d-none');
 				$("#fee_type").removeClass('d-none');
-				// var txt1 =
-				// 	`<div class="col-md-12" id="temp">
-				// 		<div class="form-group">
-				// 			<label>دپروګرام د داخلېدو مبلغ</label>
-				// 							<input placeholder="$" class="form-control" type="number" name="fee">
-
-				// 		</div>
-				// 	</div>`;
 
 				// $("#rank").after(txt1);
 				s = false;

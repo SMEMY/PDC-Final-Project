@@ -386,7 +386,7 @@ label {
 
 
 
-@section('cutom-js')
+@section('custom-js')
 	<script>
 		$('#addProgram').addClass('active');
 		var count = 2;

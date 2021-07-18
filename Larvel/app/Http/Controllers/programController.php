@@ -8,7 +8,10 @@ use App\Models\Result;
 use App\Models\Facility;
 use App\Models\Agenda;
 use App\Models\Material;
+use App\Models\Photo;
 Use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class programController extends Controller
@@ -84,7 +87,7 @@ class programController extends Controller
         $addProgram->end_day = $request->end_day;
         $addProgram->start_time = $request->start_time;
         $addProgram->end_time = $request->end_time;
-        $addProgram->days_duration = 12;
+        $addProgram->days_duration = $request->days_duration;;
         $addProgram->hours_duration = 12;
         $addProgram->campus_name = $request->campus_name;
         $addProgram->block_name = $request->block_name;
@@ -130,50 +133,9 @@ class programController extends Controller
             return view('not-enreolled-program-info', compact('programs'));
        }
         //participantEnrolledPrograms
-       elseif($request->path() === 'participantEnrolledPrograms/'.$id)
-       {
-         $enrolledPrograms = DB::table('programs')
-        ->join('programsparticipants', 'programs.id', '=', 'programsparticipants.program_id')
-        ->select('programs.*')
-        ->where('programsparticipants.participant_id','=' ,$id)
-        ->get();
-        $programsID = array();
-        $rec = DB::table('programsparticipants')->where('programsparticipants.participant_id', $id)->select('program_id')->get();
-        foreach ($rec as $r)
-        {
-           array_push( $programsID, $r->program_id);
-        }
-        $notEnrolledPrograms = DB::table('programs')
-        ->select('programs.*')
-        ->whereNotIn('id', $programsID)
-        ->get();
-        return view('facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
-
-       }
-        //facilitatorEnrolledPrograms
-       elseif($request->path() === 'facilitatorEnrolledPrograms/'.$id)
-       {
-         $enrolledPrograms = DB::table('programs')
-        ->join('programsfacilitators', 'programs.id', '=', 'programsfacilitators.program_id')
-        ->select('programs.*')
-        ->where('programsfacilitators.facilitator_id','=' ,$id)
-        ->get();
-        $programsID = array();
-        $rec = DB::table('programsfacilitators')->where('programsfacilitators.facilitator_id', $id)->select('program_id')->get();
-        foreach ($rec as $r)
-        {
-           array_push( $programsID, $r->program_id);
-        }
-        $notEnrolledPrograms = DB::table('programs')
-        ->select('programs.*')
-        ->whereNotIn('id', $programsID)
-        ->get();
-        return view('facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
-
-       }
+      
        elseif($request->path() == 'pdcProgramInfo/'.$id){
-        $programs = Program::with('getFacilities', 'getResults', 'getEvaluations', 'getAgendas')->find($id);
-
+        $programs = Program::with('getFacilities', 'getResults', 'getEvaluations', 'getAgendas', 'getPhotos')->find($id);
         return view('pdc-program-info', compact('programs'));
        }
        elseif($request->path() == 'enrolledPdcProgramInfo/'.$id){
@@ -182,13 +144,57 @@ class programController extends Controller
 
        }
        elseif($request->path() === 'pdcProgramAttendance/'.$id){
-        $participants =  DB::table('facilitatorsandparticipants')
-        ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
-        ->where('programsparticipants.program_id', $id)
-        ->select('facilitatorsandparticipants.*')
-        ->get();
-        $programID = $id;
-        return view('pdc-program-attendance', compact('participants', 'programID'));
+
+        
+        $attendancedParticipants =  DB::table('facilitatorsandparticipants')
+            ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+            ->join('attendances', 'facilitatorsandparticipants.id', '=', 'attendances.participant_id')
+            ->select('facilitatorsandparticipants.*')
+            ->where('attendances.program_id', $id)
+            ->get();
+            $attendancedParticipantsIDs = array();
+            foreach ($attendancedParticipants as $attendancedParticipant)
+            {
+            array_push( $attendancedParticipantsIDs, $attendancedParticipant->id);
+            }
+            // return $part_IDs;
+
+            $enrolledProgramParticipants =  DB::table('facilitatorsandparticipants')
+            ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+            ->select('facilitatorsandparticipants.*')
+            ->where('programsparticipants.program_id', $id)
+            ->get();
+            $enrolledProgramParticipantsIDs = array();
+            foreach ($enrolledProgramParticipants as $enrolledProgramParticipant)
+            {
+            array_push( $enrolledProgramParticipantsIDs, $enrolledProgramParticipant->id);
+            }
+            // return $ePart_IDs;
+            $notAttendancedParticipantsIDs;
+            if(count($enrolledProgramParticipantsIDs) >count( $attendancedParticipantsIDs))
+            {
+                $notAttendancedParticipantsIDs = array_diff( $enrolledProgramParticipantsIDs, $attendancedParticipantsIDs);
+            }
+            else{
+                $notAttendancedParticipantsIDs = array_diff( $attendancedParticipantsIDs ,$enrolledProgramParticipantsIDs);
+            }
+            $finalIDs = array();
+            foreach($notAttendancedParticipantsIDs as $t)
+            {
+                array_push($finalIDs, $t);
+            }
+            //  return $finalIDs;
+
+
+
+            $participants =  DB::table('facilitatorsandparticipants')
+            ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+            ->select('facilitatorsandparticipants.*')
+            ->whereIn('programsparticipants.participant_id', $finalIDs)
+            ->get();
+
+            $programID = $id;
+            return view('pdc-program-attendance', compact('participants', 'programID'));
        }
 
        else{

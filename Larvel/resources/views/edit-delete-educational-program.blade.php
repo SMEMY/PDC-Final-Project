@@ -175,7 +175,7 @@ label {
 <!-- /Page Wrapper -->
 @endsection
 
-@section('cutom-js')
+@section('custom-js')
 <script>
 
 function pathFinder(num)

@@ -21,7 +21,7 @@
 
 
 
-    @yield('cutom-js')
+    @yield('custom-js')
 
 </body>
 

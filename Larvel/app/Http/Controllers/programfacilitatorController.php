@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Program;
 use App\Models\Programsfacilitator;
+use App\Models\Photo;
+
 use App\Models\Facilitatorsandparticipant;
 use Illuminate\Support\Facades\DB;
 
@@ -50,6 +52,12 @@ class programfacilitatorController extends Controller
     public function store(Request $request)
     {
         //
+        $program =  Program::where('facilitator_code', $request->program_enrollment_code)->get();
+        $facilEnrollment = new Programsfacilitator;
+        $facilEnrollment->facilitator_id = $request->member_id;
+        $facilEnrollment->program_id = $program[0]->id;
+        $facilEnrollment->save();
+         return redirect('facilitatorProfile/'.$request->member_id);
     }
 
     /**
@@ -58,17 +66,49 @@ class programfacilitatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         //
         // return "asdfasdf";
-        $userProfile = DB::table('facilitatorsandparticipants')
-        ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
-        ->select('facilitatorsandparticipants.*')
-        ->where('programsfacilitators.facilitator_id', $id)
-        ->get();
-        $name = 'تسهیلونکی';
-        return view('pdc-user-info', compact('userProfile', 'name'));
+        if($request->path() === 'facilitatorProfile/'.$id)
+        {
+            $userProfile = DB::table('facilitatorsandparticipants')
+            ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
+            ->select('facilitatorsandparticipants.*', 'programsfacilitators.program_id')
+            ->where('programsfacilitators.facilitator_id', $id)
+            ->get();
+            $name = 'تسهیلونکی';
+            return view('pdc-user-info', compact('userProfile', 'name'));
+        }
+         //facilitatorEnrolledPrograms
+        elseif($request->path() === 'facilitatorEnrolledPrograms/'.$id)
+        {
+          $enrolledPrograms = DB::table('programs')
+         ->join('programsfacilitators', 'programs.id', '=', 'programsfacilitators.program_id')
+         ->select('programs.*')
+         ->where('programsfacilitators.facilitator_id','=' ,$id)
+         ->get();
+         $rec = DB::table('programsfacilitators')->where('programsfacilitators.facilitator_id', $id)->select('program_id')->get();
+         $programsID = array();
+         foreach ($rec as $r)
+         {
+            array_push( $programsID, $r->program_id);
+         }
+         $notEnrolledPrograms = DB::table('programs')
+         ->select('programs.*')
+         ->whereNotIn('id', $programsID)
+         ->get();
+         return view('pdc-facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
+ 
+        }
+        elseif($request->path() === 'programEnrollmentForFacilitator/'.$id)
+        {
+            $facilitator_id = $id;
+            return view('pdc-program-enrollment', compact('facilitator_id'));
+        }
+        elseif(0){
+
+        }
 
     }
 
@@ -95,7 +135,7 @@ class programfacilitatorController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $facilitator_participant = Facilandpart::find($id);
+        $facilitator_participant = Facilitatorsandparticipant::find($id);
         // return $request->last_name;
         $facilitator_participant->name = $request->name;
         $facilitator_participant->last_name = $request->last_name;
@@ -126,9 +166,12 @@ class programfacilitatorController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $deleteFacilitator = Facilandpart::find($id);
+        $deleteFacilitator = Facilitatorsandparticipant::find($id);
         $deleteFacilitator->delete();
         return redirect('facilitatorList');
+
+    //    $deleteParticipant = Programsfacilitator::where('facilitator_id', $id)->get();
+    //     $deleteParticipant->delete();
+    //     return redirect('facilitatorList');
     }
 }

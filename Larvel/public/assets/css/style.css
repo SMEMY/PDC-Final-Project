@@ -2096,10 +2096,10 @@ table.dataTable thead > tr > td.sorting {
 	padding-left: 8px;
 }
 .continue-btn {
-    background-color: #fff;
+    background-color: #ff6565;
     border: 1px solid #00c5fb;
     border-radius: 50px;
-    color: #00c5fb;
+    color: #ffffff;
     display: block;
     font-size: 18px;
     font-weight: 600;
@@ -2109,8 +2109,8 @@ table.dataTable thead > tr > td.sorting {
 .continue-btn:hover,
 .continue-btn:focus,
 .continue-btn:active {
-	background-color: #00c5fb;
-	border: 1px solid #00c5fb;
+	background-color: #ff0000;
+	border: 1px solid #000000;
 	color: #fff;
 }
 .cancel-btn {

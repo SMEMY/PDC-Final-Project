@@ -175,6 +175,7 @@
 			if (count4 != 2) {
 				$('#files').children().last().remove();
 				count4--;
+				index--;
 			}
 			if (count4 == 2) {
 				$('#file-remover').addClass('d-none');

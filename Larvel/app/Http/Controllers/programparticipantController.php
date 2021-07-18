@@ -55,9 +55,82 @@ class programparticipantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         //
+        // return "alskdfjalfkdj";
+        if($request->path() === 'specificeProgramParticipants/'.$id)
+        {
+            $participants = DB::table('facilitatorsandparticipants')
+            ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+            ->select('facilitatorsandparticipants.*', 'programsparticipants.program_id')
+            ->where('programsparticipants.program_id', $id)
+            ->get();
+            $programID = $id;
+
+            return view('pdc-program-participants-list', compact('participants', 'programID'));
+        }
+        elseif($request->path() === 'programSpecificParticipant/'.$id){
+            // return "i am login";
+            if($request->name !== null && $request->phone_number === null)
+            {
+                $participants = DB::table('facilitatorsandparticipants')
+                ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+                ->select('facilitatorsandparticipants.*', 'programsparticipants.program_id')
+                ->where('facilitatorsandparticipants.name', $request->name)
+                ->get();
+                $programID = $id;
+                return view('pdc-program-participants-list', compact('participants', 'programID'));
+            }
+            elseif($request->phone_number !== null && $request->name == null)
+            {
+                $participants = DB::table('facilitatorsandparticipants')
+                ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+                ->select('facilitatorsandparticipants.*', 'programsparticipants.program_id')
+                ->where('facilitatorsandparticipants.phone_number', $request->phone_number)
+                ->get();
+                $programID = $id;
+                return view('pdc-program-participants-list', compact('participants', 'programID'));
+            }
+            elseif($request->phone_number !== null && $request->name !== null)
+            {
+                $participants = DB::table('facilitatorsandparticipants')
+                ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+                ->select('facilitatorsandparticipants.*', 'programsparticipants.program_id')
+                ->where([
+                   ['facilitatorsandparticipants.phone_number','=', $request->phone_number],
+                   ['facilitatorsandparticipants.name', '=',$request->name]
+                    ])
+                ->get();
+                $programID = $id;
+                return view('pdc-program-participants-list', compact('participants', 'programID'));
+            }
+        }
+        
+        elseif($request->path() === 'participantEnrolledPrograms/'.$id)
+        {
+          $enrolledPrograms = DB::table('programs')
+         ->join('programsparticipants', 'programs.id', '=', 'programsparticipants.program_id')
+         ->select('programs.*')
+         ->where('programsparticipants.participant_id','=' ,$id)
+         ->get();
+         $programsID = array();
+         $rec = DB::table('programsparticipants')->where('programsparticipants.participant_id', $id)->select('program_id')->get();
+         foreach ($rec as $r)
+         {
+            array_push( $programsID, $r->program_id);
+         }
+         $notEnrolledPrograms = DB::table('programs')
+         ->select('programs.*')
+         ->whereNotIn('id', $programsID)
+         ->get();
+         return view('facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
+ 
+        }
+        else{
+            return "no path matched!";
+        }
+        // return $request->path();
     }
 
     /**
@@ -113,11 +186,22 @@ class programparticipantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         //
-        $deleteParticipant = Facilandpart::find($id);
-        $deleteParticipant->delete();
-        return redirect('participantList');
+        if($request->page == 'pdc-program-participants-list')
+        {
+            DB::table('programsparticipants')
+            ->where('programsparticipants.participant_id', $request->participant_id)
+            ->delete();
+            return redirect('specificeProgramParticipants/'.$request->program_id);
+
+        }
+        else
+        {
+            $deleteParticipant = Facilitatorsandparticipant::find($id);
+            $deleteParticipant->delete();
+            return redirect('participantList');
+        }
     }
 }
