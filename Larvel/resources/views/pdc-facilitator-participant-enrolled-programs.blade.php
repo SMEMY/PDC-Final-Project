@@ -100,8 +100,8 @@
         <!-- /Page Header -->
         <div class="row">
             <nav class="col-md-12">
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class=" nav-link active col-md-12 text-center p-3 text-lg">هغه پروګرامونه چي یاد تسهیلونکی  پکښی ګډون لري</a>
+                <div class="nav " id="nav-tab" role="tablist">
+                    <a class=" nav-link active col-md-12 text-center p-3 text-lg bg-info text-white">هغه پروګرامونه چي یاد تسهیلونکی  پکښی ګډون لري</a>
                 </div>
             </nav>
             <div class="tab-content col-md-12" id="nav-tabContent">

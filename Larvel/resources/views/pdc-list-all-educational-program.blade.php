@@ -11,6 +11,9 @@ label {
 		}
         h4 {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			color: black !important;
+			font-size: 16px !important;
+
 		}
         p {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
@@ -20,6 +23,8 @@ label {
 		}
         h3 {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			font-size: 22px !important;
+
 		}
 		select:focus {
 			box-shadow: 0px 0px 15px #c7f5ff;
@@ -29,22 +34,27 @@ label {
 			box-shadow: 0px 0px 15px #c7f5ff !important;
 		}
         input {
+			
 			background: #f0fcff !important;
 		}
-        p{
-            max-width: 1030px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+		#foot li{
+            font-size:14px;
+            background: #f3efef7a;
+            padding:5px;
+            border-radius:3px;
         }
+		
         #program{
-            transition: all 0.2s;
+			transition:all 0.3s;
 
         }
         #program:hover{
-            transform: scale(1.03);
-            transition: all 0.3s;
+            background: #d4f0ff !important; 
+            border: 1px solid blue;
+			transition:all 0.3s;
+
         }
+
 @endsection
 
 <!-- here we add dynamic content -->
@@ -54,7 +64,6 @@ label {
 
 <!-- Page Content -->
 <div class="content container-fluid">
-
     <!-- Page Header -->
     <div class="page-header">
         <div class="row align-items-center">
@@ -106,44 +115,47 @@ label {
     </div>
     </form>
     <!-- Search Filter -->
-    <div class="row p-3" >
-    @foreach($programs as $program)
-        <div class="card col-md-12 p-2" id="program">
-            <div class="card-body p-0">
-                <div class="dropdown dropdown-action profile-action">
-                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                            class="material-icons">more_vert</i></a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="{{$path}}/{{$program->id}}/edit"  ><i
-                                class="fa fa-pencil m-r-5"></i> Edit</a>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i
-                                class="fa fa-trash-o m-r-5"></i> Delete</a>
+    <div class="row">
+        @foreach($programs as $program)
+        <div class="col-md-4">
+            <div class="card p-0" id="program">
+                <div class="card-body p-1">
+                    <div class="dropdown dropdown-action profile-action">
+                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                                class="material-icons">more_vert</i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="{{$path}}/{{$program->id}}/edit"  ><i
+                                    class="fa fa-pencil m-r-5"></i> Edit</a>
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i
+                                    class="fa fa-trash-o m-r-5"></i> Delete</a>
+                        </div>
                     </div>
+                    <a href="/educationalPrograminfo/{{$program->id}}">
+                        <div class="job-list-desc" style="padding: 15px 15px 5px 15px">
+                            <h3 class="job-list-title text-center pb-2"> {{$program->topic}} </h3>
+                            <!-- <br> -->
+                            <h4 class="job-department "><strong>دشخص نوم:  </strong> {{$program->teacher_name}} {{$program->teacher_last_name}}</h4>
+                            <h4 class="job-department "><strong>د پروګرام ډول: </strong> {{$program->type}} </h4>
+                           
+                            <!-- <p class="text-muted mt-4 col-md-12"><strong>پوهنتون: </strong> {{$program->university}}
+                            <p class="text-muted mt-4 col-md-12"><strong>پوهنځۍ: </strong> {{$program->faculty}} -->
+                            <!-- </p> -->
+                        </div>
+                        <div class="job-list-footer p-0" id="foot">
+                            <ul class="m-0" style="padding:5px 10px; background: linear-gradient(to left, #88e5ff 0%, #3687ff8c 120%); border-radius: 0 0 4px 4px;">
+                                <li class="ml-1 d-inline-block"><i class="fa fa-map-signs text-danger"></i> <strong>ادرس: </strong>
+                                {{$program->campus_name}}
+                            </li>
+							<!-- <br>-->
+                            <li class="ml-1 d-inline-block"><i class="fa fa-calendar text-danger"></i> <strong> نېټه:
+                                </strong> {{$program->year}} - {{$program->month}} - {{$program->start_day}}</li> 
+								<!-- <br>
+                                <li class="ml-1 d-inline-block"><i class="fa fa fa-clock-o text-danger" aria-hidden="true"></i> <strong>د شروع کېدو وخت: </strong>
+                                    {{$program->start_time}}</li> -->
+                            </ul>
+                        </div>            
+                    </a>
                 </div>
-                <a href="/pdcProgramInfo/{{$program->id}}">
-                    <div class="job-list-desc" style="padding: 20px">
-                        <h3 class="job-list-title text-center"> {{$program->name}} </h3>
-                        <br>
-                        <h4 class="job-department "><strong>د پروګرام ډول: </strong> {{$program->type}} </h4>
-                        <h4 class="job-department mt-4"><strong>د پروګرام تسهیلونکی: </strong> {{$program->facilitator}}
-                        </h4>
-                        <p class="text-muted mt-4 col-md-12"><strong>معلومات: </strong> {{$program->program_description}}
-                        </p>
-                    </div>
-
-                    <div class="job-list-footer p-0" >
-                        <ul class="m-0" style="padding:20px; background: linear-gradient(to left, #88e5ff 0%, #3687ff 120%); border-radius: 0 0 4px 4px;">
-                            <li class="d-inline-block"><i class="fa fa-map-signs"></i> <strong>ادرس: </strong>
-                            {{$program->campus_name}}
-                        </li>
-                        <li class="ml-3 d-inline-block "><i class="fa fa-clock-o "></i> <strong>د پروګرام دوام:
-                            </strong> {{$program->days_duration}} ورځي</li>
-                            <li class="ml-3 d-inline-block"><i class="fa fa-money text-dark" aria-hidden="true"></i> <strong>د پروګرام فیس: </strong>
-                                {{$program->fee}} {{$program->fee_type}} </li>
-                        </ul>
-                    </div>            
-                </a>
-
             </div>
         </div>
 

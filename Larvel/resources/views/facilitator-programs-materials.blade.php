@@ -190,13 +190,12 @@
 												<div class="form-group">
 													<select class="custom-select"
 														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="file_type[${indexFileType}]">
-                                                        <option selected>د فایل ډول</option>
-														<option selected>د فایل ډول  </option>
-									  <option value="لکچر">لکچر</option>
-									  <option value="کتاب">کتاب</option>
-									  <option value="انځور">انځور</option>
-									  <option value="وډیو">وډیو</option>
-									  <option value="آډیو">آډیو</option>
+                                                        <option selected>د فایل ډول</option><option selected>د فایل ډول  </option>
+														<option value="لکچر">لکچر</option>
+														<option value="کتاب">کتاب</option>
+														<option value="انځور">انځور</option>
+														<option value="وډیو">وډیو</option>
+														<option value="آډیو">آډیو</option>
 													</select>
 
 												</div>

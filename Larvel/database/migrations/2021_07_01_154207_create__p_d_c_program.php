@@ -15,7 +15,7 @@ class CreatePDCProgram extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 30);	
+            $table->string('name');	
             $table->string('type', 30);	
             $table->string('sponsor', 30);	
             $table->string('supporter', 30);	

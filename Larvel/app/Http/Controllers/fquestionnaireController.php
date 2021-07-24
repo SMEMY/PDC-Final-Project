@@ -48,7 +48,7 @@ class fquestionnaireController extends Controller
             $questionnairQuestion->feedback_form_id = $programID[0]->id;
             $questionnairQuestion->save();
         }
-        return "saved questions!";
+        return redirect('pdcProgramInfo/'.$request->program_id);
     }
 
     /**

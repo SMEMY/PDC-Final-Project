@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 Use Illuminate\Support\Facades\DB;
 use App\Models\Attendance;
 use App\Models\Facilitatorsandparticipant;
-
+use PDF;
 use Illuminate\Http\Request;
 
 class attendanceController extends Controller
@@ -84,6 +84,8 @@ class attendanceController extends Controller
             ->where('attendances.program_id', $id)
             ->get();
             $programID = $id;
+            $pdf = PDF::loadView('pdc-program-attendance-report',compact('attendanceReport','programID'));
+            return $pdf->download('p.pdf');
             return view('pdc-program-attendance-report',compact('attendanceReport','programID'));
         }
     }

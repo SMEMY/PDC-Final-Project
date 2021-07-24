@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Agenda;
 
 use Illuminate\Http\Request;
 
@@ -35,6 +36,14 @@ class agendaController extends Controller
     public function store(Request $request)
     {
         //
+        for($index=0; $index<count($request->agenda); $index++)
+        {
+            $agenda = new Agenda;
+            $agenda->agenda = $request->agenda[$index];
+            $agenda->program_id = $request->program_id;
+            $agenda->save();
+        }
+        return redirect('pdcProgramInfo/'.$request->program_id);
     }
 
     /**
@@ -46,6 +55,8 @@ class agendaController extends Controller
     public function show($id)
     {
         //
+        $programID = $id;
+        return view('pdc-program-agenda', compact('programID'));
     }
 
     /**

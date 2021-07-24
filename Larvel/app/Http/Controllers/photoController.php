@@ -39,7 +39,7 @@ class photoController extends Controller
         // return $photos = $request->file('image');
         $request->validate([
             'image' => 'required',
-            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
         ]);
       
         foreach($request->file('image') as $photo)
@@ -68,13 +68,19 @@ class photoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         //
-        $programID=$id;
-        return view('program-photo', compact('programID'));
+        if($request->path() === 'pdcProgramPhoto/'.$id)
+        {
+            $programID=$id;
+            return view('pdc-program-photo', compact('programID'));
+        }
+        elseif ($request->path() === 'downloadPhoto/'.$id) {
+            return Storage::download('public/images/'.$id);
+        }
         
-        return "i am photo!";
+        // return "i am photo!";
     }
 
     /**
@@ -106,8 +112,13 @@ class photoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         //
+        // return "hahahaha";
+        Storage::delete('public/images/'.$id);
+        Photo::where('path', $id)->delete();
+        // $deletematerial->delete();
+        return redirect('pdcProgramInfo/'.$request->program_id);
     }
 }

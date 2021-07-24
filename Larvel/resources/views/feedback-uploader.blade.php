@@ -134,7 +134,7 @@ h4 {
 @endsection
 
 
-@section('cutom-js')
+@section('custom-js')
 <script>
 
 		var count4 = 2;
@@ -172,6 +172,7 @@ h4 {
 				$('#files').children().last().remove();
 				$('#files').children().last().remove();
 				count4--;
+				index--;
 			}
 			if (count4 == 2) {
 				$('#file-remover').addClass('d-none');

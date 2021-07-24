@@ -123,16 +123,16 @@
 							<table class="table table-striped custom-table table-nowrap m-0">
 								<thead>
 									<tr>
-										<th class=" border border-dark bg-gradient-info         ">
+										<th class=" border border-dark bg-gradient-info" style="width:30px">
 											شــ
 										</th>
-										<th class=" border border-dark bg-gradient-info px-1">نوم</th>
-										<th class=" border border-dark bg-gradient-info px-1">تخلص</th>
-										<th class=" border border-dark bg-gradient-info px-1">ولد</th>
-										<th class=" border border-dark bg-gradient-info px-1">د بست عنوان</th>
-										<th class=" border border-dark bg-gradient-info px-1">محل وظیفه</th>
-										<th class=" border border-dark bg-gradient-info px-1">د ټلیفون شمېره</th>
-										<th class=" border border-dark bg-gradient-info px-1">برېښنالیک</th>
+										<th class=" border border-dark bg-gradient-info px-1" style="width:100px">نوم</th>
+										<th class=" border border-dark bg-gradient-info px-1" style="width:100px">تخلص</th>
+										<th class=" border border-dark bg-gradient-info px-1" style="width:100px">ولد</th>
+										<th class=" border border-dark bg-gradient-info px-0">د بست عنوان</th>
+										<th class=" border border-dark bg-gradient-info px-0">محل وظیفه</th>
+										<th class=" border border-dark bg-gradient-info px-0" style="width:100px">د ټلیفون شمېره</th>
+										<!-- <th class=" border border-dark bg-gradient-info px-0">برېښنالیک</th> -->
 											@for($index = 0; $index<$program[0]->days_duration;$index++)
 											@if(($index+1) < 10)
 											<th class=" border border-dark bg-gradient-info p-1">{{$index + 1}}</th>
@@ -141,7 +141,7 @@
 											<th class=" border border-dark bg-gradient-info p-0">{{$index + 1}}</th>
 											@endif
 											@endfor
-										<th class=" border border-dark bg-gradient-info px-1">کتني</th>
+										<th class=" border border-dark bg-gradient-info px-0" style="width:100px">کتني</th>
 										<!-- <th class="col-md-1">8</th>
 										<th class="col-md-1">9</th>
 										<th class="col-md-1">10</th> -->
@@ -155,13 +155,13 @@
 										<td class="border border-dark">
 											{{$loop->iteration}}
 										</td>
-										<td class="border border-dark px-1"> {{$participant->name}} </td>
-										<td class="border border-dark px-1">{{$participant->last_name}}</td>
-										<td class="border border-dark px-1">عبدالصبور</td>
-										<td class="border border-dark px-1">{{$participant->office_position}}</td>
-										<td class="border border-dark px-1">{{$participant->office_building}}</td>
-										<td class="border border-dark px-1">{{$participant->phone_number}}</td>
-										<td class="border border-dark px-1 text-right">{{$participant->email}}</td>
+										<td class="border border-dark px-0"> {{$participant->name}} </td>
+										<td class="border border-dark px-0">{{$participant->last_name}}</td>
+										<td class="border border-dark px-0">عبدالصبور</td>
+										<td class="border border-dark px-0">{{$participant->office_position}}</td>
+										<td class="border border-dark px-0">{{$participant->office_building}}</td>
+										<td class="border border-dark px-0">{{$participant->phone_number}}</td>
+										<!-- <td class="border border-dark px-0 text-right">{{$participant->email}}</td> -->
 											@for($index = 0; $index<$program[0]->days_duration;$index++)
 											<td class="border border-dark p-0"></td>
 											@endfor

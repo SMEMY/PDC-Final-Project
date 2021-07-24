@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Material;
 use App\Models\Program;
 use Illuminate\Http\Request;
+use File;
 
 use Illuminate\Support\Facades\Storage;
+// use Storage;
 class materialController extends Controller
 {
     /**
@@ -87,12 +89,19 @@ class materialController extends Controller
         elseif($request->path() === 'materials/'.$id)
         {
             $program_id = $id;
+            // return $program_id;
             $programMaterials = Program::with('getMaterials')->find($id);
             return view('files-download', compact('programMaterials', 'program_id'));
         }
         elseif($request->path() === 'facilitatorMaterials/'.$id)
         {
             return view('facilitator-programs-materials', compact('program_id'));
+        }
+        elseif($request->path() === 'downloadMaterial/'.$id)
+        {
+            // return "hi";
+            return Storage::download('public/programFiles/'.$id);
+            // return Storage::download('public/programFiles/'.$id, $name, $headers);
         }
     }
 
@@ -125,8 +134,13 @@ class materialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Request $request, $id)
+    {  
+        Storage::delete('public/programFiles/'.$id);
+        Material::where('path', $id)->delete();
+        // $deletematerial->delete();
+        return redirect('materials/'.$request->program_id);
     }
+
+
 }
