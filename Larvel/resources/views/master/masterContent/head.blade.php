@@ -17,6 +17,8 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
+<!-- bootstrao growl js -->
+
 <!-- Fontawesome CSS -->
 <link  href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
 

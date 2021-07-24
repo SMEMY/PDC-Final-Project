@@ -38,9 +38,22 @@ hahahaha
 	
 		<!-- /Account Logo -->
 		<div class="row col-md-12">
-			<div class="col-md-7">
-				<div class="job-info job-widget ">
-					<h4 class="m-auto " style="width: fit-content"><i class="pr-2 fa fa-"></i>د اړونده پروګرام په اړه معلومات</h4>
+			<div class="col-md-12 mb-3">
+
+				<h4 class="p-4 bg-info d-block text-center rounded" style="font-weight:bold"><i class="pr-2 fa fa-"></i>د اړونده پروګرام په اړه معلومات</h4>
+				<div class="dropdown dropdown-action profile-action p-3" id="edit">
+					<a href="#" class="action-icon dropdown-toggle text-white" data-toggle="dropdown" aria-expanded="false"><i
+							class="material-icons">more_vert</i></a>
+					<div class="dropdown-menu dropdown-menu-right" style="z-index: 100;">
+						<a class="dropdown-item" href="/educationalProgramList/{{$program->id}}/edit"  ><i
+								class="fa fa-pencil m-r-5"></i>معلومات اصلاح کړی</a>
+						<a class="dropdown-item" href="/pdcProgramDelete/{{$program->id}}" data-toggle="modal"
+											data-target="#delete_project" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
+					</div>
+				   </div>
+			</div>
+			<div class="col-md-8">
+				<div class="job-info job-widget " style="border-radius: 5px; box-shadow:0px 0px 2px 0px #00beff;">
 					<br>
 					<br>
 					<ul class="job-post-det col-md-12">
@@ -67,23 +80,24 @@ hahahaha
 				</div>
 				
 			</div>
-			<div class="col-md-5">
-				<div class="job-det-info job-widget" style="border-radius: 10px; box-shadow:1px 0px 5px 0px #00beff;">
+			<div class="col-md-4">
+				<div class="job-det-info job-widget p-2 mb-5" style="border-radius: 5px; box-shadow:0px 0px 2px 0px #00beff;">
 					<h4 class="account-title">نېټه</h4>
 					<br>
 					<ul class="job-post-det col-md-12">
-						<li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د جوړېدو نېټه: </strong><span class="text-blue">{{ $program->year }} - {{$program->month}} - {{$program->start_day}}</span></li>
-						<li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د شروع کېدو وخت: </strong><span class="text-blue">{{ $program->start_time }}</span></li>
+						<li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong> نېټه: </strong><span class="text-blue">{{ $program->year }} - {{$program->month}} - {{$program->start_day}}</span></li>
+						<li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>وخت: </strong><span class="text-blue">{{ $program->start_time }}</span></li>
 					
 					</ul>
 					<!-- <a class="btn job-btn" href="#" data-toggle="modal" data-target="#apply_job">Enroll</a> -->
 				</div>
-				<div class="job-det-info job-widget" style="border-radius: 10px; box-shadow:1px 0px 5px 0px #00beff;">
+				<br !important>
+				<div class="job-det-info job-widget p-2" style="border-radius: 5px; box-shadow:0px 0px 2px 0px #00beff;">
 					<h4 class="account-title">پته   </h4>
 					<br>
 					<ul class="job-post-det col-md-12">
-						<li class="col-md-12"><i class="pr-2 fa fa-university"></i><strong>د ساحې نوم:  </strong><span class="text-blue">{{ $program->campus_name }}</span></li>
-						<li class="col-md-12"><i class="pr-2 fa fa-building"></i><strong> د ودانۍ نوم:  </strong><span class="text-blue">{{ $program->block_name }}</span></li>
+						<li class="col-md-12"><i class="pr-2 fa fa-university"></i><strong>ساحه:  </strong><span class="text-blue">{{ $program->campus_name }}</span></li>
+						<li class="col-md-12"><i class="pr-2 fa fa-building"></i><strong> ودانۍ:  </strong><span class="text-blue">{{ $program->block_name }}</span></li>
 						<li class="col-md-12"><i class="pr-2 fa fa-calculator"></i><strong> د ودانۍ شمېره: </strong><span class="text-blue">{{ $program->block_number }}</span></li>
 						<li class="col-md-12"><i class="pr-2 fa fa-calculator"></i><strong> د صالون شمېره: </strong><span class="text-blue">{{ $program->room_number }}</span></li>
 					

@@ -3,11 +3,11 @@
 			<div class="sidebar-inner slimscroll">
 				<div id="sidebar-menu" class="sidebar-menu">
 					<ul>
-						<li class="menu-title" >
+						<li class="menu-title text-white" style="font-size:20px;">
 							<span>اصلي مېنو</span>
 						</li>
 						<li class="submenu">
-							<a href="#"> <span> پروګرامونه</span> <i class="la la-dashboard"></i> <span class="menu-arrow"></span></a>
+							<a href="#"> <span> پروګرامونه</span> <i class="fa fa-pencil-square-o" style="font-size:20px;"></i> <span class="menu-arrow"></span></a>
 							<ul style="display: none;">
 								<!-- <li><a class="active" href="test">پروګرامونه</a></li> -->
 
@@ -32,14 +32,13 @@
 							
 						</li>
 						<li class="submenu">
-							<a href="#"> <span> ګدونوال</span> <i class="la la-dashboard"></i> <span class="menu-arrow"></span></a>
+							<a href="#"> <span> ګدونوال</span> <i class="fa fa-users" style="font-size:20px;"></i> <span class="menu-arrow"></span></a>
 							<ul style="display: none;">
 								<!-- <li><a class="active" href="test">پروګرامونه</a></li> -->
 								<li class="submenu">
 									<a href="#" class=""><span>ګدونوال ثبتول</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="/facilitatorRegisteration" dir="rtl">د پروګرام تسهیلونکی ثبتول</a></li>
-										<li><a href="/participantRegisteration">د پروګرام ګډونوال ثبتول</a></li>
+										<li><a href="/memberRegisteration">د پروګرام ګډونوال ثبتول</a></li>
 									</ul>
 								</li>
 								<li class="submenu">
@@ -47,7 +46,27 @@
 									<ul style="display: none;">
 										<li><a href="/facilitatorList" dir="rtl">د پروګرام تسهیلونکي </a></li>
 										<li><a href="/participantList">د پروګرام ګډونوال</a></li>
+										<li><a href="/memberList">د سیسټم عمومي ګډونوال</a></li>
 									</ul>
+								</li>
+								<!-- <li><a href="addProgram">پروګرام ثبتول</a></li>
+								<li><a href="addEduProgeam">دعلمي ترفېع/ تقرر پروګرام ثبتول </a></li> -->
+							</ul>
+						</li>
+						<li class="submenu">
+							<a href="#"> <span> راپورونه</span> <i class="fa fa-book" style="font-size:20px;"></i> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<!-- <li><a class="active" href="test">پروګرامونه</a></li> -->
+								<li class="submenu">
+									<a href="#" class=""><span> میاشت واره راپور</span></a>
+								</li>
+								<li class="submenu">
+									<a href="#" class=""><span>ربعه واره راپور</span></a>
+									
+								</li>
+								<li class="submenu">
+									<a href="#" class=""><span>کلنی راپور</span> </a>
+									
 								</li>
 								<!-- <li><a href="addProgram">پروګرام ثبتول</a></li>
 								<li><a href="addEduProgeam">دعلمي ترفېع/ تقرر پروګرام ثبتول </a></li> -->

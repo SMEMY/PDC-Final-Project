@@ -42,7 +42,7 @@ class Program extends Model
     {
         return $this->hasMany('App\Models\Payment');
     }
-    function getProgramFacilitator()
+    function getProgramFacilitators()
     {
         return $this->belongsToMany(Facilandpart::class, 'programsfacilitators');
     }

@@ -2,9 +2,16 @@
 @section('custom-css')
 label {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-            font-size: 20px !important;
+            font-size: 25px !important;
+            font-weight: bold !important;
 
 	}
+    span{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
+            font-weight: bold !important;
+
+    }
     h3{
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
         }
@@ -36,8 +43,10 @@ label {
 			background: #f0fcff !important;
 		}
 		textarea{
+            hieght: 400px;
 			background: #f0fcff !important;
-
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
 		}
 		#for{
 			transition:all 0.3s;
@@ -65,13 +74,14 @@ label {
 						<!-- <p class="account-subtitle"></p> -->
 <hr !important>
 						<!-- Account Form -->
-						<form action="/pdcProgramList" method="POST" enctype="multipart/form-data">
-                        @csrf
+				<form action="/pdcProgramList/{{$editProgram->id}}" method="POST" enctype="multipart/form-data">
+                {{ method_field('PATCH') }}
+                           						{{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>د پروګرام نوم</label>
-                                <input class="form-control" type="text" name="name">
+                                <input class="form-control" type="text" name="name" value="{{$editProgram->name}}">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -79,12 +89,31 @@ label {
                                 <label>د پروګرام ډول</label>
                                 <select class="custom-select"
                                     style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="type">
+                                    @if($editProgram->type === 'ورکشاپ')
                                     <option ></option>
-
-                                    <option value="ورکشاپ">ورکشاپ</option>
+                                    <option selected value="ورکشاپ">ورکشاپ</option>
                                     <option value="سیمینار">سیمینار</option>
                                     <option value="سمفوزیم">سمفوزیم</option>
                                     <option value="کنفرانس">کنفرانس</option>
+                                    @elseif($editProgram->type === 'سیمینار')
+                                    <option ></option>
+                                    <option value="ورکشاپ">ورکشاپ</option>
+                                    <option selected value="سیمینار">سیمینار</option>
+                                    <option value="سمفوزیم">سمفوزیم</option>
+                                    <option value="کنفرانس">کنفرانس</option>
+                                    @elseif($editProgram->type === 'سمفوزیم')
+                                    <option ></option>
+                                    <option value="ورکشاپ">ورکشاپ</option>
+                                    <option value="سیمینار">سیمینار</option>
+                                    <option selected value="سمفوزیم">سمفوزیم</option>
+                                    <option value="کنفرانس">کنفرانس</option>
+                                    @else
+                                    <option ></option>
+                                    <option value="ورکشاپ">ورکشاپ</option>
+                                    <option value="سیمینار">سیمینار</option>
+                                    <option value="سمفوزیم">سمفوزیم</option>
+                                    <option selected value="کنفرانس">کنفرانس</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -96,7 +125,7 @@ label {
                             <div class="form-group">
                                 <label>د پروګرام سپانسر</label>
                                 <!-- <div class="cal-icon"> -->
-                                <input class="form-control" type="text" name="sponsor">
+                                <input class="form-control" type="text" name="sponsor" value="{{$editProgram->sponsor}}">
                                 <!-- </div> -->
                             </div>
                         </div>
@@ -104,7 +133,7 @@ label {
                             <div class="form-group">
                                 <label>د پروګرام حمایه کوونکی</label>
                                 <!-- <div class="cal-icon"> -->
-                                <input class="form-control" type="text" name="supporter">
+                                <input class="form-control" type="text" name="supporter" value="{{$editProgram->supporter}}">
                                 <!-- </div> -->
                             </div>
                         </div>
@@ -114,17 +143,22 @@ label {
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>د پروګرام تنظیمونکی</label>
-                                <input placeholder="" class="form-control" type="text" name="manager">
+                                <input placeholder="" class="form-control" type="text" name="manager" value="{{$editProgram->manager}}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="">د پروګرام تسهیلونک</label>
-                                <input placeholder="" class="form-control" type="text" name="facilittator">
+                                <input placeholder="" class="form-control" type="text" name="facilittator" value="{{$editProgram->facilittator}}">
 
                             </div>
                         </div>
-                       
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="">د پروګرام د معلوماتو شمېره</label>
+                                <input placeholder="" class="form-control" type="text" name="info_mobile_number" value="{{$editProgram->info_mobile_number}}">
+                            </div>
+                        </div>
                     </div>
                     <hr !important>
 
@@ -133,13 +167,13 @@ label {
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>د پروګرام د ګډون والو کچه</label>
-                                <input placeholder="" class="form-control" type="number" name="participant_amount">
+                                <input placeholder="" class="form-control" type="number" name="participant_amount" value="{{$editProgram->participant_amount}}" >
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>د پروګرام یودیجه</label>
-                                <input placeholder="$" class="form-control" type="number" name="fund">
+                                <input placeholder="$" class="form-control" type="number" name="fund" value="{{$editProgram->fund}}">
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -147,9 +181,15 @@ label {
                                 <label>د پروګرام یودیجه پولي واحد</label>
                                 <select class="custom-select rankS"
                                     style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="fund_type">
-                                    <option selected></option>
-                                    <option value="افغانۍ">افغانۍ</option>
+                                    @if($editProgram->fund_type === 'افغانۍ')
+                                    <option ></option>
+                                    <option selected value="افغانۍ">افغانۍ</option>
                                     <option value="ډالر">ډالر</option>
+                                    @else
+                                    <option ></option>
+                                    <option value="افغانۍ">افغانۍ</option>
+                                    <option selected value="ډالر">ډالر</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -163,60 +203,72 @@ label {
                                         class="text-danger">*</span></label>
                                 <select class="custom-select rankS"
                                     style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="fee_able">
-                                    <option selected></option>
-                                    <option value="1">هو</option>
+                                    @if($editProgram->fee_able === 1)
+                                    <option ></option>
+                                    <option selected value="1">هو</option>
                                     <option value="0">یا</option>
+                                    @else
+                                    <option></option>
+                                    <option value="1">هو</option>
+                                    <option selected value="0">یا</option>
+                                    @endif
                                 </select>
 
                             </div>
                         </div>
-                        <div class="col-md-12 d-none" id="fee">
+                        @if($editProgram->fee_able === 1)
+                        <div class="col-md-12" id="fee">
                             <div class="form-group">
                                 <label class="col-form-label">د پروګرام فیس<span
                                         class="text-danger">*</span></label>
-                                        <input placeholder="$" class="form-control" type="number" name="fee">
-
-
+                                        <input placeholder="$" class="form-control" type="number" name="fee" value="{{$editProgram->fee}}">
                             </div>
                         </div>
-                        <div class="col-md-12 d-none" id="fee_type">
+                        <div class="col-md-12 " id="fee_type">
                             <div class="form-group">
                                 <label class="col-form-label">د پروګرام د فیس پولي واحد<span
-                                        class="text-danger">*</span></label>
+                                class="text-danger">*</span></label>
                                 <select class="custom-select rankS"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="fee_type">
-                                    <option selected></option>
-                                    <option value="افغانۍ">افغانۍ</option>
-                                    <option value="ډالر">ډالر</option>
-                                </select>
-
-                            </div>
+                                style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="fee_type">
+                                @if($editProgram->fee_type === 'افغانۍ')
+                                <option ></option>
+                                <option selected value="افغانۍ">افغانۍ</option>
+                                <option value="ډالر">ډالر</option>
+                                @else
+                                <option selected></option>
+                                <option value="افغانۍ">افغانۍ</option>
+                                <option selected value="ډالر">ډالر</option>
+                                @endif
+                            </select>
+                            
                         </div>
+                        @endif
+                    </div>
                     </div>
                     <hr !important>
                     <div class="row my-5">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د رامنځته کولو ساحه</label>
-                                <input placeholder="" class="form-control" type="text" name="campus_name">
+                                <input placeholder="" class="form-control" type="text" name="campus_name" value="{{$editProgram->campus_name}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د رامنځته کولو تعمیر نوم</label>
-                                <input placeholder="" class="form-control" type="text" name="block_name">
+                                <input placeholder="" class="form-control" type="text" name="block_name" value="{{$editProgram->block_name}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د رامنځته کولو تعمیر نمبر</label>
-                                <input placeholder="" class="form-control" type="text" name="block_number">
+                                <input placeholder="" class="form-control" type="number" name="block_number" value="{{$editProgram->block_number}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پروګرام د اطاق نمبر</label>
-                                <input placeholder="" class="form-control" type="number" name="room_number">
+                                <input placeholder="" class="form-control" type="number" name="room_number" value="{{$editProgram->room_number}}">
                             </div>
                         </div>
                     </div>
@@ -225,59 +277,65 @@ label {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پېل کېدو کال</label>
-                                <input placeholder="" class="form-control" type="number" name="year">
+                                <input placeholder="" class="form-control" type="number" name="year" value="{{$editProgram->year}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پېل کېدو میاشت</label>
-                                <input placeholder="" class="form-control" type="number" name="month">
+                                <input placeholder="" class="form-control" type="number" name="month" value="{{$editProgram->month}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د پېل کېدو ورځ</label>
-                                <input placeholder="" class="form-control" type="number" name="start_day">
+                                <input placeholder="" class="form-control" type="number" name="start_day" value="{{$editProgram->start_day}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د ختم کېدو ورځ</label>
-                                <input placeholder="" class="form-control" type="number" name="end_day">
+                                <input placeholder="" class="form-control" type="number" name="end_day" value="{{$editProgram->end_day}}">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>د پروګرام د ورځو شمېر</label>
-                                <input placeholder="" class="form-control" type="number" name="days_duration">
+                                <input placeholder="" class="form-control" type="number" name="days_duration" value="{{$editProgram->days_duration}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>دشروع کېدو ساعت</label>
-                                <input placeholder="" class="form-control" type="time" name="start_time">
+                                <input placeholder="" class="form-control" type="time" name="start_time" value="{{$editProgram->start_time}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>د ختم کېدو ساعت</label>
-                                <input placeholder="" class="form-control" type="time" name="end_time">
+                                <input placeholder="" class="form-control" type="time" name="end_time" value="{{$editProgram->end_time}}">
                             </div>
                         </div>
                     </div>
                     <hr !important>
 
                     <div class="row">
+                        <label class="col-md-12">د پروګرام سهولتونه</label>
                         <div class="form-group col-md-12" id="facilities">
+                            @foreach($editProgram->getFacilities as $facility)
                             <div class="form-group">
-                                <label>د پروګرام سهولتونه</label>
-                                <input placeholder="1" class="form-control" type="text" name="facility[0]">
+                                <input placeholder="د پروګرام سهولت" class="form-control" type="text" name="facility[{{$loop->index}}]" value="{{$facility->facility}}">
                             </div>
-
+                            @endforeach
+                            @if( count($editProgram->getFacilities) === 0 )
+                            <div class="form-group">
+                                <input placeholder="د پروګرام سهولت" class="form-control" type="text" name="facility[0]" value="">
+                            </div>
+                            @endif
                         </div>
                         <div class="form-group m-auto" id="ad">
                             <button type="button" id="times"
-                                class="btn btn-info mx-auto rounded-circle d-none" style="font-size: 20px;"
+                                class="btn btn-info mx-auto rounded-circle" style="font-size: 20px;"
                                 onclick="rmv()">&times;</button>
                             <button type="button" class="btn btn-info mx-auto rounded-circle"
                                 style="font-size: 20px;;" onclick="afterText()">&plus;</button>
@@ -287,16 +345,22 @@ label {
                     <hr !important>
 
                     <div class="row mt-5">
+                    <label class="col-md-12">د پروګرام اجنډا</label>
                         <div class="form-group col-md-12" id="agendas">
+                        @foreach($editProgram->getAgendas as $agenda)
                             <div class="form-group">
-                                <label>د پروګرام اجنډا</label>
-                                <input placeholder="1" class="form-control" type="text" name="agenda[0]">
+                                <input placeholder="د پروګرام اجنډا" class="form-control" type="text" name="agenda[0]" value="{{$agenda->agenda}}">
                             </div>
-
+                        @endforeach
+                        @if( count($editProgram->getAgendas) === 0 )
+                            <div class="form-group">
+                                <input placeholder="د پروګرام اجنډا" class="form-control" type="text" name="agenda[0]" value="">
+                            </div>
+                        @endif
                         </div>
                         <div class="form-group m-auto">
                             <button type="button" id="remove-agenda"
-                                class="btn btn-info mx-auto rounded-circle d-none" style="font-size: 20px;"
+                                class="btn btn-info mx-auto rounded-circle" style="font-size: 20px;"
                                 onclick="removeAgenda()">&times;</button>
                             <button type="button" class="btn btn-info mx-auto rounded-circle"
                                 style="font-size: 20px;;" onclick="addAgenda()">&plus;</button>
@@ -304,52 +368,63 @@ label {
                         </div>
                     </div>
                     <hr !important>
-
-                  
-                    <hr !important>
-                    <div class="row " id="files">
-                        <div class=" col-md-6">
-                            <div class="form-group custom-file ">
-                                <input type="file" class="custom-file-input" id="customFile"
-                                    onchange="nameShow(this)" name="filename[0]">
-                                <label class="custom-file-label" for="customFile">د پروګرام اړونده
-                                    فایل
-                                    انتخاب کړی</label>
-                            </div>
-                        </div>
-                        <div class=" col-md-6 mb-3" id="">
+                    <div class="row mt-5">
+                    <label class="col-md-12">د پروګرام پایلي</label>
+                        <div class="form-group col-md-12" id="results">
+                        @foreach($editProgram->getResults as $result)
                             <div class="form-group">
-                                <select class="custom-select"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="filetype[0]">
-                                    <option selected></option>
-                                    <option value="پریشینټېشن">پریشینټېشن</option>
-                                    <option value="وډیو">وډیو</option>
-                                    <option value="آډیو">آډیو</option>
-                                </select>
-
+                                <input placeholder="د پروګرام پایله" class="form-control" type="text" name="result[0]" value="{{$result->result}}">
                             </div>
+                        @endforeach
+                        @if( count($editProgram->getResults) === 0 )
+                            <div class="form-group">
+                                <input placeholder="د پروګرام پایله" class="form-control" type="text" name="result[0]" value="">
+                            </div>
+                        @endif
                         </div>
-
-
-                    </div>
-                    <div class="row">
-                        <div class="form-group m-auto ">
-                            <button type="button" id="file-remover"
-                                class="btn btn-info mx-auto rounded-circle d-none" style="font-size: 20px;"
-                                onclick="removeFile()">&times;</button>
+                        <div class="form-group m-auto">
+                            <button type="button" id="remove-result"
+                                class="btn btn-info mx-auto rounded-circle" style="font-size: 20px;"
+                                onclick="removeResult()">&times;</button>
                             <button type="button" class="btn btn-info mx-auto rounded-circle"
-                                style="font-size: 20px;;" onclick="addFile(), el()">&plus;</button>
+                                style="font-size: 20px;;" onclick="addResult()">&plus;</button>
                             <!-- <label class="ml-5 col-form-label col-lg-2" style="display: block;">add more questions!</label> -->
                         </div>
                     </div>
+                  
+                    <hr !important>
+                    <div class="row mt-5">
+                    <label class="col-md-12">د پروګرام ارزوني</label>
+                        <div class="form-group col-md-12" id="evaluations">
+                        @foreach($editProgram->getEvaluations as $evaluation)
+                            <div class="form-group">
+                                <input placeholder="د پروګرام ارزونه" class="form-control" type="text" name="evaluation[0]" value="{{$evaluation->evaluation}}">
+                            </div>
+                        @endforeach
+                        @if( count($editProgram->getEvaluations) === 0 )
+                            <div class="form-group">
+                                <input placeholder="د پروګرام ارزونه" class="form-control" type="text" name="evaluation[0]" value="">
+                            </div>
+                        @endif
+                        </div>
+                        <div class="form-group m-auto">
+                            <button type="button" id="remove-evaluation"
+                                class="btn btn-info mx-auto rounded-circle" style="font-size: 20px;"
+                                onclick="removeEvaluation()">&times;</button>
+                            <button type="button" class="btn btn-info mx-auto rounded-circle"
+                                style="font-size: 20px;;" onclick="addEvaluation()">&plus;</button>
+                            <!-- <label class="ml-5 col-form-label col-lg-2" style="display: block;">add more questions!</label> -->
+                        </div>
+                    </div>
+                   
 
                     <div class="row mt-5">
                         <div class="input-group col-md-12">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">د پروګرام په اړه معلومات</span>
                             </div>
-                            <textarea class="form-control" style="height: 100px;"
-                                aria-label="With textarea" name="program_description"></textarea>
+                            <textarea class="form-control" style="min-height: 145px;"
+                                aria-label="With textarea" name="program_description" value="">{{$editProgram->program_description}}</textarea>
                         </div>
                     </div>
 
@@ -373,14 +448,16 @@ label {
 @section('custom-js')
 	<script>
 		$('#addProgram').addClass('active');
-		var count = 2;
-        var index = 1;
+		var count = 1 + ($("#facilities").children().length);
+        var index = $("#facilities").children().length;
 		function afterText() {
+            console.log(count);
+            console.log(index);
 			var txt1 =
 				`
 				<div class="form-group">
 										
-										<input placeholder="${count}" class="form-control" type="text" name="facility[${index}]">
+										<input placeholder="د پروګرام سهولت" class="form-control" type="text" name="facility[${index}]">
 									</div>`;
 
 			$("#facilities").children().last().after(txt1);
@@ -390,24 +467,24 @@ label {
 		}
 		function rmv() {
 
-			if (count != 2) {
+			if ($("#facilities").children().length > 1) {
 				$('#facilities').children().last().remove();
-				count--;
+                index--;
+				
 			}
-			if (count == 2) {
+			if ($("#facilities").children().length == 1) {
 				$('#times').addClass('d-none');
-
 			}
 
 		}
 		var count1 = 2;
-        var indexAgenda = 1;
+        var indexAgenda = $("#agendas").children().length;
 		function addAgenda() {
 			var txt1 =
 				`
 				<div class="form-group">
 										
-										<input placeholder="${count1}" class="form-control" type="text" name="agenda[${indexAgenda}]">
+										<input placeholder="${indexAgenda}" class="form-control" type="text" name="agenda[${indexAgenda}]">
 									</div>`;
 
 			$("#agendas").children().last().after(txt1);
@@ -417,16 +494,81 @@ label {
 		}
 		function removeAgenda() {
 
-			if (count1 != 2) {
+			if ($("#agendas").children().length > 1) {
 				$('#agendas').children().last().remove();
-				count1--;
+				indexAgenda = indexAgenda - 1;;
 			}
-			if (count1 == 2) {
+			if ($("#agendas").children().length == 1) {
 				$('#remove-agenda').addClass('d-none');
 
 			}
 
 		}
+
+
+
+
+        var indexResult = $("#results").children().length;
+		function addResult() {
+			var txt1 =
+				`
+				<div class="form-group">
+										
+										<input placeholder="${indexResult}" class="form-control" type="text" name="result[${indexResult}]">
+									</div>`;
+
+			$("#results").children().last().after(txt1);
+			$('#remove-result').removeClass('d-none');
+			   // Insert new elements after img
+            indexResult++;
+		}
+		function removeResult() {
+            console.log($("#results").children().length);
+			if ($("#results").children().length > 1) {
+				$('#results').children().last().remove();
+				indexResult = indexResult - 1;;
+			}
+			if ($("#results").children().length == 1) {
+				$('#remove-result').addClass('d-none');
+
+			}
+
+		}
+
+
+
+
+        var indexEvaluation = $("#evaluations").children().length;
+		function addEvaluation() {
+			var txt1 =
+				`
+				<div class="form-group">
+										
+										<input placeholder="${indexEvaluation}" class="form-control" type="text" name="evaluation[${indexEvaluation}]">
+									</div>`;
+
+			$("#evaluations").children().last().after(txt1);
+			$('#remove-evaluation').removeClass('d-none');
+			   // Insert new elements after img
+               indexEvaluation++;
+		}
+		function removeEvaluation() {
+            console.log($("#evaluations").children().length);
+			if ($("#evaluations").children().length > 1) {
+				$('#evaluations').children().last().remove();
+				indexEvaluation = indexEvaluation - 1;;
+			}
+			if ($("#evaluations").children().length == 1) {
+				$('#remove-evaluation').addClass('d-none');
+
+			}
+
+		}
+
+
+
+
+
 
 		var s = true;
 		$("select.rankS").change(function () {
@@ -466,52 +608,7 @@ label {
 			$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 		});
 
-		var count4 = 2;
-        var indexFile = 1;
-		function addFile() {
-			var txt1 =
-				`	<div class=" col-md-6" >
-												<div class="form-group custom-file ">
-													<input type="file" class="custom-file-input" id="customFile"
-														name="filename[${indexFile}]">
-													<label class="custom-file-label" for="customFile">د پروګرام اړونده
-														فایل
-														انتخاب کړی</label>
-												</div>
-											</div>
-											<div class=" col-md-6 mb-3" id="">
-												<div class="form-group">
-													<select class="custom-select"
-														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="filetype[${indexFile}]">
-                                                        <option selected></option>
-                                    <option value="پریشینټېشن">پریشینټېشن</option>
-                                    <option value="وډیو">وډیو</option>
-                                    <option value="آډیو">آډیو</option>
-													</select>
-
-												</div>
-											</div>`;
-
-			$("#files").children().last().after(txt1);
-			$('#file-remover').removeClass('d-none');
-			count4++;   // Insert new elements after img
-            indexFile++;
-		}
-		function removeFile() {
-
-			if (count4 != 2) {
-				$('#files').children().last().remove();
-				$('#files').children().last().remove();
-
-				count4--;
-			}
-			if (count4 == 2) {
-				$('#file-remover').addClass('d-none');
-
-			}
-
-		}
-
+		
 
 		$( "#toggle_btn" ).click(function() {
             if($('#for').css('width') === '1100px' && $('#for').css('margin-right') === '140px')

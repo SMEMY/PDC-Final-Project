@@ -17,7 +17,7 @@ class eduprogramController extends Controller
     {
         $programs =  Eduprogram::orderBy('id', 'desc')->get();
         $path = '/educationalProgramList';
-        return view('list-educational-program', compact('programs', 'path'));
+        return view('pdc-list-all-educational-program', compact('programs', 'path'));
     }
 
     /**
@@ -75,7 +75,7 @@ class eduprogramController extends Controller
     {
         //
         $program = Eduprogram::find($id);
-        return view('educational-program-info', compact('program'));
+        return view('pdc-educational-program-info', compact('program'));
         
     }
     
@@ -89,7 +89,7 @@ class eduprogramController extends Controller
     {
         
         $program = Eduprogram::find($id);
-        return view('editEducationalProgram', compact('program'));
+        return view('pdc-edit-educational-program', compact('program'));
     }
 
     /**

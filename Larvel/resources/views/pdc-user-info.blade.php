@@ -10,6 +10,10 @@ h4 {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-size:30px !important;
 		}
+		#cards_headings h4{
+			font-size:25px !important;
+
+		}
         p, h5 {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-size: 20px !important;
@@ -25,8 +29,8 @@ h4 {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 
 		}
-		a:hover{
-			transform: scale(1.05);
+		#cards_headings a:hover{
+			transform: scale(1.04);
 			transition: all  0.2s;
 		}
 		#date, #address{
@@ -34,13 +38,16 @@ h4 {
 
 		}
 		#date:hover, #address:hover{
-			transform: scale(1.04);
+			transform: scale(1.02);
 			transition: all  0.2s;
 		}
 		#small li, #small a{
-			font-size: 17px !important;
+			font-size: 20px !important;
 			font-wieght: bold;
-			border-radius: 15px !important;
+			border-radius: 5px !important;
+		}
+		span{
+			font-weight: bold !important;
 		}
 @endsection
 
@@ -56,10 +63,20 @@ h4 {
 		<!-- Account Logo -->
 		
 		<!-- /Account Logo -->
-		<div class="row col-md-12">
+		<div class="row">
+			<div class="col-md-12">
+				<h4 class="text-center d-block rounded p-3 bg-info" style="font-weight: bold"><i class="pr-2 fa fa-"></i>د اړونده {{$name}} په اړه بشپړ معلومات</h4>
+			</div>
 			<div class="col-md-8">
-				<div class="job-info job-widget">
-				<h4 class="m-auto " style="width: fit-content"><i class="pr-2 fa fa-"></i>د اړونده {{$name}} په اړه بشپړ معلومات</h4>
+				<div class="job-info job-widget" style=" box-shadow:0px 0px 0px 1px #00beff; border-radius: 5px; ">
+								<div class="dropdown-file">
+									<a href="" class="dropdown-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a href="/{{$path}}/{{$userProfile[0]->id}}/edit" class="dropdown-item"><i class="fa fa-download m-r-5"></i>معلومات  اصلاح کول</a>
+										<a class="dropdown-item" href="/{{$path}}/{{$userProfile[0]->id}}" data-toggle="modal"
+											data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i>معلومات له منځه یې اوسی</a>
+									</div>
+								</div>
 					<br>
 					<br>
 					<ul class="job-post-det col-md-12">
@@ -81,19 +98,65 @@ h4 {
 				</div>
 				
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4" id="cards_headings">
 				
-				<div class="job-det-info job-widget" style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="small">
-					<h4 class="account-title">  معلومات ثبتول</h4>
-<br>
-					<a class="btn job-btn mt-3 p-2 " href="/facilitatorEnrolledPrograms/{{$userProfile[0]->program_id}}" >د {{$name}} پروګرامونه</a>
+				<div class="job-det-info job-widget" style=" box-shadow:0px 0px 0px 1px #00beff; border-radius: 5px; " id="small">
+					<h4 class="account-title">د {{$name}} اړونده کړني</h4>
+					@if($name !== 'ثبت سوی شخص')
+					<a class="btn job-btn mt-3 p-2 " href="/facilitatorEnrolledPrograms/{{$userProfile[0]->id}}" >د {{$name}} پروګرامونه</a>
+					@endif
 					<a class="btn job-btn mt-3 p-2 " href="/programEnrollmentForFacilitator/{{$userProfile[0]->id}}" > {{$name}} پروګرام ته شاملول</a>
 				</div>
 			</div>
 		</div>
 	</div>
 <!-- /Page Content -->
+<div class="modal custom-modal fade" id="delete_client" role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-body">
+							<div class="form-header">
+								<h3>ښاغلی/آغلې له منځه وړل</h3>
+								<p>آیا تاسي باوري یاست چي یاد کس له سیسټم څخه له منځه یوسي؟</p>
+							</div>
+							<div class="modal-btn delete-action">
+								<div class="row">
+									<div class="col-md-6">
+                          				<form action="" method="post" id="pathGetter">
+                            					{{ method_field('DELETE') }}
+                           						{{ csrf_field() }}
+                           					 <button type="submit" class="btn btn-primary continue-btn col-md-12">له منځه یې اوسی</button>
+                       					</form>
+									</div>
+									<div class="col-6">
+										<a href="javascript:void(0);" data-dismiss="modal"
+											class="btn btn-primary cancel-btn">قطعه یې کړی</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 </div>
 <!-- /Page Wrapper -->
 @endsection
+
+
+@section('custom-js')
+<script>
+		function pathFinder(num)
+					{
+						// console.log(num.href.split('/'));
+						// var fileArr = num.href.split('/');
+						// var fileArrlen = fileArr.length;
+						// var fileName = fileArr[fileArrlen - 1];
+						// // document.getElementById('file_name').value = fileName;
+						// console.log(fileName);
+						document.getElementById("pathGetter").action = num.href;
+
+					}
+</script>
+@endsection
+
 

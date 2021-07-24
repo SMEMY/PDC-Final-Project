@@ -73,7 +73,7 @@ class feedBackController extends Controller
             $questionAnswer->save();
         }
 
-        return "hahahaah SAVE!!!!";
+        return redirect('pdcProgramInfo/'.$request->program_id);
         
        
     }

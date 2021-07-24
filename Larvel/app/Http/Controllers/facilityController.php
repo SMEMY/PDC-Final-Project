@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Facility;
 
 use Illuminate\Http\Request;
 
@@ -35,6 +36,17 @@ class facilityController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'facility.*' => 'bail|required*|max:100',
+        ]);
+        for($index=0; $index<count($request->facility); $index++)
+        {
+            $facility = new Facility;
+            $facility->facility = $request->facility[$index];
+            $facility->program_id = $request->program_id;
+            $facility->save();
+        }
+        return redirect('pdcProgramInfo/'.$request->program_id);
     }
 
     /**
@@ -46,6 +58,8 @@ class facilityController extends Controller
     public function show($id)
     {
         //
+        $programID = $id;
+        return view('pdc-program-facility', compact('programID'));
     }
 
     /**

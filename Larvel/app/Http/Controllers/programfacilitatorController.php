@@ -28,9 +28,12 @@ class programfacilitatorController extends Controller
          $members =  DB::table('facilitatorsandparticipants')
         ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
         ->select('facilitatorsandparticipants.*')
+        ->distinct()
         ->get();
+        // return DB::table('facilitatorsandparticipants')->groupBy('phone_number')->having('Phone_number', '!=', '0008343043')->get();
         $path = 'facilitator';
-        return view('ListfacilitatorAndParticipant', compact('members', 'path'));
+        $searchPath = '/searchFacilitator';
+        return view('pdc-list-all-member', compact('members', 'path', 'searchPath'));
     }
 
     /**
@@ -52,12 +55,24 @@ class programfacilitatorController extends Controller
     public function store(Request $request)
     {
         //
-        $program =  Program::where('facilitator_code', $request->program_enrollment_code)->get();
-        $facilEnrollment = new Programsfacilitator;
-        $facilEnrollment->facilitator_id = $request->member_id;
-        $facilEnrollment->program_id = $program[0]->id;
-        $facilEnrollment->save();
-         return redirect('facilitatorProfile/'.$request->member_id);
+        if($request->path() === 'searchFacilitator'){
+            $members = DB::table('facilitatorsandparticipants')
+            ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
+            ->select('facilitatorsandparticipants.*')
+            ->where($request->search_type, $request->search_content)
+            ->get();
+           $path = 'facilitator';
+           $searchPath = '/searchFacilitator';
+           return view('ListfacilitatorAndParticipant', compact('members', 'path', 'searchPath'));
+        }
+        else{
+            $program =  Program::where('facilitator_code', $request->program_enrollment_code)->get();
+            $facilEnrollment = new Programsfacilitator;
+            $facilEnrollment->facilitator_id = $request->member_id;
+            $facilEnrollment->program_id = $program[0]->id;
+            $facilEnrollment->save();
+             return redirect('facilitatorProfile/'.$request->member_id);
+        }
     }
 
     /**
@@ -74,11 +89,23 @@ class programfacilitatorController extends Controller
         {
             $userProfile = DB::table('facilitatorsandparticipants')
             ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
-            ->select('facilitatorsandparticipants.*', 'programsfacilitators.program_id')
-            ->where('programsfacilitators.facilitator_id', $id)
+            ->select('facilitatorsandparticipants.*')
+            ->where('facilitatorsandparticipants.id', $id)
             ->get();
             $name = 'تسهیلونکی';
-            return view('pdc-user-info', compact('userProfile', 'name'));
+            $path = 'facilitatorList';
+            return view('pdc-user-info', compact('userProfile', 'name', 'path'));
+        }
+        elseif($request->path() === 'facilitatorProfileForProgram/'.$id)
+        {
+            $userProfile =  DB::table('facilitatorsandparticipants')
+            ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
+            ->select('facilitatorsandparticipants.*')
+            ->where('programsfacilitators.program_id', $id)
+            ->get();
+            $name = 'تسهیلونکی';
+            $program_id = $id;
+            return view('pdc-program-user-info', compact('userProfile', 'name', 'program_id'));
         }
          //facilitatorEnrolledPrograms
         elseif($request->path() === 'facilitatorEnrolledPrograms/'.$id)
@@ -118,11 +145,26 @@ class programfacilitatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
-        $facilitator = Facilitatorsandparticipant::find($id);
-        return view('editFacilitator', compact('facilitator'));
+        if($request->path() === 'facilitatorList/'.$id."/edit")
+        {
+        $member = Facilitatorsandparticipant::find($id);
+        $path = 'facilitatorList';
+        return view('pdc-edit-member', compact('member', 'path'));
+        }
+        elseif($request->path() === 'facilitatorProfileForProgram/'.$id."/edit")
+        {
+            $member = Facilitatorsandparticipant::find($id);
+            $program_id =  DB::table('facilitatorsandparticipants')
+            ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
+            ->select('programsfacilitators.program_id')
+            ->where('programsfacilitators.facilitator_id', $id)
+            ->get();
+            $path = 'facilitatorProfileForProgram';
+        return view('pdc-edit-member', compact('member', 'program_id', 'path'));
+        }
     }
 
     /**
@@ -154,7 +196,15 @@ class programfacilitatorController extends Controller
             $facilitator_participant->password = $request->password;
         }
         $facilitator_participant->save();
-        return redirect('facilitatorList');
+        if($request->path() === 'facilitatorList/'.$id)
+        {
+             return redirect('facilitatorList');
+        }
+        elseif($request->path() === 'facilitatorProfileForProgram/'.$id){
+            return redirect('facilitatorProfileForProgram/'.$request->program_id);
+
+        }
+       
 
     }
 
@@ -164,11 +214,23 @@ class programfacilitatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $deleteFacilitator = Facilitatorsandparticipant::find($id);
-        $deleteFacilitator->delete();
-        return redirect('facilitatorList');
+        if($request->path() === 'deleteFacilitatorForProgram/'.$id)
+        {
+            // return $id;
+            Programsfacilitator::
+            where([
+                ['facilitator_id', $id], 
+                ['program_id', $request->program_id]
+                ])
+            ->delete();
+            return redirect('facilitatorProfileForProgram/'.$id);
+        }
+        else{
+            $deleteFacilitator = Programsfacilitator::where('facilitator_id', $id)->delete();
+            return redirect('facilitatorList');
+        }
 
     //    $deleteParticipant = Programsfacilitator::where('facilitator_id', $id)->get();
     //     $deleteParticipant->delete();

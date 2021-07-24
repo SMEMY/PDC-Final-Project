@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Facilandpart;
+
+use Illuminate\Support\Facades\Hash;
+use App\Models\Facilitatorsandparticipant;
+use Illuminate\Support\Facades\DB;
 
 
 class facilitatorandparticipantController extends Controller
@@ -13,10 +16,38 @@ class facilitatorandparticipantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(request $request)
     {
-        
-
+        if($request->path() === 'memberList')
+        {
+            //  $facilitators =  DB::table('facilitatorsandparticipants')
+            // ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
+            // ->select('facilitatorsandparticipants.*')
+            // ->distinct()
+            // ->get();
+            // $participants =  DB::table('facilitatorsandparticipants')
+            // ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+            // ->select('facilitatorsandparticipants.*')
+            // ->distinct()
+            // ->get();
+            // $enrlledIDs = array();
+            // foreach($facilitators as $facilitator){
+            //     array_push( $enrlledIDs, $facilitator->id);
+            // }
+            // foreach($participants as  $participant){
+            //     array_push( $enrlledIDs, $participant->id);
+            // }
+            // $members = DB::table('facilitatorsandparticipants')
+            // ->select('facilitatorsandparticipants.*')
+            // ->whereNotIn('id', $enrlledIDs)
+            // ->get();
+            $members = Facilitatorsandparticipant::all();
+            // return $enrlledIDs;
+            // return DB::table('facilitatorsandparticipants')->groupBy('phone_number')->having('Phone_number', '!=', '0008343043')->get();
+            $path = 'member';
+            $searchPath = '/searchMember';
+            return view('pdc-list-all-member', compact('members', 'path', 'searchPath'));
+        }
 
         //
     }
@@ -40,35 +71,44 @@ class facilitatorandparticipantController extends Controller
     public function store(Request $request)
     {
         //
+        // $record = Facilitatorsandparticipant::find(10);
+        // if (Hash::check('۱۲۳', $record->password)) {
+        //     // The passwords match...
+        //     return "hahaha";
+        //  }
+        //  else{
+        //      return "woy";
+        //  }
+        if($request->path() === 'memberStore')
 
-        $facilitator_participant = new Facilandpart;
+        $member = new Facilitatorsandparticipant;
 
-        $facilitator_participant->name = $request->name;
-        $facilitator_participant->last_name = $request->last_name;
-        $facilitator_participant->phone_number = $request->phone_number;
-        $facilitator_participant->email = $request->email;
-        $facilitator_participant->gender = $request->gender;
-        $facilitator_participant->office_campus = $request->office_campus;
-        $facilitator_participant->office_building = $request->office_building;
-        $facilitator_participant->office_department = $request->office_department;
-        $facilitator_participant->office_position = $request->office_position;
-        $facilitator_participant->office_position_category = $request->office_position_category;
+        $member->name = $request->name;
+        $member->last_name = $request->last_name;
+        $member->phone_number = $request->phone_number;
+        $member->email = $request->email;
+        $member->gender = $request->gender;
+        $member->office_campus = $request->office_campus;
+        $member->office_building = $request->office_building;
+        $member->office_department = $request->office_department;
+        $member->office_position = $request->office_position;
+        $member->office_position_category = $request->office_position_category;
         if ( $request->educational_rank != null) {
-            $facilitator_participant->educational_rank = $request->educational_rank;
+            $member->educational_rank = $request->educational_rank;
         }
-        if ($request->password == $request->password_confirm) {
-            $facilitator_participant->password = $request->password;
+        if ($request->password === $request->password_confirm) {
+            $member->password = Hash::make($request->password);
         }
-        $facilitator_participant->save();
+        $member->save();
 
         // return "data saved";
         if($request->return === 'facilitator')
         {
-            return redirect('participantList');
+            return redirect('facilitatorList');
         }
         else if($request->return === 'participant')
         {
-            return redirect('facilitatorList');
+            return redirect('participantList');
 
         }
         else{
@@ -85,9 +125,16 @@ class facilitatorandparticipantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         //
+        if($request->path() === 'memberProfile/'.$id)
+        {
+            $userProfile = DB::table('facilitatorsandparticipants')->where('id', $id)->get();
+            $name  = 'ثبت سوی شخص';
+            $path = 'memberList';
+        return view('pdc-user-info', compact('userProfile', 'name', 'path'));
+        }
     }
 
     /**
@@ -96,10 +143,15 @@ class facilitatorandparticipantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
-       
+        if($request->path() === 'memberList/'.$id.'/edit')
+        {
+            $member = Facilitatorsandparticipant::find($id);
+            $path= 'member';
+            return view('pdc-edit-member', compact('member', 'path'));
+        }
     }
 
     /**
@@ -112,6 +164,29 @@ class facilitatorandparticipantController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if($request->path() === 'memberList/'.$id){
+            $member = Facilitatorsandparticipant::find($id);
+            // return $request->last_name;
+            $member->name = $request->name;
+            $member->last_name = $request->last_name;
+            $member->phone_number = $request->phone_number;
+            $member->email = $request->email;
+            $member->gender = $request->gender;
+            $member->office_campus = $request->office_campus;
+            $member->office_building = $request->office_building;
+            $member->office_department = $request->office_department;
+            $member->office_position = $request->office_position;
+            $member->office_position_category = $request->office_position_category;
+            if ( $request->educational_rank != null) {
+                $member->educational_rank = $request->educational_rank;
+            }
+            if ($request->password == $request->password_confirm) {
+                $member->password = $request->password;
+            }
+            $member->save();
+            return redirect('memberList');
+
+        }
     }
 
     /**
@@ -120,8 +195,13 @@ class facilitatorandparticipantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         //
+        if($request->path() === 'memberList/'.$id)
+        {
+            Facilitatorsandparticipant::find($id)->delete();
+            return redirect('memberList');
+        }
     }
 }

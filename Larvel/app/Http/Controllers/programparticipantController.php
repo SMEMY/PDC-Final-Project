@@ -22,10 +22,11 @@ class programparticipantController extends Controller
         $members =  DB::table('facilitatorsandparticipants')
         ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
         ->select('facilitatorsandparticipants.*')
+        ->distinct()
         ->get();
-
-        $path = 'participant';
-        return view('ListfacilitatorAndParticipant', compact('members', 'path'));
+        $searchPath = '/searchParticipant';
+        $path = 'participantList';
+        return view('pdc-list-all-member', compact('members', 'path', 'searchPath'));
     }
 
     /**
@@ -47,6 +48,16 @@ class programparticipantController extends Controller
     public function store(Request $request)
     {
         //
+        if($request->path() === 'searchParticipant'){
+            $members = DB::table('facilitatorsandparticipants')
+            ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+            ->select('facilitatorsandparticipants.*')
+            ->where($request->search_type, $request->search_content)
+            ->get();
+            $path = 'particiapnt';
+            $searchPath = '/searchParticipant';
+            return view('ListfacilitatorAndParticipant', compact('members', 'path', 'searchPath'));
+         }
     }
 
     /**
@@ -59,7 +70,18 @@ class programparticipantController extends Controller
     {
         //
         // return "alskdfjalfkdj";
-        if($request->path() === 'specificeProgramParticipants/'.$id)
+        if($request->path() === 'participantProfile/'.$id)
+        {
+            $userProfile = DB::table('facilitatorsandparticipants')
+            ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+            ->select('facilitatorsandparticipants.*')
+            ->where('facilitatorsandparticipants.id', $id)
+            ->get();
+            $name = 'ګډونوال';
+            $path = 'participantList';
+            return view('pdc-user-info', compact('userProfile', 'name', 'path'));
+        }
+        elseif($request->path() === 'specificeProgramParticipants/'.$id)
         {
             $participants = DB::table('facilitatorsandparticipants')
             ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
@@ -139,13 +161,16 @@ class programparticipantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
 
-        // return $id;
-        $participant = Facilitatorsandparticipant::find($id);
-        return view('editParticipant', compact('participant'));
+        if($request->path() === 'participantList/'.$id."/edit")
+        {
+        $member = Facilitatorsandparticipant::find($id);
+        $path = 'participant';
+        return view('pdc-edit-member', compact('member', 'path'));
+        }
     }
 
     /**

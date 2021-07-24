@@ -58,7 +58,7 @@
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-size:22px !important;
 			font-weight: bolder;
-			background:#98d9ff !important;
+			background:#98d9ff6e !important;
 			text-align: center !important;
 		}
 		#title{
@@ -90,17 +90,17 @@
 							
 							<div class="file-cont-wrap w-100">
 								<div class="file-cont-inner">
-									<div class="file-cont-header">
+									<div class="file-cont-header bg-info rounded">
 										<div class="file-options">
 										</div>
-										<span class="text-center mx-auto d-block" id="title">   {{$programMaterials->name}} پروګرام اړونده فایلونه  </span>
+										<span class="text-center mx-auto d-block " id="title">   {{$programMaterials->name}} پروګرام اړونده فایلونه  </span>
 									</div>
 									<div class="file-content">
 										
 										<div class="file-body">
 											<div class="file-scroll">
 												<div class="file-content-inner">
-													<h4 class="p-4">لکچرونه</h4>
+													<h4 class="p-4 rounded">لکچرونه</h4>
 													<div class="row">
 
 														@foreach($programMaterials->getMaterials as $material)
@@ -110,9 +110,9 @@
 																<div class="dropdown-file">
 																	<a href="" class="dropdown-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
 																	<div class="dropdown-menu dropdown-menu-right">
-																		<a href="{{ asset('storage/programFiles/'.$material->path) }}" class="dropdown-item">Download</a>
-																		<a href="#" class="dropdown-item">Rename</a>
-																		<a href="#" class="dropdown-item">Delete</a>
+																		<a href="/downloadMaterial/{{$material->path}}" class="dropdown-item"><i class="fa fa-download m-r-5"></i>Download</a>
+																		<a class="dropdown-item" href="/deleteMaterial/{{$material->path}}" data-toggle="modal"
+										data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 																	</div>
 																</div>
 																<div class="card-file-thumb">
@@ -130,7 +130,7 @@
 																</div>
 																<div class="card-body">
 																	<h6>{{$material->name}}</h6>
-																	<span class="float-right d-block">22.67kb</span>
+																	<span class="float-right d-block" dir="ltr">{{$material->size}} MB</span>
 																</div>
 															</div>
 														</div>
@@ -143,7 +143,7 @@
 													</div>
 
 
-													<h4 class="p-4 ">کتابونه</h4>
+													<h4 class="p-4 rounded">کتابونه</h4>
 													<div class="row">
 
 														@foreach($programMaterials->getMaterials as $material)
@@ -153,9 +153,9 @@
 																<div class="dropdown-file">
 																	<a href="" class="dropdown-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
 																	<div class="dropdown-menu dropdown-menu-right">
-																		<a href="{{ asset('storage/programFiles/'.$material->path) }}" class="dropdown-item">Download</a>
-																		<a href="#" class="dropdown-item">Rename</a>
-																		<a href="#" class="dropdown-item">Delete</a>
+																		<a href="/downloadMaterial/{{$material->path}}" class="dropdown-item"><i class="fa fa-download m-r-5"></i>Download</a>
+																		<a class="dropdown-item" href="/deleteMaterial/{{$material->path}}" data-toggle="modal"
+										data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 																	</div>
 																</div>
 																<div class="card-file-thumb">
@@ -166,7 +166,7 @@
 																</div>
 																<div class="card-body">
 																	<h6>{{$material->name}}</h6>
-																	<span class="float-right d-block">22.67kb</span>
+																	<span class="float-right d-block" dir="ltr">{{$material->size}} MB</span>
 																</div>
 															</div>
 														</div>
@@ -176,7 +176,7 @@
 
 
 
-													<h4 class="p-4">انځورونه</h4>
+													<h4 class="p-4 rounded">انځورونه</h4>
 													<div class="row">
 
 														@foreach($programMaterials->getMaterials as $material)
@@ -186,9 +186,9 @@
 																<div class="dropdown-file">
 																	<a href="" class="dropdown-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
 																	<div class="dropdown-menu dropdown-menu-right">
-																		<a href="{{ asset('storage/programFiles/'.$material->path) }}" class="dropdown-item">Download</a>
-																		<a href="#" class="dropdown-item">Rename</a>
-																		<a href="#" class="dropdown-item">Delete</a>
+																		<a href="/downloadMaterial/{{$material->path}}" class="dropdown-item"><i class="fa fa-download m-r-5"></i>Download</a>
+																		<a class="dropdown-item" href="/deleteMaterial/{{$material->path}}" data-toggle="modal"
+										data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 																	</div>
 																</div>
 																<div class="card-file-thumb">
@@ -199,7 +199,7 @@
 																</div>
 																<div class="card-body">
 																	<h6>{{$material->name}}</h6>
-																	<span class="float-right d-block">22.67kb</span>
+																	<span class="float-right d-block" dir="ltr">{{$material->size}} MB </span>
 																</div>
 															</div>
 														</div>
@@ -209,7 +209,7 @@
 
 
 
-													<h4 class="p-4">وډیوکاني</h4>
+													<h4 class="p-4 rounded">وډیوکاني</h4>
 													<div class="row">
 
 														@foreach($programMaterials->getMaterials as $material)
@@ -219,9 +219,9 @@
 																<div class="dropdown-file">
 																	<a href="" class="dropdown-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
 																	<div class="dropdown-menu dropdown-menu-right">
-																		<a href="{{ asset('storage/programFiles/'.$material->path) }}" class="dropdown-item">Download</a>
-																		<a href="#" class="dropdown-item">Rename</a>
-																		<a href="#" class="dropdown-item">Delete</a>
+																		<a href="/downloadMaterial/{{$material->path}}" class="dropdown-item"><i class="fa fa-download m-r-5"></i>Download</a>
+																		<a class="dropdown-item" href="/deleteMaterial/{{$material->path}}" data-toggle="modal"
+										data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 																	</div>
 																</div>
 																<div class="card-file-thumb">
@@ -232,14 +232,15 @@
 																</div>
 																<div class="card-body">
 																	<h6>{{$material->name}}</h6>
-																	<span class="float-right d-block">22.67kb</span>
+																	<!-- <video src="{{ asset('storage/programFiles/'.$material->path) }}" controls></video> -->
+																	<span class="float-right d-block" dir="ltr">{{$material->size}} MB </span>
 																</div>
 															</div>
 														</div>
 														@endif
 														@endforeach
 													</div>
-													<h4 class="p-4">آډیو ګاني</h4>
+													<h4 class="p-4 rounded">آډیو ګاني</h4>
 													<div class="row">
 
 														@foreach($programMaterials->getMaterials as $material)
@@ -249,9 +250,9 @@
 																<div class="dropdown-file">
 																	<a href="" class="dropdown-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
 																	<div class="dropdown-menu dropdown-menu-right">
-																		<a href="{{ asset('storage/programFiles/'.$material->path) }}" class="dropdown-item">Download</a>
-																		<a href="#" class="dropdown-item">Rename</a>
-																		<a href="#" class="dropdown-item">Delete</a>
+																		<a href="/downloadMaterial/{{$material->path}}" class="dropdown-item"><i class="fa fa-download m-r-5"></i>Download</a>
+																		<a class="dropdown-item" href="/deleteMaterial/{{$material->path}}" data-toggle="modal"
+										data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 																	</div>
 																</div>
 																<div class="card-file-thumb">
@@ -262,7 +263,7 @@
 																</div>
 																<div class="card-body">
 																	<h6>{{$material->name}}</h6>
-																	<span class="float-right d-block">22.67kb</span>
+																	<span class="float-right d-block" dir="ltr">{{$material->size}} MB </span>
 																</div>
 															</div>
 														</div>
@@ -281,6 +282,36 @@
 
 			</div>
 			<!-- /Page Content -->
+			<!-- Delete Client Modal -->
+			<div class="modal custom-modal fade" id="delete_client" role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-body">
+							<div class="form-header">
+								<h3>ښاغلی/آغلې له منځه وړل</h3>
+								<p>آیا تاسي باوري یاست چي یاد کس له سیسټم څخه له منځه یوسي؟</p>
+							</div>
+							<div class="modal-btn delete-action">
+								<div class="row">
+									<div class="col-md-6">
+                          				<form action="" method="post" id="pathGetter">
+                            					{{ method_field('DELETE') }}
+                           						{{ csrf_field() }}
+												   <input class="d-none" type="number" name="program_id" id="file_name" value="{{$program_id}}">
+                           					 <button type="submit" class="btn btn-primary continue-btn col-md-12">له منځه یې اوسی</button>
+                       					</form>
+									</div>
+									<div class="col-6">
+										<a href="javascript:void(0);" data-dismiss="modal"
+											class="btn btn-primary cancel-btn">قطعه یې کړی</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Delete Client Modal -->
 
 		</div>
 		<!-- /Page Wrapper -->
@@ -288,26 +319,39 @@
 	</div>
 	<!-- /Main Wrapper -->
 
-	<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
-    <!-- Bootstrap Core JS -->
-    <script src="{{asset('assets/js/popper.min.js')}}"></script>
-    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-    <!-- Slimscroll JS -->
-    <script src="{{asset('assets/js/jquery.slimscroll.min.js')}}"></script>
-    <!-- Chart JS -->
-    <script src="{{asset('assets/plugins/morris/morris.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/raphael/raphael.min.js')}}"></script>
-    <script src="{{asset('assets/js/chart.js')}}"></script>
-    <!-- Custom JS -->
-    <script src="{{asset('assets/js/app.js')}}"></script>
-    <!-- Datetimepicker JS -->
-    <script src="assets/js/moment.min.js"></script>
-    <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-    <!-- Select2 JS -->
-    <script src="assets/js/select2.min.js"></script>
-    <!-- Tagsinput JS -->
-    <script src="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+		<!-- jQuery -->
+		<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+	<!-- Bootstrap Core JS -->
+	<script src="{{asset('assets/js/popper.min.js')}}"></script>
+	<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+	<!-- Slimscroll JS -->
+	<script src="{{asset('assets/js/jquery.slimscroll.min.js')}}"></script>
+	<!-- Chart JS -->
+	<script src="{{asset('assets/plugins/morris/morris.min.js')}}"></script>
+	<script src="{{asset('assets/plugins/raphael/raphael.min.js')}}"></script>
+	<script src="{{asset('assets/js/chart.js')}}"></script>
+	<!-- Custom JS -->
+	<script src="{{asset('assets/js/app.js')}}"></script>
+	<!-- Datetimepicker JS -->
+	<script src="{{asset('assets/js/moment.min.js')}}"></script>
+	<script src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
+	<!-- Select2 JS -->
+	<script src="{{asset('assets/js/select2.min.js')}}"></script>
+	<!-- Tagsinput JS -->
+	<script src="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}"></script>
+		<script>
+				function pathFinder(num)
+					{
+						// console.log(num.href.split('/'));
+						// var fileArr = num.href.split('/');
+						// var fileArrlen = fileArr.length;
+						// var fileName = fileArr[fileArrlen - 1];
+						// // document.getElementById('file_name').value = fileName;
+						// console.log(fileName);
+						document.getElementById("pathGetter").action = num.href;
 
+					}
+		</script>
 </body>
 
 </html>
