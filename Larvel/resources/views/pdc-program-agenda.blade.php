@@ -53,9 +53,18 @@
 			span{
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			}
-			textarea {
+			textarea{
 			background: #f0fcff !important;
-		}
+            max-height: 200px; !important;
+            min-height: 44px; !important;
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			font-size: 20px !important;
+			color: black !important;
+			}
+			#alertMassege li{
+				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+					font-size: 20px !important;
+			}
 		</style>
 </head>
 
@@ -87,6 +96,17 @@
 								{{ method_field('POST') }}
                             	{{ csrf_field() }}
 								<input class="d-none" type="text" value="{{$programID}}" name='program_id'>
+									@if ($errors->any())
+										<div class="mb-2" id="alertMassege">
+											<ul style="list-style-type:none" class="p-0 m-0">
+												@foreach ($errors->all() as $error)
+												<li class="rounded p-2 m-1 alert alert-danger" >
+													{{ $error }}
+												</li>
+												@endforeach
+											</ul>
+										</div>
+									@endif
                                     <div class="row" id="files">
                                         <div class="input-group col-12">
                                             <div class="input-group-prepend">

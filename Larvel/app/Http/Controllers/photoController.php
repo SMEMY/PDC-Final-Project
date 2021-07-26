@@ -38,28 +38,24 @@ class photoController extends Controller
         // return count($request->image);
         // return $photos = $request->file('image');
         $request->validate([
-            'image' => 'required',
-            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
-        ]);
-      
-        foreach($request->file('image') as $photo)
+            'photo' => 'required',
+            'photo.*' => 'mimes:jpeg,jpg,png,gif,csv|max:10240',
+          ]);
+        // $request->validate([
+        //     'photo.*' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
+        // ]);
+
+        foreach($request->file('photo') as $photo)
         {
-            if( !empty( $photo ) && is_uploaded_file( $photo ) )
-            {     
-                echo $imageName = time().'.'.$photo->extension();
-                echo "<br>"; 
+                $imageName = time().'.'.$photo->extension();
                 $photo->storeAs('public/images', $imageName);
                 sleep(1);   
                 $imageSave = new Photo;
                 $imageSave->program_id = $request->program_id;
                 $imageSave->path = $imageName;
                 $imageSave->save();
-            }
-            else{
-                echo "error!";
-            }
         }
-        return redirect('pdcProgramInfo/'.$request->program_id);
+        return redirect('pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده تفرقې په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**

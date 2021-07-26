@@ -31,6 +31,7 @@ h4 {
 			color: black !important;
 
 		}
+	
         h3 {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			color: black !important;
@@ -71,6 +72,8 @@ h4 {
 		}
 		#images ul{
 		}
+		
+        
 		
 @endsection
 
@@ -314,7 +317,23 @@ h4 {
 <!-- /Page Wrapper -->
 @endsection
 
-@section('custom-js')
+		@section('custom-js')
+		@if(Session::has('program_part_added'))
+            <script>
+            swal('ډېر ښه!',"{!! Session::get('program_part_added') !!}", "success", {
+                button: "مننه",
+            });
+            </script>
+        @endif
+		@section('custom-js')
+		@if(Session::has('warn'))
+            <script>
+            swal('وبخښئ!',"{!! Session::get('warn') !!}", "warning", {
+                button: "وروسته کوښښ وکړئ",
+            });
+            </script>
+        @endif
+	
 <script>
 		function pathFinder(num)
 					{

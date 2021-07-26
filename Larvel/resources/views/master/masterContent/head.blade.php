@@ -55,6 +55,18 @@
 
 			}
             
+			.swal-modal div{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
+        }
+		.swal-text{
+			text-align: right;
+
+		}
+		.swal-modal{
+			padding: 20px 24px;
+    		width: 600px;
+		}
             @yield('custom-css')
     </style>
 </head>

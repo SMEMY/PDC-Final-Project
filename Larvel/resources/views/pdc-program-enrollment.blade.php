@@ -10,12 +10,13 @@
 	<meta name="author" content="Dreamguys - Bootstrap Admin Template">
 	<meta name="robots" content="noindex, nofollow">
 	<title>@yield('page-title')</title>
-
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+
+<!-- bootstrao growl js -->
 
 <!-- Fontawesome CSS -->
 <link  href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -60,6 +61,14 @@
 		input:focus {
 			border-color: #00c5fb !important;
 		}
+		.swal-modal div{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
+        }
+		.swal-text{
+			text-align: right;
+
+		}
 	</style>
 </head>
 
@@ -83,11 +92,12 @@
 						<!-- <p class="account-subtitle"></p> -->
 						<hr !important>
 						<!-- Account Form -->
-						<form action="/programEnrollmentForFacilitator" method="post">
+						<form action="/memberEnrollmentForProgram" method="post">
 							@csrf
 							<div class="form-group col-md-10 m-auto p-5">
 								<!-- <label>نوم</label> -->
-								<input class="d-none" type="number" placeholder="" value="{{$facilitator_id}}" name="member_id">
+								<input class="d-none" type="number" placeholder="" value="{{$member_id}}" name="member_id">
+								<input class="d-none" type="text" placeholder="" value="{{$user_address}}" name="user_address">
 								<input class="form-control text-center" type="text" placeholder="" name="program_enrollment_code">
 							</div>
 
@@ -107,8 +117,8 @@
 	</div>
 	<!-- /Main Wrapper -->
 
-	<!-- jQuery -->
-	<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+		<!-- jQuery -->
+		<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
 	<!-- Bootstrap Core JS -->
 	<script src="{{asset('assets/js/popper.min.js')}}"></script>
 	<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
@@ -127,8 +137,18 @@
 	<script src="{{asset('assets/js/select2.min.js')}}"></script>
 	<!-- Tagsinput JS -->
 	<script src="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}"></script>
+	<!-- bootstrap growl js -->
+	<script src="{{asset('assets/growl/jquery.bootstrap-growl.min.js')}}"></script>
+<!-- sweet alert -->
+<script src="{{asset('assets/sweet-alert/sweetalert.min.js')}}"></script>
 
-
+	 	@if(Session::has('program_code_not_found'))
+            <script>
+            swal('وبخښئ!',"{!! Session::get('program_code_not_found') !!}", "warning", {
+                button: "بیا ځلي کوښښ وکړئ",
+            });
+            </script>
+        @endif
 </body>
 
 </html>

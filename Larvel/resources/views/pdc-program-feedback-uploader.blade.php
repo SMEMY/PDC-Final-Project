@@ -80,10 +80,21 @@ h4 {
 								<h4 class="card-title mb-0">د اړونده پروګرام د کیفیت لپاره پوښټنلیک رامنځته کړی</h4>
 							</div>
 							<div class="card-body">
-								<form action="feedbackFormInsertion" method="POST">
+								<form action="/feedbackFormInsertion" method="POST">
 								{{ method_field('POST') }}
                             	{{ csrf_field() }}
 								<input class="d-none" type="text" name="program_id" id="" value="{{$programID}}">
+									@if ($errors->any())
+										<div class="mb-2" id="alertMassege">
+											<ul style="list-style-type:none" class="p-0 m-0">
+												@foreach ($errors->all() as $error)
+												<li class="rounded p-2 m-1 alert alert-danger" >
+													{{ $error }}
+												</li>
+												@endforeach
+											</ul>
+										</div>
+									@endif
                                     <div class="row" id="files">
                                         <div class="form-group col-md-12">
                                             <input type="text" class="form-control "  placeholder="پوښتنه ولیکی" name="feedback_question[0]">

@@ -67,10 +67,16 @@
         }
         p {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-            max-width: 1030px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            width: 400px !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+        #foot li{
+            font-size:14px;
+            background: #ffffff7a;
+            padding:8px;
+            border-radius:5px;
         }
     </style>
 </head>
@@ -121,11 +127,11 @@
                             </div>
                         
                         </div>
-                        <div class="job-list-footer" style="background:#bde3fdc7;">
+                        <div class="job-list-footer p-2" style="background:#bde3fdc7;" id="foot">
                             <ul>
-                                <li class="mb-2 ml-3"><i class="fa fa-map-signs text-info"></i> <strong>ادرس: </strong>{{ $program->campus_name }}</li>
-                                <li class="mb-2 ml-3"><i class="fa fa-money text-info"></i> <strong>د پروګرام فیس: </strong>{{ $program->fee }} {{ $program->fee_type }}</li>
-                                <li class="mb-2 ml-3"><i class="fa fa-clock-o text-info"></i> <strong>د پروګرام دوام: </strong>{{ $program->days_duration }} ورځي</li>
+                                <li class="ml-1 text-dark d-inline-block"><i class="fa fa-map-signs text-info"></i> <strong>ادرس: </strong>{{ $program->campus_name }}</li>
+                                <li class="ml-2 text-dark d-inline-block"><i class="fa fa-money text-info"></i> <strong>د پروګرام فیس: </strong>{{ $program->fee }} {{ $program->fee_type }}</li>
+                                <li class="ml-2 text-dark d-inline-block"><i class="fa fa-clock-o text-info"></i> <strong>د پروګرام دوام: </strong>{{ $program->days_duration }} ورځي</li>
                             </ul>
                         </div>
                     </a>

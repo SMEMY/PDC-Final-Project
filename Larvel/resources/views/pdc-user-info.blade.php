@@ -103,9 +103,9 @@ h4 {
 				<div class="job-det-info job-widget" style=" box-shadow:0px 0px 0px 1px #00beff; border-radius: 5px; " id="small">
 					<h4 class="account-title">د {{$name}} اړونده کړني</h4>
 					@if($name !== 'ثبت سوی شخص')
-					<a class="btn job-btn mt-3 p-2 " href="/facilitatorEnrolledPrograms/{{$userProfile[0]->id}}" >د {{$name}} پروګرامونه</a>
+					<a class="btn job-btn mt-3 p-2 " href="/{{$user_request}}EnrolledPrograms/{{$userProfile[0]->id}}" >د {{$name}} پروګرامونه</a>
 					@endif
-					<a class="btn job-btn mt-3 p-2 " href="/programEnrollmentForFacilitator/{{$userProfile[0]->id}}" > {{$name}} پروګرام ته شاملول</a>
+					<a class="btn job-btn mt-3 p-2 " href="/{{$user_request}}EnrollmentForProgram/{{$userProfile[0]->id}}" > {{$name}} پروګرام ته شاملول</a>
 				</div>
 			</div>
 		</div>

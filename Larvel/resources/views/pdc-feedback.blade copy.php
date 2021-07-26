@@ -79,10 +79,10 @@
             border: 1px solid #e3e3e3 !important;
 
         }
-        select:hover{
-            /* background-color: black !important; */
+select:hover{
+    /* background-color: black !important; */
 
-        }
+}
         select:focus {
             box-shadow: 0px 0px 15px #c7f5ff !important;
     /* background-color: black !important; */
@@ -97,36 +97,6 @@
             background: #f0fcff !important;
 
             font-size: 23px !important;
-        }
-        #edit a{
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-            font-size: 15px !important;
-        }
-        .dropdown.profile-action{
-            position: relative !important;
-            top: 42px;
-        }
-        #edit1{
-            top: 13px !important;
-        }
-        .swal-modal div{
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-            font-size: 20px !important;
-        }
-		.swal-text{
-			text-align: right;
-
-		}
-		.swal-modal{
-			padding: 20px 24px;
-    		width: 600px;
-		}
-        #alertMassege{
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-            font-size: 30px !important;
-        }
-        .bg-primary, .badge-primary{
-            background-color:#00c5fb2b !important;
         }
     </style>
 
@@ -148,145 +118,168 @@
                 <!-- /Account Logo -->
 
                 <div class="account-box border board-danger" style="width: 1000px;">
-                @if(count($comments) !== 0 || count($locations) !== 0 || count($facilities) !== 0 || count($materials) !== 0)
-                   
-                    <div class="dropdown dropdown-action profile-action" id="edit1">
-                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                                class="material-icons">more_vert</i></a>
-                        <div class="dropdown-menu dropdown-menu-left">
-                            <a class="dropdown-item" href="/feedback/{{$program_id}}/edit"  ><i
-                                    class="fa fa-pencil m-r-5"></i>معلومات اصلاح کړی</a>
-                        </div>
-                    </div>
-                @endif
                     <div class="account-wrapper" style="">
                         <h3 class="account-title" style=" font-size: 35px">د پروګرام اړونده پوښتنلیک</h3>
-                        <!-- <h4 class="mt-5 mb-5">د مهربانی له مخي په لاندي درکړل سوي لیسټ کي سوالونه په (X) سره په نښه کړئ! -->
+                        <h4 class="mt-5 mb-5">د مهربانی له مخي په لاندي درکړل سوي لیسټ کي سوالونه په (X) سره په نښه کړئ!
                         </h4>
                         <hr>
-                        @if( count($materials) !== 0)
-                            <h4 class="bg-primary p-3 rounded text-center" style=" font-size: 25px;"> <strong> د
+                        <!-- <p class="account-subtitle"></p> -->
+
+                        <!-- Account Form -->
+                        <form action="/feedback" method="POST">
+                            {{ method_field('POST') }}
+                            {{ csrf_field() }}
+
+                            <input class="d-none" type="text" name="program_id" id="" value="{{$program_id}}">
+                            <input class="d-none" type="text" name="feedback_form_id" id="" value="{{$materials[0]->feedbackFormId}}">
+
+                            <h4 class="" style="margin:30px auto; font-size: 30px;width: fit-content;"> <strong> د
                                     ورکشاپ/ټرېنینګ مواد</strong></h4>
+
                             @foreach($materials as $material)
-                            <div class="row mb-0" style="border-bottom:1px solid rgba(0,0,0,.1) !important;">
-                                <div class="col-md-12">
+                            @if( $material->question_category === 'د ورکشاپ/ټرېنینګ مواد')
+
+                            <div class="row mb-5" style="border-bottom:1px solid rgba(0,0,0,.1) !important;">
+                                <div class="col-md-9">
                                     <div class="">
                                         <div class="form-group mb-2">
                                             <input class="d-none" type="text" name="materials[{{$loop->index}}]" id=""
-                                            value="{{$material->id}}">
-                                            <div class="dropdown dropdown-action profile-action" id="edit">
-                                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                                                        class="material-icons">more_vert</i></a>
-                                                <div class="dropdown-menu dropdown-menu-left">
-                                                    <a class="dropdown-item" href="/deleteQuestion/{{$material->id}}"><i class="fa fa-trash-o m-r-5"></i>یاده پوښتنه له سیسټم څخه له منځه یوسی</a>
-                                                </div>
-                                            </div>
-                                            <p class="mb-0 p-2 " style="background:#d7e5ff6e;border-radius:5px;">( {{$loop->iteration}} ) <i class="fa fa-hand-o-left"></i> 
-                                            {{$material->question}}
-                                             </p>
+                                                value="{{$material->id}}">
+                                            <p class="mb-0 p-3 " style="background:#d7e5ff;border-radius:5px;"><i
+                                                    class="fa fa-hand-o-left"></i> {{$material->question}} </p>
                                         </div>
                                     </div>
 
                                 </div>
+                                <div class="mb-5 col-md-3 pb-3">
+                                    <select class="custom-select" name="materials_answer[{{$loop->index}}]" onchange="colorChanger(this)">
+                                        <!-- <option selected=""></option> -->
+                                        <option>ځواب انتخاب کړئ</option>
+                                        <option value="بد">بد</option>
+                                        <option value="متوسط">متوسط</option>
+                                        <option value="ښه">ښه</option>
+                                        <option value="ډېر ښه">ډېرښه</option>
+                                    </select>
+                                </div>
                                 <hr>
                             </div>
+                            @endif
                             @endforeach
-                        @endif
-                        @if( count($facilities) !== 0)
-                            <h4 class="bg-primary p-3 rounded text-center mt-3" style=" font-size: 25px;"> <strong>
+                            <h4 class="" style="margin:30px auto; font-size: 30px;    width: fit-content"> <strong>
                                     آســـــــــــــــانتیـــــــــــــــاوي</strong></h4>
+
                             @foreach($facilities as $facility)
-                            <div class="row mb-0" style="border-bottom:1px solid rgba(0,0,0,.1) !important;">
-                                <div class="col-md-12">
+                            @if( $facility->question_category === 'آسانتیاوي')
+
+                            <div class="row mb-5" style="border-bottom:1px solid rgba(0,0,0,.1) !important;">
+                                <div class="col-md-9">
                                     <div class="">
                                         <div class="form-group mb-2">
                                             <input class="d-none" type="text" name="facilities[{{$loop->index}}]" id=""
                                                 value="{{$facility->id}}">
-                                                <div class="dropdown dropdown-action profile-action" id="edit">
-                                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                                                            class="material-icons">more_vert</i></a>
-                                                    <div class="dropdown-menu dropdown-menu-left">
-                                                        <a class="dropdown-item" href="/deleteQuestion/{{$facility->id}}"><i class="fa fa-trash-o m-r-5"></i>یاده پوښتنه له سیسټم څخه له منځه یوسی</a>
-                                                    </div>
-                                                </div>
-                                            <p class="mb-0 p-2 " style="background:#d7e5ff6e;border-radius:5px;">( {{$loop->iteration}} ) <i
+                                            <p class="mb-0 p-3 " style="background:#d7e5ff;border-radius:5px;"><i
                                                     class="fa fa-hand-o-left"></i> {{$facility->question}} </p>
                                         </div>
                                     </div>
 
                                 </div>
+                                <div class="mb-5 col-md-3 pb-3">
+                                    <select class="custom-select" name="facilities_answer[{{$loop->index}}]" onchange="colorChanger(this)">
+                                        <!-- <option selected=""></option> -->
+                                        <option>ځواب انتخاب کړئ</option>
+                                        <option value="بد">بد</option>
+                                        <option value="متوسط">متوسط</option>
+                                        <option value="ښه">ښه</option>
+                                        <option value="ډېر ښه">ډېرښه</option>
+                                    </select>
+                                </div>
                                 <hr>
                             </div>
+                            @endif
                             @endforeach
-                        @endif
-                        @if( count($locations) !== 0)
-                            <h4 class="bg-primary p-3 rounded text-center mt-3" style=" font-size: 25px;"> <strong>
+
+                            <h4 class="" style="margin:30px auto; font-size: 30px;    width: fit-content"> <strong>
                                     ځـــــــــاي</strong></h4>
+
                             @foreach($locations as $location)
-                            <div class="row mb-0" style="border-bottom:1px solid rgba(0,0,0,.1) !important;">
-                                <div class="col-md-12">
+                            @if( $location->question_category === 'ځاي')
+
+                            <div class="row mb-5" style="border-bottom:1px solid rgba(0,0,0,.1) !important;">
+                                <div class="col-md-9">
                                     <div class="">
                                         <div class="form-group mb-2">
                                             <input class="d-none" type="text" name="locations[{{$loop->index}}]" id=""
                                                 value="{{$location->id}}">
-                                                <div class="dropdown dropdown-action profile-action" id="edit">
-                                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                                                            class="material-icons">more_vert</i></a>
-                                                    <div class="dropdown-menu dropdown-menu-left">
-                                                        <a class="dropdown-item" href="/deleteQuestion/{{$location->id}}"><i class="fa fa-trash-o m-r-5"></i>یاده پوښتنه له سیسټم څخه له منځه یوسی</a>
-                                                    </div>
-                                                </div>
-                                            <p class="mb-0 p-2 " style="background:#d7e5ff6e;border-radius:5px;">( {{$loop->iteration}} ) <i
+                                            <p class="mb-0 p-3 " style="background:#d7e5ff;border-radius:5px;"><i
                                                     class="fa fa-hand-o-left"></i> {{$location->question}} </p>
                                         </div>
                                     </div>
 
                                 </div>
+                                <div class="mb-5 col-md-3 pb-3">
+                                    <select class="custom-select" name="locations_answer[{{$loop->index}}]" onchange="colorChanger(this)">
+                                        <!-- <option selected=""></option> -->
+                                        <option>ځواب انتخاب کړئ</option>
+                                        <option value="بد">بد</option>
+                                        <option value="متوسط">متوسط</option>
+                                        <option value="ښه">ښه</option>
+                                        <option value="ډېر ښه">ډېرښه</option>
+                                    </select>
+                                </div>
                                 <hr>
                             </div>
+                            @endif
                             @endforeach
-                        @endif
-                            
-                            @if( count($comments) !== 0)
-                            <h4 class="bg-primary p-3 rounded text-center mt-3" style=" font-size: 25px;"> <strong>
+
+                            <h4 class="" style="margin:30px auto; font-size: 30px;    width: fit-content"> <strong>
                                     عمومي نظر</strong></h4>
+
                             @foreach($comments as $comment)
-                            <div class="row mb-0" style="border-bottom:1px solid rgba(0,0,0,.1) !important;">
-                                <div class="col-md-12">
+                            @if( $comment->question_category === 'عمومي نظر')
+
+                            <div class="row mb-5" style="border-bottom:1px solid rgba(0,0,0,.1) !important;">
+                                <div class="col-md-9">
                                     <div class="">
                                         <div class="form-group mb-2">
                                             <input class="d-none" type="text" name="opinions[{{$loop->index}}]" id=""
                                                 value="{{$comment->id}}">
-                                                <div class="dropdown dropdown-action profile-action" id="edit">
-                                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                                                            class="material-icons">more_vert</i></a>
-                                                    <div class="dropdown-menu dropdown-menu-left">
-                                                        <a class="dropdown-item" href="/deleteQuestion/{{$comment->id}}"><i class="fa fa-trash-o m-r-5"></i>یاده پوښتنه له سیسټم څخه له منځه یوسی</a>
-                                                    </div>
-                                                </div>
-                                            <p class="mb-0 p-2 " style="background:#d7e5ff6e;border-radius:5px;">( {{$loop->iteration}} ) <i
+                                            <p class="mb-0 p-3 " style="background:#d7e5ff;border-radius:5px;"><i
                                                     class="fa fa-hand-o-left"></i> {{$comment->question}} </p>
                                         </div>
                                     </div>
 
                                 </div>
+                                <div class="mb-3 col-md-3 pb-3">
+                                    <select class="custom-select" name="opinions_answer[{{$loop->index}}]" onchange="colorChanger(this)">
+                                        <!-- <option selected=""></option> -->
+                                        <option>ځواب انتخاب کړئ</option>
+                                        <option value="بد">بد</option>
+                                        <option value="متوسط">متوسط</option>
+                                        <option value="ښه">ښه</option>
+                                        <option value="ډېر ښه">ډېرښه</option>
+                                    </select>
+                                </div>
                                 <hr>
                             </div>
+                            @endif
                             @endforeach
-                        @endif
-                        @if(count($comments) === 0 && count($locations) === 0 && count($facilities) === 0 && count($materials) === 0)
-                   
-                            <div class="mb-5" id="alertMassege">
-                               
-                                    <div class="rounded p-5 m-1 alert alert-danger text-center" >
-                                       د یاد پروګرام لپاره پوښتنلیک شتون نلري!
+                            <div class="row mt-5">
+                                <div class="input-group col-md-12">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">د پروګرام په اړه معلومات</span>
                                     </div>
-                                   
-                                    
-                                </ul>
+                                    <textarea class="form-control" style="height: 100px;" aria-label="With textarea"
+                                        name="comment"></textarea>
+                                </div>
                             </div>
-                        
-                        @endif
+                            <div class="mt-4"></div>
+                            <div class="form-group text-center col-md-4  m-auto">
+                                <button class="btn btn-primary  account-btn col-md-12" type="submit">پوښتنلیک
+                                    واستوی</button>
+                            </div>
+                        </form>
+                        <!-- /Account Form -->
+
                     </div>
                 </div>
             </div>
@@ -314,29 +307,6 @@
     <script src="{{asset('assets/js/select2.min.js')}}"></script>
     <!-- Tagsinput JS -->
     <script src="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}"></script>
-    <!-- sweet alert -->
-<script src="{{asset('assets/sweet-alert/sweetalert.min.js')}}"></script>
-		@if(Session::has('feedback_edited'))
-            <script>
-            swal('ډېر ښه!',"{!! Session::get('feedback_edited') !!}", "success", {
-                button: "مننه",
-            });
-            </script>
-        @endif
-        @if(Session::has('question_deleted'))
-            <script>
-            swal('ډېر ښه!',"{!! Session::get('question_deleted') !!}", "success", {
-                button: "مننه",
-            });
-            </script>
-        @endif
-        @if(Session::has('question_not_found'))
-            <script>
-            swal(' وبخښئ!',"{!! Session::get('question_not_found') !!}", "warning", {
-                button: "بیاځلي امتحان کړی",
-            });
-            </script>
-        @endif
     <script>
 
 
