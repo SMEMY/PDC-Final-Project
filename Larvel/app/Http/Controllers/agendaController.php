@@ -36,6 +36,9 @@ class agendaController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'agenda.*' => 'bail|required|max:100',
+        ]);
         for($index=0; $index<count($request->agenda); $index++)
         {
             $agenda = new Agenda;
@@ -43,7 +46,7 @@ class agendaController extends Controller
             $agenda->program_id = $request->program_id;
             $agenda->save();
         }
-        return redirect('pdcProgramInfo/'.$request->program_id);
+        return redirect('pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده اجنډاوي په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**

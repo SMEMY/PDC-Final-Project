@@ -48,6 +48,8 @@ label {
 			background: #f0fcff !important;
             max-height: 200px; !important;
             min-height: 44px; !important;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
 		}
 		#for{
 			transition:all 0.3s;
@@ -176,7 +178,7 @@ label {
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="">د پروګرام تسهیلونکی</label>
-                                        <input placeholder="" class="form-control" type="text" name="facilittator" value="{{old('facilittator')}}">
+                                        <input placeholder="" class="form-control" type="text" name="facilitator" value="{{old('facilitator')}}">
 
                                     </div>
                                 </div>
@@ -428,6 +430,7 @@ label {
             });
             </script>
         @endif
+        
 	    <script>
         function bootstrapAlert(){
             $('.bootstrap-growl').remove();

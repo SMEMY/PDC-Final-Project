@@ -36,6 +36,9 @@ class resultController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'program_result.*' => 'bail|required|max:100',
+        ]);
         for($index=0; $index<count($request->program_result); $index++)
         {
             $result = new Result;
@@ -43,7 +46,7 @@ class resultController extends Controller
             $result->program_id = $request->program_id;
             $result->save();
         }
-        return redirect('pdcProgramInfo/'.$request->program_id);
+        return redirect('pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده پایلي په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**

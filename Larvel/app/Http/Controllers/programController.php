@@ -65,6 +65,7 @@ class programController extends Controller
    
     public function store(Request $request)
     {
+        
         // this part is belongs to Program Model
         if($request->path() === 'searchPdcProgram')
         {
@@ -73,32 +74,33 @@ class programController extends Controller
             return view('pdc-list-all-program', compact('programs', 'path'));
         }
         elseif($request->path() === 'pdcProgramList'){
-            $request->validate([
-                'name' => 'bail|required|max:255',
-                'type' => 'bail|required|max:7',
-                'sponsor' => 'bail|required|max:50',
-                'supporter' => 'bail|required|max:50',
-                'manager' => 'bail|required|max:50',
-                'facilitator' => 'bail|nullable|max:50',
-                'info_mobile_number' => 'bail|required|max:13',
-                'participant_amount' => 'bail|required|max:3',
-                'fund' => 'bail|required|max:8',
-                'fund_type' => 'bail|required|max:6',
-                'fee_able' => 'bail|required|max:1',
+            
+            $validate = $request->validate([
+                'name' => 'bail|required|string|max:100',
+                'type' => 'bail|required|string|in:ورکشاپ,سیمینار,سمفوزیم,کتفرانس',
+                'sponsor' => 'bail|required|string|max:30',
+                'supporter' => 'bail|required|string|max:30',
+                'manager' => 'bail|required|string|max:30',
+                'facilitator' => 'bail|nullable|string|max:30',
+                'info_mobile_number' => 'bail|required|string|max:13',
+                'participant_amount' => 'bail|required|integer|between:1,1000',
+                'fund' => 'bail|required|integer',
+                'fund_type' => 'bail|required|string|in:افغانۍ,ډالر',
+                'fee_able' => 'bail|required|string|in:0,1',
                 'fee' => 'bail|required_if:fee_able,=,1|integer',
-                'fee_type' => 'bail|required_if:fee_able,=,1|max:6',
-                'campus_name' => 'bail|required|max:50',
-                'block_name' => 'bail|required|max:50',
+                'fee_type' => 'bail|string|required_if:fee_able,=,1|in:افغانۍ,ډالر',
+                'campus_name' => 'bail|required|string|max:30',
+                'block_name' => 'bail|required|string|max:30',
                 'block_number' => 'bail|required|integer|between:1,30',
                 'room_number' => 'bail|required|integer|between:1,30',
-                'year' => 'bail|required|integer|between:1900,3000',
+                'year' => 'bail|required|integer|between:2017,3000',
                 'month' => 'bail|required|integer|between:1,12',
                 'start_day' => 'bail|required|integer|between:1,31',
                 'end_day' => 'bail|required|integer|between:1,31',
                 'start_time' => 'bail|required|date_format:H:i',
                 'end_time' => 'bail|required|date_format:H:i',
-                'days_duration' => 'bail|required|max:2|min:1',
-                'program_description' => 'bail|required|max:2000',
+                'days_duration' => 'bail|required|integer',
+                'program_description' => 'bail|required|string|max:2000',
             ]);
             $addProgram = new Program;
             $addProgram->name = $request->name;
@@ -114,8 +116,8 @@ class programController extends Controller
             $addProgram->fee = $request->fee;
             $addProgram->fee_type = $request->fee_type;
             $addProgram->program_description = $request->program_description;
-            $addProgram->facilitator_code = rand(1000000, 9000000);
-            $addProgram->participant_code = rand(1000000, 9000000);
+            $addProgram->facilitator_code = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+            $addProgram->participant_code = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
             $addProgram->year = $request->year;
             $addProgram->month = $request->month;
             $addProgram->start_day = $request->start_day;
@@ -129,7 +131,6 @@ class programController extends Controller
             $addProgram->block_number = $request->block_number;
             $addProgram->room_number = $request->room_number;
             $addProgram->save();
-            
             // return "done";
             // $request->session()->put('program_added', "پروګرام يه کامیابۍ سره سیسټم ته اضافه سو!");
             return back()->with('program_added', "پروګرام په کامیابۍ سره سیسټم ته اضافه سو!");
@@ -167,58 +168,7 @@ class programController extends Controller
             return view('facil-part-enroll-program-info', compact('programs'));
 
        }
-       elseif($request->path() === 'pdcProgramAttendance/'.$id){        
-            $attendancedParticipants =  DB::table('facilitatorsandparticipants')
-            ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
-            ->join('attendances', 'facilitatorsandparticipants.id', '=', 'attendances.participant_id')
-            ->select('facilitatorsandparticipants.*')
-            ->where('attendances.program_id', $id)
-            ->get();
-            $attendancedParticipantsIDs = array();
-            foreach ($attendancedParticipants as $attendancedParticipant)
-            {
-            array_push( $attendancedParticipantsIDs, $attendancedParticipant->id);
-            }
-            // return $part_IDs;
-
-            $enrolledProgramParticipants =  DB::table('facilitatorsandparticipants')
-            ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
-            ->select('facilitatorsandparticipants.*')
-            ->where('programsparticipants.program_id', $id)
-            ->get();
-            $enrolledProgramParticipantsIDs = array();
-            foreach ($enrolledProgramParticipants as $enrolledProgramParticipant)
-            {
-            array_push( $enrolledProgramParticipantsIDs, $enrolledProgramParticipant->id);
-            }
-            // return $ePart_IDs;
-            $notAttendancedParticipantsIDs;
-            if(count($enrolledProgramParticipantsIDs) >count( $attendancedParticipantsIDs))
-            {
-                $notAttendancedParticipantsIDs = array_diff( $enrolledProgramParticipantsIDs, $attendancedParticipantsIDs);
-            }
-            else{
-                $notAttendancedParticipantsIDs = array_diff( $attendancedParticipantsIDs ,$enrolledProgramParticipantsIDs);
-            }
-            $finalIDs = array();
-            foreach($notAttendancedParticipantsIDs as $t)
-            {
-                array_push($finalIDs, $t);
-            }
-            //  return $finalIDs;
-
-
-
-            $participants =  DB::table('facilitatorsandparticipants')
-            ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
-            ->select('facilitatorsandparticipants.*')
-            ->whereIn('programsparticipants.participant_id', $finalIDs)
-            ->get();
-
-            $programID = $id;
-            return view('pdc-program-attendance', compact('participants', 'programID'));
-       }
-       
+      
        else{
            return "path not found!";
        }

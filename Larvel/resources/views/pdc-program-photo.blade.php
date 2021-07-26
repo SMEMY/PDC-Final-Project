@@ -46,6 +46,25 @@
 			<script src="assets/js/html5shiv.min.js"></script>
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
+		<style>
+			h4{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+				font-size: 30px !important;
+			}
+			label{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			font-size: 17px !important;
+
+			}
+			input{
+
+			}
+			
+			#alertMassege li{
+				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+					font-size: 20px !important;
+			}
+		</style>
 </head>
 
 <body>
@@ -74,11 +93,22 @@
 									{{ method_field('POST') }}
 									{{ csrf_field() }}
 									<input class="d-none" type="text" name="program_id" id="" value="{{$programID}}">
+									@if ($errors->any())
+										<div class="mb-2" id="alertMassege">
+											<ul style="list-style-type:none" class="p-0 m-0">
+												@foreach ($errors->all() as $error)
+												<li class="rounded p-2 m-1 alert alert-danger" >
+													{{ $error }}
+												</li>
+												@endforeach
+											</ul>
+										</div>
+									@endif
 									<div class="row " id="files">
 										<div class=" col-md-12">
 											<div class="form-group custom-file ">
-												<input type="file" class="custom-file-input" id="image"
-													name="image[0]" onchange="nameShow()">
+												<input type="file" class="custom-file-input " id="image"
+													name="photo[0]" onchange="nameShow()">
 												<label class="custom-file-label" for="customFile">د پروګرام اړونده عکس
 													انتخاب کړي</label>
 											</div>
@@ -151,7 +181,7 @@
 				`	<div class=" col-md-12 mt-3" >
 														<div class="form-group custom-file ">
 															<input type="file" class="custom-file-input" id="customFile"
-																name="image[${index}]">
+																name="photo[${index}]">
 															<label class="custom-file-label" for="customFile">د پروګرام اړونده
 																فایل
 																انتخاب کړی</label>

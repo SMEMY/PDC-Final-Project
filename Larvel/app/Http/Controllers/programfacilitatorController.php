@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Program;
 use App\Models\Programsfacilitator;
+use App\Models\Programsparticiapant;
 use App\Models\Photo;
 
 use App\Models\Facilitatorsandparticipant;
@@ -65,14 +66,7 @@ class programfacilitatorController extends Controller
            $searchPath = '/searchFacilitator';
            return view('ListfacilitatorAndParticipant', compact('members', 'path', 'searchPath'));
         }
-        else{
-            $program =  Program::where('facilitator_code', $request->program_enrollment_code)->get();
-            $facilEnrollment = new Programsfacilitator;
-            $facilEnrollment->facilitator_id = $request->member_id;
-            $facilEnrollment->program_id = $program[0]->id;
-            $facilEnrollment->save();
-             return redirect('facilitatorProfile/'.$request->member_id);
-        }
+        
     }
 
     /**
@@ -94,10 +88,12 @@ class programfacilitatorController extends Controller
             ->get();
             $name = 'تسهیلونکی';
             $path = 'facilitatorList';
-            return view('pdc-user-info', compact('userProfile', 'name', 'path'));
+            $user_request = 'facilitator';
+            return view('pdc-user-info', compact('userProfile', 'name', 'path', 'user_request'));
         }
         elseif($request->path() === 'facilitatorProfileForProgram/'.$id)
-        {
+        {   
+
             $userProfile =  DB::table('facilitatorsandparticipants')
             ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
             ->select('facilitatorsandparticipants.*')
@@ -105,7 +101,13 @@ class programfacilitatorController extends Controller
             ->get();
             $name = 'تسهیلونکی';
             $program_id = $id;
-            return view('pdc-program-user-info', compact('userProfile', 'name', 'program_id'));
+            if(count($userProfile) !== 0)
+            {
+                return view('pdc-program-user-info', compact('userProfile', 'name', 'program_id'));
+            }
+            else{
+                return back()->with('warn', "د پروګرام لپاره تر اوسه تسهیلونکي ندی اضافه کړل سوی!");
+            }
         }
          //facilitatorEnrolledPrograms
         elseif($request->path() === 'facilitatorEnrolledPrograms/'.$id)
@@ -128,11 +130,7 @@ class programfacilitatorController extends Controller
          return view('pdc-facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
  
         }
-        elseif($request->path() === 'programEnrollmentForFacilitator/'.$id)
-        {
-            $facilitator_id = $id;
-            return view('pdc-program-enrollment', compact('facilitator_id'));
-        }
+       
         elseif(0){
 
         }

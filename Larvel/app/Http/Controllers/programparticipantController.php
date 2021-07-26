@@ -25,7 +25,7 @@ class programparticipantController extends Controller
         ->distinct()
         ->get();
         $searchPath = '/searchParticipant';
-        $path = 'participantList';
+        $path = 'participant';
         return view('pdc-list-all-member', compact('members', 'path', 'searchPath'));
     }
 
@@ -79,7 +79,8 @@ class programparticipantController extends Controller
             ->get();
             $name = 'ګډونوال';
             $path = 'participantList';
-            return view('pdc-user-info', compact('userProfile', 'name', 'path'));
+            $user_request = 'participant';
+            return view('pdc-user-info', compact('userProfile', 'name', 'path', 'user_request'));
         }
         elseif($request->path() === 'specificeProgramParticipants/'.$id)
         {
@@ -89,8 +90,13 @@ class programparticipantController extends Controller
             ->where('programsparticipants.program_id', $id)
             ->get();
             $programID = $id;
-
-            return view('pdc-program-participants-list', compact('participants', 'programID'));
+            if(count($participants) !== 0)
+            {
+                return view('pdc-program-participants-list', compact('participants', 'programID'));
+            }
+            else{
+                return back()->with('warn', "د پروګرام لپاره تر اوسه ګډونوال ندي اضافه کړل سوي!");
+            }
         }
         elseif($request->path() === 'programSpecificParticipant/'.$id){
             // return "i am login";
@@ -146,7 +152,7 @@ class programparticipantController extends Controller
          ->select('programs.*')
          ->whereNotIn('id', $programsID)
          ->get();
-         return view('facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
+         return view('pdc-facilitator-participant-enrolled-programs', compact('enrolledPrograms','notEnrolledPrograms'));
  
         }
         else{
@@ -216,13 +222,35 @@ class programparticipantController extends Controller
         //
         if($request->page == 'pdc-program-participants-list')
         {
-            DB::table('programsparticipants')
-            ->where('programsparticipants.participant_id', $request->participant_id)
-            ->delete();
-            return redirect('specificeProgramParticipants/'.$request->program_id);
+            // return $id;
+            $check = DB::table('programsparticipants')
+            ->where([
+                ['programsparticipants.participant_id', $id],
+                ['programsparticipants.program_id', $request->program_id]
+            ])->get();
+            if(count( $check) !== 0){
+                $deleteParticipant = DB::table('programsparticipants')
+                ->where([
+                    ['programsparticipants.participant_id', $id],
+                    ['programsparticipants.program_id', $request->program_id]
+                ]);
+                $deleteParticipant->delete();
+                $check1 = DB::table('programsparticipants')
+                ->where('programsparticipants.program_id', $request->program_id)->get();
+                if(count($check1) !== 0)
+                {
+                    return redirect('specificeProgramParticipants/'.$request->program_id);
+                }
+                else{
+                    return redirect('pdcProgramInfo/'.$request->program_id)->with('warn', "د یاد پروګرام ټوله ګدونوال له سیسټم څخه پاک کړل سوه!");
+                }
+            }
+            else{
+                return back()->with('warn', "یاد کس په پروګرام کي شتون نلري د له منځه وړلو لپاره!");
+            }
 
         }
-        else
+        elseif($request->paht('participantList/'.$id))
         {
             $deleteParticipant = Facilitatorsandparticipant::find($id);
             $deleteParticipant->delete();

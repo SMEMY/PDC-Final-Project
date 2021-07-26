@@ -36,8 +36,9 @@ class facilityController extends Controller
     public function store(Request $request)
     {
         //
+        // return "sdfsd";
         $request->validate([
-            'facility.*' => 'bail|required*|max:100',
+            'facility.*' => 'bail|required|max:100',
         ]);
         for($index=0; $index<count($request->facility); $index++)
         {
@@ -46,7 +47,7 @@ class facilityController extends Controller
             $facility->program_id = $request->program_id;
             $facility->save();
         }
-        return redirect('pdcProgramInfo/'.$request->program_id);
+        return redirect('pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده سهولتونه په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**

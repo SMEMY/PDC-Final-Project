@@ -17,6 +17,8 @@ use App\Http\Controllers\agendaController;
 use App\Http\Controllers\evaluationController;
 use App\Http\Controllers\fquestionnaireController;
 use App\Http\Controllers\photoController;
+use App\Http\Controllers\programEnrollmentController;
+use App\Http\Controllers\deleteFeedbackQuestion;
 use App\Http\Controllers\facilitatorandparticipantController;
 
 
@@ -53,9 +55,10 @@ Route::view('/memberRegisteration', 'pdc-add-member');
 Route::view('/adminDashboard', 'index');
 // Route::view('/programEnrollment', 'enroll-program-info');
 
+Route::get('/deleteQuestion/{id}', [deleteFeedbackQuestion::class, 'deleteQuestion']);
 
 // Route::resource('/addFacilitator', facilitatorandparticipantController::class);
-
+// Route::get('/deleteQuestion', [deleteFeedbackQuestion::class, 'deleteQuestion']);
 Route::resource('/specificeProgramParticipants', programparticipantController::class);
 Route::resource('/programSpecificParticipant', programparticipantController::class);
 Route::resource('/participantList', programparticipantController::class);
@@ -68,18 +71,22 @@ Route::resource('/educationalProgramList', eduprogramController::class);
 Route::resource('/educationalPrograminfo', eduprogramController::class);
 Route::resource('/pdcProgramList', programController::class);
 Route::resource('/pdcProgramInfo', programController::class);
-Route::resource('/programEnrollmentForFacilitator', programfacilitatorController::class);
+Route::resource('/memberEnrollmentForProgram', programEnrollmentController::class);
+Route::resource('/facilitatorEnrollmentForProgram', programEnrollmentController::class);
+Route::resource('/participantEnrollmentForProgram', programEnrollmentController::class);
 Route::resource('/enrolledPdcProgramInfo', programController::class);
-Route::resource('/pdcProgramAttendance', programController::class);
+Route::resource('/pdcProgramAttendance', attendanceController::class);
 Route::resource('/pdcProgramAttendanceReport', attendanceController::class);
 Route::resource('/pdcProgramAttendancePaper', attendanceController::class);
 Route::resource('/comAllPrograms', programController::class);
 Route::resource('/participantEnrolledPrograms', programparticipantController::class);
 Route::resource('/facilitatorEnrolledPrograms', programfacilitatorController::class);
+Route::resource('/participantEnrolledPrograms', programparticipantController::class);
 Route::resource('/facilitatorMaterials', materialController::class);
 Route::resource('/storeMaterials', materialController::class);
 Route::resource('/deleteMaterial', materialController::class);
 Route::resource('/materials', materialController::class);
+Route::resource('/feedbackFormEdition', fquestionnaireController::class);
 Route::resource('/feedback', feedBackController::class);
 Route::resource('/feedbackFormInsertion', fquestionnaireController::class);
 Route::resource('/pdcProgramAttendanceEntry', attendanceController::class);
@@ -96,48 +103,15 @@ Route::resource('/deleteFacilitatorForProgram', programfacilitatorController::cl
 Route::resource('/searchFacilitator', programfacilitatorController::class);
 Route::resource('/searchParticipant', programparticipantController::class);
 Route::resource('/searchPdcProgram', programController::class);
-
 Route::resource('/pdcProgramAgenda', agendaController::class);
 Route::resource('/pdcProgramFacility', facilityController::class);
+Route::resource('/participantFacilitatorStore', facilitatorandparticipantController::class);
+Route::resource('/memberStore', facilitatorandparticipantController::class);
+Route::resource('/facilitatorMaterials', materialController::class);
 
 
 
 
-
-
-Route::resource('/facilitatorList/{id}/edit', programfacilitatorController::class);
-Route::resource('/participantList/{id}/edit', programparticipantController::class);
-Route::resource('/educationalProgramList/{id}/edit', eduprogramController::class);
-Route::resource('/pdcProgramInfo/{id}/edit', programController::class);
-Route::resource('/enrolledPdcProgramInfo/{id}/edit', programController::class);
-Route::resource('/feedbackFormInsertion/{id}/edit', fquestionnaireController::class);
-Route::resource('/facilitatorMaterials/{id}/edit', materialController::class);
-Route::resource('/pdcProgramAttendanceStore/{id}/edit', attendanceController::class);
-Route::resource('/pdcProgramResult/{id}/edit', resultController::class);
-Route::resource('/pdcProgramEvaluation/{id}/edit', evaluationController::class);
-Route::resource('/specificeProgramParticipants/{id}/edit', programparticipantController::class);
-Route::resource('/programSpecificParticipant/{id}/edit', programparticipantController::class);
-Route::resource('/pdcProgramAttendance/{id}/edit', programController::class);
-Route::resource('/pdcProgramAttendanceEntry/{id}/edit', attendanceController::class);
-Route::resource('/pdcProgramAttendancePaper/{id}/edit', attendanceController::class);
-Route::resource('/pdcProgramAttendanceReport/{id}/edit', attendanceController::class);
-Route::resource('/pdcProgramPhoto/{id}/edit', photoController::class);
-Route::resource('/storeMaterials/{id}/edit', materialController::class);
-Route::resource('/materials/{id}/edit', materialController::class);
-Route::resource('/deleteMaterial/{id}/edit', materialController::class);
-Route::resource('/downloadMaterial/{id}/edit', materialController::class);
-Route::resource('/pdcProgramDelete/{id}/edit', programController::class);
-Route::resource('/pdcProgramList/{id}/edit', programController::class);
-Route::resource('/deleteFacilitatorForProgram/{id}/edit', programfacilitatorController::class);
-Route::resource('/membersList/{id}/edit', facilitatorandparticipantController::class);
-
-
-
-
-
-
-
-// show pagers with specific ID  methid:: edit()
 Route::resource('/storeMaterials/{id}', materialController::class);
 Route::resource('/comAllPrograms/{id}', programController::class);
 Route::resource('/participantEnrolledPrograms/{id}', programparticipantController::class);
@@ -148,7 +122,6 @@ Route::resource('/educationalPrograminfo/{id}', eduprogramController::class);
 Route::resource('/pdcProgramInfo/{id}', programController::class);
 Route::resource('/pdcProgramList/{id}', programController::class);
 Route::resource('/memberProfile/{id}', facilitatorandparticipantController::class);
-
 Route::resource('/pdcProgramDelete/{id}', programController::class);
 Route::resource('/enrolledPdcProgramInfo/{id}', programController::class);
 Route::resource('/feedbackFormInsertion/{id}', fquestionnaireController::class);
@@ -172,14 +145,52 @@ Route::resource('/facilitatorProfile/{id}', programfacilitatorController::class)
 Route::resource('/facilitatorProfileForProgram/{id}', programfacilitatorController::class);
 Route::resource('/deleteFacilitatorForProgram/{id}', programfacilitatorController::class);
 Route::resource('/memberList/{id}', facilitatorandparticipantController::class);
+Route::resource('/participantProfile/{id}', programparticipantController::class);
+Route::resource('/feedbackFormEdition/{id}', fquestionnaireController::class);
+
+
+Route::resource('/facilitatorList/{id}/edit', programfacilitatorController::class);
+Route::resource('/participantList/{id}/edit', programparticipantController::class);
+Route::resource('/educationalProgramList/{id}/edit', eduprogramController::class);
+Route::resource('/pdcProgramInfo/{id}/edit', programController::class);
+Route::resource('/enrolledPdcProgramInfo/{id}/edit', programController::class);
+Route::resource('/feedbackFormInsertion/{id}/edit', fquestionnaireController::class);
+Route::resource('/facilitatorMaterials/{id}/edit', materialController::class);
+Route::resource('/pdcProgramAttendanceStore/{id}/edit', attendanceController::class);
+Route::resource('/pdcProgramResult/{id}/edit', resultController::class);
+Route::resource('/pdcProgramEvaluation/{id}/edit', evaluationController::class);
+Route::resource('/specificeProgramParticipants/{id}/edit', programparticipantController::class);
+Route::resource('/programSpecificParticipant/{id}/edit', programparticipantController::class);
+Route::resource('/pdcProgramAttendance/{id}/edit', programController::class);
+Route::resource('/pdcProgramAttendanceEntry/{id}/edit', attendanceController::class);
+Route::resource('/pdcProgramAttendancePaper/{id}/edit', attendanceController::class);
+Route::resource('/pdcProgramAttendanceReport/{id}/edit', attendanceController::class);
+Route::resource('/pdcProgramPhoto/{id}/edit', photoController::class);
+// Route::resource('/storeMaterials/{id}/edit', materialController::class);
+Route::resource('/materials/{id}/edit', materialController::class);
+Route::resource('/deleteMaterial/{id}/edit', materialController::class);
+Route::resource('/downloadMaterial/{id}/edit', materialController::class);
+Route::resource('/pdcProgramDelete/{id}/edit', programController::class);
+Route::resource('/pdcProgramList/{id}/edit', programController::class);
+Route::resource('/deleteFacilitatorForProgram/{id}/edit', programfacilitatorController::class);
+Route::resource('/membersList/{id}/edit', facilitatorandparticipantController::class);
+Route::resource('/feedbackFormEdition/{id}/edit', fquestionnaireController::class);
 
 
 
 
 
-Route::resource('/participantList/{id}', programparticipantController::class);
-Route::resource('/facilitatorList/{id}', programfacilitatorController::class);
-Route::resource('/educationalProgramList/{id}', eduprogramController::class);
+
+
+// show pagers with specific ID  methid:: edit()
+
+
+
+
+
+// Route::resource('/participantList/{id}', programparticipantController::class);
+// Route::resource('/facilitatorList/{id}', programfacilitatorController::class);
+// Route::resource('/educationalProgramList/{id}', eduprogramController::class);
 
 
 
@@ -190,9 +201,6 @@ Route::resource('/educationalProgramList/{id}', eduprogramController::class);
 
 
 
-Route::resource('/participantFacilitatorStore', facilitatorandparticipantController::class);
-Route::resource('/memberStore', facilitatorandparticipantController::class);
-Route::resource('/facilitatorMaterials', materialController::class);
 
 
 

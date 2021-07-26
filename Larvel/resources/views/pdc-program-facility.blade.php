@@ -57,6 +57,9 @@
 			background: #f0fcff !important;
             max-height: 200px; !important;
             min-height: 44px; !important;
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			font-size: 20px !important;
+			color: black !important;
 			}
 			#alertMassege li{
 				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
@@ -89,42 +92,42 @@
 								<h4 class="card-title mb-0">د اوړنده پروکرام په اړه د سهولتونو د ثبتولو پاڼه</h4>
 							</div>
 							<div class="card-body">
-								<form action="pdcProgramEvaluation" method="POST" >
-								{{ method_field('POST') }}
-                            	{{ csrf_field() }}
-								<input class="d-none" type="text" value="{{$programID}}" name='program_id'>
-								@if ($errors->any())
-									<div class="mb-2" id="alertMassege">
-										<ul style="list-style-type:none" class="p-0 m-0">
-											@foreach ($errors->all() as $error)
-											<li class="rounded p-2 m-1 alert alert-danger" >
-												{{ $error }}
-											</li>
-											@endforeach
-										</ul>
-									</div>
-								@endif
-                                    <div class="row" id="files">
-                                        <div class="input-group col-12">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">د پروګرام سهولت</span>
-                                            </div>
-                                            <textarea class="form-control" aria-label="With textarea" name="facility[0]"></textarea>
-                                        </div>
-                                    </div>
-									<div class="row mt-3 col-md-12">
-										<div class="form-group m-auto ">
-											<button type="button" id="file-remover"
-												class="btn btn-info mx-auto rounded-circle d-none"
-												style="font-size: 20px;" onclick="removeFile()">&times;</button>
-											<button type="button" class="btn btn-info mx-auto rounded-circle"
-												style="font-size: 20px;;" onclick="addFile()">&plus;</button>
+								<form action="pdcProgramFacility" method="POST" >
+									{{ method_field('POST') }}
+									{{ csrf_field() }}
+									<input class="d-none" type="text" value="{{$programID}}" name='program_id'>
+									@if ($errors->any())
+										<div class="mb-2" id="alertMassege">
+											<ul style="list-style-type:none" class="p-0 m-0">
+												@foreach ($errors->all() as $error)
+												<li class="rounded p-2 m-1 alert alert-danger" >
+													{{ $error }}
+												</li>
+												@endforeach
+											</ul>
 										</div>
-									</div>
+									@endif
+										<div class="row" id="files">
+											<div class="input-group col-12">
+												<div class="input-group-prepend">
+													<span class="input-group-text">د پروګرام سهولت</span>
+												</div>
+												<textarea class="form-control" aria-label="With textarea" name="facility[0]"></textarea>
+											</div>
+										</div>
+										<div class="row mt-3 col-md-12">
+											<div class="form-group m-auto ">
+												<button type="button" id="file-remover"
+													class="btn btn-info mx-auto rounded-circle d-none"
+													style="font-size: 20px;" onclick="removeFile()">&times;</button>
+												<button type="button" class="btn btn-info mx-auto rounded-circle"
+													style="font-size: 20px;;" onclick="addFile()">&plus;</button>
+											</div>
+										</div>
 
-									<div class="text-right mt-5">
-										<button type="submit" class="btn btn-primary w-25">Submit</button>
-									</div>
+										<div class="text-right mt-5">
+											<button type="submit" class="btn btn-primary w-25">Submit</button>
+										</div>
 								</form>
 							</div>
 						</div>

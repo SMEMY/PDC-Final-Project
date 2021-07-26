@@ -42,7 +42,7 @@ class materialController extends Controller
         
         $request->validate([
             'materials' => 'required',
-            'materials.*' => 'required',
+            'materials.*' =>  'mimes:pdf,docx, doc, docm, rtf, txt, pptx, pptm, ppt, xlsx, xlsm, xlsb, xltx|max:40960',
         ]);
         // return "sdfsd";w
         // return $files = $request->materials;
@@ -67,7 +67,7 @@ class materialController extends Controller
                 $fileSave->save();
                 $index++;
         }
-        return redirect('pdcProgramInfo/'.$request->program_id);
+        return redirect('pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده فایلونه په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**
@@ -83,7 +83,7 @@ class materialController extends Controller
         if($request->path() === 'storeMaterials/'.$id)
         {
             $program_id = $id;
-            return view('facilitator-programs-materials', compact('program_id'));
+            return view('pdc-add-programs-materials', compact('program_id'));
 
         }
         elseif($request->path() === 'materials/'.$id)

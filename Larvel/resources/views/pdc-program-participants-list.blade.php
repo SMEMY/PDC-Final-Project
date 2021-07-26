@@ -121,7 +121,6 @@ hahahaha
 													<div class="dropdown-menu dropdown-menu-left" >
 														<a class="dropdown-item" href="/participantList/{{$participant->id}}/edit" ><i class="fa fa-pencil m-r-5"></i> اصلاح يې کړی</a>
 														<a class="dropdown-item" href="/participantList/{{$participant->id}}" data-toggle="modal" data-target="#delete_employee" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-user-o m-r-5"></i>نور معلومات تر لاسه کړی</a>
 													</div>
 												</div>
 											</td>
@@ -176,6 +175,13 @@ hahahaha
 @endsection
 
 @section('custom-js')
+		@if(Session::has('warn'))
+            <script>
+            swal('وبخښئ!',"{!! Session::get('warn') !!}", "warning", {
+                button: "وروسته کوښښ وکړئ",
+            });
+            </script>
+        @endif
 <script>
 	function pathFinder(num)
 	{

@@ -133,7 +133,8 @@ class facilitatorandparticipantController extends Controller
             $userProfile = DB::table('facilitatorsandparticipants')->where('id', $id)->get();
             $name  = 'ثبت سوی شخص';
             $path = 'memberList';
-        return view('pdc-user-info', compact('userProfile', 'name', 'path'));
+            $user_request = 'member';
+        return view('pdc-user-info', compact('userProfile', 'name', 'path', 'user_request'));
         }
     }
 

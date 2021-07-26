@@ -65,6 +65,11 @@
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-size: 17px !important;
 		}
+		
+		#alertMassege li{
+				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+					font-size: 20px !important;
+			}
 	</style>
 </head>
 
@@ -90,6 +95,17 @@
 					{{ method_field('POST') }}
       				{{ csrf_field() }}
 						<input class="d-none" type="text" name="program_id" id="" value="{{$program_id}}">
+						@if ($errors->any())
+										<div class="mb-2" id="alertMassege">
+											<ul style="list-style-type:none" class="p-0 m-0">
+												@foreach ($errors->all() as $error)
+												<li class="rounded p-2 m-1 alert alert-danger" >
+													{{ $error }}
+												</li>
+												@endforeach
+											</ul>
+										</div>
+									@endif
 					  <div class="row mt-5" id="files">
 						  <div class=" col-md-6">
 							  <div class="form-group custom-file ">
