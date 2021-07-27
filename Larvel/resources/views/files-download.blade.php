@@ -67,6 +67,18 @@
 			font-weight: bold !important;
 
 		}
+		.swal-modal div{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
+        }
+		.swal-text{
+			text-align: right;
+
+		}
+		.swal-modal{
+			padding: 20px 24px;
+    		width: 600px;
+		}
 	</style>
 </head>
 
@@ -339,6 +351,15 @@
 	<script src="{{asset('assets/js/select2.min.js')}}"></script>
 	<!-- Tagsinput JS -->
 	<script src="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}"></script>
+		<!-- sweet alert -->
+		<script src="{{asset('assets/sweet-alert/sweetalert.min.js')}}"></script>
+	@if(Session::has('success'))
+	<script>
+	swal('ډېر ښه!',"{!! Session::get('success') !!}", "success", {
+		button: "سمده",
+	});
+	</script>
+	@endif
 		<script>
 				function pathFinder(num)
 					{

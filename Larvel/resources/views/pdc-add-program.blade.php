@@ -90,13 +90,11 @@ label {
                         @if ($errors->any())
                             <div class="mb-5" id="alertMassege">
                                 <ul style="list-style-type:none" class="p-0 m-0">
-
                                     @foreach ($errors->all() as $error)
                                     <li class="rounded p-2 m-1 alert alert-danger" >
                                         {{ $error }}
                                     </li>
                                     @endforeach
-                                    
                                 </ul>
                             </div>
                         @endif

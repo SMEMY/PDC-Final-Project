@@ -72,7 +72,7 @@ class feedBackController extends Controller
                 $questionAnswer->question_id = $request->opinions[$i];
                 $questionAnswer->save();
             }
-            return redirect('pdcProgramInfo/'.$request->program_id);
+            return redirect('pdcProgramInfo/'.$request->program_id)->with('success_questionnaire', 'د یاد پروګرام لپاره په سیسټم کي په کامیابۍ سره پوښتنلیک اضافه کړل سو!');
         
        
     }

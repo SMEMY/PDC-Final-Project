@@ -221,9 +221,7 @@ label {
 								<button class="btn btn-primary  account-btn col-md-12" type="submit">تسهیلونکی ثبت
 									کړی</button>
 							</div>
-							<div class="account-footer my-5">
-								<p>آیا تر مخه مو حساب کړی دی؟ <a href="login.html">لاګ ان</a></p>
-							</div>
+							
 						</form>
 						<!-- /Account Form -->
 

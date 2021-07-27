@@ -316,8 +316,8 @@ h4 {
 </div>
 <!-- /Page Wrapper -->
 @endsection
-@section('custom-js')
 
+@section('custom-js')
 @if(Session::has('program_part_added'))
 	<script>
 	swal('ډېر ښه!',"{!! Session::get('program_part_added') !!}", "success", {
@@ -325,7 +325,13 @@ h4 {
 	});
 	</script>
 @endif
-@section('custom-js')
+@if(Session::has('success_questionnaire'))
+	<script>
+	swal('ډېر ښه!',"{!! Session::get('success_questionnaire') !!}", "success", {
+		button: "مننه",
+	});
+	</script>
+@endif
 @if(Session::has('warn'))
 	<script>
 	swal('وبخښئ!',"{!! Session::get('warn') !!}", "warning", {

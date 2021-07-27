@@ -70,6 +70,18 @@
 				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 					font-size: 20px !important;
 			}
+		.swal-modal div{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
+        }
+		.swal-text{
+			text-align: right;
+
+		}
+		.swal-modal{
+			padding: 20px 24px;
+    		width: 600px;
+		}
 	</style>
 </head>
 
@@ -126,7 +138,7 @@
 								  <select class="custom-select"
 									  style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;"
 									  name="file_type[0]">
-									  <option selected>د فایل ډول  </option>
+									  <option selected value="">د فایل ډول  </option>
 									  <option value="لکچر">لکچر</option>
 									  <option value="کتاب">کتاب</option>
 									  <option value="انځور">انځور</option>
@@ -182,6 +194,8 @@
 	<script src="{{asset('assets/js/select2.min.js')}}"></script>
 	<!-- Tagsinput JS -->
 	<script src="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}"></script>
+		<!-- sweet alert -->
+		<script src="{{asset('assets/sweet-alert/sweetalert.min.js')}}"></script>
 		@if(Session::has('warn'))
 			<script>
 			swal('وبخښئ!',"{!! Session::get('warn') !!}", "warning", {
@@ -216,7 +230,7 @@
 												<div class="form-group">
 													<select class="custom-select"
 														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="file_type[${indexFileType}]">
-                                                        <option selected>د فایل ډول</option><option selected>د فایل ډول  </option>
+                                                        <option selected value="">د فایل ډول</option>
 														<option value="لکچر">لکچر</option>
 														<option value="کتاب">کتاب</option>
 														<option value="انځور">انځور</option>

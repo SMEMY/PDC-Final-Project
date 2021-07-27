@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Material;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Program;
 use Illuminate\Http\Request;
 use File;
@@ -42,16 +44,12 @@ class materialController extends Controller
         
         $request->validate([
             'materials' => 'required',
-            'materials.*' =>  'mimes:png,jpg,jpeg,mp4,pdf,docx,doc,docm,rtf,txt,pptx,pptm,ppt,xlsx,xlsm,xlsb,xltx,gif,csv,mp3,m4a,mkv,avi,wmv,mov|max:40960',
-            // 'file_name' => 'requird',
-            // 'file_name.*' => 'string|max:20',
-            // 'file_type' => 'requird',
-            // 'file_type.*' => 'string|in:آډیو,وډیو,انځور,کتاب,لکچر',
+            'materials.*' => 'mimes:png,jpg,jpeg,mp4,pdf,docx,doc,docm,rtf,txt,pptx,pptm,ppt,xlsx,xlsm,xlsb,xltx,gif,csv,mp3,m4a,mkv,avi,wmv,mov|max:40960',
+            // 'file_name' => 'required',
+            'file_name.*' => 'required|string|max:20',
+            // 'file_type' => 'required',
+            'file_type.*' => 'required|string|in:آډیو,وډیو,انځور,کتاب,لکچر',
         ]);
-        // return "sdfsd";w
-        // return $files = $request->materials;
-        // $files = $request->file('materials');
-        // echo $request->file_type[0];
         $index = 0;
         foreach($request->file('materials') as $material)
         {     
@@ -72,20 +70,16 @@ class materialController extends Controller
                     $fileSave->program_id = $request->program_id;
                     $fileSave->save();
                     $index++;
-                    return redirect('pdcProgramInfo/'.$request->program_id)->with('program_materials_added', "پروګرام اړونده فایلونه په کامیابۍ سره سیسټم ته داخل کړل سوه!");
                 }
                 elseif(empty($request->file_name[$index])){
                     return back()->with('warn', "د فایل نوم باید وجود ولري!");
                 }
                 elseif(empty($request->file_type[$index]))
                 {
-                    return back()->with('warn', "د فایل ډولس باید وجود ولري!");
-
-                }
-                else{
-                    return "lkasjdfalkfdjaldfkjalfdkjflak";
+                    return back()->with('warn', "د فایل ډول باید وجود ولري!");
                 }
         }
+        return redirect('pdcProgramInfo/'.$request->program_id)->with('program_materials_added', "پروګرام اړونده فایلونه په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**
@@ -108,8 +102,17 @@ class materialController extends Controller
         {
             $program_id = $id;
             // return $program_id;
-            $programMaterials = Program::with('getMaterials')->find($id);
-            return view('files-download', compact('programMaterials', 'program_id'));
+            // $programMaterials = Program::with('getMaterials')->find($id);
+            $programMaterials = DB::table('materials')->where('program_id', $id)->get();
+
+
+            if(count($programMaterials) !== 0 )
+            {
+                return view('files-download', compact('programMaterials', 'program_id'));
+            }
+            else{
+                return back()->with('warn', 'د یاد پروګرام لپاره تر اوسه فایلونه ندي اضافه سوي سیسټم کي !');
+            }
         }
         elseif($request->path() === 'facilitatorMaterials/'.$id)
         {
@@ -154,10 +157,28 @@ class materialController extends Controller
      */
     public function destroy(Request $request, $id)
     {  
-        Storage::delete('public/programFiles/'.$id);
-        Material::where('path', $id)->delete();
+        
+       
         // $deletematerial->delete();
-        return redirect('materials/'.$request->program_id);
+        // return redirect('materials/'.$request->program_id);
+        // return $id;
+        Storage::delete('public/programFiles/'.$id);
+        $delete = Material::where('path', $id);
+        if($delete->program_id === $request->program_id)
+        {
+            $delete->delete();
+        }
+        else{
+            return back()->with('warn', " یاد فایل چي تاسي غواړی  له منځه یوسی پدې پروګرام پوري اړه نلري!");
+        }
+         $check = DB::table('materials')->where('program_id',$request->program_id)->get();
+        if(count($check) === 0)
+        {
+            return redirect('pdcProgramInfo/'.$request->program_id)->with('success', "د یاد پروګرام ټوله فایلونه له سیسټم څخه له منځه ولاړ!");;
+        }
+        else{
+            return back()->with('success', "یاد فایل له سیسټم څخه له منځه ولاړ!");
+        }
     }
 
 
