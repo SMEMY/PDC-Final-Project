@@ -19,6 +19,7 @@ use App\Http\Controllers\fquestionnaireController;
 use App\Http\Controllers\photoController;
 use App\Http\Controllers\programEnrollmentController;
 use App\Http\Controllers\deleteFeedbackQuestion;
+use App\Http\Controllers\searchController;
 use App\Http\Controllers\facilitatorandparticipantController;
 
 
@@ -34,9 +35,9 @@ use App\Http\Controllers\facilitatorandparticipantController;
 */
 
 
-// Route::get('/', function () {
-//     return view('add-edit-delete-facilitator');
-// });
+Route::get('/', function () {
+    return view('chart');
+});
 
 
 
@@ -46,6 +47,7 @@ use App\Http\Controllers\facilitatorandparticipantController;
 
 
 
+// Route::view('/chart', 'chart');
 Route::view('login', 'admin-registeration');
 Route::view('/registration', 'facilitatorParticipantRegisteration');
 Route::view('/addPdcProgram', 'pdc-add-program');
@@ -55,7 +57,9 @@ Route::view('/memberRegisteration', 'pdc-add-member');
 Route::view('/adminDashboard', 'index');
 // Route::view('/programEnrollment', 'enroll-program-info');
 
+Route::get('/deleteQuestionnaire/{id}', [deleteFeedbackQuestion::class, 'deleteProgramQuestionnaire']);
 Route::get('/deleteQuestion/{id}', [deleteFeedbackQuestion::class, 'deleteQuestion']);
+// Route::post('/searchٍEducationalProgram', [searchController::class, 'searchEduProgram']);
 
 // Route::resource('/addFacilitator', facilitatorandparticipantController::class);
 // Route::get('/deleteQuestion', [deleteFeedbackQuestion::class, 'deleteQuestion']);
@@ -69,6 +73,7 @@ Route::resource('/memberList', facilitatorandparticipantController::class);
 Route::resource('/memberProfile', facilitatorandparticipantController::class);
 Route::resource('/educationalProgramList', eduprogramController::class);
 Route::resource('/educationalPrograminfo', eduprogramController::class);
+Route::resource('/searchEducationalProgram', eduprogramController::class);
 Route::resource('/pdcProgramList', programController::class);
 Route::resource('/pdcProgramInfo', programController::class);
 Route::resource('/memberEnrollmentForProgram', programEnrollmentController::class);
@@ -111,6 +116,7 @@ Route::resource('/facilitatorMaterials', materialController::class);
 
 
 
+// Route::resource('/searchٍEducationalProgram/{id}', eduprogramController::class);
 
 Route::resource('/storeMaterials/{id}', materialController::class);
 Route::resource('/comAllPrograms/{id}', programController::class);

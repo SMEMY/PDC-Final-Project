@@ -46,6 +46,10 @@ label {
 			transition: all 0.3s;
 
         }
+        #alertMassege{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
+        }
 @endsection
 
 
@@ -64,7 +68,7 @@ label {
 				</div> -->
 				<!-- /Account Logo -->
 
-				<div class="account-box" style="width: 1170px; margin-top: 75px; margin-right:70px;" id="for">
+				<div class="account-box" style="width: 1000px; margin-top: 75px; margin-right:200px;" id="for">
 					<div class="account-wrapper mt-3" style="">
 						<h3 class="account-title mb-5">د تقرر/علمي رتبې پروګرام ثبت کړی</h3>
 						<!-- <p class="account-subtitle"></p> -->
@@ -75,6 +79,17 @@ label {
                     {{ method_field('PUT') }}
                     {{ csrf_field() }}
                                 <div class="row">
+                                    @if ($errors->any())
+                                        <div class="mb-5 col-md-12" id="alertMassege">
+                                            <ul style="list-style-type:none" class="p-0 m-0">
+                                                @foreach ($errors->all() as $error)
+                                                <li class="rounded p-2 m-1 alert alert-danger" >
+                                                    {{ $error }}
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>د علمي کنفرانفس/ سیمینار موضوع</label>
@@ -86,8 +101,8 @@ label {
                                         <label>د تقرري/ علمي ترفېع ډول</label>
                                         <select class="custom-select"
                                             style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="type">
-                                            <option></option>
                                             @if($program->type == 'علمي ترفېع')
+                                            <option></option>
                                             <option selected value="علمي ترفېع">علمي ترفېع</option>
                                             <option  value="ارتقاء">ارتقاء</option>
                                             <option  value="تقرر">تقرر</option>
@@ -140,8 +155,8 @@ label {
                                         <label>د استاد پوهنتون</label>
                                         <select class="custom-select"
                                             style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="university">
-                                            <option ></option>
                                             @if($program->university === 'کندهار پوهنتون')
+                                            <option ></option>
                                             <option selected value="کندهار پوهنتون">کندهار پوهنتون</option>
                                             @endif
                                         </select>
@@ -153,8 +168,8 @@ label {
                                         <select class="custom-select"
                                             style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="faculty">
                                         
-                                            <option ></option>
                                             @if($program->faculty === 'طب')
+                                            <option ></option>
                                             <option selected value="طب">طب</option>
                                             <option  value="انجنیري">انجنیري</option>
                                             <option  value="کمپیوټر ساینس">کمپیوټر ساینس</option>
@@ -454,10 +469,11 @@ label {
 
 
 @section('custom-js')
+       
 	<script>
         console.log($('#for').css('margin-right'));
 		$( "#toggle_btn" ).click(function() {
-            if($('#for').css('width') == '1170px' && $('#for').css('margin-right') == '70px')
+            if($('#for').css('width') == '1000px' && $('#for').css('margin-right') == '200px')
             {
                 console.log("alkfjlakfd");
                 $("#for").css("width", "1200px");
@@ -465,8 +481,8 @@ label {
             }
             else{
                 console.log("else");
-                $("#for").css("width", "1170px");
-                $("#for").css("margin-right", "70px");
+                $("#for").css("width", "1000px");
+                $("#for").css("margin-right", "200px");
             }
         });
 	</script>

@@ -47,7 +47,7 @@ hahahaha
 					<div class="dropdown-menu dropdown-menu-right" style="z-index: 100;">
 						<a class="dropdown-item" href="/educationalProgramList/{{$program->id}}/edit"  ><i
 								class="fa fa-pencil m-r-5"></i>معلومات اصلاح کړی</a>
-						<a class="dropdown-item" href="/pdcProgramDelete/{{$program->id}}" data-toggle="modal"
+						<a class="dropdown-item" href="/educationalProgramList/{{$program->id}}" data-toggle="modal"
 											data-target="#delete_project" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 					</div>
 				   </div>
@@ -107,8 +107,64 @@ hahahaha
 			</div>
 		</div>
 	</div>
+	
+
+<!-- Delete Project Modal -->
+<div class="modal custom-modal fade" id="delete_project" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-header">
+                    <h3>علمي پروګرام له منځه وړل</h3>
+                    <p>آیا تاسي باوري یاست چي یاد پروګرام معلومات له سیسټم څخه له منځه یوس؟</p>
+                </div>
+				<div class="modal-btn delete-action">
+					<div class="row">
+						<div class="col-md-6">
+               				<form action="" method="post" id="pathGetter">
+             					{{ method_field('DELETE') }}
+           						{{ csrf_field() }}
+											 
+               					 <button type="submit" class="btn btn-primary continue-btn col-md-12">له منځه یې اوسی</button>
+          					</form>
+						</div>
+						<div class="col-6">
+									<a href="javascript:void(0);" data-dismiss="modal"
+										class="btn btn-primary cancel-btn">قطعه یې کړی</a>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Delete Project Modal -->
+
 <!-- /Page Content -->
 </div>
 <!-- /Page Wrapper -->
 @endsection
 
+
+@section('custom-js')
+	@if(Session::has('success'))
+        <script>
+			swal('ډېر ښه!',"{!! Session::get('success') !!}", "success", {
+			button: "مننه",
+			});
+        </script>
+    @endif	
+	<script>
+		function pathFinder(num)
+					{
+						// console.log(num.href.split('/'));
+						// var fileArr = num.href.split('/');
+						// var fileArrlen = fileArr.length;
+						// var fileName = fileArr[fileArrlen - 1];
+						// // document.getElementById('file_name').value = fileName;
+						// console.log(fileName);
+						document.getElementById("pathGetter").action = num.href;
+
+					}
+	</script>
+@endsection

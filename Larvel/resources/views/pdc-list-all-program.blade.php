@@ -142,10 +142,21 @@ hahahaha
             <form action="/searchPdcProgram" method="POST">
 				{{ method_field('POST') }}
       			{{ csrf_field() }}
+                        <div class="row">
+                            <div class="mb-3 col-md-12" id="alertMassege">
+                                <ul style="list-style-type:none" class="p-0 m-0">
+                                    @foreach ($errors->all() as $error)
+                                    <li class="rounded p-2 m-1 alert alert-danger" >
+                                        {{ $error }}
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+						</div>
 					<div class="row filter-row mb-5" id="search_parts">
 						<div class="col-sm-6 col-md-5" id="search_input">
 							<div class="form-group form-focus">
-								<input type="text" class="form-control floating disable" name="search_content" disabled id="searchInput">
+								<input type="text" class="form-control floating" name="search_content" disabled id="searchInput">
 								<label class="focus-label">تسهیلونکی وپلټی</label>
 							</div>
 						</div>
@@ -570,6 +581,20 @@ hahahaha
 @endsection
 
 @section('custom-js')
+@if(Session::has('success_search'))
+	<script>
+	swal('ډېر ښه!',"{!! Session::get('success_search') !!}", "success", {
+		button: "مننه",
+	});
+	</script>
+@endif
+@if(Session::has('warn_search'))
+	<script>
+	swal('وبخښئ',"{!! Session::get('warn_search') !!}", "warning", {
+		button: "مننه",
+	});
+	</script>
+@endif
 <script>
 			function pathFinder(num)
 					{
@@ -767,7 +792,7 @@ hahahaha
 				<div class="col-sm-6 col-md-5" id="search_input">
 				<div class="form-group">
                 <select class="custom-select p-2 h-100" name="search_content">
-                                            <option selected>د پروګرام ډول انتخاب کړی</option>
+                                            <option selected value="">د پروګرام ډول انتخاب کړی</option>
                                             <option value="ورکشاپ">ورکشاپ</option>
                                             <option value="سیمینار">سیمینار</option>
                                             <option value="سمفوزیم">سمفوزیم</option>

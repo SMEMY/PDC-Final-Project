@@ -69,9 +69,23 @@ class programController extends Controller
         // this part is belongs to Program Model
         if($request->path() === 'searchPdcProgram')
         {
+            $request->validate([
+                'search_type' => 'bail|required|string|in:month,year,manager,supporter,sponsor,type,name',
+                'search_content' => 'bail|required',
+            ]);
             $path = '/pdcProgramList';
-            $programs =  Program::where($request->search_type, $request->search_content)->get();
-            return view('pdc-list-all-program', compact('programs', 'path'));
+            $programs =  DB::table('programs')->where($request->search_type, $request->search_content)->get();
+            if(count($programs) === 0)
+            {
+                return back()->with('warn_search', 'یاد پروګرام په سیسټم کي ونه موندل سو!');
+            }
+            else{
+                redirect('searchPdcProgram')->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
+                return view('pdc-list-all-program', compact('programs', 'path'));
+            }
+            // $path = '/pdcProgramList';
+            // $programs =  Program::where($request->search_type, $request->search_content)->get();
+            // return view('pdc-list-all-program', compact('programs', 'path'));
         }
         elseif($request->path() === 'pdcProgramList'){
             

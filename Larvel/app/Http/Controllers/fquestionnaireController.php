@@ -67,11 +67,21 @@ class fquestionnaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         //
-        $programID = $id;
-        return view('pdc-program-feedback-uploader', compact('programID'));
+        if($request->path() === 'feedbackFormInsertion/'.$id){
+            $programID = $id;
+            $check = DB::table('feedbacks')->where('program_id', $id)->get();
+            if(count($check) === 0){
+                return view('pdc-program-feedback-uploader', compact('programID'));
+            }
+            elseif(count($check) !== 0)
+            {
+                return back()->with('warn', "د یاد پروګرام لپاره مخکي پوښتنلیک سیسټم ته اضافه سوی دی!");
+            }
+        }
+
     }
 
     /**

@@ -70,6 +70,18 @@
 				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 					font-size: 20px !important;
 			}
+		.swal-modal div{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
+        }
+		.swal-text{
+			text-align: right;
+
+		}
+		.swal-modal{
+			padding: 20px 24px;
+    		width: 600px;
+		}
 	</style>
 </head>
 
@@ -95,7 +107,7 @@
 					{{ method_field('POST') }}
       				{{ csrf_field() }}
 						<input class="d-none" type="text" name="program_id" id="" value="{{$program_id}}">
-						@if ($errors->any())
+									@if ($errors->any())
 										<div class="mb-2" id="alertMassege">
 											<ul style="list-style-type:none" class="p-0 m-0">
 												@foreach ($errors->all() as $error)
@@ -126,7 +138,7 @@
 								  <select class="custom-select"
 									  style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;"
 									  name="file_type[0]">
-									  <option selected>د فایل ډول  </option>
+									  <option selected value="">د فایل ډول  </option>
 									  <option value="لکچر">لکچر</option>
 									  <option value="کتاب">کتاب</option>
 									  <option value="انځور">انځور</option>
@@ -182,7 +194,19 @@
 	<script src="{{asset('assets/js/select2.min.js')}}"></script>
 	<!-- Tagsinput JS -->
 	<script src="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}"></script>
+		<!-- sweet alert -->
+		<script src="{{asset('assets/sweet-alert/sweetalert.min.js')}}"></script>
+		@if(Session::has('warn'))
+			<script>
+			swal('وبخښئ!',"{!! Session::get('warn') !!}", "warning", {
+				button: "وروسته کوښښ وکړئ",
+			});
+			</script>
+		@endif
 	<script>
+
+		
+
 		var count4 = 2;
 		var indexFile = 1;
 		var indexFileType = 1;
@@ -206,7 +230,7 @@
 												<div class="form-group">
 													<select class="custom-select"
 														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="file_type[${indexFileType}]">
-                                                        <option selected>د فایل ډول</option><option selected>د فایل ډول  </option>
+                                                        <option selected value="">د فایل ډول</option>
 														<option value="لکچر">لکچر</option>
 														<option value="کتاب">کتاب</option>
 														<option value="انځور">انځور</option>

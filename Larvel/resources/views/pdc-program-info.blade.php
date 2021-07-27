@@ -317,22 +317,56 @@ h4 {
 <!-- /Page Wrapper -->
 @endsection
 
-		@section('custom-js')
-		@if(Session::has('program_part_added'))
-            <script>
-            swal('ډېر ښه!',"{!! Session::get('program_part_added') !!}", "success", {
-                button: "مننه",
-            });
-            </script>
-        @endif
-		@section('custom-js')
-		@if(Session::has('warn'))
-            <script>
-            swal('وبخښئ!',"{!! Session::get('warn') !!}", "warning", {
-                button: "وروسته کوښښ وکړئ",
-            });
-            </script>
-        @endif
+@section('custom-js')
+@if(Session::has('program_part_added'))
+	<script>
+	swal('ډېر ښه!',"{!! Session::get('program_part_added') !!}", "success", {
+		button: "مننه",
+	});
+	</script>
+@endif
+@if(Session::has('success_questionnaire'))
+	<script>
+	swal('ډېر ښه!',"{!! Session::get('success_questionnaire') !!}", "success", {
+		button: "مننه",
+	});
+	</script>
+@endif
+@if(Session::has('warn'))
+	<script>
+	swal('وبخښئ!',"{!! Session::get('warn') !!}", "warning", {
+		button: "وروسته کوښښ وکړئ",
+	});
+	</script>
+@endif
+@if(Session::has('all_facilitator_deleted'))
+	<script>
+	swal('ډېر ښه!',"{!! Session::get('all_facilitator_deleted') !!}", "success", {
+		button: "سمده",
+	});
+	</script>
+@endif
+@if(Session::has('questionnaire_deleted'))
+	<script>
+	swal('ډېر ښه!',"{!! Session::get('questionnaire_deleted') !!}", "success", {
+		button: "سمده",
+	});
+	</script>
+@endif
+@if(Session::has('success'))
+	<script>
+	swal('ډېر ښه!',"{!! Session::get('success') !!}", "success", {
+		button: "سمده",
+	});
+	</script>
+@endif
+@if(Session::has('program_materials_added'))
+	<script>
+	swal('ډېر ښه!',"{!! Session::get('program_materials_added') !!}", "success", {
+		button: "سمده",
+	});
+	</script>
+@endif
 	
 <script>
 		function pathFinder(num)

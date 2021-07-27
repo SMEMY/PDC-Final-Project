@@ -20,8 +20,8 @@
 	<script src="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}"></script>
 	<!-- bootstrap growl js -->
 	<script src="{{asset('assets/growl/jquery.bootstrap-growl.min.js')}}"></script>
-<!-- sweet alert -->
-<script src="{{asset('assets/sweet-alert/sweetalert.min.js')}}"></script>
+	<!-- sweet alert -->
+	<script src="{{asset('assets/sweet-alert/sweetalert.min.js')}}"></script>
 
 
     @yield('custom-js')

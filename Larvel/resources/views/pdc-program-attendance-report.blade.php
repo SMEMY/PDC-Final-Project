@@ -14,16 +14,38 @@ li, h3{
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-size:30px !important;
 }
-th{
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+		th{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			text-align: center !important;
+			padding:10 !important;
+			<!-- line-height: 15px; -->
+			font-size: 20px !important;
+			font-weight: bold !important;
+			border-radius: 5px !important;
 
-	font-size:25px !important;
-	
-}
-td{
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-			font-size:20px !important;
-}
+		}
+		td{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			text-align: center !important;
+			border-radius: 5px !important;
+			padding:2px !important;
+			font-size: 20px !important;
+
+		}
+		h4{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			font-weight: bold !important;
+			font-size: 20px !important;
+			
+
+		}
+		h5{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
+		}
+		table{
+			border-collapse: separate !important;
+		}
 li{
 	font-size: 20px !important;
 }
@@ -74,7 +96,7 @@ li{
 										<th class=" col-2 p-2 border text-light" style="font-size: 18px;">
 											<strong>ګډونوال</strong>
 										</th>
-										<th class="text-center border col-3 p-1" style="font-size: 18px;">
+										<th class="text-center border col-3 p-1 text-light" style="font-size: 18px;">
 											<strong>مجموعه ورځي</strong>
 										</th>
 										<th class="text-center border col-3 p-2" style="font-size: 18px;">
@@ -100,7 +122,7 @@ li{
 
 										@foreach($attendanceReport as $participant)
 										<tr class="border col-12">
-											<td class="border-left ">
+											<td class="border-left text-left pl-3">
 												{{$participant->name}} {{$participant->last_name}}
 											</td>
 											<td class="text-center  border-left ">
@@ -173,6 +195,13 @@ li{
 		<!-- Page Wrapper -->
 @endsection
 @section('custom-js')
+		@if(Session::has('success'))
+            <script>
+            swal('ډېر ښه!',"{!! Session::get('success') !!}", "success", {
+                button: "سمده",
+            });
+            </script>
+        @endif
 <script>
 	function pathFinder(num)
 	{

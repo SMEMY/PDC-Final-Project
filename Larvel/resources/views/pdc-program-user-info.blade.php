@@ -145,6 +145,13 @@ h4 {
 
 
 @section('custom-js')
+		@if(Session::has('facilitator_deleted'))
+            <script>
+            swal('ډېر ښه!',"{!! Session::get('facilitator_deleted') !!}", "success", {
+                button: "سمده",
+            });
+            </script>
+        @endif
 <script>
 		function pathFinder(num)
 					{
