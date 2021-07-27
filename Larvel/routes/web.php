@@ -55,6 +55,7 @@ Route::view('/memberRegisteration', 'pdc-add-member');
 Route::view('/adminDashboard', 'index');
 // Route::view('/programEnrollment', 'enroll-program-info');
 
+Route::get('/deleteQuestionnaire/{id}', [deleteFeedbackQuestion::class, 'deleteProgramQuestionnaire']);
 Route::get('/deleteQuestion/{id}', [deleteFeedbackQuestion::class, 'deleteQuestion']);
 
 // Route::resource('/addFacilitator', facilitatorandparticipantController::class);

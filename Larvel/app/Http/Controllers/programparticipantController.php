@@ -235,11 +235,12 @@ class programparticipantController extends Controller
                     ['programsparticipants.program_id', $request->program_id]
                 ]);
                 $deleteParticipant->delete();
+                DB::table('attendances')->where('participant_id', $id)->delete();
                 $check1 = DB::table('programsparticipants')
                 ->where('programsparticipants.program_id', $request->program_id)->get();
                 if(count($check1) !== 0)
                 {
-                    return redirect('specificeProgramParticipants/'.$request->program_id);
+                    return back()->with('success', "یاد ګډونوال له سیسټم څخه له منځه ولاړ!");
                 }
                 else{
                     return redirect('pdcProgramInfo/'.$request->program_id)->with('warn', "د یاد پروګرام ټوله ګدونوال له سیسټم څخه پاک کړل سوه!");

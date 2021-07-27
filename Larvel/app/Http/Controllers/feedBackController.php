@@ -125,7 +125,13 @@ class feedBackController extends Controller
             // $programs = DB::table('programs')->get();
             // return $facilities;
             // $program_id = $id;
-            return view('pdc-feedback', compact('materials','facilities','locations','comments', 'program_id'));
+            if(count($materials) === 0 && count($facilities) === 0 && count($locations) === 0 && count($comments) === 0)
+            {
+                return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
+            }
+            else{
+                return view('pdc-feedback', compact('materials','facilities','locations','comments', 'program_id'));
+            }
         }
        
         return "i am feed show function()";

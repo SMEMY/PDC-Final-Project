@@ -156,6 +156,8 @@
                         <div class="dropdown-menu dropdown-menu-left">
                             <a class="dropdown-item" href="/feedback/{{$program_id}}/edit"  ><i
                                     class="fa fa-pencil m-r-5"></i>معلومات اصلاح کړی</a>
+                                    <a class="dropdown-item"  data-toggle="modal"
+                                        data-target="#delete_project" id="path" ><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
                         </div>
                     </div>
                 @endif
@@ -291,6 +293,32 @@
                 </div>
             </div>
         </div>
+        
+<!-- Delete Project Modal -->
+            <div class="modal custom-modal fade" id="delete_project" role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-body">
+							<div class="form-header">
+								<h3>ښاغلی/آغلې له منځه وړل</h3>
+								<p>آیا تاسي باوري یاست چي یاد پوښتنلیک له منځه وړی؟</p>
+							</div>
+							<div class="modal-btn delete-action">
+								<div class="row">
+									<div class="col-md-6">
+                          				<a class="btn btn-primary continue-btn col-md-12" href="/deleteQuestionnaire/{{$program_id}}">پوښتنلیک له منځه یوسی</a>
+									</div>
+									<div class="col-6">
+										<a href="javascript:void(0);" data-dismiss="modal"
+											class="btn btn-primary cancel-btn">قطعه یې کړی</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<!-- /Delete Project Modal -->
     </div>
     <!-- /Main Wrapper -->
 
@@ -333,6 +361,13 @@
         @if(Session::has('question_not_found'))
             <script>
             swal(' وبخښئ!',"{!! Session::get('question_not_found') !!}", "warning", {
+                button: "بیاځلي امتحان کړی",
+            });
+            </script>
+        @endif
+        @if(Session::has('questionnaire_not_found'))
+            <script>
+            swal(' وبخښئ!',"{!! Session::get('questionnaire_not_found') !!}", "warning", {
                 button: "بیاځلي امتحان کړی",
             });
             </script>

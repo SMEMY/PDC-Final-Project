@@ -42,7 +42,11 @@ class materialController extends Controller
         
         $request->validate([
             'materials' => 'required',
-            'materials.*' =>  'mimes:pdf,docx, doc, docm, rtf, txt, pptx, pptm, ppt, xlsx, xlsm, xlsb, xltx|max:40960',
+            'materials.*' =>  'mimes:png,jpg,jpeg,mp4,pdf,docx,doc,docm,rtf,txt,pptx,pptm,ppt,xlsx,xlsm,xlsb,xltx,gif,csv,mp3,m4a,mkv,avi,wmv,mov|max:40960',
+            // 'file_name' => 'requird',
+            // 'file_name.*' => 'string|max:20',
+            // 'file_type' => 'requird',
+            // 'file_type.*' => 'string|in:آډیو,وډیو,انځور,کتاب,لکچر',
         ]);
         // return "sdfsd";w
         // return $files = $request->materials;
@@ -51,23 +55,37 @@ class materialController extends Controller
         $index = 0;
         foreach($request->file('materials') as $material)
         {     
-                $fileName = time().'.'.$material->extension();
-                $kb = $material->getSize() / 1024;
-                $mb = $kb / 1024;
-                $gb = $mb / 1024;
-                $material->storeAs('public/programFiles', $fileName);
-                sleep(1);   
-                $fileSave = new Material;
-                $fileSave->name = $request->file_name[$index];
-                $fileSave->type = $request->file_type[$index];
-                $fileSave->path = $fileName;
-                $fileSave->size =  round($mb, 2);
-                $fileSave->extension =  $material->extension();
-                $fileSave->program_id = $request->program_id;
-                $fileSave->save();
-                $index++;
+                if(!empty($request->file_name[$index]) && !empty($request->file_type[$index]))
+                {
+                    $fileName = time().'.'.$material->extension();
+                    $kb = $material->getSize() / 1024;
+                    $mb = $kb / 1024;
+                    $gb = $mb / 1024;
+                    $material->storeAs('public/programFiles', $fileName);
+                    sleep(1);   
+                    $fileSave = new Material;
+                    $fileSave->name = $request->file_name[$index];
+                    $fileSave->type = $request->file_type[$index];
+                    $fileSave->path = $fileName;
+                    $fileSave->size =  round($mb, 2);
+                    $fileSave->extension =  $material->extension();
+                    $fileSave->program_id = $request->program_id;
+                    $fileSave->save();
+                    $index++;
+                    return redirect('pdcProgramInfo/'.$request->program_id)->with('program_materials_added', "پروګرام اړونده فایلونه په کامیابۍ سره سیسټم ته داخل کړل سوه!");
+                }
+                elseif(empty($request->file_name[$index])){
+                    return back()->with('warn', "د فایل نوم باید وجود ولري!");
+                }
+                elseif(empty($request->file_type[$index]))
+                {
+                    return back()->with('warn', "د فایل ډولس باید وجود ولري!");
+
+                }
+                else{
+                    return "lkasjdfalkfdjaldfkjalfdkjflak";
+                }
         }
-        return redirect('pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده فایلونه په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**

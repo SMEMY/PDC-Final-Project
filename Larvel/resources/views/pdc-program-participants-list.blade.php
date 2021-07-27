@@ -182,6 +182,13 @@ hahahaha
             });
             </script>
         @endif
+		@if(Session::has('success'))
+            <script>
+            swal('ډېر ښه!',"{!! Session::get('success') !!}", "success", {
+                button: "سمده",
+            });
+            </script>
+        @endif
 <script>
 	function pathFinder(num)
 	{

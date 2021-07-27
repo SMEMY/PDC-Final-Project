@@ -101,14 +101,18 @@ class attendanceController extends Controller
             ->where('attendances.program_id', $id)
             ->get();
             $programID = $id;
-            // $pdf = PDF::loadView('pdc-program-attendance-report',compact('attendanceReport','programID'));
-            // return $pdf->download('p.pdf');
-            return view('pdc-program-attendance-report',compact('attendanceReport','programID'));
+            if(count($attendanceReport) === 0)
+            {
+                return back()->with('warn', "تر اوس د یاد پروګرام حاضري سیسټم ته نده اضافه کړل سوې!");
+            }
+            else
+            {
+                return view('pdc-program-attendance-report',compact('attendanceReport','programID'));
+            }
         }
         elseif($request->path() === 'pdcProgramAttendance/'.$id){        
             $Participants =  DB::table('facilitatorsandparticipants')
             ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
-            // ->join('attendances', 'facilitatorsandparticipants.id', '=', 'attendances.participant_id')
             ->select('facilitatorsandparticipants.*')
             ->where('programsparticipants.program_id', $id)
             ->get();
@@ -117,13 +121,7 @@ class attendanceController extends Controller
             {
             array_push( $ParticipantsIDs, $participant->id);
             }
-            // return $ParticipantsIDs;
-
-
-
-
             $participantsAttendanced =  DB::table('facilitatorsandparticipants')
-            // ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
             ->join('attendances', 'facilitatorsandparticipants.id', '=', 'attendances.participant_id')
             ->select('facilitatorsandparticipants.*')
             ->where('attendances.program_id', $id)
@@ -133,54 +131,32 @@ class attendanceController extends Controller
             {
             array_push( $attendancedParticipantsIDs, $participant->id);
             }
-
-            // $attendancedParticipantsIDs;
-
             $notAttendancedParticipantsIDs = array_diff( $ParticipantsIDs, $attendancedParticipantsIDs);
-            // return $notAttendancedParticipantsIDs->1;
             $remainAttendance = array();
             foreach($notAttendancedParticipantsIDs as $notID)
             {
                 array_push( $remainAttendance,$notID);
             }
-            // return $remainAttendance;
-            // $enrolledProgramParticipants =  DB::table('facilitatorsandparticipants')
-            // ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
-            // ->select('facilitatorsandparticipants.*')
-            // ->where('programsparticipants.program_id', $id)
-            // ->get();
-            // $enrolledProgramParticipantsIDs = array();
-            // foreach ($enrolledProgramParticipants as $enrolledProgramParticipant)
-            // {
-            // array_push( $enrolledProgramParticipantsIDs, $enrolledProgramParticipant->id);
-            // }
-            // // return $ePart_IDs;
-            // $notAttendancedParticipantsIDs;
-            // if(count($enrolledProgramParticipantsIDs) >count( $attendancedParticipantsIDs))
-            // {
-            // }
-            // else{
-            //     $notAttendancedParticipantsIDs = array_diff( $attendancedParticipantsIDs ,$enrolledProgramParticipantsIDs);
-            // }
-            // $finalIDs = array();
-            // foreach($notAttendancedParticipantsIDs as $t)
-            // {
-            //     array_push($finalIDs, $t);
-            // }
-            //  return $finalIDs;
-
-
-
             $participants =  DB::table('facilitatorsandparticipants')
             ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
             ->select('facilitatorsandparticipants.*')
             ->whereIn('programsparticipants.participant_id', $remainAttendance)
             ->distinct()
-            // ->where('programsparticipants.program_id', $id)
             ->get();
-
             $programID = $id;
-            return view('pdc-program-attendance', compact('participants', 'programID'));
+            $check =  DB::table('facilitatorsandparticipants')
+            ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
+            ->select('facilitatorsandparticipants.*')
+            ->where('programsparticipants.program_id', $id)
+            ->get();
+            if(count($check) !== 0)
+            {
+                return view('pdc-program-attendance', compact('participants', 'programID'));
+            }
+            else
+            {
+                return back()->with('warn', "یاد پروګرام لپاره تر اوسه ګډونوال ندي اضافه کړل سوي!");
+            }
        }
        
     }
@@ -251,9 +227,18 @@ class attendanceController extends Controller
         //
         if($request->path() === 'pdcProgramAttendanceReport/'.$id)
         {
-            $attendance = Attendance::where('participant_id', $id)->get();
-            $attendance[0]->delete();
-            return redirect('pdcProgramAttendanceReport/'.$request->program_id);
+
+            Attendance::where('participant_id', $id)->delete();
+            $check = DB::table('attendances')->where('Program_id', $request->program_id)->get();
+            if(count($check) === 0)
+            {
+                return redirect('pdcProgramInfo/'.$request->program_id)->with('success', "د یاد پروګرام د حاضرۍ راپور په بښپړه ډول له  سیسټم څخه له منځه ولاړ!");
+
+            }
+            else{
+                return back()->with('success', "د یاد ګدونوال د حاضرۍ راپور د سیسټم څخه له منځه ولاړ!");
+
+            }
         }
     }
 }

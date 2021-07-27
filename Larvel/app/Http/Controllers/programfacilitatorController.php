@@ -217,13 +217,16 @@ class programfacilitatorController extends Controller
         if($request->path() === 'deleteFacilitatorForProgram/'.$id)
         {
             // return $id;
-            Programsfacilitator::
-            where([
-                ['facilitator_id', $id], 
-                ['program_id', $request->program_id]
-                ])
-            ->delete();
-            return redirect('facilitatorProfileForProgram/'.$id);
+            Programsfacilitator::where([['facilitator_id', $id], ['program_id', $request->program_id]])->delete();
+            $check =  Programsfacilitator::where('program_id', $request->program_id)->get();
+            if(count($check) != 0)
+            {
+                return back()->with('facilitator_deleted', "د یاد پروګرام تسهیلونکی له سیسټم څخه پاک کړل سوه!");
+            }
+            else
+            {
+                return redirect('pdcProgramInfo/'.$request->program_id)->with('all_facilitator_deleted', "د یاد پروګرام ټوله تسهیلونکي له سیسټم څخه پاک کړل سوه!");
+            }
         }
         else{
             $deleteFacilitator = Programsfacilitator::where('facilitator_id', $id)->delete();
