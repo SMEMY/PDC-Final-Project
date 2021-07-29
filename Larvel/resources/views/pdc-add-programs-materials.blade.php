@@ -40,6 +40,7 @@
 
 	<!-- Tagsinput CSS -->
 	<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
+	
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -82,6 +83,20 @@
 			padding: 20px 24px;
     		width: 600px;
 		}
+		.bootstrap-growl{
+            font-size: 30px !important;
+			padding:40px !important;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
+		}
+
+
+        .progress { position:relative; width:100%; border: 1px solid #7F98B2; padding: 1px; border-radius: 3px; height: 20px;}
+
+        .bar { background: linear-gradient(to left, #a6ffb1 0%, #2ca106 100%); width:0%; height:15px; border-radius: 3px; }
+
+        .percent { position:absolute; display:inline-block; top:3px; left:48%; color: #ff0303}
+
 	</style>
 </head>
 
@@ -103,10 +118,10 @@
 				<div class="card-header p-3">
 					<h4 class="card-title mb-0">د اوړنده پروکرام اړونده فایلونه اپلوډ کړئ</h4>
 				</div>
-				<form action="/materials" method="POST" enctype="multipart/form-data" name="formName">
+				<form action="/materials" method="POST" enctype="multipart/form-data" name="formName" id="filesUploads">
 					{{ method_field('POST') }}
       				{{ csrf_field() }}
-						<input class="d-none" type="text" name="program_id" id="" value="{{$program_id}}">
+						<input class="d-none" type="text" name="program_id" id="prog" value="{{$program_id}}">
 									@if ($errors->any())
 										<div class="mb-2" id="alertMassege">
 											<ul style="list-style-type:none" class="p-0 m-0">
@@ -121,8 +136,7 @@
 					  <div class="row mt-5" id="files">
 						  <div class=" col-md-6">
 							  <div class="form-group custom-file ">
-								  <input type="file" class="custom-file-input" id="customFile" onchange="nameShow(this)"
-									  name="materials[0]">
+								  <input type="file" class="custom-file-input" id="customFile" name="materials[0]">
 								  <label class="custom-file-label" for="customFile">د پروګرام اړونده
 									  فایل
 									  انتخاب کړی</label>
@@ -158,8 +172,13 @@
 							  <!-- <label class="ml-5 col-form-label col-lg-2" style="display: block;">add more questions!</label> -->
 						  </div>
 					  </div>
+
+					    <div class="progress mb-5 d-none" id="show">
+                            <div class="bar"></div >
+                            <div class="percent ">0%</div >
+                        </div>
 					  <div class="m-auto" style="width: fit-content;">
-						  <button type="submit" class="btn btn-primary p-2" style="width: 300px; text-align: center;">ثبت
+						  <button type="submit" class="btn btn-primary p-2" style="width: 300px; text-align: center;" onclick="showBar()">ثبت
 							  کړی</button>
 					  </div>
 				</form>
@@ -173,9 +192,8 @@
 
 
 
-
-<!-- jQuery -->
-<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+	<!-- jQuery -->
+	<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
 	<!-- Bootstrap Core JS -->
 	<script src="{{asset('assets/js/popper.min.js')}}"></script>
 	<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
@@ -194,8 +212,75 @@
 	<script src="{{asset('assets/js/select2.min.js')}}"></script>
 	<!-- Tagsinput JS -->
 	<script src="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}"></script>
-		<!-- sweet alert -->
-		<script src="{{asset('assets/sweet-alert/sweetalert.min.js')}}"></script>
+	<!-- bootstrap growl js -->
+	<script src="{{asset('assets/growl/jquery.bootstrap-growl.min.js')}}"></script>
+	<!-- sweet alert -->
+	<script src="{{asset('assets/sweet-alert/sweetalert.min.js')}}"></script>
+
+		<script src="{{asset('assets/form-js/jquery.form.min.js')}}"></script>
+	<script>
+		function showBar(){
+			$('#show').removeClass('d-none');
+		}
+		function bootstrapAlert(){
+				   $('.bootstrap-growl').remove();
+	   
+				   $.bootstrapGrowl("د پروګرام فایلونه په کامیابۍ سره سیسټم ته اضافه کړل سول!", {
+					   type:"success",
+					   offset: {from: "top", amount: 200},
+					   align: "center", 
+					   width: 1000,
+					   delay: 3000,
+					   allow_dismiss: true,
+					   stackup_spacing: 20
+				   });
+			   }
+			   function bootstrapAlert1(){
+				
+				swal('وبخښئ!',"د یاد پروګرام لپاره فایلونه سیسټم ته داخل کړل سوه!", "success", {
+				button: "مننه",
+			}).then(function(){ 
+					var program = $('#prog').val();
+					console.log(program);
+					window.location = `/pdcProgramInfo/${program}`;
+  					 }
+);
+			}
+	</script>
+		<script type="text/javascript">
+
+$(function() {
+    $(document).ready(function()
+    {
+        var bar = $('.bar');
+        var percent = $('.percent');
+          $('#filesUploads').ajaxForm({
+            beforeSend: function() {
+                var percentVal = '0%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            uploadProgress: function(event, position, total, percentComplete) {
+				$('#show').removeClass('d-none');
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            complete: function(xhr) {
+                bootstrapAlert1();
+				$('#show').addClass('d-none');
+				
+				// window.setTimeout(function () {
+				// 	var program = $('#prog').val();
+				// 	console.log(program);
+				// 	// window.location = `/pdcProgramInfo/${program}`;
+				// }, 3000);
+            }
+          });
+    }); 
+ });
+
+</script>
 		@if(Session::has('warn'))
 			<script>
 			swal('وبخښئ!',"{!! Session::get('warn') !!}", "warning", {

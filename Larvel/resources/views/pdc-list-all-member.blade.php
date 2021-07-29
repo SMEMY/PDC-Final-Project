@@ -155,6 +155,14 @@ select{
 
 
 @section('custom-js')
+
+		@if(Session::has('member_edited'))
+            <script>
+            swal('ډېر ښه!',"{!! Session::get('member_edited') !!}", "success", {
+                button: "مننه",
+            });
+            </script>
+        @endif
 <script>
 
 	function pathFinder(num)

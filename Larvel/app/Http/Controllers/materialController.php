@@ -44,7 +44,7 @@ class materialController extends Controller
         
         $request->validate([
             'materials' => 'required',
-            'materials.*' => 'mimes:png,jpg,jpeg,mp4,pdf,docx,doc,docm,rtf,txt,pptx,pptm,ppt,xlsx,xlsm,xlsb,xltx,gif,csv,mp3,m4a,mkv,avi,wmv,mov|max:40960',
+            'materials.*' => 'mimes:png,jpg,jpeg,mp4,pdf,docx,doc,docm,rtf,txt,pptx,pptm,ppt,xlsx,xlsm,xlsb,xltx,gif,csv,mp3,m4a,mkv,avi,wmv,mov|max:1048576',
             // 'file_name' => 'required',
             'file_name.*' => 'required|string|max:20',
             // 'file_type' => 'required',
@@ -102,11 +102,11 @@ class materialController extends Controller
         {
             $program_id = $id;
             // return $program_id;
-            // $programMaterials = Program::with('getMaterials')->find($id);
-            $programMaterials = DB::table('materials')->where('program_id', $id)->get();
+            $programMaterials = Program::with('getMaterials')->find($id);
+            $programMaterialsCheck = DB::table('materials')->where('program_id', $id)->get();
 
 
-            if(count($programMaterials) !== 0 )
+            if(count($programMaterialsCheck) !== 0 )
             {
                 return view('files-download', compact('programMaterials', 'program_id'));
             }
@@ -163,7 +163,7 @@ class materialController extends Controller
         // return redirect('materials/'.$request->program_id);
         // return $id;
         Storage::delete('public/programFiles/'.$id);
-        $delete = Material::where('path', $id);
+        $delete = Material::where('path', $id)->get();
         if($delete->program_id === $request->program_id)
         {
             $delete->delete();

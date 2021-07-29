@@ -144,6 +144,13 @@ h4 {
 
 
 @section('custom-js')
+		@if(Session::has('added_to_program'))
+            <script>
+            swal('ډېر ښه!',"{!! Session::get('added_to_program') !!}", "success", {
+                button: "مننه",
+            });
+            </script>
+        @endif
 <script>
 		function pathFinder(num)
 					{
