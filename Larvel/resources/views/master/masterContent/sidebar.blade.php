@@ -36,9 +36,9 @@
 							<ul style="display: none;">
 								<!-- <li><a class="active" href="test">پروګرامونه</a></li> -->
 								<li class="submenu">
-									<a href="#" class=""><span>ګدونوال ثبتول</span> <span class="menu-arrow"></span></a>
+									<a href="#" class=""><span>غړی ثبتول</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="/memberRegisteration">د پروګرام ګډونوال ثبتول</a></li>
+										<li><a href="/memberRegisteration">سیسټم ته غړی اضافه کول</a></li>
 									</ul>
 								</li>
 								<li class="submenu">

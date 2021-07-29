@@ -55,16 +55,16 @@ class programEnrollmentController extends Controller
                     $facilEnrollment->save();
                     if($request->user_address === 'member')
                     {
-                        return redirect('memberProfile/'.$request->member_id);
+                        return redirect('memberProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم غړی په کامیابۍ سره و پروګرام ته د تسهیلونکی په حیث شامل کړل سو!');
                         
                     }
                     elseif($request->user_address === 'facilitator')
                     {
                         
-                        return redirect('facilitatorProfile/'.$request->member_id);
+                        return redirect('facilitatorProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم تسهیلونکی په کامیابۍ سره و پروګرام ته د تسهیلونکی په حیث شامل کړل سو!');
                     }
                     else{
-                        return redirect('participantProfile/'.$request->member_id);
+                        return redirect('participantProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم ګډونوال په کامیابۍ سره و پروګرام ته د تسهیلونکی په حیث شامل کړل سو!');
                     }
                 }
                 else{
@@ -86,17 +86,17 @@ class programEnrollmentController extends Controller
                     $partEnrollment->save();
                     if($request->user_address === 'member')
                     {
-                        return redirect('memberProfile/'.$request->member_id);
+                        return redirect('memberProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم غړی په کامیابۍ سره و پروګرام ته د ګډونوال په حیث شامل کړل سو!');
                         
                     }
                     elseif($request->user_address === 'facilitator')
                     {
                         
-                        return redirect('facilitatorProfile/'.$request->member_id);
+                        return redirect('facilitatorProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم تسهیلونکی په کامیابۍ سره و پروګرام ته د ګډونوال په حیث شامل کړل سو!');
                     }
                     else{
-                        return redirect('participantProfile/'.$request->member_id);
-                    } 
+                        return redirect('participantProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم ګډونوال په کامیابۍ سره و پروګرام ته د ګډونوال په حیث شامل کړل سو!');
+                    }
                 } 
                 else{
                     return back()->with('program_code_not_found', "تاسي د دې دمخه لا په یاد پروګرام کي د ګډونوال په حیث ګډون لری!");

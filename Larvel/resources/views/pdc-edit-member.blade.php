@@ -74,9 +74,20 @@ label {
 						<!-- <p class="account-subtitle"></p> -->
 <hr !important>
 						<!-- Account Form -->
-						<form action="/{{$path}}/{{$member->id}}" method="POST">
+						<form action="/{{$path}}List/{{$member->id}}" method="POST">
 								{{ method_field('PUT') }}
       					 	    {{ csrf_field() }}
+								   @if ($errors->any())
+										<div class="mb-5" id="alertMassege">
+											<ul style="list-style-type:none" class="p-0 m-0">
+												@foreach ($errors->all() as $error)
+												<li class="rounded p-2 m-1 alert alert-danger" >
+													{{ $error }}
+												</li>
+												@endforeach
+											</ul>
+										</div>
+									@endif
 								   @if($path === 'facilitatorProfileForProgram')
 								   <input class="d-none" type="number" name="program_id" id="" value="{{$program_id[0]->program_id}}">
 								   @endif
@@ -84,7 +95,7 @@ label {
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="col-form-label">نوم <span class="text-danger">*</span></label>
-											<input class="form-control " type="text" name="name" value="{{$member->name}}">
+											<input class="form-control " type="text" name="member_name" value="{{$member->name}}">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -235,9 +246,10 @@ label {
 									@endif			
 								</div>
 								
-								<hr !important>	<!-- this part has been hidden just for DB member role -->
+								<!-- <hr !important>	 -->
+								<!-- this part has been hidden just for DB member role -->
 
-								<div class="row">
+								<!-- <div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="col-form-label">پاسورډ<span
@@ -249,10 +261,10 @@ label {
 										<div class="form-group">
 											<label class="col-form-label">پاسورډ تائید کړی<span
 													class="text-danger">*</span></label>
-											<input class="form-control input-sm" type="password" name="password_confirm">
+											<input class="form-control input-sm" type="password" name="password_confirmation" value="{{$member->password}}">
 										</div>
 									</div>
-								</div>
+								</div> -->
 							<hr !important>	<!-- this part has been hidden just for DB member role -->
 
 							<div class="form-group text-center col-md-4 m-auto">

@@ -188,10 +188,22 @@ class programparticipantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $facilitator_participant = Facilandpart::find($id);
+        $validate = $request->validate([
+            'member_name' => 'bail|required|string|max:30',
+            'last_name' => 'bail|required|string|max:30',
+            'phone_number' => 'bail|required|string|max:13',
+            'email' => 'bail|required|email|max:50',
+            'gender' => 'bail|required|string|in:نارینه,ښځینه',
+            'office_campus' => 'bail|nullable|string|in:کندهار پوهتون',
+            'office_building' => 'bail|required|string|in:ساینس,ادبیات,شرعیات,اقتصاد,زراعت,ژورنالیزم,حقوق,ساینس,انجنیري,طب,اداري معاونیت,ریاست مقام,محصلینو چارو معاونیت,تعلیم او تربیه,اداره ئې عامه,کمپیوټر ساینس',
+            'office_department' => 'bail|required|string|max:30',
+            'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
+            'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
+            'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
+        ]);
+        $facilitator_participant = Facilitatorsandparticipant::find($id);
         // return $request->last_name;
-        $facilitator_participant->name = $request->name;
+        $facilitator_participant->name = $request->member_name;
         $facilitator_participant->last_name = $request->last_name;
         $facilitator_participant->phone_number = $request->phone_number;
         $facilitator_participant->email = $request->email;
@@ -201,14 +213,9 @@ class programparticipantController extends Controller
         $facilitator_participant->office_department = $request->office_department;
         $facilitator_participant->office_position = $request->office_position;
         $facilitator_participant->office_position_category = $request->office_position_category;
-        if ( $request->educational_rank != null) {
-            $facilitator_participant->educational_rank = $request->educational_rank;
-        }
-        if ($request->password == $request->password_confirm) {
-            $facilitator_participant->password = $request->password;
-        }
+        $facilitator_participant->educational_rank = $request->educational_rank;
         $facilitator_participant->save();
-        return redirect('participantList');
+        return redirect('participantList')->with('member_edited', 'د یاد غړي معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
     }
 
     /**
