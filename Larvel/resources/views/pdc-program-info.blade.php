@@ -272,7 +272,8 @@ h4 {
 						<a class="btn job-btn mt-3 p-2 bg-danger" href="/pdcProgramAttendancePaper/{{$programs->id}}" >د پروګرام د ګډونوالو حاضري پاڼه</a>
 						<a class="btn job-btn mt-3 p-2 " href="/pdcProgramAttendanceReport/{{$programs->id}}" >د پروګرام د ګډونوالو د سوبتیا راپور </a>
 						<a class="btn job-btn mt-3 p-2" href="/feedback/{{$programs->id}}" >د پروګرام پوښتنلیک </a>
-						<a class="btn job-btn mt-3 p-2 bg-danger" href="/" >د پروګرام پوښتنلیک اوسط</a>
+						<a class="btn job-btn mt-3 p-2 " href="/feedbackAnswer/{{$programs->id}}" >د پروګرام پوښتنلیک ځوابول</a>
+						<a class="btn job-btn mt-3 p-2 " href="/pdcProgramFeedbackReport/{{$programs->id}}" >د پروګرام پوښتنلیک راپور</a>
 						<a class="btn job-btn mt-3 p-2" href="/materials/{{$programs->id}}" >د پروګرام تدریسي مواد</a>
 	
 					</div>

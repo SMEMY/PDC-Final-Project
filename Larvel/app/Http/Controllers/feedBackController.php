@@ -6,6 +6,7 @@ Use Illuminate\Http\Request;
 Use Illuminate\Support\Facades\DB;
 Use App\Models\Fquestionnaire;
 Use App\Models\Feedback;
+Use App\Models\Feedbackcomment;
 Use App\Models\Feedbackanswer;
 
 
@@ -42,10 +43,22 @@ class feedBackController extends Controller
     public function store(Request $request)
     {
         //
-        //    return $request->feedback_form_id;
-                $programId = DB::table('feedbacks')
-                ->where('id', $request->feedback_form_id)
-                ->update(['comment'=> $request->comment]);
+          
+            $request->validate([
+                'materials_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
+                'facilities_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
+                'locations_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
+                'opinions_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
+                'comment' => 'bail|required|max:500',
+            ]);
+
+            $comment = new Feedbackcomment;
+            $comment->feedback_form_id = $request->feedback_form_id;
+            $comment->comment = $request->comment;
+            $comment->save();
+                // $programId = DB::table('feedbackcomments')
+                // ->where('id', $request->feedback_form_id)
+                // ->update(['comment'=> $request->comment]);
             // echo $request->facilities[0];
             
             for ($i=0; $i <count($request->materials) ; $i++) { 
@@ -72,7 +85,8 @@ class feedBackController extends Controller
                 $questionAnswer->question_id = $request->opinions[$i];
                 $questionAnswer->save();
             }
-            return redirect('pdcProgramInfo/'.$request->program_id)->with('success_questionnaire', 'د یاد پروګرام لپاره په سیسټم کي په کامیابۍ سره پوښتنلیک اضافه کړل سو!');
+            // return redirect('pdcProgramInfo/'.$request->program_id)->with('success_questionnaire', 'د یاد پروګرام لپاره په سیسټم کي په کامیابۍ سره پوښتنلیک اضافه کړل سو!');
+            return back()->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
         
        
     }
@@ -133,6 +147,54 @@ class feedBackController extends Controller
                 return view('pdc-feedback', compact('materials','facilities','locations','comments', 'program_id'));
             }
         }
+        elseif($request->path() === 'feedbackAnswer/'.$id)
+        {
+            $materials =  DB::table('feedbacks')
+            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+            ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
+            ->where([
+                ['feedbacks.program_id', '=', $id],
+                ['fquestionnaires.question_category', '=', 'د ورکشاپ/ټرېنینګ مواد']
+               ])
+            ->get();
+            $facilities =  DB::table('feedbacks')
+            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+            ->select('feedbacks.id', 'fquestionnaires.*')
+            ->where([
+                ['feedbacks.program_id', '=', $id],
+                ['fquestionnaires.question_category', '=', 'آسانتیاوي']
+            ])
+            ->get();
+            $locations =  DB::table('feedbacks')
+            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+            ->select('feedbacks.id', 'fquestionnaires.*')
+            ->where([
+                ['feedbacks.program_id', '=', $id],
+                ['fquestionnaires.question_category', '=', 'ځاي']
+             ] )
+            ->get();
+            $comments =  DB::table('feedbacks')
+            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+            ->select('feedbacks.id', 'fquestionnaires.*')
+            ->where([
+                ['feedbacks.program_id', '=', $id],
+                ['fquestionnaires.question_category', '=', 'عمومي نظر']
+               ] )
+            ->get();
+            $program_id = $id;
+            //
+            // $programs = DB::table('programs')->get();
+            // return $facilities;
+            // $program_id = $id;
+            if(count($materials) === 0 && count($facilities) === 0 && count($locations) === 0 && count($comments) === 0)
+            {
+                return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
+            }
+            else{
+                return view('pdc-feedback-answer', compact('materials','facilities','locations','comments', 'program_id'));
+            }
+        }
+        
        
         return "i am feed show function()";
     }

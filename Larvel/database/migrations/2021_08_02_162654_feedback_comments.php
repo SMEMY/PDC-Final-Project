@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePDCFeedback extends Migration
+class FeedbackComments extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePDCFeedback extends Migration
      */
     public function up()
     {
-        Schema::create('feedbacks', function (Blueprint $table) {
+        Schema::create('feedbackcomments', function (Blueprint $table) {
             $table->increments('id');
-            // $table->longText('comment')->nullable();
-            $table->unsignedInteger('program_id');
-            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
+            $table->longText('comment')->nullable();
+            $table->unsignedInteger('feedback_form_id');
+            $table->foreign('feedback_form_id')->references('id')->on('feedbacks')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,7 @@ class CreatePDCFeedback extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feedbacks');
+        //
+        Schema::dropIfExists('feedbackcomments');
     }
 }

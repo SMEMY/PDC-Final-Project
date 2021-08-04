@@ -14,6 +14,11 @@ class Feedback extends Model
         return $this->hasMany('App\Models\Fquestionnaire');
     }
 
+    function getFeedbackComments()
+    {
+        return $this->hasMany('App\Models\Feedbackcomment');
+    }
+
    // These are reverse (ONE - TO - MANY) relationships
    function program()
    {

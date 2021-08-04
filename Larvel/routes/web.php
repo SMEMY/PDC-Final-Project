@@ -48,7 +48,8 @@ Route::get('/', function () {
 
 
 // Route::view('/chart', 'chart');
-Route::view('login', 'admin-registeration');
+Route::view('/adminRegistration', 'admin-registeration');
+// Route::view('/login', 'login');
 Route::view('/registration', 'facilitatorParticipantRegisteration');
 Route::view('/addPdcProgram', 'pdc-add-program');
 Route::view('/addEduProgram', 'pdc-add-educational-program');
@@ -93,7 +94,9 @@ Route::resource('/deleteMaterial', materialController::class);
 Route::resource('/materials', materialController::class);
 Route::resource('/feedbackFormEdition', fquestionnaireController::class);
 Route::resource('/feedback', feedBackController::class);
+Route::resource('/feedbackAnswer', feedBackController::class);
 Route::resource('/feedbackFormInsertion', fquestionnaireController::class);
+Route::resource('/pdcProgramFeedbackReport', fquestionnaireController::class);
 Route::resource('/pdcProgramAttendanceEntry', attendanceController::class);
 Route::resource('/pdcProgramResult', resultController::class);
 Route::resource('/pdcProgramEvaluation', evaluationController::class);
@@ -112,6 +115,7 @@ Route::resource('/pdcProgramAgenda', agendaController::class);
 Route::resource('/pdcProgramFacility', facilityController::class);
 Route::resource('/participantFacilitatorStore', facilitatorandparticipantController::class);
 Route::resource('/memberStore', facilitatorandparticipantController::class);
+Route::resource('/publicMemberStore', facilitatorandparticipantController::class);
 Route::resource('/facilitatorMaterials', materialController::class);
 
 
