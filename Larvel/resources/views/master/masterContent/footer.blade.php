@@ -22,8 +22,8 @@
 	<script src="{{asset('assets/growl/jquery.bootstrap-growl.min.js')}}"></script>
 	<!-- sweet alert -->
 	<script src="{{asset('assets/sweet-alert/sweetalert.min.js')}}"></script>
-
-
+	<!-- chart-js -->
+	<script src="{{asset('assets/chart-js/dist/chart.min.js')}}"></script>
     @yield('custom-js')
 
 </body>

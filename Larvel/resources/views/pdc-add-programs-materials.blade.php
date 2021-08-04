@@ -236,16 +236,15 @@
 				   });
 			   }
 			   function bootstrapAlert1(){
-				
-				swal('وبخښئ!',"د یاد پروګرام لپاره فایلونه سیسټم ته داخل کړل سوه!", "success", {
-				button: "مننه",
-			}).then(function(){ 
-					var program = $('#prog').val();
-					console.log(program);
-					window.location = `/pdcProgramInfo/${program}`;
-  					 }
-);
-			}
+					swal('وبخښئ!',"د یاد پروګرام لپاره فایلونه سیسټم ته داخل کړل سوه!", "success", {
+					button: "مننه",
+				}).then(function()
+				{ 
+						var program = $('#prog').val();
+						console.log(program);
+						window.location = `/pdcProgramInfo/${program}`;
+				});
+				}
 	</script>
 		<script type="text/javascript">
 

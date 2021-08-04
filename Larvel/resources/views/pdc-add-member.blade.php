@@ -88,7 +88,7 @@ label {
 					<div class="account-wrapper mt-3" style="">
 						<h3 class="account-title mb-5" style="font-size:35px !important; font-weight: bolder;">د مسلکي پرمختیائي مرکز پروګرام ګډونوال ثبت کړئ</h3>
 						<!-- <p class="account-subtitle"></p> -->
-<hr !important>
+						<hr !important>
 						<!-- Account Form -->
 						<form action="/memberStore" method="POST">
 								{{ method_field('POST') }}

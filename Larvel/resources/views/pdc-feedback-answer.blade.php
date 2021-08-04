@@ -98,6 +98,18 @@ select:hover{
 
             font-size: 23px !important;
         }
+        .swal-modal div{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
+        }
+		.swal-text{
+			text-align: right;
+
+		}
+		.swal-modal{
+			padding: 20px 24px;
+    		width: 600px;
+		}
     </style>
 
 </head>
@@ -129,7 +141,17 @@ select:hover{
                         <form action="/feedback" method="POST">
                             {{ method_field('POST') }}
                             {{ csrf_field() }}
-
+                                    @if ($errors->any())
+										<div class="mb-5" id="alertMassege">
+											<ul style="list-style-type:none" class="p-0 m-0">
+												@foreach ($errors->all() as $error)
+												<li class="rounded p-2 m-1 alert alert-danger" >
+													{{ $error }}
+												</li>
+												@endforeach
+											</ul>
+										</div>
+									@endif
                             <input class="d-none" type="text" name="program_id" id="" value="{{$program_id}}">
                             <input class="d-none" type="text" name="feedback_form_id" id="" value="{{$materials[0]->feedbackFormId}}">
 
@@ -307,6 +329,24 @@ select:hover{
     <script src="{{asset('assets/js/select2.min.js')}}"></script>
     <!-- Tagsinput JS -->
     <script src="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}"></script>
+    	<!-- sweet alert -->
+	<script src="{{asset('assets/sweet-alert/sweetalert.min.js')}}"></script>
+	<!-- chart-js -->
+	<script src="{{asset('assets/chart-js/dist/chart.min.js')}}"></script>
+@if(Session::has('warn'))
+	<script>
+	swal('وبخښئ!',"{!! Session::get('warn') !!}", "warning", {
+		button: "وروسته کوښښ وکړئ",
+	});
+	</script>
+@endif
+@if(Session::has('success_questionnaire'))
+	<script>
+	swal('ډېر ښه!',"{!! Session::get('success_questionnaire') !!}", "success", {
+		button: "مننه",
+	});
+	</script>
+@endif
     <script>
 
 

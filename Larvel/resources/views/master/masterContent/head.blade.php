@@ -43,6 +43,7 @@
 <!-- Tagsinput CSS -->
 <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
 
+
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>

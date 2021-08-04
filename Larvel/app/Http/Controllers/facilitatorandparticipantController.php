@@ -70,58 +70,73 @@ class facilitatorandparticipantController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // $record = Facilitatorsandparticipant::find(10);
-        // if (Hash::check('۱۲۳', $record->password)) {
-        //     // The passwords match...
-        //     return "hahaha";
-        //  }
-        //  else{
-        //      return "woy";
-        //  }
+        
         if($request->path() === 'memberStore')
-        $validate = $request->validate([
-            'member_name' => 'bail|required|string|max:30',
-            'last_name' => 'bail|required|string|max:30',
-            'phone_number' => 'bail|required|string|max:13',
-            'email' => 'bail|required|email|max:50',
-            'gender' => 'bail|required|string|in:نارینه,ښځینه',
-            'office_campus' => 'bail|nullable|string|in:کندهار پوهتون',
-            'office_building' => 'bail|required|string|in:ساینس,ادبیات,شرعیات,اقتصاد,زراعت,ژورنالیزم,حقوق,ساینس,انجنیري,طب,اداري معاونیت,ریاست مقام,محصلینو چارو معاونیت,تعلیم او تربیه,اداره ئې عامه,کمپیوټر ساینس',
-            'office_department' => 'bail|required|string|max:30',
-            'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
-            'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
-            'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
-            'password' => 'bail|string|min:8|max:20|confirmed:password_confirmation',
-            'password_confirmation' => 'bail|string|min:8|max:20|',
-        ]);
-        $member = new Facilitatorsandparticipant;
-        $member->name = $request->member_name;
-        $member->last_name = $request->last_name;
-        $member->phone_number = $request->phone_number;
-        $member->email = $request->email;
-        $member->gender = $request->gender;
-        $member->office_campus = $request->office_campus;
-        $member->office_building = $request->office_building;
-        $member->office_department = $request->office_department;
-        $member->office_position = $request->office_position;
-        $member->office_position_category = $request->office_position_category;
-        $member->educational_rank = $request->educational_rank;
-        $member->password = Hash::make($request->password);
-        $member->save();
-        return back()->with('member_added', 'یاد شخص سسیسټم ته په کامیابۍ سره ثبت کړل سو!');
-        // // return "data saved";
-        // if($request->return === 'facilitator')
-        // {
-        //     return redirect('facilitatorList');
-        // }
-        // else if($request->return === 'participant')
-        // {
-        //     return redirect('participantList');
-        // }
-        // else{
-        //     return redirect('showPrograms');
-        // }
+        {
+            $validate = $request->validate([
+                'member_name' => 'bail|required|string|max:30',
+                'last_name' => 'bail|required|string|max:30',
+                'phone_number' => 'bail|required|string|max:13',
+                'email' => 'bail|required|email|max:50',
+                'gender' => 'bail|required|string|in:نارینه,ښځینه',
+                'office_campus' => 'bail|nullable|string|in:کندهار پوهتون',
+                'office_building' => 'bail|required|string|in:ساینس,ادبیات,شرعیات,اقتصاد,زراعت,ژورنالیزم,حقوق,ساینس,انجنیري,طب,اداري معاونیت,ریاست مقام,محصلینو چارو معاونیت,تعلیم او تربیه,اداره ئې عامه,کمپیوټر ساینس',
+                'office_department' => 'bail|required|string|max:30',
+                'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
+                'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
+                'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
+                'password' => 'bail|string|min:8|max:20|confirmed:password_confirmation',
+                'password_confirmation' => 'bail|string|min:8|max:20|',
+            ]);
+            $member = new Facilitatorsandparticipant;
+            $member->name = $request->member_name;
+            $member->last_name = $request->last_name;
+            $member->phone_number = $request->phone_number;
+            $member->email = $request->email;
+            $member->gender = $request->gender;
+            $member->office_campus = $request->office_campus;
+            $member->office_building = $request->office_building;
+            $member->office_department = $request->office_department;
+            $member->office_position = $request->office_position;
+            $member->office_position_category = $request->office_position_category;
+            $member->educational_rank = $request->educational_rank;
+            $member->password = Hash::make($request->password);
+            $member->save();
+            return back()->with('member_added', 'یاد شخص سسیسټم ته په کامیابۍ سره ثبت کړل سو!');
+        }
+        elseif($request->path() === 'publicMemberStore')
+        {
+            $validate = $request->validate([
+                'member_name' => 'bail|required|string|max:30',
+                'last_name' => 'bail|required|string|max:30',
+                'phone_number' => 'bail|required|string|max:13',
+                'email' => 'bail|required|email|max:50',
+                'gender' => 'bail|required|string|in:نارینه,ښځینه',
+                'office_campus' => 'bail|nullable|string|in:کندهار پوهتون',
+                'office_building' => 'bail|required|string|in:ساینس,ادبیات,شرعیات,اقتصاد,زراعت,ژورنالیزم,حقوق,ساینس,انجنیري,طب,اداري معاونیت,ریاست مقام,محصلینو چارو معاونیت,تعلیم او تربیه,اداره ئې عامه,کمپیوټر ساینس',
+                'office_department' => 'bail|required|string|max:30',
+                'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
+                'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
+                'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
+                'password' => 'bail|string|min:8|max:20|confirmed:password_confirmation',
+                'password_confirmation' => 'bail|string|min:8|max:20|',
+            ]);
+            $member = new Facilitatorsandparticipant;
+            $member->name = $request->member_name;
+            $member->last_name = $request->last_name;
+            $member->phone_number = $request->phone_number;
+            $member->email = $request->email;
+            $member->gender = $request->gender;
+            $member->office_campus = $request->office_campus;
+            $member->office_building = $request->office_building;
+            $member->office_department = $request->office_department;
+            $member->office_position = $request->office_position;
+            $member->office_position_category = $request->office_position_category;
+            $member->educational_rank = $request->educational_rank;
+            $member->password = Hash::make($request->password);
+            $member->save();
+            return back()->with('add', 'تاسي په کامیابۍ سره سیستم کي ثبت سولاست!');
+        }
     }
 
     /**

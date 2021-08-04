@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Feedback;;
 use App\Models\Fquestionnaire;
+use App\Models\Feedbackcomment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
@@ -45,8 +46,8 @@ class fquestionnaireController extends Controller
                 'feedback_question_category.*' => 'bail|required|string|in:د ورکشاپ/ټرېنینګ مواد,آسانتیاوي,ځاي,عمومي نظر',
                 'feedback_question.*' => 'bail|required|string|max:100',
             ]);
-            DB::table('feedbacks')->insert(['program_id' => $request->program_id]);
-            $programID =  DB::table('feedbacks')->select('feedbacks.id')->where('created_at',DB::table('feedbacks')->max('created_at') )->get();
+            // DB::table('feedbacks')->insert(['program_id' => $request->program_id]);
+            // $programID =  DB::table('feedbacks')->select('feedbacks.id')->where('created_at',DB::table('feedbacks')->max('created_at') )->get();
             for($index = 0; $index < count($request->feedback_question);$index++)
             {   
                 $questionnairQuestion = new Fquestionnaire;
@@ -79,6 +80,75 @@ class fquestionnaireController extends Controller
             elseif(count($check) !== 0)
             {
                 return back()->with('warn', "د یاد پروګرام لپاره مخکي پوښتنلیک سیسټم ته اضافه سوی دی!");
+            }
+        }
+        elseif($request->path() === 'pdcProgramFeedbackReport/'.$id)
+        {
+            $questions = DB::table('feedbacks')
+            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+            ->select('fquestionnaires.*', 'feedbacks.id as form_id')
+            ->where([
+                ['feedbacks.program_id', $id]
+            ])->get();
+            $first = array();
+            $second = array();
+            $third = array();
+            $fourth = array();
+            for ($index=0; $index < count($questions); $index++) { 
+                $firstStateAnswerCounts = DB::table('feedbacks')
+                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                ->join('feedbackanswers', 'fquestionnaires.id', '=', 'feedbackanswers.question_id')
+                ->select('fquestionnaires.question_category', 'fquestionnaires.question', 'feedbackanswers.answer')
+                ->where([
+                    ['feedbacks.program_id', $id],
+                    ['feedbackanswers.question_id', '=',  $questions[$index]->id],
+                    ['feedbackanswers.answer', '=', 'ښه'],
+                    ])->get();
+                array_push( $first, count( $firstStateAnswerCounts));
+
+
+                $secondStateAnswerCounts = DB::table('feedbacks')
+                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                ->join('feedbackanswers', 'fquestionnaires.id', '=', 'feedbackanswers.question_id')
+                ->select('fquestionnaires.question_category', 'fquestionnaires.question', 'feedbackanswers.answer')
+                ->where([
+                    ['feedbacks.program_id', $id],
+                    ['feedbackanswers.question_id', '=',  $questions[$index]->id],
+                    ['feedbackanswers.answer', '=', 'ډېر ښه'],
+                ])->get();
+                array_push( $second, count( $secondStateAnswerCounts));
+                
+
+                $thirdStateAnswerCounts = DB::table('feedbacks')
+                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                ->join('feedbackanswers', 'fquestionnaires.id', '=', 'feedbackanswers.question_id')
+                ->select('fquestionnaires.question_category', 'fquestionnaires.question', 'feedbackanswers.answer')
+                ->where([
+                    ['feedbacks.program_id', $id],
+                    ['feedbackanswers.question_id', '=',  $questions[$index]->id],
+                    ['feedbackanswers.answer', '=', 'متوسط'],
+                    ])->get();
+                    array_push( $third, count( $thirdStateAnswerCounts));
+
+                    
+                $fourthStateAnswerCounts = DB::table('feedbacks')
+                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                ->join('feedbackanswers', 'fquestionnaires.id', '=', 'feedbackanswers.question_id')
+                ->select('fquestionnaires.question_category', 'fquestionnaires.question', 'feedbackanswers.answer')
+                ->where([
+                    ['feedbacks.program_id', $id],
+                    ['feedbackanswers.question_id', '=',  $questions[$index]->id],
+                    ['feedbackanswers.answer', '=', 'بد'],
+                ])->get();
+                array_push( $fourth, count( $fourthStateAnswerCounts));
+              
+            }
+            $comments = Feedbackcomment::where('feedback_form_id', $questions[0]->form_id)->get();
+            if(count($first) === 0 && count($second) === 0 && count($third) === 0 && count($fourth) === 0 && count($comments) === 0){
+                return back()->with('warn', 'د یاد پروګرام د پوښتنلیک راپور تر اوسه سیسټم کي وجود نلري!');
+            }
+            else{
+                return view('chart', compact('questions', 'first', 'second', 'third', 'fourth',  'comments'));
             }
         }
 

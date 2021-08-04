@@ -77,7 +77,7 @@ label {
 						<form action="/{{$path}}List/{{$member->id}}" method="POST">
 								{{ method_field('PUT') }}
       					 	    {{ csrf_field() }}
-								   @if ($errors->any())
+								    @if ($errors->any())
 										<div class="mb-5" id="alertMassege">
 											<ul style="list-style-type:none" class="p-0 m-0">
 												@foreach ($errors->all() as $error)
