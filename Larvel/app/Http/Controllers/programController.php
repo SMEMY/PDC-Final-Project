@@ -31,7 +31,7 @@ class programController extends Controller
        
        $path = '/pdcProgramList';
 
-       if($request->path() === 'pdcProgramList')
+       if($request->path() === 'admin/pdcProgramList')
        {
            return view('pdc-list-all-program', compact('programs', 'path'));
        }
@@ -67,7 +67,7 @@ class programController extends Controller
     {
         
         // this part is belongs to Program Model
-        if($request->path() === 'searchPdcProgram')
+        if($request->path() === 'admin/searchPdcProgram')
         {
             $request->validate([
                 'search_type' => 'bail|required|string|in:month,year,manager,supporter,sponsor,type,name',
@@ -87,11 +87,11 @@ class programController extends Controller
             // $programs =  Program::where($request->search_type, $request->search_content)->get();
             // return view('pdc-list-all-program', compact('programs', 'path'));
         }
-        elseif($request->path() === 'pdcProgramList'){
-            
+        elseif($request->path() === 'admin/pdcProgramList'){
+            // return "akdsfjaksjflj";
             $validate = $request->validate([
                 'name' => 'bail|required|string|max:100',
-                'type' => 'bail|required|string|in:ورکشاپ,سیمینار,سمفوزیم,کتفرانس',
+                'type' => 'bail|required|string|in:ورکشاپ,سیمینار,سمفوزیم,کنفرانس',
                 'sponsor' => 'bail|required|string|max:30',
                 'supporter' => 'bail|required|string|max:30',
                 'manager' => 'bail|required|string|max:30',
@@ -100,7 +100,7 @@ class programController extends Controller
                 'participant_amount' => 'bail|required|integer|between:1,1000',
                 'fund' => 'bail|required|integer',
                 'fund_type' => 'bail|required|string|in:افغانۍ,ډالر',
-                'fee_able' => 'bail|required|string|in:0,1',
+                'fee_able' => 'bail|required|integer|in:0,1',
                 'fee' => 'bail|required_if:fee_able,=,1|integer',
                 'fee_type' => 'bail|string|required_if:fee_able,=,1|in:افغانۍ,ډالر',
                 'campus_name' => 'bail|required|string|max:30',
@@ -171,7 +171,7 @@ class programController extends Controller
        }
         //participantEnrolledPrograms
       
-       elseif($request->path() == 'pdcProgramInfo/'.$id){
+       elseif($request->path() == 'admin/pdcProgramInfo/'.$id){
             $programs = Program::with('getFacilities', 'getResults', 'getEvaluations', 'getAgendas', 'getPhotos', )->find($id);
             $program_id = $id;
         

@@ -149,6 +149,7 @@ class feedBackController extends Controller
         }
         elseif($request->path() === 'feedbackAnswer/'.$id)
         {
+            // return "hasdkjadh";
             $materials =  DB::table('feedbacks')
             ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
             ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')

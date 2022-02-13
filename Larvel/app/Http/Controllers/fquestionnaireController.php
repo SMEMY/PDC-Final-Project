@@ -46,8 +46,8 @@ class fquestionnaireController extends Controller
                 'feedback_question_category.*' => 'bail|required|string|in:د ورکشاپ/ټرېنینګ مواد,آسانتیاوي,ځاي,عمومي نظر',
                 'feedback_question.*' => 'bail|required|string|max:100',
             ]);
-            // DB::table('feedbacks')->insert(['program_id' => $request->program_id]);
-            // $programID =  DB::table('feedbacks')->select('feedbacks.id')->where('created_at',DB::table('feedbacks')->max('created_at') )->get();
+            DB::table('feedbacks')->insert(['program_id' => $request->program_id]);
+            $programID =  DB::table('feedbacks')->select('feedbacks.id')->where('created_at',DB::table('feedbacks')->max('created_at') )->get();
             for($index = 0; $index < count($request->feedback_question);$index++)
             {   
                 $questionnairQuestion = new Fquestionnaire;
@@ -141,10 +141,12 @@ class fquestionnaireController extends Controller
                     ['feedbackanswers.answer', '=', 'بد'],
                 ])->get();
                 array_push( $fourth, count( $fourthStateAnswerCounts));
-              
             }
-            $comments = Feedbackcomment::where('feedback_form_id', $questions[0]->form_id)->get();
-            if(count($first) === 0 && count($second) === 0 && count($third) === 0 && count($fourth) === 0 && count($comments) === 0){
+            if(count($questions) !== 0)
+            {
+                $comments = Feedbackcomment::where('feedback_form_id', $questions[0]->form_id)->get();
+            }
+            if(count($first) === 0 && count($second) === 0 && count($third) === 0 && count($fourth) === 0 ){
                 return back()->with('warn', 'د یاد پروګرام د پوښتنلیک راپور تر اوسه سیسټم کي وجود نلري!');
             }
             else{

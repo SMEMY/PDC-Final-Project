@@ -136,7 +136,7 @@
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-        <a href="/comAllPrograms/{{$program_id}}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
+        <a href="/pdcProgramInfo/{{$program_id}}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
         <div class="account-content">
             <!-- <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a> -->
             <div class="container ">

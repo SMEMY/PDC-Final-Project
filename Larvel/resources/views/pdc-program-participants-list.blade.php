@@ -63,7 +63,7 @@ hahahaha
 					<!-- /Page Header -->
 					
 					<!-- Search Filter -->
-					<form action="/programSpecificParticipant/{{$programID}}" method="get">
+					<form action="/admin/programSpecificParticipant/{{$programID}}" method="get">
 						{{ method_field('GET') }}
 						{{ csrf_field() }}
 						<div class="row filter-row">
@@ -119,8 +119,8 @@ hahahaha
 												<div class="dropdown dropdown-action">
 													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 													<div class="dropdown-menu dropdown-menu-left" >
-														<a class="dropdown-item" href="/participantList/{{$participant->id}}/edit" ><i class="fa fa-pencil m-r-5"></i> اصلاح يې کړی</a>
-														<a class="dropdown-item" href="/participantList/{{$participant->id}}" data-toggle="modal" data-target="#delete_employee" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
+														<a class="dropdown-item" href="/admin/participantList/{{$participant->id}}/edit" ><i class="fa fa-pencil m-r-5"></i> اصلاح يې کړی</a>
+														<a class="dropdown-item" href="/admin/participantList/{{$participant->id}}" data-toggle="modal" data-target="#delete_employee" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 													</div>
 												</div>
 											</td>

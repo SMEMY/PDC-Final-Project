@@ -91,11 +91,18 @@
 		}
 
 
-        .progress { position:relative; width:100%; border: 1px solid #7F98B2; padding: 1px; border-radius: 3px; height: 20px;}
+        .progress { position:relative; width:100%; border: 1px solid #7F98B2; padding: 1px; border-radius: 3px; height: 22px;}
 
-        .bar { background: linear-gradient(to left, #a6ffb1 0%, #2ca106 100%); width:0%; height:15px; border-radius: 3px; }
+        .bar { background: linear-gradient(to left, #b0dbff 0%, #058ecf 100%); width:0%; height:18px; border-radius: 3px; }
 
         .percent { position:absolute; display:inline-block; top:3px; left:48%; color: #ff0303}
+
+		.op{
+			opacity: 0.5;
+		}
+		.n-op{
+			opacity: 1 !important;
+		}
 
 	</style>
 </head>
@@ -114,7 +121,7 @@
 
 		<div class="" style="min-height: 371px;">
 
-			<div class="content p-5" style="background: white;">
+			<div class="content p-5" style="background: white;" id="op">
 				<div class="card-header p-3">
 					<h4 class="card-title mb-0">د اوړنده پروکرام اړونده فایلونه اپلوډ کړئ</h4>
 				</div>
@@ -174,12 +181,13 @@
 					  </div>
 
 					    <div class="progress mb-5 d-none" id="show">
-                            <div class="bar"></div >
+                            <div class="bar" style="background-color: white-blue"></div >
                             <div class="percent ">0%</div >
                         </div>
 					  <div class="m-auto" style="width: fit-content;">
-						  <button type="submit" class="btn btn-primary p-2" style="width: 300px; text-align: center;" onclick="showBar()">ثبت
-							  کړی</button>
+						  <button type="submit" class="btn btn-primary p-2" style="width: 300px; text-align: center;" id="btn">ثبت کړی</button>
+							  <!-- <button type="submit" class="btn btn-primary p-2" style="width: 300px; text-align: center;" >ثبت
+							  کړی</button> -->
 					  </div>
 				</form>
 			</div>
@@ -235,7 +243,7 @@
 					   stackup_spacing: 20
 				   });
 			   }
-			   function bootstrapAlert1(){
+		 function bootstrapAlert1(){
 					swal('وبخښئ!',"د یاد پروګرام لپاره فایلونه سیسټم ته داخل کړل سوه!", "success", {
 					button: "مننه",
 				}).then(function()
@@ -244,7 +252,7 @@
 						console.log(program);
 						window.location = `/pdcProgramInfo/${program}`;
 				});
-				}
+				}	  
 	</script>
 		<script type="text/javascript">
 
@@ -261,9 +269,13 @@ $(function() {
             },
             uploadProgress: function(event, position, total, percentComplete) {
 				$('#show').removeClass('d-none');
-                var percentVal = percentComplete + '%';
+                var percentVal = (percentComplete - 6) + '%';
                 bar.width(percentVal)
                 percent.html(percentVal);
+				// $('#op').addClass('op');
+				// $('#show').addClass('n-op');
+				// $(".bar").addClass('n-op');
+
             },
             complete: function(xhr) {
                 bootstrapAlert1();

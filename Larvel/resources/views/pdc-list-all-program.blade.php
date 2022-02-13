@@ -200,7 +200,7 @@ hahahaha
                 </div>
             </div>
             <div class="card-body p-0" style="border-radius: 5px !important;" >
-                <a href="/pdcProgramInfo/{{$program->id}}" >
+                <a href="/admin/pdcProgramInfo/{{$program->id}}" >
                     <div class="job-list-desc" style="padding: 15px 15px 5px 15px" >
                         <h3 class="job-list-title text-center" style="font-size:18px"> {{$program->name}} </h3>
                         <br>

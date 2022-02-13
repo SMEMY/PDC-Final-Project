@@ -60,7 +60,7 @@ class eduprogramController extends Controller
                 return view('pdc-list-all-educational-program', compact('programs', 'path'));
             }
         }
-        else{
+        else if($request->path() === 'admin/educationalProgramList'){
 
             $request->validate([
                 'topic' => 'bail|required|string|max:100',
@@ -106,6 +106,9 @@ class eduprogramController extends Controller
             $program->save();
     
             return back()->with('success', 'یاد پروګرام په کامیابۍ سره سیسټم اضافه کړل سو!');
+        }
+        else{
+            return "not found path!!!";
         }
 
     }

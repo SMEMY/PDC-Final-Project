@@ -21,7 +21,7 @@ class deleteFeedbackQuestion extends Controller
             $check1 =  DB::table('feedbacks')
             ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
             ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
-            ->where('feedbacks.program_id', '=', $id)
+            ->where('feedbacks.program_id', '=', $programID[0]->program_id)
             ->get();
             if(count($check1) !== 0)
             {
