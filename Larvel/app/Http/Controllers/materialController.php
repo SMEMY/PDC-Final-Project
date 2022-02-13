@@ -55,6 +55,7 @@ class materialController extends Controller
         {     
                 if(!empty($request->file_name[$index]) && !empty($request->file_type[$index]))
                 {
+                    // return "slakdj";
                     $fileName = time().'.'.$material->extension();
                     $kb = $material->getSize() / 1024;
                     $mb = $kb / 1024;
@@ -116,6 +117,7 @@ class materialController extends Controller
         }
         elseif($request->path() === 'facilitatorMaterials/'.$id)
         {
+            $program_id = $id;
             return view('facilitator-programs-materials', compact('program_id'));
         }
         elseif($request->path() === 'downloadMaterial/'.$id)

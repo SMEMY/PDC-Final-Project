@@ -72,7 +72,7 @@ label {
 						<!-- <p class="account-subtitle"></p> -->
                         <hr !important>
 						<!-- Account Form -->
-                            <form action="/educationalProgramList" method="POST" enctype="multipart/form-data">
+                            <form action="/admin/educationalProgramList" method="POST" enctype="multipart/form-data">
                                     @csrf
                                 <div class="row">
                                     @if ($errors->any())

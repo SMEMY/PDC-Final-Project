@@ -98,7 +98,7 @@ label {
                                 </ul>
                             </div>
                         @endif
-                        <form action="/pdcProgramList" method="POST" enctype="multipart/form-data">
+                        <form action="/admin/pdcProgramList" method="POST" enctype="multipart/form-data">
                                 @csrf
                             <div class="row">
                                 <div class="col-sm-6">

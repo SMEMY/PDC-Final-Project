@@ -158,6 +158,7 @@ select:hover{
                             <h4 class="" style="margin:30px auto; font-size: 30px;width: fit-content;"> <strong> د
                                     ورکشاپ/ټرېنینګ مواد</strong></h4>
 
+                            @if($materials != null)
                             @foreach($materials as $material)
                             @if( $material->question_category === 'د ورکشاپ/ټرېنینګ مواد')
 
@@ -187,8 +188,10 @@ select:hover{
                             </div>
                             @endif
                             @endforeach
+                            @endif
                             <h4 class="" style="margin:30px auto; font-size: 30px;    width: fit-content"> <strong>
                                     آســـــــــــــــانتیـــــــــــــــاوي</strong></h4>
+                                    @if($facilities != null)
 
                             @foreach($facilities as $facility)
                             @if( $facility->question_category === 'آسانتیاوي')
@@ -219,9 +222,11 @@ select:hover{
                             </div>
                             @endif
                             @endforeach
+                            @endif
 
                             <h4 class="" style="margin:30px auto; font-size: 30px;    width: fit-content"> <strong>
                                     ځـــــــــاي</strong></h4>
+                            @if($locations != null)
 
                             @foreach($locations as $location)
                             @if( $location->question_category === 'ځاي')
@@ -252,9 +257,12 @@ select:hover{
                             </div>
                             @endif
                             @endforeach
+                            @endif
 
                             <h4 class="" style="margin:30px auto; font-size: 30px;    width: fit-content"> <strong>
                                     عمومي نظر</strong></h4>
+                            
+                            @if($comments != null)
 
                             @foreach($comments as $comment)
                             @if( $comment->question_category === 'عمومي نظر')
@@ -285,6 +293,8 @@ select:hover{
                             </div>
                             @endif
                             @endforeach
+                            @endif
+
                             <div class="row mt-5">
                                 <div class="input-group col-md-12">
                                     <div class="input-group-prepend">

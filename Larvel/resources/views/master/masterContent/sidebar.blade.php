@@ -14,15 +14,15 @@
 								<li class="submenu">
 									<a href="#" class="active"><span> پروګرام ثبتول</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="/addPdcProgram" >د (پي ډي سي) پروګرام ثبتول</a></li>
-										<li><a href="/addEduProgram">دعلمي ترفېع/ تقرر پروګرام ثبتول</a></li>
+										<li><a href="/admin/addPdcProgram" >د (پي ډي سي) پروګرام ثبتول</a></li>
+										<li><a href="/admin/addEduProgram">دعلمي ترفېع/ تقرر پروګرام ثبتول</a></li>
 									</ul>
 								</li>
 								<li class="submenu">
 									<a href="#" class=""><span> پروګرامونو لیست</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="/pdcProgramList" dir="rtl">د (پي ډي سي) پروګرامونه</a></li>
-										<li><a href="/educationalProgramList">دعلمي ترفېع/ تقرر پروګرامونه</a></li>
+										<li><a href="/admin/pdcProgramList" dir="rtl">د (پي ډي سي) پروګرامونه</a></li>
+										<li><a href="/admin/educationalProgramList">دعلمي ترفېع/ تقرر پروګرامونه</a></li>
 									</ul>
 								</li>
 								<!-- <li><a href="addProgram">پروګرام ثبتول</a></li>
@@ -38,15 +38,15 @@
 								<li class="submenu">
 									<a href="#" class=""><span>غړی ثبتول</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="/memberRegisteration">سیسټم ته غړی اضافه کول</a></li>
+										<li><a href="/admin/memberRegisteration">سیسټم ته غړی اضافه کول</a></li>
 									</ul>
 								</li>
 								<li class="submenu">
 									<a href="#" class=""><span>ګدونوالو لیست</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="/facilitatorList" dir="rtl">د پروګرام تسهیلونکي </a></li>
-										<li><a href="/participantList">د پروګرام ګډونوال</a></li>
-										<li><a href="/memberList">د سیسټم عمومي ګډونوال</a></li>
+										<li><a href="/admin/facilitatorList" dir="rtl">د پروګرام تسهیلونکي </a></li>
+										<li><a href="/admin/participantList">د پروګرام ګډونوال</a></li>
+										<li><a href="/admin/memberList">د سیسټم عمومي ګډونوال</a></li>
 									</ul>
 								</li>
 								<!-- <li><a href="addProgram">پروګرام ثبتول</a></li>
