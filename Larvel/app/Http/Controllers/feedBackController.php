@@ -100,7 +100,7 @@ class feedBackController extends Controller
     public function show(Request $request, $id)
     {
         // return Feedback::all();
-        if($request->path() === 'feedback/'.$id)
+        if($request->path() === 'admin/feedback/'.$id)
         {
             $materials =  DB::table('feedbacks')
             ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')

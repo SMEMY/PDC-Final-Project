@@ -97,9 +97,9 @@ h4 {
 						<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
 								class="material-icons">more_vert</i></a>
 						<div class="dropdown-menu dropdown-menu-right" style="z-index: 100;">
-							<a class="dropdown-item" href="/pdcProgramList/{{$programs->id}}/edit"  ><i
+							<a class="dropdown-item" href="/admin/pdcProgramList/{{$programs->id}}/edit"  ><i
 									class="fa fa-pencil m-r-5"></i>معلومات اصلاح کړی</a>
-							<a class="dropdown-item" href="/pdcProgramDelete/{{$programs->id}}" data-toggle="modal"
+							<a class="dropdown-item" href="/admin/pdcProgramList/{{$programs->id}}" data-toggle="modal"
 												data-target="#delete_project" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 						</div>
 					</div>
@@ -204,9 +204,9 @@ h4 {
 								<div class="dropdown-file p-3">
 									<a href="" class="dropdown-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
 									<div class="dropdown-menu dropdown-menu-right">
-										<a href="/downloadPhoto/{{$photo->path}}" class="dropdown-item"><i class="fa fa-download m-r-5"></i>کښته یې کړی</a>
-										<a class="dropdown-item" href="/deletePhoto/{{$photo->path}}" data-toggle="modal"
-											data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
+										<a href="/admin/downloadPhoto/{{$photo->path}}" class="dropdown-item"><i class="fa fa-download m-r-5"></i>کښته یې کړی</a>
+										<a class="dropdown-item" href="/admin/deletePhoto/{{$photo->path}}" data-toggle="modal"
+												data-target="#delete_photo" id="" onclick="pathFindertwo(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 									</div>
 								</div>
 								<a href="{{ asset( 'storage/images/'.$photo->path) }}" target="_blank">
@@ -253,28 +253,28 @@ h4 {
 					<div class="job-det-info job-widget col-md-12" style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="save_info">
 						<h4 class="account-title">معلومات ثبتول</h4>
 	
-						<a class="btn job-btn mt-3 p-2" href="/pdcProgramAttendance/{{$programs->id}}" >د پروګرام د ګډونوالو حاضري ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/pdcProgramFacility/{{$programs->id}}" >د پروګرام سهولتونه ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/pdcProgramAgenda/{{$programs->id}}" >د پروګرام اجنډاوي ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/pdcProgramEvaluation/{{$programs->id}}" >د پروګرام ارزوني ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/pdcProgramResult/{{$programs->id}}" >د پروګرام پایلي ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/pdcProgramPhoto/{{$programs->id}}" >د پروګرام تفرقه ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/storeMaterials/{{$programs->id}}" >د پروګرام درسي موادو ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/feedbackFormInsertion/{{$programs->id}}" >د پروګرام پوښتنلیک ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramAttendance/{{$programs->id}}" >د پروګرام د ګډونوالو حاضري ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramFacility/{{$programs->id}}" >د پروګرام سهولتونه ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramAgenda/{{$programs->id}}" >د پروګرام اجنډاوي ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramEvaluation/{{$programs->id}}" >د پروګرام ارزوني ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramResult/{{$programs->id}}" >د پروګرام پایلي ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramPhoto/{{$programs->id}}" >د پروګرام تفرقه ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/storeMaterials/{{$programs->id}}" >د پروګرام درسي موادو ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/feedbackFormInsertion/{{$programs->id}}" >د پروګرام پوښتنلیک ثبتول</a>
 					</div>
 				</div>
 				<div class=" col-md-6" Style="padding:0px !important; padding-right:20px !important;">
 					<div class="job-det-info job-widget col-md-12" style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="save_info">
 						<h4 class="account-title">د پروګرام  نور معلومات </h4>
 	
-						<a class="btn job-btn mt-3 p-2" href="/facilitatorProfileForProgram/{{$program_id}}" >د پروګرام تسهیلونکی</a>
-						<a class="btn job-btn mt-3 p-2" href="/specificeProgramParticipants/{{$programs->id}}" >د پروګرام د ګډونوالو لیست</a>
-						<a class="btn job-btn mt-3 p-2 bg-danger" href="/pdcProgramAttendancePaper/{{$programs->id}}" >د پروګرام د ګډونوالو حاضري پاڼه</a>
-						<a class="btn job-btn mt-3 p-2 " href="/pdcProgramAttendanceReport/{{$programs->id}}" >د پروګرام د ګډونوالو د سوبتیا راپور </a>
-						<a class="btn job-btn mt-3 p-2" href="/feedback/{{$programs->id}}" >د پروګرام پوښتنلیک </a>
-						<a class="btn job-btn mt-3 p-2 " href="/feedbackAnswer/{{$programs->id}}" >د پروګرام پوښتنلیک ځوابول</a>
-						<a class="btn job-btn mt-3 p-2 " href="/pdcProgramFeedbackReport/{{$programs->id}}" >د پروګرام پوښتنلیک راپور</a>
-						<a class="btn job-btn mt-3 p-2" href="/materials/{{$programs->id}}" >د پروګرام تدریسي مواد</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/facilitatorProfileForProgram/{{$program_id}}" >د پروګرام تسهیلونکی</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/specificeProgramParticipants/{{$programs->id}}" >د پروګرام د ګډونوالو لیست</a>
+						<a class="btn job-btn mt-3 p-2 bg-danger" href="/admin/pdcProgramAttendancePaper/{{$programs->id}}" >د پروګرام د ګډونوالو حاضري پاڼه</a>
+						<a class="btn job-btn mt-3 p-2 " href="/admin/pdcProgramAttendanceReport/{{$programs->id}}" >د پروګرام د ګډونوالو د سوبتیا راپور </a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/feedback/{{$programs->id}}" >د پروګرام پوښتنلیک </a>
+						<a class="btn job-btn mt-3 p-2 " href="/admin/feedbackAnswer/{{$programs->id}}" >د پروګرام پوښتنلیک ځوابول</a>
+						<a class="btn job-btn mt-3 p-2 " href="/admin/pdcProgramFeedbackReport/{{$programs->id}}" >د پروګرام پوښتنلیک راپور</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/materials/{{$programs->id}}" >د پروګرام تدریسي مواد</a>
 	
 					</div>
 				</div>
@@ -284,7 +284,7 @@ h4 {
 <!-- /Page Content -->
 			
 <!-- Delete Project Modal -->
-<div class="modal custom-modal fade" id="delete_project" role="dialog">
+			<div class="modal custom-modal fade" id="delete_project" role="dialog">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-body">
@@ -298,7 +298,36 @@ h4 {
                           				<form action="" method="post" id="pathGetter">
                             					{{ method_field('DELETE') }}
                            						{{ csrf_field() }}
-												 
+												   <button type="submit" class="btn btn-primary continue-btn col-md-12">له منځه یې اوسی</button>
+												</form>
+									</div>
+									<div class="col-6">
+										<a href="javascript:void(0);" data-dismiss="modal"
+											class="btn btn-primary cancel-btn">قطعه یې کړی</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="modal custom-modal fade" id="delete_photo" role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-body">
+							<div class="form-header">
+								<h3>انځور له منځه وړل!</h3>
+								<p>آیا تاسي باوري یاست چي یاد انځور له سیسټم څخه له منځه یوسي؟</p>
+							</div>
+							<div class="modal-btn delete-action">
+								<div class="row">
+									<div class="col-md-6">
+                          				<form action="" method="post" id="pathGettertwo">
+                            					{{ method_field('DELETE') }}
+                           						{{ csrf_field() }}
+												   
+												   <input type="hidden"  name="program_id" id="" value="{{$programs->id}}">
                            					 <button type="submit" class="btn btn-primary continue-btn col-md-12">له منځه یې اوسی</button>
                        					</form>
 									</div>
@@ -368,6 +397,13 @@ h4 {
 	});
 	</script>
 @endif
+@if(Session::has('attandance_added'))
+	<script>
+	swal('ډېر ښه!',"{!! Session::get('attandance_added') !!}", "success", {
+		button: "سمده",
+	});
+	</script>
+@endif
 	
 <script>
 		function pathFinder(num)
@@ -379,6 +415,13 @@ h4 {
 						// // document.getElementById('file_name').value = fileName;
 						// console.log(fileName);
 						document.getElementById("pathGetter").action = num.href;
+
+					}
+
+		function pathFindertwo(numtwo)
+					{
+					
+						document.getElementById("pathGettertwo").action = numtwo.href;
 
 					}
 </script>

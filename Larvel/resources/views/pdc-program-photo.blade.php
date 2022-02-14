@@ -88,7 +88,7 @@
 								<h4 class="card-title mb-0">د اوړنده پروکرام په اړه د انځورونو پاڼه</h4>
 							</div>
 							<div class="card-body">
-								<form action="/pdcProgramPhoto" method="POST" enctype="multipart/form-data" name="formName">
+								<form action="/admin/pdcProgramPhoto" method="POST" enctype="multipart/form-data" name="formName">
 
 									{{ method_field('POST') }}
 									{{ csrf_field() }}

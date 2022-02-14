@@ -90,9 +90,11 @@ label {
 						<!-- <p class="account-subtitle"></p> -->
 						<hr !important>
 						<!-- Account Form -->
-						<form action="/memberStore" method="POST">
+						<form action="/admin/memberStoreTwo" method="POST">
 								{{ method_field('POST') }}
       					 	    {{ csrf_field() }}
+								   <input class="" type="hidden" value="{{$program_id}}" name="program_id">
+
 								    @if ($errors->any())
 										<div class="mb-5" id="alertMassege">
 											<ul style="list-style-type:none" class="p-0 m-0">
@@ -104,7 +106,7 @@ label {
 											</ul>
 										</div>
 									@endif
-							    <div class="row">
+							<div class="row">
 									<div class="col-md-6 d-none">
 										<div class="form-group">
 											<label class="col-form-label">نوم <span class="text-danger">*</span></label>
@@ -112,13 +114,9 @@ label {
 										</div>
 									</div>
 									<div class="col-md-6">
-										<!-- <div class="form-group">
-											<label class="col-form-label">نوم <span class="text-danger">*</span></label>
-											<input class="form-control" type="text"  name="member_name" value="{{old('')}}">
-										</div> -->
 										<div class="form-group">
-											<label class="col-form-label">نوم</label>
-											<input class="form-control " type="text" name="member_name" value="{{old('member_name')}}">
+											<label class="col-form-label">نوم <span class="text-danger">*</span></label>
+											<input class="form-control" type="text"  name="member_name" value="{{old('member_name')}}">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -579,7 +577,7 @@ label {
 									</div>
 									@endif
 								</div>
-								<hr !important>	<!-- this part has been hidden just for DB Facilitator role -->
+								<hr !important>	
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -595,9 +593,33 @@ label {
 											<input class="form-control input-sm" type="password" name="password_confirmation" value="{{old('password_confirmation')}}">
 										</div>
 									</div>
+							    </div>
+								<hr !important>	
+								<!-- this part has been hidden just for DB Facilitator role -->
+								<div class="row">
+								    <div class="col-md-12">
+										<div class="form-group">
+											<label class="col-form-label">ګډون کولو ډول<span
+													class="text-danger">*</span></label>
+											<select class="custom-select" name="member_type">
+												@if(old('member_type') === 'تسهیلونکی')
+												<option ></option>
+												<option selected value="تسهیلونکی" >تسهبلونکی </option>
+												<option value="ګډونوال" >ګډونوال</option>
+												@elseif(old('member_type') === 'ګډونوال')
+												<option ></option>
+												<option selected value="ګډونوال" >ګډونوال</option>
+												<option  value="تسهیلونکی" > تسهیلونکی</option>
+												@else 
+												<option selected ></option>
+												<option  value="تسهیلونکی" >تسهیلونکی </option>
+												<option value="ګډونوال" >ګډونوال</option>
+												@endif
+											</select>
 
-
-							</div>
+										</div>
+									</div>
+							    </div>
 							<hr !important>	<!-- this part has been hidden just for DB Facilitator role -->
 
 							<div class="form-group text-center col-md-4 m-auto">

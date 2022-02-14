@@ -79,7 +79,7 @@ class programfacilitatorController extends Controller
     {
         //
         // return "asdfasdf";
-        if($request->path() === 'facilitatorProfile/'.$id)
+        if($request->path() === 'admin/facilitatorProfile/'.$id)
         {
             $userProfile = DB::table('facilitatorsandparticipants')
             ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
@@ -91,7 +91,7 @@ class programfacilitatorController extends Controller
             $user_request = 'facilitator';
             return view('pdc-user-info', compact('userProfile', 'name', 'path', 'user_request'));
         }
-        elseif($request->path() === 'facilitatorProfileForProgram/'.$id)
+        elseif($request->path() === 'admin/facilitatorProfileForProgram/'.$id)
         {   
 
             $userProfile =  DB::table('facilitatorsandparticipants')

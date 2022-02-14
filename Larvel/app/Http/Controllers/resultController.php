@@ -46,7 +46,7 @@ class resultController extends Controller
             $result->program_id = $request->program_id;
             $result->save();
         }
-        return redirect('pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده پایلي په کامیابۍ سره سیسټم ته داخل کړل سوه!");
+        return redirect('admin/pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده پایلي په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**

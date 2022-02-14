@@ -262,7 +262,7 @@ label {
                                     <div class="form-group">
                                         <label class="col-form-label"> <span class="text-danger">*</span> د پروګرام د فیس پولي واحد</label>
                                         <select class="custom-select rankS"
-                                            style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="fee_type">
+                                            style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="fee_unit">
                                             @if(old('fee_type') === 'افغانۍ')
                                             <option ></option>
                                             <option selected value="افغانۍ">افغانۍ</option>

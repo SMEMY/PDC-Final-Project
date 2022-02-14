@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
 use App\Models\Facilitatorsandparticipant;
+use App\Models\Programsparticipant;
+use App\Models\Programsfacilitator;
 use Illuminate\Support\Facades\DB;
 
 
@@ -48,6 +50,7 @@ class facilitatorandparticipantController extends Controller
             $searchPath = '/searchMember';
             return view('pdc-list-all-member', compact('members', 'path', 'searchPath'));
         }
+       
 
         //
     }
@@ -71,7 +74,7 @@ class facilitatorandparticipantController extends Controller
     public function store(Request $request)
     {
         
-        if($request->path() === 'memberStore')
+        if($request->path() === 'admin/memberStore')
         {
             $validate = $request->validate([
                 'member_name' => 'bail|required|string|max:30',
@@ -103,6 +106,71 @@ class facilitatorandparticipantController extends Controller
             $member->password = Hash::make($request->password);
             $member->save();
             return back()->with('member_added', 'یاد شخص سسیسټم ته په کامیابۍ سره ثبت کړل سو!');
+        }
+        elseif($request->path() === 'admin/memberStoreTwo')
+        {
+            if($request->member_type != null)
+            {
+
+                // return $request->member_type;
+                $validate = $request->validate([
+                    'member_name' => 'bail|required|string|max:30',
+                    'last_name' => 'bail|required|string|max:30',
+                    'phone_number' => 'bail|required|string|max:13',
+                    'email' => 'bail|required|email|max:50',
+                    'gender' => 'bail|required|string|in:نارینه,ښځینه',
+                    'office_campus' => 'bail|nullable|string|in:کندهار پوهتون',
+                    'office_building' => 'bail|required|string|in:ساینس,ادبیات,شرعیات,اقتصاد,زراعت,ژورنالیزم,حقوق,ساینس,انجنیري,طب,اداري معاونیت,ریاست مقام,محصلینو چارو معاونیت,تعلیم او تربیه,اداره ئې عامه,کمپیوټر ساینس',
+                    'office_department' => 'bail|required|string|max:30',
+                    'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
+                    'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
+                    'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
+                    'password' => 'bail|string|min:8|max:20|confirmed:password_confirmation',
+                    'password_confirmation' => 'bail|string|min:8|max:20|',
+                    'member_type' => 'bail|string|in:تسهیلونکی,ګډونوال|required',
+                ]);
+                $member = new Facilitatorsandparticipant;
+                $member->name = $request->member_name;
+                $member->last_name = $request->last_name;
+                $member->phone_number = $request->phone_number;
+                $member->email = $request->email;
+                $member->gender = $request->gender;
+                $member->office_campus = $request->office_campus;
+                $member->office_building = $request->office_building;
+                $member->office_department = $request->office_department;
+                $member->office_position = $request->office_position;
+                $member->office_position_category = $request->office_position_category;
+                $member->educational_rank = $request->educational_rank;
+                $member->password = Hash::make($request->password);
+                $member->save();
+                if($request->member_type === 'ګډونوال')
+                {
+                    $participant_id = DB::table('facilitatorsandparticipants')->max('id');
+                    $reg = new Programsparticipant;
+                    // return "par";
+                    $reg->participant_id = $participant_id;
+                    $reg->program_id = $request->program_id;
+                    $reg->save();
+                    return redirect('admin/pdcProgramList')->with('member_added', 'پروګرام ته ګډونکوونکی اضافه کړل سو!');
+                }
+                elseif ($request->member_type === 'تسهیلونکی')
+                {
+                    $facilitator_id = DB::table('facilitatorsandparticipants')->max('id');
+                    $reg = new Programsfacilitator;
+                    // return "facil";
+                    $reg->facilitator_id = $facilitator_id;
+                    $reg->program_id = $request->program_id;
+                    $reg->save();
+                    return redirect('admin/pdcProgramList')->with('member_added', 'پروګرام ته تسهیلونکی اضافه کړل سو!');
+                }
+                else{
+                    return "nullllllllllll member registration!";
+                }
+            }
+            else{
+                return "facil and part controller has faced with error in store function!";
+            }
+            
         }
         elseif($request->path() === 'publicMemberStore')
         {
@@ -148,13 +216,22 @@ class facilitatorandparticipantController extends Controller
     public function show(Request $request, $id)
     {
         //
-        if($request->path() === 'memberProfile/'.$id)
+        // return "jhgj";
+        
+        if($request->path() === 'admin/memberProfile/'.$id)
         {
             $userProfile = DB::table('facilitatorsandparticipants')->where('id', $id)->get();
             $name  = 'ثبت سوی شخص';
-            $path = 'memberList';
+            $path = 'admin/memberList';
             $user_request = 'member';
-        return view('pdc-user-info', compact('userProfile', 'name', 'path', 'user_request'));
+            return view('pdc-user-info', compact('userProfile', 'name', 'path', 'user_request'));
+        }
+
+        elseif($request->path() === 'admin/memberRegisterationTwo/'.$id)
+        {
+            $program_id = $id;
+            return view('pdc-add-member-two', compact('program_id'));
+
         }
     }
 

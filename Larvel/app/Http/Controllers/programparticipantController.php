@@ -82,7 +82,7 @@ class programparticipantController extends Controller
             $user_request = 'participant';
             return view('pdc-user-info', compact('userProfile', 'name', 'path', 'user_request'));
         }
-        elseif($request->path() === 'specificeProgramParticipants/'.$id)
+        elseif($request->path() === 'admin/specificeProgramParticipants/'.$id)
         {
             $participants = DB::table('facilitatorsandparticipants')
             ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
