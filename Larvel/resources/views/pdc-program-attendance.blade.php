@@ -115,7 +115,7 @@ li{
 
 								</thead>
 								<tbody class="overflow-hidden">
-									<form action="/admin/pdcProgramAttendanceEntry" class="" method="POST">
+									<form action="admin/pdcProgramAttendanceEntry" class="" method="POST">
 
 										{{ method_field('POST') }}
 										{{ csrf_field() }}

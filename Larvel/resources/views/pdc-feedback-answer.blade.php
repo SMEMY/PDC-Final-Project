@@ -138,7 +138,7 @@ select:hover{
                         <!-- <p class="account-subtitle"></p> -->
 
                         <!-- Account Form -->
-                        <form action="/feedback" method="POST">
+                        <form action="/admin/feedback" method="POST">
                             {{ method_field('POST') }}
                             {{ csrf_field() }}
                                     @if ($errors->any())

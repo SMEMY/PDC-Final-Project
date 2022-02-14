@@ -80,7 +80,20 @@
 			border-collapse: separate !important;
 		}
 	</style>
+	<script>
+		 $("#btnPrint").live("click", function () {
+      var divContents = $("#text").html();
+      var printWindow = window.open('', '', 'height=400,width=800');
+      printWindow.document.write('<html><head><title>Html to PDF</title>');
+      printWindow.document.write('</head><body >');
+      printWindow.document.write(text);
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+      printWindow.print();
+    });
+	</script>
 </head>
+
 
 <body>
 	<!-- Main Wrapper -->

@@ -404,7 +404,13 @@ h4 {
 	});
 	</script>
 @endif
-	
+@if(Session::has('success_questionnaire'))
+	<script>
+	swal('ډېر ښه!',"{!! Session::get('success_questionnaire') !!}", "success", {
+		button: "سمده",
+	});
+	</script>
+@endif
 <script>
 		function pathFinder(num)
 					{
