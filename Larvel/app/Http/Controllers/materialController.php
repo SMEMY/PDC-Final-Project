@@ -93,13 +93,13 @@ class materialController extends Controller
     {
         //
         // return $request->path()
-        if($request->path() === 'storeMaterials/'.$id)
+        if($request->path() === 'admin/storeMaterials/'.$id)
         {
             $program_id = $id;
             return view('pdc-add-programs-materials', compact('program_id'));
 
         }
-        elseif($request->path() === 'materials/'.$id)
+        elseif($request->path() === 'admin/materials/'.$id)
         {
             $program_id = $id;
             // return $program_id;
@@ -163,7 +163,7 @@ class materialController extends Controller
        
         // $deletematerial->delete();
         // return redirect('materials/'.$request->program_id);
-        // return $id;
+        return $id;
         Storage::delete('public/programFiles/'.$id);
         $delete = Material::where('path', $id)->get();
         if($delete->program_id === $request->program_id)

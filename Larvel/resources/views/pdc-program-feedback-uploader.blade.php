@@ -80,7 +80,7 @@ h4 {
 								<h4 class="card-title mb-0">د اړونده پروګرام د کیفیت لپاره پوښټنلیک رامنځته کړی</h4>
 							</div>
 							<div class="card-body">
-								<form action="/feedbackFormInsertion" method="POST">
+								<form action="/admin/feedbackFormInsertion" method="POST">
 								{{ method_field('POST') }}
                             	{{ csrf_field() }}
 								<input class="d-none" type="text" name="program_id" id="" value="{{$programID}}">

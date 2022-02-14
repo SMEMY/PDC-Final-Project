@@ -92,7 +92,7 @@
 								<h4 class="card-title mb-0">د اوړنده پروکرام په اړه د سهولتونو د ثبتولو پاڼه</h4>
 							</div>
 							<div class="card-body">
-								<form action="pdcProgramFacility" method="POST" >
+								<form action="/admin/pdcProgramFacility" method="POST" >
 									{{ method_field('POST') }}
 									{{ csrf_field() }}
 									<input class="d-none" type="text" value="{{$programID}}" name='program_id'>

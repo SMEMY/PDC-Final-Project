@@ -125,7 +125,7 @@ hahahaha
                 </ul>
             </div>
             <div class="col-auto float-right ml-auto">
-                <a href="#" class="btn add-btn px-4" data-toggle="modal" data-target="#create_program"><i
+                <a href="/admin/addPdcProgram" class="btn add-btn px-4" data-toggle="modal" data-target="#create_program"><i
                         class="fa fa-plus"></i>پروګرام ثبت کړی</a>
                 <!-- <div class="view-icons">
                     <a href="projects.html" class="grid-view btn btn-link active"><i
@@ -192,10 +192,12 @@ hahahaha
             <div class="dropdown dropdown-action profile-action" id="edit">
                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
                         class="material-icons">more_vert</i></a>
-                <div class="dropdown-menu dropdown-menu-right" style="z-index: 100;">
-                    <a class="dropdown-item" href="/pdcProgramList/{{$program->id}}/edit"  ><i
+                        <div class="dropdown-menu dropdown-menu-right" style="z-index: 100;">
+                            <a class="dropdown-item" href="/admin/memberRegisterationTwo/{{$program->id}}"  ><i
+                            class="fa fa-pencil m-r-5"></i>ګدونوال ثبتول</a>
+                    <a class="dropdown-item" href="/admin/pdcProgramList/{{$program->id}}/edit"  ><i
                             class="fa fa-pencil m-r-5"></i>معلومات اصلاح کړی</a>
-                            <a class="dropdown-item" href="/pdcProgramDelete/{{$program->id}}" data-toggle="modal"
+                            <a class="dropdown-item" href="/admin/pdcProgramList/{{$program->id}}" data-toggle="modal"
                                         data-target="#delete_project" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
                 </div>
             </div>
@@ -215,9 +217,9 @@ hahahaha
                         <ul class="m-0" style="padding:5px 10px; background: linear-gradient(to left, #88e5ff 0%, #3687ff8c 120%); border-radius: 0 0 4px 4px;">
 							<li class="ml-1 text-dark d-inline-block"><i class="fa fa-map-signs text-danger"></i> <strong>ادرس: </strong>{{$program->campus_name}}</li>
                             <!-- <br> -->
-							<li class="ml-2 text-dark d-inline-block"><i class="fa fa-clock-o text-danger"></i> <strong>د پروګرام دوام:</strong> {{$program->days_duration}} ورځي</li>
+							<li class="ml-2 text-dark d-inline-block"><i class="fa fa-clock-o text-danger"></i> <strong>دوام:</strong> {{$program->days_duration}} ورځي</li>
                             <!-- <br> -->
-							<li class="ml-2 text-dark d-inline-block"><i class="fa fa-money text-danger"></i> <strong>د پروګرام فیس: </strong>{{$program->fee}} {{$program->fee_type}} </li>
+							<li class="ml-2 text-dark d-inline-block"><i class="fa fa-money text-danger"></i> <strong>فیس: </strong>{{$program->fee}} {{$program->fee_type}} </li>
                         </ul>
                     </div>            
                 </a>
@@ -551,8 +553,8 @@ hahahaha
 					<div class="modal-content">
 						<div class="modal-body">
 							<div class="form-header">
-								<h3>ښاغلی/آغلې له منځه وړل</h3>
-								<p>آیا تاسي باوري یاست چي یاد کس له سیسټم څخه له منځه یوسي؟</p>
+								<h3>پروګرام له منځه وړل!</h3>
+								<p>آیا تاسي باوري یاست چي یاد پروګرام له سیسټم څخه له منځه یوسي؟</p>
 							</div>
 							<div class="modal-btn delete-action">
 								<div class="row">
@@ -595,6 +597,21 @@ hahahaha
 	});
 	</script>
 @endif
+@if(Session::has('program_edited'))
+        <script>
+            swal('ډېر ښه!',"{!! Session::get('program_edited') !!}", "success", {
+                button: "مننه",
+            });
+        </script>
+        @endif
+
+        @if(Session::has('member_added'))
+        <script>
+            swal('ډېر ښه!',"{!! Session::get('member_added') !!}", "success", {
+                button: "مننه",
+            });
+        </script>
+        @endif
 <script>
 			function pathFinder(num)
 					{

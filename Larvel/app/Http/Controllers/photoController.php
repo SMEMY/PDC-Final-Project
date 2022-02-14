@@ -55,7 +55,7 @@ class photoController extends Controller
                 $imageSave->path = $imageName;
                 $imageSave->save();
         }
-        return redirect('pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده تفرقې په کامیابۍ سره سیسټم ته داخل کړل سوه!");
+        return redirect('admin/pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده تفرقې په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**
@@ -67,12 +67,12 @@ class photoController extends Controller
     public function show(Request $request, $id)
     {
         //
-        if($request->path() === 'pdcProgramPhoto/'.$id)
+        if($request->path() === 'admin/pdcProgramPhoto/'.$id)
         {
             $programID=$id;
             return view('pdc-program-photo', compact('programID'));
         }
-        elseif ($request->path() === 'downloadPhoto/'.$id) {
+        elseif ($request->path() === 'admin/downloadPhoto/'.$id) {
             return Storage::download('public/images/'.$id);
         }
         
@@ -111,10 +111,11 @@ class photoController extends Controller
     public function destroy(Request $request, $id)
     {
         //
-        // return "hahahaha";
+        // return "hahahahmmmmmmmmma";
+        // return $id;
         Storage::delete('public/images/'.$id);
         Photo::where('path', $id)->delete();
         // $deletematerial->delete();
-        return redirect('pdcProgramInfo/'.$request->program_id);
+        return redirect('admin/pdcProgramInfo/'.$request->program_id);
     }
 }

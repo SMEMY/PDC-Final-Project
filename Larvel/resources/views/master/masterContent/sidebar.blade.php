@@ -14,8 +14,8 @@
 								<li class="submenu">
 									<a href="#" class="active"><span> پروګرام ثبتول</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="/admin/addPdcProgram" >د (پي ډي سي) پروګرام ثبتول</a></li>
-										<li><a href="/admin/addEduProgram">دعلمي ترفېع/ تقرر پروګرام ثبتول</a></li>
+										<li><a href="{{route('addPdcprogram')}}" >د (پي ډي سي) پروګرام ثبتول</a></li>
+										<li><a href="{{route('addEduProgram')}}">دعلمي ترفېع/ تقرر پروګرام ثبتول</a></li>
 									</ul>
 								</li>
 								<li class="submenu">

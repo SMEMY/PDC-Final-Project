@@ -39,7 +39,7 @@ class fquestionnaireController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->path() === 'feedbackFormInsertion')
+        if($request->path() === 'admin/feedbackFormInsertion')
         {
             
             $request->validate([
@@ -56,8 +56,11 @@ class fquestionnaireController extends Controller
                 $questionnairQuestion->feedback_form_id = $programID[0]->id;
                 $questionnairQuestion->save();
             }
-            return redirect('pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده پوښتنلیک په کامیابۍ سره سیسټم ته داخل کړل سو!");
+            return redirect('admin/pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده پوښتنلیک په کامیابۍ سره سیسټم ته داخل کړل سو!");
               
+        }
+        else{
+            return "fquestionnaireController Store() function!";
         }
       
     }
@@ -71,7 +74,7 @@ class fquestionnaireController extends Controller
     public function show(Request $request, $id)
     {
         //
-        if($request->path() === 'feedbackFormInsertion/'.$id){
+        if($request->path() === 'admin/feedbackFormInsertion/'.$id){
             $programID = $id;
             $check = DB::table('feedbacks')->where('program_id', $id)->get();
             if(count($check) === 0){
@@ -82,7 +85,7 @@ class fquestionnaireController extends Controller
                 return back()->with('warn', "د یاد پروګرام لپاره مخکي پوښتنلیک سیسټم ته اضافه سوی دی!");
             }
         }
-        elseif($request->path() === 'pdcProgramFeedbackReport/'.$id)
+        elseif($request->path() === 'admin/pdcProgramFeedbackReport/'.$id)
         {
             $questions = DB::table('feedbacks')
             ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')

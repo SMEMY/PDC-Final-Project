@@ -52,15 +52,18 @@ class attendanceController extends Controller
         for($index = 0; $index<count($request->participant_id); $index++){
             $total_days = Program::find($request->program_id);
             // return $total_days->days_duration;
-            if($total_days->days_duration === $request->presence[$index] + $request->absence[$index]){
-                $participantAttendance = new Attendance;
-                $participantAttendance->presence_days = $request->presence[$index];
-                $participantAttendance->absence_days = $request->absence[$index];
-                $participantAttendance->participant_id = $request->participant_id[$index];
-                $participantAttendance->program_id = $request->program_id;
-                $participantAttendance->total_days = $request->presence[$index] +$request->absence[$index];
-                $participantAttendance->save();
-                return back()->with('program_added', "د پروګرام د ګډونوالو حاضري په کامیابي سره سیسټم داخل کړل سوه!");
+            if($total_days->days_duration === $request->presence[$index] + $request->absence[$index] ){
+
+                if($request->absence[$index] != null && $request->presence[$index] != null){
+                    $participantAttendance = new Attendance;
+                    $participantAttendance->presence_days = $request->presence[$index];
+                    $participantAttendance->absence_days = $request->absence[$index];
+                    $participantAttendance->participant_id = $request->participant_id[$index];
+                    $participantAttendance->program_id = $request->program_id;
+                    $participantAttendance->total_days = $request->presence[$index] +$request->absence[$index];
+                    $participantAttendance->save();
+                    return redirect('admin/pdcProgramInfo/'.$request->program_id)->with('attandance_added', "د پروګرام د ګډونوالو حاضري په کامیابي سره سیسټم داخل کړل سوه!");
+                }
             }
             else{
             return back()->with('attendance_not_added', "د ګدونوالو د حاضري جمع، په سیسټم کي د پروګرام د ورځو د تعداد سره مساوي نه وو. نو یاد معلومات سیسټم ته اضافه نسول!");
@@ -69,7 +72,7 @@ class attendanceController extends Controller
 
         }
 
-        return redirect('pdcProgramInfo/'.$request->program_id);
+        return redirect('admin/pdcProgramInfo/'.$request->program_id);
     }
 
     /**
@@ -81,7 +84,7 @@ class attendanceController extends Controller
     public function show(Request $request, $id)
     {
         //
-        if($request->path() === 'pdcProgramAttendancePaper/'.$id){
+        if($request->path() === 'admin/pdcProgramAttendancePaper/'.$id){
             $participants = DB::table('facilitatorsandparticipants')
            ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
            ->select('facilitatorsandparticipants.*')
@@ -94,7 +97,7 @@ class attendanceController extends Controller
            ->get();
            return view('pdc-program-attendance-paper', compact('participants', 'program'));
         }
-        elseif($request->path() == 'pdcProgramAttendanceReport/'.$id){
+        elseif($request->path() == 'admin/pdcProgramAttendanceReport/'.$id){
             $attendanceReport =  DB::table('facilitatorsandparticipants')
             ->join('attendances', 'facilitatorsandparticipants.id', '=', 'attendances.participant_id')
             ->select('facilitatorsandparticipants.id as p_id', 'facilitatorsandparticipants.name', 'facilitatorsandparticipants.last_name', 'attendances.*')
@@ -110,7 +113,7 @@ class attendanceController extends Controller
                 return view('pdc-program-attendance-report',compact('attendanceReport','programID'));
             }
         }
-        elseif($request->path() === 'pdcProgramAttendance/'.$id){        
+        elseif($request->path() === 'admin/pdcProgramAttendance/'.$id){        
             $Participants =  DB::table('facilitatorsandparticipants')
             ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
             ->select('facilitatorsandparticipants.*')
@@ -193,14 +196,14 @@ class attendanceController extends Controller
                 $upddateRecord->absence_days = $request->absence;
                 $upddateRecord->total_days = $upddateRecord->presence_days + $request->absence;
                 $upddateRecord->save();
-                return redirect('pdcProgramAttendanceReport/'.$request->program_id);
+                return redirect('admin/pdcProgramAttendanceReport/'.$request->program_id);
             }
             elseif($request->presence !== null && $request->absence === null){
                 $upddateRecord =  Attendance::find($id);
                 $upddateRecord->presence_days = $request->presence;
                 $upddateRecord->total_days = $request->presence + $upddateRecord->absence_days;
                 $upddateRecord->save();
-                return redirect('pdcProgramAttendanceReport/'.$request->program_id);
+                return redirect('admin/pdcProgramAttendanceReport/'.$request->program_id);
             }
             else{
                 $upddateRecord =  Attendance::find($id);
@@ -208,7 +211,7 @@ class attendanceController extends Controller
                 $upddateRecord->absence_days = $request->absence;
                 $upddateRecord->total_days = $request->presence + $request->absence;
                 $upddateRecord->save();
-                return redirect('pdcProgramAttendanceReport/'.$request->program_id);
+                return redirect('admin/pdcProgramAttendanceReport/'.$request->program_id);
             }
         }
         else{
@@ -225,14 +228,14 @@ class attendanceController extends Controller
     public function destroy(Request $request, $id)
     {
         //
-        if($request->path() === 'pdcProgramAttendanceReport/'.$id)
+        if($request->path() === 'admin/pdcProgramAttendanceReport/'.$id)
         {
 
             Attendance::where('participant_id', $id)->delete();
             $check = DB::table('attendances')->where('Program_id', $request->program_id)->get();
             if(count($check) === 0)
             {
-                return redirect('pdcProgramInfo/'.$request->program_id)->with('success', "د یاد پروګرام د حاضرۍ راپور په بښپړه ډول له  سیسټم څخه له منځه ولاړ!");
+                return redirect('admin/pdcProgramInfo/'.$request->program_id)->with('success', "د یاد پروګرام د حاضرۍ راپور په بښپړه ډول له  سیسټم څخه له منځه ولاړ!");
 
             }
             else{

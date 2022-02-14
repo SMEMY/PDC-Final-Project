@@ -23,19 +23,27 @@ class CreatePDCProgram extends Migration
             $table->decimal('fund', 10, 5);	
             $table->string('fund_type', 15);
             $table->boolean('fee_able');	
-            $table->decimal('fee', 10, 5);	
-            $table->string('fee_type',20);	
+            $table->decimal('fee', 10, 5)->nullable();	
+            $table->string('fee_type',20)->nullable();	
             $table->string('info_mobile_number');	
             $table->longText('program_description');	
             $table->decimal('participant_amount', 5,0);
             $table->text('facilitator_code');	
             $table->text('participant_code');
+
+            $table->string('start_year');
+            $table->string('end_year');
+            $table->string('start_month');
+            $table->string('end_month');
+
+            $table->integer('start_day');
             $table->integer('end_day');
-            $table->string('start_date');
-            $table->string('end_date');
+
             $table->string('start_time');
             $table->string('end_time');
+
             $table->integer('days_duration');
+
             $table->string('campus_name', 30);	
             $table->string('block_name', 30);
             $table->integer('block_number');	

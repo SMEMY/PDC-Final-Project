@@ -30,6 +30,7 @@ class programController extends Controller
      
        
        $path = '/pdcProgramList';
+    //    return "lakdjf";
 
        if($request->path() === 'admin/pdcProgramList')
        {
@@ -101,8 +102,8 @@ class programController extends Controller
                 'fund' => 'bail|required|integer',
                 'fund_type' => 'bail|required|string|in:افغانۍ,ډالر',
                 'fee_able' => 'bail|required|integer|in:0,1',
-                'fee' => 'bail|required_if:fee_able,=,1|integer',
-                'fee_type' => 'bail|string|required_if:fee_able,=,1|in:افغانۍ,ډالر',
+                // 'fee' => 'bail|integer|required_unless:fee_able,=,1|integer|gte:1',
+                // 'fee_unit' => 'bail|string|required_if:fee_able,=,1|in:افغانۍ,ډالر',
                 'campus_name' => 'bail|required|string|max:30',
                 'block_name' => 'bail|required|string|max:30',
                 'block_number' => 'bail|required|integer|between:1,30',
@@ -116,6 +117,14 @@ class programController extends Controller
                 'days_duration' => 'bail|required|integer',
                 'program_description' => 'bail|required|string|max:2000',
             ]);
+            // return $request->fee_able;
+            if($request->fee_able == 1){
+                // return "lsdflds";
+                $validate = $request->validate([
+                    'fee' => 'bail|integer|required',
+                    'fee_unit' => 'bail|string|required|in:افغانۍ,ډالر',
+                ]);
+            }
             $addProgram = new Program;
             $addProgram->name = $request->name;
             $addProgram->type = $request->type;
@@ -128,7 +137,7 @@ class programController extends Controller
             $addProgram->fund_type = $request->fund_type;
             $addProgram->fee_able = $request->fee_able;
             $addProgram->fee = $request->fee;
-            $addProgram->fee_type = $request->fee_type;
+            $addProgram->fee_type = $request->fee_unit;
             $addProgram->program_description = $request->program_description;
             $addProgram->facilitator_code = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
             $addProgram->participant_code = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
@@ -182,7 +191,6 @@ class programController extends Controller
             return view('facil-part-enroll-program-info', compact('programs'));
 
        }
-      
        else{
            return "path not found!";
        }
@@ -197,7 +205,7 @@ class programController extends Controller
     public function edit(Request $request, $id)
     {
         //
-        if($request->path() === 'pdcProgramList/'.$id."/edit")
+        if($request->path() === 'admin/pdcProgramList/'.$id."/edit")
         {
             $editProgram = Program::with('getResults', 'getFacilities', 'getAgendas', 'getEvaluations')->find($id);
             return view('pdc-edit-program', compact('editProgram'));
@@ -215,7 +223,7 @@ class programController extends Controller
     public function update(Request $request, $id)
     {
         //
-        if($request->path() === 'pdcProgramList/'.$id)
+        if($request->path() === 'admin/pdcProgramList/'.$id)
         {
             
             $addProgram = Program::with('getResults', 'getFacilities', 'getAgendas', 'getEvaluations')->find($id);
@@ -284,7 +292,7 @@ class programController extends Controller
             }
             
             // return "done";
-            return redirect('pdcProgramList');
+            return redirect('admin/pdcProgramList')->with('program_edited', "پروګرام په کامیابۍ سره سیسټم کي اصلاح کړل سو!");
         }
     }
 
@@ -298,10 +306,15 @@ class programController extends Controller
     {
         //
 
-        if($request->path() === 'pdcProgramDelete/'.$id){
+        // if($request->path() === 'admin/pdcProgramDelete/'.$id){
+        //     $deleteProgram = Program::find($id);
+        //     $deleteProgram->delete();
+        //     return redirect('/pdcProgramList');
+        // }
+        if($request->path() === 'admin/pdcProgramList/'.$id){
             $deleteProgram = Program::find($id);
             $deleteProgram->delete();
-            return redirect('/pdcProgramList');
+            return redirect('/admin/pdcProgramList');
         }
         return $id;
     }
