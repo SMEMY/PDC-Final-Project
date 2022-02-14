@@ -85,8 +85,8 @@ class feedBackController extends Controller
                 $questionAnswer->question_id = $request->opinions[$i];
                 $questionAnswer->save();
             }
-            // return redirect('pdcProgramInfo/'.$request->program_id)->with('success_questionnaire', 'د یاد پروګرام لپاره په سیسټم کي په کامیابۍ سره پوښتنلیک اضافه کړل سو!');
-            return back()->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
+            return redirect('admin/pdcProgramInfo/'.$request->program_id)->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
+            // return back()->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
         
        
     }
@@ -102,6 +102,7 @@ class feedBackController extends Controller
         // return Feedback::all();
         if($request->path() === 'admin/feedback/'.$id)
         {
+            // return "kjsda";
             $materials =  DB::table('feedbacks')
             ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
             ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
@@ -147,7 +148,7 @@ class feedBackController extends Controller
                 return view('pdc-feedback', compact('materials','facilities','locations','comments', 'program_id'));
             }
         }
-        elseif($request->path() === 'feedbackAnswer/'.$id)
+        elseif($request->path() === 'admin/feedbackAnswer/'.$id)
         {
             // return "hasdkjadh";
             $materials =  DB::table('feedbacks')
@@ -197,7 +198,7 @@ class feedBackController extends Controller
         }
         
        
-        return "i am feed show function()";
+        // return "i am feed show function()";
     }
 
     /**
