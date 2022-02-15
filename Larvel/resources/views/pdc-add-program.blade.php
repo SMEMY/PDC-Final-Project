@@ -268,7 +268,7 @@ label {
                                             <option selected value="افغانۍ">افغانۍ</option>
                                             <option value="ډالر">ډالر</option>
                                             @elseif(old('fee_type') === 'ډالر')
-                                            <option selected></option>
+                                            <option ></option>
                                             <option value="افغانۍ">افغانۍ</option>
                                             <option selected value="ډالر">ډالر</option>
                                             @else
@@ -310,19 +310,19 @@ label {
                             </div>
                             <hr !important>
                             <div class="row my-5">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label><span class="text-danger">*</span> د پېل کېدو کال</label>
-                                        <input placeholder="" class="form-control" type="number" name="year" value="{{old('year')}}">
+                                        <label><span class="text-danger">*</span> د پېل کېدو تاریخ</label>
+                                        <input placeholder="" class="form-control" type="datetime-local" name="start_date" value="{{old('start_date')}}">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label><span class="text-danger">*</span> د پېل کېدو میاشت</label>
-                                        <input placeholder="" class="form-control" type="number" name="month" value="{{old('month')}}">
+                                        <label><span class="text-danger">*</span> د ختمېدو تاریخ</label>
+                                        <input placeholder="" class="form-control" type="datetime-local" name="end_date" value="{{old('end_date')}}">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <div class="form-group">
                                         <label><span class="text-danger">*</span> د پېل کېدو ورځ</label>
                                         <input placeholder="" class="form-control" type="number" name="start_day" value="{{old('start_day')}}">
@@ -333,14 +333,14 @@ label {
                                         <label> <span class="text-danger">*</span> د ختم کېدو ورځ</label>
                                         <input placeholder="" class="form-control" type="number" name="end_day" value="{{old('end_day')}}">
                                     </div>
-                                </div>
-                                <div class="col-md-4">
+                                </div> -->
+                                <!-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label> <span class="text-danger">*</span>د پروګرام د ورځو شمېر</label>
                                         <input placeholder="" class="form-control" type="number" name="days_duration" value="{{old('days_duration')}}">
                                     </div>
-                                </div>
-                                <div class="col-md-4">
+                                </div> -->
+                                <!-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label> <span class="text-danger">*</span> دشروع کېدو ساعت</label>
                                         <input placeholder="" class="form-control" type="time" name="start_time" value="{{old('start_time')}}">
@@ -351,7 +351,7 @@ label {
                                         <label style=""><span class="text-danger">*</span> د ختم کېدو ساعت</label>
                                         <input placeholder="" class="form-control" type="time" name="end_time" value="{{old('end_time')}}">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <hr !important>
 
