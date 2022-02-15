@@ -31,16 +31,18 @@ class CreatePDCProgram extends Migration
             $table->text('facilitator_code');	
             $table->text('participant_code');
 
-            $table->string('start_year');
-            $table->string('end_year');
-            $table->string('start_month');
-            $table->string('end_month');
+            // $table->string('');
+            $table->dateTimeTz('start_date', $precision = 0);
+            $table->dateTimeTz('end_date', $precision = 0);
+            // $table->string('');
+            // $table->string('start_month');
+            // $table->string('end_month');
 
-            $table->integer('start_day');
-            $table->integer('end_day');
+            // $table->integer('start_day');
+            // $table->integer('end_day');
 
-            $table->string('start_time');
-            $table->string('end_time');
+            // $table->string('start_time');
+            // $table->string('end_time');
 
             $table->integer('days_duration');
 

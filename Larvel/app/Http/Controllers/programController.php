@@ -9,6 +9,7 @@ use App\Models\Facility;
 use App\Models\Agenda;
 use App\Models\Evaluation;
 use App\Models\Material;
+use Carbon\Carbon;
 use App\Models\Photo;
 Use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -102,19 +103,19 @@ class programController extends Controller
                 'fund' => 'bail|required|integer',
                 'fund_type' => 'bail|required|string|in:افغانۍ,ډالر',
                 'fee_able' => 'bail|required|integer|in:0,1',
-                // 'fee' => 'bail|integer|required_unless:fee_able,=,1|integer|gte:1',
-                // 'fee_unit' => 'bail|string|required_if:fee_able,=,1|in:افغانۍ,ډالر',
+                'fee' => 'bail|integer|required_unless:fee_able,=,1|integer|gte:1',
+                'fee_unit' => 'bail|string|required_if:fee_able,=,1|in:افغانۍ,ډالر',
                 'campus_name' => 'bail|required|string|max:30',
                 'block_name' => 'bail|required|string|max:30',
                 'block_number' => 'bail|required|integer|between:1,30',
                 'room_number' => 'bail|required|integer|between:1,30',
-                'year' => 'bail|required|integer|between:2017,3000',
-                'month' => 'bail|required|integer|between:1,12',
-                'start_day' => 'bail|required|integer|between:1,31',
-                'end_day' => 'bail|required|integer|between:1,31',
-                'start_time' => 'bail|required|date_format:H:i',
-                'end_time' => 'bail|required|date_format:H:i',
-                'days_duration' => 'bail|required|integer',
+                'start_date' => 'bail|required|date',
+                'end_date' => 'bail|required|date',
+                // 'start_day' => 'bail|required|integer|between:1,31',
+                // 'end_day' => 'bail|required|integer|between:1,31',
+                // 'start_time' => 'bail|required|date_format:H:i',
+                // 'end_time' => 'bail|required|date_format:H:i',
+                // 'days_duration' => 'bail|required|integer',
                 'program_description' => 'bail|required|string|max:2000',
             ]);
             // return $request->fee_able;
@@ -125,6 +126,8 @@ class programController extends Controller
                     'fee_unit' => 'bail|string|required|in:افغانۍ,ډالر',
                 ]);
             }
+            $start = Carbon::parse($request->input('start_date'));
+            $end = Carbon::parse($request->input('end_date'));
             $addProgram = new Program;
             $addProgram->name = $request->name;
             $addProgram->type = $request->type;
@@ -141,14 +144,11 @@ class programController extends Controller
             $addProgram->program_description = $request->program_description;
             $addProgram->facilitator_code = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
             $addProgram->participant_code = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
-            $addProgram->year = $request->year;
-            $addProgram->month = $request->month;
-            $addProgram->start_day = $request->start_day;
-            $addProgram->end_day = $request->end_day;
-            $addProgram->start_time = $request->start_time;
-            $addProgram->end_time = $request->end_time;
-            $addProgram->days_duration = $request->days_duration;;
-            $addProgram->hours_duration = 12;
+            // $addProgram->year = $request->year;
+            $addProgram->start_date = $request->start_date;
+            $addProgram->end_date = $request->end_date;
+            $addProgram->days_duration = $start->diffInDays($end);
+            // $addProgram->hours_duration = 12;
             $addProgram->campus_name = $request->campus_name;
             $addProgram->block_name = $request->block_name;
             $addProgram->block_number = $request->block_number;
@@ -183,6 +183,8 @@ class programController extends Controller
        elseif($request->path() == 'admin/pdcProgramInfo/'.$id){
             $programs = Program::with('getFacilities', 'getResults', 'getEvaluations', 'getAgendas', 'getPhotos', )->find($id);
             $program_id = $id;
+            // return $programs->start_date;
+            // return Carbon::parse($programs->start_date)->format('M');
         
             return view('pdc-program-info', compact('programs', 'program_id'));
        }
