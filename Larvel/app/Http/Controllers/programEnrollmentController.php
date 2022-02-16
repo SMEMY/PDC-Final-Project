@@ -39,7 +39,7 @@ class programEnrollmentController extends Controller
     {
         //
         // return "sldfksdlf";
-        if($request->path() === 'memberEnrollmentForProgram'){
+        if($request->path() === 'admin/memberEnrollmentForProgram'){
             $programForFacilitator = Program::where('facilitator_code', $request->program_enrollment_code)->get();
             $programForParticipant =  Program::where('participant_code', $request->program_enrollment_code)->get();
             if(count($programForFacilitator) !== 0){
@@ -55,16 +55,16 @@ class programEnrollmentController extends Controller
                     $facilEnrollment->save();
                     if($request->user_address === 'member')
                     {
-                        return redirect('memberProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم غړی په کامیابۍ سره و پروګرام ته د تسهیلونکی په حیث شامل کړل سو!');
+                        return redirect('admin/memberProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم غړی په کامیابۍ سره و پروګرام ته د تسهیلونکی په حیث شامل کړل سو!');
                         
                     }
                     elseif($request->user_address === 'facilitator')
                     {
                         
-                        return redirect('facilitatorProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم تسهیلونکی په کامیابۍ سره و پروګرام ته د تسهیلونکی په حیث شامل کړل سو!');
+                        return redirect('admin/facilitatorProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم تسهیلونکی په کامیابۍ سره و پروګرام ته د تسهیلونکی په حیث شامل کړل سو!');
                     }
                     else{
-                        return redirect('participantProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم ګډونوال په کامیابۍ سره و پروګرام ته د تسهیلونکی په حیث شامل کړل سو!');
+                        return redirect('admin/participantProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم ګډونوال په کامیابۍ سره و پروګرام ته د تسهیلونکی په حیث شامل کړل سو!');
                     }
                 }
                 else{
@@ -118,13 +118,13 @@ class programEnrollmentController extends Controller
     {
         //
         
-        if($request->path() === 'memberEnrollmentForProgram/'.$id)
+        if($request->path() === 'admin/memberEnrollmentForProgram/'.$id)
         {
             $member_id = $id;
             $user_address = 'member';
             return view('pdc-program-enrollment', compact('member_id', 'user_address'));
         }
-        elseif($request->path() === 'facilitatorEnrollmentForProgram/'.$id)
+        elseif($request->path() === 'admin/facilitatorEnrollmentForProgram/'.$id)
         {
             $member_id = $id;
             $user_address = 'facilitator';

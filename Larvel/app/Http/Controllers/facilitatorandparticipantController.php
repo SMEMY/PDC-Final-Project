@@ -20,7 +20,7 @@ class facilitatorandparticipantController extends Controller
      */
     public function index(request $request)
     {
-        if($request->path() === 'memberList')
+        if($request->path() === 'admin/memberList')
         {
             //  $facilitators =  DB::table('facilitatorsandparticipants')
             // ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
@@ -48,7 +48,9 @@ class facilitatorandparticipantController extends Controller
             // return DB::table('facilitatorsandparticipants')->groupBy('phone_number')->having('Phone_number', '!=', '0008343043')->get();
             $path = 'member';
             $searchPath = '/searchMember';
-            return view('pdc-list-all-member', compact('members', 'path', 'searchPath'));
+            $page = 'عمومي ګډونوال';
+
+            return view('pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'));
         }
        
 
@@ -79,6 +81,7 @@ class facilitatorandparticipantController extends Controller
             $validate = $request->validate([
                 'member_name' => 'bail|required|string|max:30',
                 'last_name' => 'bail|required|string|max:30',
+                'father_name' => 'bail|required|string|max:30',
                 'phone_number' => 'bail|required|string|max:13',
                 'email' => 'bail|required|email|max:50',
                 'gender' => 'bail|required|string|in:نارینه,ښځینه',
@@ -94,6 +97,7 @@ class facilitatorandparticipantController extends Controller
             $member = new Facilitatorsandparticipant;
             $member->name = $request->member_name;
             $member->last_name = $request->last_name;
+            $member->father_name = $request->father_name;
             $member->phone_number = $request->phone_number;
             $member->email = $request->email;
             $member->gender = $request->gender;
@@ -233,6 +237,10 @@ class facilitatorandparticipantController extends Controller
             return view('pdc-add-member-two', compact('program_id'));
 
         }
+        else
+        {
+            return "askdfjas";
+        }
     }
 
     /**
@@ -244,7 +252,7 @@ class facilitatorandparticipantController extends Controller
     public function edit(Request $request, $id)
     {
         //
-        if($request->path() === 'memberList/'.$id.'/edit')
+        if($request->path() === 'admin/memberList/'.$id.'/edit')
         {
             $member = Facilitatorsandparticipant::find($id);
             $path= 'member';
@@ -262,20 +270,20 @@ class facilitatorandparticipantController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $validate = $request->validate([
-            'member_name' => 'bail|required|string|max:30',
-            'last_name' => 'bail|required|string|max:30',
-            'phone_number' => 'bail|required|string|max:13',
-            'email' => 'bail|required|email|max:50',
-            'gender' => 'bail|required|string|in:نارینه,ښځینه',
-            'office_campus' => 'bail|nullable|string|in:کندهار پوهتون',
-            'office_building' => 'bail|required|string|in:ساینس,ادبیات,شرعیات,اقتصاد,زراعت,ژورنالیزم,حقوق,ساینس,انجنیري,طب,اداري معاونیت,ریاست مقام,محصلینو چارو معاونیت,تعلیم او تربیه,اداره ئې عامه,کمپیوټر ساینس',
-            'office_department' => 'bail|required|string|max:30',
-            'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
-            'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
-            'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
-        ]);
-        if($request->path() === 'memberList/'.$id){
+        if($request->path() === 'admin/memberList/'.$id){
+            $validate = $request->validate([
+                'member_name' => 'bail|required|string|max:30',
+                'last_name' => 'bail|required|string|max:30',
+                'phone_number' => 'bail|required|string|max:13',
+                'email' => 'bail|required|email|max:50',
+                'gender' => 'bail|required|string|in:نارینه,ښځینه',
+                'office_campus' => 'bail|nullable|string|in:کندهار پوهتون',
+                'office_building' => 'bail|required|string|in:ساینس,ادبیات,شرعیات,اقتصاد,زراعت,ژورنالیزم,حقوق,ساینس,انجنیري,طب,اداري معاونیت,ریاست مقام,محصلینو چارو معاونیت,تعلیم او تربیه,اداره ئې عامه,کمپیوټر ساینس',
+                'office_department' => 'bail|required|string|max:30',
+                'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
+                'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
+                'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
+            ]);
             $member = Facilitatorsandparticipant::find($id);
             // return $request->last_name;
             $member->name = $request->member_name;
@@ -290,7 +298,7 @@ class facilitatorandparticipantController extends Controller
             $member->office_position_category = $request->office_position_category;
             $member->educational_rank = $request->educational_rank;
             $member->save();
-            return redirect('memberList')->with('member_edited', 'د یاد تسهیلونکی معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
+            return redirect('admin/memberList')->with('member_edited', 'د یاد تسهیلونکی معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
 
         }
     }
@@ -304,10 +312,10 @@ class facilitatorandparticipantController extends Controller
     public function destroy(Request $request, $id)
     {
         //
-        if($request->path() === 'memberList/'.$id)
+        if($request->path() === 'admin/memberList/'.$id)
         {
             Facilitatorsandparticipant::find($id)->delete();
-            return redirect('memberList');
+            return redirect('admin/memberList');
         }
     }
 }

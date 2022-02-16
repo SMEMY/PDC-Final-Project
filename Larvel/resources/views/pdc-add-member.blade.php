@@ -90,7 +90,7 @@ label {
 						<!-- <p class="account-subtitle"></p> -->
 						<hr !important>
 						<!-- Account Form -->
-						<form action="/memberStore" method="POST">
+						<form action="/admin/memberStore" method="POST">
 								{{ method_field('POST') }}
       					 	    {{ csrf_field() }}
 								    @if ($errors->any())
@@ -111,7 +111,7 @@ label {
 											<input class="form-control" type="text" value="participant" name="return">
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<!-- <div class="form-group">
 											<label class="col-form-label">نوم <span class="text-danger">*</span></label>
 											<input class="form-control" type="text"  name="member_name" value="{{old('')}}">
@@ -121,10 +121,16 @@ label {
 											<input class="form-control " type="text" name="member_name" value="{{old('member_name')}}">
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label class="col-form-label">تخلص</label>
 											<input class="form-control " type="text" name="last_name" value="{{old('last_name')}}">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="col-form-label">پلار نوم</label>
+											<input class="form-control " type="text" name="father_name" value="{{old('father_name')}}">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -601,7 +607,7 @@ label {
 							<hr !important>	<!-- this part has been hidden just for DB Facilitator role -->
 
 							<div class="form-group text-center col-md-4 m-auto">
-								<button class="btn btn-primary  account-btn col-md-12" type="submit">تسهیلونکی ثبت
+								<button class="btn btn-primary submit-btn" type="submit">تسهیلونکی ثبت
 									کړی</button>
 							</div>
 							

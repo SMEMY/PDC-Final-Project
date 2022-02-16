@@ -46,6 +46,10 @@ label {
 			transition: all 0.3s;
 
         }
+        button {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
+        }
         #alertMassege{
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
             font-size: 20px !important;
@@ -490,7 +494,7 @@ label {
                                    
                                 </div>
                                 <div class="submit-section">
-                                    <button class="btn btn-primary submit-btn">Submit</button>
+                                    <button class="btn btn-primary submit-btn">معلومات ثبت کړئ</button>
                                 </div>
                         </form>
 					</div>

@@ -33,8 +33,9 @@ class programfacilitatorController extends Controller
         ->get();
         // return DB::table('facilitatorsandparticipants')->groupBy('phone_number')->having('Phone_number', '!=', '0008343043')->get();
         $path = 'facilitator';
+        $page = 'تسهیلونکی';
         $searchPath = '/searchFacilitator';
-        return view('pdc-list-all-member', compact('members', 'path', 'searchPath'));
+        return view('pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'));
     }
 
     /**
@@ -56,13 +57,14 @@ class programfacilitatorController extends Controller
     public function store(Request $request)
     {
         //
-        if($request->path() === 'searchFacilitator'){
+        if($request->path() === 'admin/searchFacilitator'){
             $members = DB::table('facilitatorsandparticipants')
             ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
             ->select('facilitatorsandparticipants.*')
             ->where($request->search_type, $request->search_content)
             ->get();
            $path = 'facilitator';
+           
            $searchPath = '/searchFacilitator';
            return view('ListfacilitatorAndParticipant', compact('members', 'path', 'searchPath'));
         }
@@ -110,7 +112,7 @@ class programfacilitatorController extends Controller
             }
         }
          //facilitatorEnrolledPrograms
-        elseif($request->path() === 'facilitatorEnrolledPrograms/'.$id)
+        elseif($request->path() === 'admin/facilitatorEnrolledPrograms/'.$id)
         {
           $enrolledPrograms = DB::table('programs')
          ->join('programsfacilitators', 'programs.id', '=', 'programsfacilitators.program_id')
@@ -146,7 +148,7 @@ class programfacilitatorController extends Controller
     public function edit(Request $request, $id)
     {
         //
-        if($request->path() === 'facilitatorList/'.$id."/edit")
+        if($request->path() === 'admin/facilitatorList/'.$id."/edit")
         {
         $member = Facilitatorsandparticipant::find($id);
         $path = 'facilitator';
@@ -201,9 +203,9 @@ class programfacilitatorController extends Controller
         $facilitator_participant->office_position_category = $request->office_position_category;
         $facilitator_participant->educational_rank = $request->educational_rank;
         $facilitator_participant->save();
-        if($request->path() === 'facilitatorList/'.$id)
+        if($request->path() === 'admin/facilitatorList/'.$id)
         {
-             return redirect('facilitatorList')->with('member_edited', 'د یاد تسهیلونکی معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
+             return redirect('admin/facilitatorList')->with('member_edited', 'د یاد تسهیلونکی معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
         }
         elseif($request->path() === 'facilitatorProfileForProgram/'.$id){
             return redirect('facilitatorProfileForProgram/'.$request->program_id)->with('member_edited', 'د یاد غړي معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
@@ -237,7 +239,7 @@ class programfacilitatorController extends Controller
         }
         else{
             $deleteFacilitator = Programsfacilitator::where('facilitator_id', $id)->delete();
-            return redirect('facilitatorList');
+            return redirect('admin/facilitatorList');
         }
 
     //    $deleteParticipant = Programsfacilitator::where('facilitator_id', $id)->get();

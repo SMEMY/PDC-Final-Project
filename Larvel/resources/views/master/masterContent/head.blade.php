@@ -68,6 +68,11 @@
 			padding: 20px 24px;
     		width: 600px;
 		}
+		button
+		{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
+		}
             @yield('custom-css')
     </style>
 </head>

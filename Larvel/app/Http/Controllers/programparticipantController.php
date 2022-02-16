@@ -26,7 +26,9 @@ class programparticipantController extends Controller
         ->get();
         $searchPath = '/searchParticipant';
         $path = 'participant';
-        return view('pdc-list-all-member', compact('members', 'path', 'searchPath'));
+        $page = 'د پروګرامونو ګډونوال';
+
+        return view('pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'));
     }
 
     /**
@@ -48,6 +50,7 @@ class programparticipantController extends Controller
     public function store(Request $request)
     {
         //
+        
         if($request->path() === 'searchParticipant'){
             $members = DB::table('facilitatorsandparticipants')
             ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
@@ -70,7 +73,7 @@ class programparticipantController extends Controller
     {
         //
         // return "alskdfjalfkdj";
-        if($request->path() === 'participantProfile/'.$id)
+        if($request->path() === 'admin/participantProfile/'.$id)
         {
             $userProfile = DB::table('facilitatorsandparticipants')
             ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
@@ -135,7 +138,7 @@ class programparticipantController extends Controller
             }
         }
         
-        elseif($request->path() === 'participantEnrolledPrograms/'.$id)
+        elseif($request->path() === 'admin/participantEnrolledPrograms/'.$id)
         {
           $enrolledPrograms = DB::table('programs')
          ->join('programsparticipants', 'programs.id', '=', 'programsparticipants.program_id')
@@ -171,7 +174,7 @@ class programparticipantController extends Controller
     {
         //
 
-        if($request->path() === 'participantList/'.$id."/edit")
+        if($request->path() === 'admin/participantList/'.$id."/edit")
         {
         $member = Facilitatorsandparticipant::find($id);
         $path = 'participant';
@@ -215,7 +218,7 @@ class programparticipantController extends Controller
         $facilitator_participant->office_position_category = $request->office_position_category;
         $facilitator_participant->educational_rank = $request->educational_rank;
         $facilitator_participant->save();
-        return redirect('participantList')->with('member_edited', 'د یاد غړي معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
+        return redirect('admin/participantList')->with('member_edited', 'د یاد غړي معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
     }
 
     /**
@@ -258,11 +261,11 @@ class programparticipantController extends Controller
             }
 
         }
-        elseif($request->paht('participantList/'.$id))
+        elseif($request->paht('admin/participantList/'.$id))
         {
             $deleteParticipant = Facilitatorsandparticipant::find($id);
             $deleteParticipant->delete();
-            return redirect('participantList');
+            return redirect('admin/participantList');
         }
     }
 }

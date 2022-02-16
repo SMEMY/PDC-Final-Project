@@ -435,7 +435,7 @@ label {
                         
 
                             <div class="submit-section">
-                                <button class="btn btn-primary submit-btn">Submit</button>
+                                <button class="btn btn-primary submit-btn">معلومات ثبت کړئ</button>
                             </div>
                         </form>
 						<!-- /Account Form -->

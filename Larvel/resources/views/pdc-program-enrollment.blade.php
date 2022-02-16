@@ -92,7 +92,7 @@
 						<!-- <p class="account-subtitle"></p> -->
 						<hr !important>
 						<!-- Account Form -->
-						<form action="/memberEnrollmentForProgram" method="post">
+						<form action="/admin/memberEnrollmentForProgram" method="post">
 							@csrf
 							<div class="form-group col-md-10 m-auto p-5">
 								<!-- <label>نوم</label> -->

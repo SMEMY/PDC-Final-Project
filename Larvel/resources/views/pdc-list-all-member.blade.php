@@ -36,21 +36,22 @@ select{
 				<div class="page-header">
 					<div class="row align-items-center">
 						<div class="col">
-							<h3 class="page-title">تسهیلوونکي</h3>
+							<h3 class="page-title">{{$page}}</h3>
 							<ul class="breadcrumb">
 								<li class="breadcrumb-item"><a href="index.html">اډمېن پاڼه</a></li>
-								<li class="breadcrumb-item active">تسهیلوونکي</li>
+								<li class="breadcrumb-item active">{{$page}}</li>
 							</ul>
 						</div>
 						
 					</div>
 				</div>
 				<!-- /Page Header -->
+				@if(count($members) !== 0)
 
 				<!-- Search Filter -->
 				<form action="memberList" method="POST">
-				{{ method_field('POST') }}
-      			{{ csrf_field() }}
+					{{ method_field('POST') }}
+					{{ csrf_field() }}
 					<div class="row filter-row mb-5" id="search_parts">
 						<div class="col-sm-6 col-md-5" id="search_input">
 							<div class="form-group form-focus">
@@ -86,7 +87,7 @@ select{
 				<!-- Search Filter -->
 
 				<div class="row staff-grid-row">
-				@foreach($members as $member)
+					@foreach($members as $member)
 					<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3" >
 						<div class="profile-widget" style="box-shadow: 0px 0px 2px 1px #89d0e5;">
 							<div class="profile-img">
@@ -96,9 +97,9 @@ select{
 								<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
 									aria-expanded="false"><i class="material-icons">more_vert</i></a>
 								<div class="sel dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="/{{$path}}List/{{$member->id}}/edit"  ><i
+								<a class="dropdown-item" href="/admin/{{$path}}List/{{$member->id}}/edit"  ><i
                                 class="fa fa-pencil m-r-5"></i> اصلاح یې کړی</a>
-									<a class="dropdown-item" href="{{$path}}List/{{$member->id}}" data-toggle="modal"
+									<a class="dropdown-item" href="/admin/{{$path}}List/{{$member->id}}" data-toggle="modal"
 										data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 								</div>
 							</div>
@@ -110,11 +111,25 @@ select{
 							<!-- <a href="client-profile.html" class="btn btn-white btn-sm m-t-10">معلوت وګوری</a> -->
 						</div>
 					</div>
-				@endforeach	
-
-					
-
+					@endforeach	
 				</div>
+				@else
+		<div class="row">
+			<div class="col-md-12">
+				<tr class="p-0">
+					<td colspan="3"  class="p-0">
+						<div class="" id="alertMassege">
+							<ul style="list-style-type:none " class="p-0 mt-5">
+								<li class="rounded p-5 my-3  success alert-success text-center"  style="font-size: 35px !important;">
+									تــر اوســـه په سیــسټم کــي {{$page}} شتـــون نلـــري!
+								</li>
+							</ul>
+						</div>
+					</td>
+				</tr>
+			</div>
+		</div>
+	@endif
 			</div>
 			<!-- /Page Content -->
 

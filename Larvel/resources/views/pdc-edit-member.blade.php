@@ -74,7 +74,7 @@ label {
 						<!-- <p class="account-subtitle"></p> -->
 <hr !important>
 						<!-- Account Form -->
-						<form action="/{{$path}}List/{{$member->id}}" method="POST">
+						<form action="/admin/{{$path}}List/{{$member->id}}" method="POST">
 								{{ method_field('PUT') }}
       					 	    {{ csrf_field() }}
 								    @if ($errors->any())
