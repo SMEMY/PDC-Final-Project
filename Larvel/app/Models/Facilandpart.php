@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Facilandpart extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     // These are (ONE - TO - MANY) relationships
     function getAttendances()

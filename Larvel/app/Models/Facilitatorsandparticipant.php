@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Facilitatorsandparticipant extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     function getAttendances()
     {
         return $this->hasMany('App\Models\Attendance');

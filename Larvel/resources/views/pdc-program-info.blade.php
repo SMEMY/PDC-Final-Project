@@ -228,7 +228,7 @@ h4 {
 						<ul class="job-post-det ">
 							<li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د جوړېدو نېټه: </strong><span class="text-blue">{{date('d - m - Y ', strtotime($programs->start_date))}}</span></li>
 							<li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د ختمېدو نېټه: </strong><span class="text-blue">{{date('d - m - Y ', strtotime($programs->end_date))}}</span></li>
-							<li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د شروع کېدو وخت: </strong><span class="text-blue">{{date('H:i', strtotime($programs->start_date))}}</span></li>
+							<li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د شروع کېدو وخت: </strong><span class="text-blue">{{date('H:i A', strtotime($programs->start_date))}}</span></li>
 							<li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د ختم کېدو وخت: </strong><span class="text-blue">{{date('H:i', strtotime($programs->end_date))}}</span></li>
 						
 						</ul>

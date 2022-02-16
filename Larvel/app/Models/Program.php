@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Program extends Model
 {
     use HasFactory;
-    public $timestamp=false;
+    public $timestamps = false;
     // These are (ONE - TO - MANY) relationships
     function getPhotos()
     {

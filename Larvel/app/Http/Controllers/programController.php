@@ -126,6 +126,7 @@ class programController extends Controller
                     'fee_unit' => 'bail|string|required|in:افغانۍ,ډالر',
                 ]);
             }
+            // return $request->start_date;
             $start = Carbon::parse($request->input('start_date'));
             $end = Carbon::parse($request->input('end_date'));
             $addProgram = new Program;
@@ -134,7 +135,8 @@ class programController extends Controller
             $addProgram->sponsor = $request->sponsor;
             $addProgram->supporter = $request->supporter;
             $addProgram->manager = $request->manager;
-            $addProgram->facilitator = $request->facilitator;
+            $addProgram->info_mobile_number = $request->info_mobile_number;
+            // $addProgram->facilitator = $request->facilitator;
             $addProgram->participant_amount = $request->participant_amount;
             $addProgram->fund = $request->fund;
             $addProgram->fund_type = $request->fund_type;
@@ -209,6 +211,7 @@ class programController extends Controller
         //
         if($request->path() === 'admin/pdcProgramList/'.$id."/edit")
         {
+            // return "i am edit.";
             $editProgram = Program::with('getResults', 'getFacilities', 'getAgendas', 'getEvaluations')->find($id);
             return view('pdc-edit-program', compact('editProgram'));
         }
@@ -227,6 +230,7 @@ class programController extends Controller
         //
         if($request->path() === 'admin/pdcProgramList/'.$id)
         {
+            // return "i am edit.";
             
             $addProgram = Program::with('getResults', 'getFacilities', 'getAgendas', 'getEvaluations')->find($id);
             $addProgram->name = $request->name;
@@ -243,14 +247,8 @@ class programController extends Controller
             $addProgram->fee = $request->fee;
             $addProgram->fee_type = $request->fee_type;
             $addProgram->program_description = $request->program_description;
-            $addProgram->year = $request->year;
-            $addProgram->month = $request->month;
-            $addProgram->start_day = $request->start_day;
-            $addProgram->end_day = $request->end_day;
-            $addProgram->start_time = $request->start_time;
-            $addProgram->end_time = $request->end_time;
-            $addProgram->days_duration = $request->days_duration;;
-            $addProgram->hours_duration = 12;
+            $addProgram->start_date = $request->start_date;
+            $addProgram->end_date = $request->end_date;
             $addProgram->campus_name = $request->campus_name;
             $addProgram->block_name = $request->block_name;
             $addProgram->block_number = $request->block_number;

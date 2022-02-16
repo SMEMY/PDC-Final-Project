@@ -9,6 +9,7 @@ class Programsparticipant extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
     // These are Reverse (ONE - TO - MANY) relationships
     protected $table = 'programsparticipants';
 }

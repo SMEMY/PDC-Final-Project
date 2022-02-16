@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Fquestionnaire extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     // These are reverse (ONE - TO - MANY) relationships
     function programFeedback()
     {

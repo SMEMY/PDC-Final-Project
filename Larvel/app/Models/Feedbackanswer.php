@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Feedbackanswer extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     // These are reverse (ONE - TO - ONE) relationships
     function feedbackQuestionAnswer()

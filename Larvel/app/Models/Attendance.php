@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Attendance extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     // These are Reverse (ONE - TO - MANY) relationships
     function program()

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
 
     // These are (ONE - TO - MANY) relationships

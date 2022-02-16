@@ -354,45 +354,6 @@ label {
                                 </div> -->
                             </div>
                             <hr !important>
-
-                            <!-- <div class="row">
-                                <div class="form-group col-md-12" id="facilities">
-                                    <div class="form-group">
-                                        <label>د پروګرام سهولتونه</label>
-                                        <input placeholder="1" class="form-control" type="text" name="facility[0]" value="{{old('')}}">
-                                    </div>
-
-                                </div>
-                                <div class="form-group m-auto" id="ad">
-                                    <button type="button" id="times"
-                                        class="btn btn-info mx-auto rounded-circle d-none" style="font-size: 20px;"
-                                        onclick="rmv()">&times;</button>
-                                    <button type="button" class="btn btn-info mx-auto rounded-circle"
-                                        style="font-size: 20px;;" onclick="afterText()">&plus;</button>
-                                </div>
-                            </div>
-                            <hr !important> -->
-
-                            <!-- <div class="row mt-5">
-                                <div class="form-group col-md-12" id="agendas">
-                                    <div class="form-group">
-                                        <label>د پروګرام اجنډا</label>
-                                        <input placeholder="1" class="form-control" type="text" name="agenda[0]" value="{{old('')}}">
-                                    </div>
-
-                                </div>
-                                <div class="form-group m-auto">
-                                    <button type="button" id="remove-agenda"
-                                        class="btn btn-info mx-auto rounded-circle d-none" style="font-size: 20px;"
-                                        onclick="removeAgenda()">&times;</button>
-                                    <button type="button" class="btn btn-info mx-auto rounded-circle"
-                                        style="font-size: 20px;;" onclick="addAgenda()">&plus;</button>
-                                </div>
-                            </div>
-                            <hr !important> -->
-
-
-
                             <div class="row mt-5">
                                 <div class="input-group col-md-12">
                                     <div class="input-group-prepend" id="info">

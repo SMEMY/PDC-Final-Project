@@ -14,6 +14,8 @@ class CreatePDCFquestionnaire extends Migration
     public function up()
     {
         Schema::create('fquestionnaires', function (Blueprint $table) {
+            // $table->dropForeign('feedback_form_id');
+
             $table->increments('id');
             $table->string('question_category', 100);
             $table->longText('question');
@@ -30,6 +32,7 @@ class CreatePDCFquestionnaire extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('feedbackanswers');
         Schema::dropIfExists('fquestionnaires');
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Feedbackcomment extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
 
 
     function feedbacks()

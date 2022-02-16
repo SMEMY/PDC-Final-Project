@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Agenda extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     function program()
     {
         return $this->belongsTo('App\Models\Program');

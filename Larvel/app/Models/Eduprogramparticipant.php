@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Eduprogramparticipant extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     // These are Reverse (ONE - TO - ONE) relationships
     // function EducationalProgram()

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Time extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     // These are (ONE - TO - MANY) relationships
 //     function getProgram()
 //     {
@@ -17,4 +18,4 @@ class Time extends Model
 //     {
 //         return $this->hasMany('App\Models\Eduprogram');
 //     }
-// }
+}

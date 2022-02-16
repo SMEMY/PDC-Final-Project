@@ -13,7 +13,7 @@ class CreateFeedbackanswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('feedbachanswers', function (Blueprint $table) {
+        Schema::create('feedbackanswers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('answer');
             $table->unsignedInteger('question_id');	
@@ -29,6 +29,6 @@ class CreateFeedbackanswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feedbachanswers');
+        Schema::dropIfExists('feedbackanswers');
     }
 }

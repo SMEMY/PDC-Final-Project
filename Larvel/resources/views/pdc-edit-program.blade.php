@@ -3,11 +3,10 @@
 label {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
             font-size: 25px !important;
-            font-weight: bold !important;
+            <!-- font-weight: bold !important; -->
 
 	}
     span{
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
             font-size: 20px !important;
             font-weight: bold !important;
 
@@ -59,10 +58,18 @@ label {
 	<!-- Main Wrapper -->
 	<div class="main-wrapper">
 		<div class="account-content">
+			<!-- <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a> -->
 			<div class="container ">
+
+				<!-- Account Logo -->
+				<!-- <div class="account-logo mt-5" style="width: 1150px;">
+					<a href="index.html"><img src="assets/img/logo2.png" alt="Dreamguy's Technologies"></a>
+				</div> -->
+				<!-- /Account Logo -->
+
 				<div class="account-box" style="width: 1100px; margin-top: 75px; margin-right:140px;" id="for">
 					<div class="account-wrapper mt-3" style="">
-						<h3 class="account-title mb-5" style="font-size:35px !important; font-weight: bolder;">د مسلکي پرمختیائي مرکز پروګرام اصلاح پاڼه</h3>
+						<h3 class="account-title mb-5" style="font-size:35px !important; font-weight: bolder;">د مسلکي پرمختیائي مرکز پروګرام ثبت پاڼه</h3>
 						<!-- <p class="account-subtitle"></p> -->
                         <hr !important>
 						<!-- Account Form -->
@@ -236,6 +243,7 @@ label {
                                 </div>
                                 @endif
                             </div>
+                            </div>
                             <hr !important>
                             <div class="row my-5">
                                 <div class="col-md-6">
@@ -267,46 +275,17 @@ label {
                             <div class="row my-5">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>د پېل کېدو کال</label>
-                                        <input placeholder="" class="form-control" type="number" name="year" value="{{$editProgram->year}}">
+                                        <label>د پېل کېدو نېټه</label>
+                                        <input placeholder="" class="form-control" type="datetime-local" name="start_date" value="{{$editProgram->start_date}}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>د پېل کېدو میاشت</label>
-                                        <input placeholder="" class="form-control" type="number" name="month" value="{{$editProgram->month}}">
+                                        <label>د ختمېدو نېټه</label>
+                                        <input placeholder="" class="form-control" type="datetime-local" name="end_date" value="{{$editProgram->end_date}}">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>د پېل کېدو ورځ</label>
-                                        <input placeholder="" class="form-control" type="number" name="start_day" value="{{$editProgram->start_day}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>د ختم کېدو ورځ</label>
-                                        <input placeholder="" class="form-control" type="number" name="end_day" value="{{$editProgram->end_day}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>د پروګرام د ورځو شمېر</label>
-                                        <input placeholder="" class="form-control" type="number" name="days_duration" value="{{$editProgram->days_duration}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>دشروع کېدو ساعت</label>
-                                        <input placeholder="" class="form-control" type="time" name="start_time" value="{{$editProgram->start_time}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>د ختم کېدو ساعت</label>
-                                        <input placeholder="" class="form-control" type="time" name="end_time" value="{{$editProgram->end_time}}">
-                                    </div>
-                                </div>
+                            
                             </div>
                             <hr !important>
 
@@ -336,7 +315,7 @@ label {
                             <hr !important>
 
                             <div class="row mt-5">
-                                <label class="col-md-12">د پروګرام اجنډا</label>
+                            <label class="col-md-12">د پروګرام اجنډا</label>
                                 <div class="form-group col-md-12" id="agendas">
                                 @foreach($editProgram->getAgendas as $agenda)
                                     <div class="form-group">
@@ -350,9 +329,15 @@ label {
                                 @endif
                                 </div>
                                 <div class="form-group m-auto">
+                                @if( count($editProgram->getAgendas) === 0 )
                                     <button type="button" id="remove-agenda"
+                                        class="btn btn-info mx-auto rounded-circle" style="font-size: 20px; display:none;"
+                                        onclick="removeAgenda()">&times;</button>
+                                @elseif(count($editProgram->getAgendas) != 0)
+                                <button type="button" id="remove-agenda"
                                         class="btn btn-info mx-auto rounded-circle" style="font-size: 20px;"
                                         onclick="removeAgenda()">&times;</button>
+                                @endif
                                     <button type="button" class="btn btn-info mx-auto rounded-circle"
                                         style="font-size: 20px;;" onclick="addAgenda()">&plus;</button>
                                     <!-- <label class="ml-5 col-form-label col-lg-2" style="display: block;">add more questions!</label> -->
@@ -360,7 +345,7 @@ label {
                             </div>
                             <hr !important>
                             <div class="row mt-5">
-                                <label class="col-md-12">د پروګرام پایلي</label>
+                            <label class="col-md-12">د پروګرام پایلي</label>
                                 <div class="form-group col-md-12" id="results">
                                 @foreach($editProgram->getResults as $result)
                                     <div class="form-group">
@@ -385,7 +370,7 @@ label {
                         
                             <hr !important>
                             <div class="row mt-5">
-                                <label class="col-md-12">د پروګرام ارزوني</label>
+                            <label class="col-md-12">د پروګرام ارزوني</label>
                                 <div class="form-group col-md-12" id="evaluations">
                                 @foreach($editProgram->getEvaluations as $evaluation)
                                     <div class="form-group">
@@ -424,6 +409,7 @@ label {
                             </div>
                         </form>
 						<!-- /Account Form -->
+
 					</div>
 				</div>
 			</div>
@@ -436,7 +422,6 @@ label {
 
 
 @section('custom-js')
-    
 	<script>
 		$('#addProgram').addClass('active');
 		var count = 1 + ($("#facilities").children().length);
