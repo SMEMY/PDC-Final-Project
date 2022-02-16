@@ -125,7 +125,7 @@ hahahaha
                 </ul>
             </div>
             <div class="col-auto float-right ml-auto">
-                <a href="/admin/addPdcProgram" class="btn add-btn px-4" data-toggle="modal" data-target="#create_program"><i
+                <a href="/admin/addPdcProgram" class="btn add-btn px-4" ><i
                         class="fa fa-plus"></i>پروګرام ثبت کړی</a>
                 <!-- <div class="view-icons">
                     <a href="projects.html" class="grid-view btn btn-link active"><i
@@ -137,9 +137,9 @@ hahahaha
         </div>
     </div>
     <!-- /Page Header -->
-
+    @if(count($programs) !== 0)
     <!-- Search Filter -->
-            <form action="/admin/searchPdcProgram" method="POST">
+        <form action="/admin/searchPdcProgram" method="POST">
 				{{ method_field('POST') }}
       			{{ csrf_field() }}
                         <div class="row">
@@ -182,53 +182,69 @@ hahahaha
 							<button type="submit" class="btn btn-success btn-block h3 p-1">پلټنه</button>
 						</div>
 					</div>
-				</form>
+		</form>    
     <!-- Search Filter -->
     <div class="row p-3" >
-    @foreach($programs as $program)
-	<div class="col-md-6 p-1">
+        @foreach($programs as $program)
+        <div class="col-md-6 p-1">
 
-        <div class="card col-md-12 p-1" id="program">
-            <div class="dropdown dropdown-action profile-action" id="edit">
-                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                        class="material-icons">more_vert</i></a>
-                        <div class="dropdown-menu dropdown-menu-right" style="z-index: 100;">
-                            <a class="dropdown-item" href="/admin/memberRegisterationTwo/{{$program->id}}"  ><i
-                            class="fa fa-pencil m-r-5"></i>ګدونوال ثبتول</a>
-                    <a class="dropdown-item" href="/admin/pdcProgramList/{{$program->id}}/edit"  ><i
-                            class="fa fa-pencil m-r-5"></i>معلومات اصلاح کړی</a>
-                            <a class="dropdown-item" href="/admin/pdcProgramList/{{$program->id}}" data-toggle="modal"
-                                        data-target="#delete_project" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
+            <div class="card col-md-12 p-1" id="program">
+                <div class="dropdown dropdown-action profile-action" id="edit">
+                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                            class="material-icons">more_vert</i></a>
+                            <div class="dropdown-menu dropdown-menu-right" style="z-index: 100;">
+                                <a class="dropdown-item" href="/admin/memberRegisterationTwo/{{$program->id}}"  ><i
+                                class="fa fa-pencil m-r-5"></i>ګدونوال ثبتول</a>
+                        <a class="dropdown-item" href="/admin/pdcProgramList/{{$program->id}}/edit"  ><i
+                                class="fa fa-pencil m-r-5"></i>معلومات اصلاح کړی</a>
+                                <a class="dropdown-item" href="/admin/pdcProgramList/{{$program->id}}" data-toggle="modal"
+                                            data-target="#delete_project" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
+                    </div>
+                </div>
+                <div class="card-body p-0" style="border-radius: 5px !important;" >
+                    <a href="/admin/pdcProgramInfo/{{$program->id}}" >
+                        <div class="job-list-desc" style="padding: 15px 15px 5px 15px" >
+                            <h3 class="job-list-title text-center" style="font-size:18px"> {{$program->name}} </h3>
+                            <br>
+                            <h4 class="job-department "><strong>د پروګرام ډول: </strong> {{$program->type}} </h4>
+                        
+                            </h4>
+                        
+                        </div>
+
+                        <div class="job-list-footer p-0"  id="foot" style="border-radius:0px 5px 5px 0px !important;">
+                            <ul class="m-0" style="padding:5px 10px; background: linear-gradient(to left, #88e5ff 0%, #3687ff8c 120%); border-radius: 0 0 4px 4px;">
+                                <li class="ml-1 text-dark d-inline-block"><i class="fa fa-map-signs text-danger"></i> <strong>ادرس: </strong>{{$program->campus_name}}</li>
+                                <!-- <br> -->
+                                <li class="ml-2 text-dark d-inline-block"><i class="fa fa-clock-o text-danger"></i> <strong>دوام:</strong> {{$program->days_duration}} ورځي</li>
+                                <!-- <br> -->
+                                <li class="ml-2 text-dark d-inline-block"><i class="fa fa-money text-danger"></i> <strong>فیس: </strong>{{$program->fee}} {{$program->fee_type}} </li>
+                            </ul>
+                        </div>            
+                    </a>
+
                 </div>
             </div>
-            <div class="card-body p-0" style="border-radius: 5px !important;" >
-                <a href="/admin/pdcProgramInfo/{{$program->id}}" >
-                    <div class="job-list-desc" style="padding: 15px 15px 5px 15px" >
-                        <h3 class="job-list-title text-center" style="font-size:18px"> {{$program->name}} </h3>
-                        <br>
-                        <h4 class="job-department "><strong>د پروګرام ډول: </strong> {{$program->type}} </h4>
-                      
-                        </h4>
-                       
-                    </div>
-
-                    <div class="job-list-footer p-0"  id="foot" style="border-radius:0px 5px 5px 0px !important;">
-                        <ul class="m-0" style="padding:5px 10px; background: linear-gradient(to left, #88e5ff 0%, #3687ff8c 120%); border-radius: 0 0 4px 4px;">
-							<li class="ml-1 text-dark d-inline-block"><i class="fa fa-map-signs text-danger"></i> <strong>ادرس: </strong>{{$program->campus_name}}</li>
-                            <!-- <br> -->
-							<li class="ml-2 text-dark d-inline-block"><i class="fa fa-clock-o text-danger"></i> <strong>دوام:</strong> {{$program->days_duration}} ورځي</li>
-                            <!-- <br> -->
-							<li class="ml-2 text-dark d-inline-block"><i class="fa fa-money text-danger"></i> <strong>فیس: </strong>{{$program->fee}} {{$program->fee_type}} </li>
-                        </ul>
-                    </div>            
-                </a>
-
-            </div>
         </div>
-	</div>
-
         @endforeach
     </div>
+    @else
+		<div class="row">
+			<div class="col-md-12">
+				<tr class="p-0">
+					<td colspan="3"  class="p-0">
+						<div class="" id="alertMassege">
+							<ul style="list-style-type:none " class="p-0 mt-5">
+								<li class="rounded p-5 my-3  success alert-success text-center"  style="font-size: 35px !important;">
+									تــر اوســـه په سیــسټم کــي پروګــرام شتـــون نلـــري!
+								</li>
+							</ul>
+						</div>
+					</td>
+				</tr>
+			</div>
+		</div>
+	@endif
 </div>
 <!-- /Page Content -->
 

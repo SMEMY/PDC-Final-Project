@@ -75,7 +75,7 @@ label {
                         <hr !important>
 
 						<!-- Account Form -->
-                    <form action="/educationalProgramList/{{$program->id}}" method="post" >
+                    <form action="/admin/educationalProgramList/{{$program->id}}" method="post" >
                     {{ method_field('PUT') }}
                     {{ csrf_field() }}
                                 <div class="row">
@@ -335,7 +335,7 @@ label {
                                             <option  value="پوهاند">پوهاند</option>
                                             @elseif($program->current_educational_position === 'پوهنیار')
                                             <option  value="پوهیالی">پوهیالی</option>
-                                            <option  selecte dvalue="پوهنیار">پوهنیار</option>
+                                            <option  selected dvalue="پوهنیار">پوهنیار</option>
                                             <option  value="پوهنمل">پوهنمل</option>
                                             <option  value="پوهاند">پوهاند</option>
                                             @elseif($program->current_educational_position === 'پوهنمل')
@@ -422,30 +422,13 @@ label {
                             </div>
                             <hr !important>
                             <div class="row my-5">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>د پېل کېدو کال</label>
-                                        <input placeholder="" class="form-control" type="number" name="year" value="{{$program->year}}">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>نېټه</label>
+                                            <input placeholder="" class="form-control" type="datetime-local" name="date" value="{{$program->date}}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>د پېل کېدو میاشت</label>
-                                        <input placeholder="" class="form-control" type="number" name="month" value="{{$program->month}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>د پېل کېد  ورځ</label>
-                                        <input placeholder="" class="form-control" type="number" name="start_day" value="{{$program->start_day}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>دشروع کېدو وخت</label>
-                                        <input placeholder="" class="form-control" type="time" name="start_time" value="{{$program->start_time}}">
-                                    </div>
-                                </div>
+                                   
                             </div>
                         
 

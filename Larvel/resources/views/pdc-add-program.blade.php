@@ -73,13 +73,6 @@ label {
 		<div class="account-content">
 			<!-- <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a> -->
 			<div class="container ">
-                
-            <!-- <div class="container text-center mt-5">
-                <h1>auto hidding alert massage</h1>
-                <button class="btn btn-primary" onclick="bootstrapAlert()">click here</button>
-            </div>
-                           -->
-                
                 <div class="account-box" style="width: 1100px; margin-top: 75px; margin-right:140px;" id="for">
 					<div class="account-wrapper mt-3" style="">
                         <h3 class="account-title mb-5" style="font-size:35px !important; font-weight: bolder;">د مسلکي پرمختیائي مرکز پروګرام ثبت پاڼه</h3>

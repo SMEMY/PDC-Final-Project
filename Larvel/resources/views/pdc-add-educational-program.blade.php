@@ -484,27 +484,10 @@ label {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>نېټه</label>
-                                            <input placeholder="" class="form-control" type="datetime-local" name="year" value="{{old('year')}}">
+                                            <input placeholder="" class="form-control" type="datetime-local" name="date" value="{{old('date')}}">
                                         </div>
                                     </div>
-                                    <!-- <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>د پېل کېدو کېدو میاشت</label>
-                                            <input placeholder="" class="form-control" type="number" name="month" value="{{old('month')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>د پېل کېدو کېدو  ورځ</label>
-                                            <input placeholder="" class="form-control" type="number" name="start_day" value="{{old('start_day')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>دشروع کېدو وخت</label>
-                                            <input placeholder="" class="form-control" type="time" name="start_time" value="{{old('start_time')}}">
-                                        </div>
-                                    </div> -->
+                                   
                                 </div>
                                 <div class="submit-section">
                                     <button class="btn btn-primary submit-btn">Submit</button>

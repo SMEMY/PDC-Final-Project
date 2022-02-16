@@ -44,24 +44,25 @@ class eduprogramController extends Controller
     {
         //
         // return $request->path();
-        if($request->path() === 'searchEducationalProgram'){
+        if($request->path() === 'admin/searchEducationalProgram'){
             $request->validate([
                 'search_type' => 'bail|required|string|in:year,department,faculty,university,teacher_last_name,teacher_name,teacher_name,type,topic',
                 'search_content' => 'bail|required',
             ]);
-            $path = '/educationalProgramList';
+            $path = '/admin/educationalProgramList';
             $programs =  DB::table('eduprograms')->where($request->search_type, $request->search_content)->get();
             if(count($programs) === 0)
             {
                 return back()->with('warn_search', 'یاد پروګرام په سیسټم کي ونه موندل سو!');
             }
             else{
-                redirect('searchEducationalProgram')->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
-                return view('pdc-list-all-educational-program', compact('programs', 'path'));
+                // return "asdf";
+                // redirect('admin/educafdfdftionalProgramList')->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
+                return view('pdc-list-all-educational-program', compact('programs', 'path'))->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
             }
         }
         else if($request->path() === 'admin/educationalProgramList'){
-
+            // return $request->date;
             $request->validate([
                 'topic' => 'bail|required|string|max:100',
                 'type' => 'bail|required|string|in:تقرر,ارتقاء,علمي ترفېع',
@@ -74,10 +75,10 @@ class eduprogramController extends Controller
                 'current_educational_position' => 'bail|required|string|in:پوهاند,پوهنمل,پوهنیار,پوهیالی',
                 'achieving_educational_position' => 'bail|required|string|in:پوهاند,پوهنمل,پوهنیار,پوهیالی',
                 'participant_amount' => 'bail|required|integer|between:1,200',
-                'year' => 'bail|required|integer|between:2017,3000',
-                'month' => 'bail|required|integer|between:1,12',
-                'start_day' => 'bail|required|integer|between:1,31',
-                'start_time' => 'bail|required|date_format:H:i',
+                'date' => 'bail|required|date',
+                // 'month' => 'bail|required|integer|between:1,12',
+                // 'start_day' => 'bail|required|integer|between:1,31',
+                // 'start_time' => 'bail|required|date_format:H:i',
                 'campus_name' => 'bail|required|string|max:30',
                 'block_name' => 'bail|required|string|max:30',
                 'block_number' => 'bail|required|integer|between:1,30',
@@ -95,10 +96,7 @@ class eduprogramController extends Controller
             $program->current_educational_position = $request->current_educational_position;
             $program->achieving_educational_position = $request->achieving_educational_position;
             $program->participant_amount = $request->participant_amount;
-            $program->year = $request->year;
-            $program->month = $request->month;
-            $program->start_day = $request->start_day;
-            $program->start_time = $request->start_time;
+            $program->date = $request->date;
             $program->campus_name = $request->campus_name;
             $program->block_name = $request->block_name;
             $program->block_number = $request->block_number;
@@ -162,15 +160,13 @@ class eduprogramController extends Controller
             'current_educational_position' => 'bail|required|string|in:پوهاند,پوهنمل,پوهنیار,پوهیالی',
             'achieving_educational_position' => 'bail|required|string|in:پوهاند,پوهنمل,پوهنیار,پوهیالی',
             'participant_amount' => 'bail|required|integer|between:1,200',
-            'year' => 'bail|required|integer|between:2017,3000',
-            'month' => 'bail|required|integer|between:1,12',
-            'start_day' => 'bail|required|integer|between:1,31',
-            'start_time' => 'bail|required|date_format:H:i',
+            'date' => 'bail|required|date',
             'campus_name' => 'bail|required|string|max:30',
             'block_name' => 'bail|required|string|max:30',
             'block_number' => 'bail|required|integer|between:1,30',
             'room_number' => 'bail|required|integer|between:1,30',
         ]);
+        // return "sdfsdfs";
         $program = Eduprogram::find($id);
         $program->topic = $request->topic;
         $program->type = $request->type;
@@ -183,16 +179,13 @@ class eduprogramController extends Controller
         $program->current_educational_position = $request->current_educational_position;
         $program->achieving_educational_position = $request->achieving_educational_position;
         $program->participant_amount = $request->participant_amount;
-        $program->year = $request->year;
-        $program->month = $request->month;
-        $program->start_day = $request->start_day;
-        $program->start_time = $request->start_time;
+        $program->date = $request->date;
         $program->campus_name = $request->campus_name;
         $program->block_name = $request->block_name;
         $program->block_number = $request->block_number;
         $program->room_number = $request->room_number;
         $program->save();
-        return redirect('educationalPrograminfo/'.$id)->with('success', 'د یاد پروګرام معلومات په سیسټم کي په کامیابۍ سره تغیر ورکړل سو!');
+        return redirect('admin/educationalPrograminfo/'.$id)->with('success', 'د یاد پروګرام معلومات په سیسټم کي په کامیابۍ سره تغیر ورکړل سو!');
 
 
     }
@@ -209,11 +202,11 @@ class eduprogramController extends Controller
         {
             $program = Eduprogram::find($id);
             $program->delete();
-            return redirect('educationalProgramList')->with('success', 'د یاد پروګرام معلومات له سیسټم څخه په کامیابۍ سره له منځه لاړ!');
+            return redirect('admin/educationalProgramList')->with('success', 'د یاد پروګرام معلومات له سیسټم څخه په کامیابۍ سره له منځه لاړ!');
         }
         elseif(count(DB::table('eduprograms')->where('id', $id)->get()) === 0)
         {
-            return redirect('educationalProgramList')->with('warn', 'یاد پروګرام په سیسټم کي د له منځه وړلو لپاره نسو پیدا!');
+            return redirect('admin/educationalProgramList')->with('warn', 'یاد پروګرام په سیسټم کي د له منځه وړلو لپاره نسو پیدا!');
         }
 
 

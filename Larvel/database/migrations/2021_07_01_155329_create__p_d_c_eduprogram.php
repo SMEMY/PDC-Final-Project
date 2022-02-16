@@ -26,7 +26,7 @@ class CreatePDCEduprogram extends Migration
             $table->string('current_educational_position');
             $table->string('achieving_educational_position');
             $table->integer('participant_amount');
-            $table->dateTimeTz('date');
+            $table->string('date');
             // $table->integer('month');
             // $table->integer('start_day');
             // $table->string('start_time');

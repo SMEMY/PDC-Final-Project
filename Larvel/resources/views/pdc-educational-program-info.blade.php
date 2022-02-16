@@ -45,9 +45,9 @@ hahahaha
 					<a href="#" class="action-icon dropdown-toggle text-white" data-toggle="dropdown" aria-expanded="false"><i
 							class="material-icons">more_vert</i></a>
 					<div class="dropdown-menu dropdown-menu-right" style="z-index: 100;">
-						<a class="dropdown-item" href="/educationalProgramList/{{$program->id}}/edit"  ><i
+						<a class="dropdown-item" href="/admin/educationalProgramList/{{$program->id}}/edit"  ><i
 								class="fa fa-pencil m-r-5"></i>معلومات اصلاح کړی</a>
-						<a class="dropdown-item" href="/educationalProgramList/{{$program->id}}" data-toggle="modal"
+						<a class="dropdown-item" href="/admin/educationalProgramList/{{$program->id}}" data-toggle="modal"
 											data-target="#delete_project" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 					</div>
 				   </div>
@@ -85,8 +85,8 @@ hahahaha
 					<h4 class="account-title">نېټه</h4>
 					<br>
 					<ul class="job-post-det col-md-12">
-						<li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong> نېټه: </strong><span class="text-blue">{{ $program->year }} - {{$program->month}} - {{$program->start_day}}</span></li>
-						<li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>وخت: </strong><span class="text-blue">{{ $program->start_time }}</span></li>
+						<li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong> نېټه: </strong><span class="text-blue">{{date('d - m - Y ', strtotime($program->date))}}</span></li>
+						<li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>وخت: </strong><span class="text-blue" dir="ltr">{{date('H:i A', strtotime($program->date))}}</span></li>
 					
 					</ul>
 					<!-- <a class="btn job-btn" href="#" data-toggle="modal" data-target="#apply_job">Enroll</a> -->

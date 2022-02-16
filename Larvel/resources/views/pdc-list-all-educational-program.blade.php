@@ -85,14 +85,8 @@ hahahaha
 					</ul>
 				</div>
 				<div class="col-auto float-right ml-auto">
-					<!-- <a href="#" class="btn add-btn px-4" data-toggle="modal" data-target="#create_project"><i
-							class="fa fa-plus"></i>پروګرام ثبت کړی</a>
-					<div class="view-icons">
-						<a href="projects.html" class="grid-view btn btn-link active"><i
-								class="fa fa-th"></i></a>
-						<a href="project-list.html" class="list-view btn btn-link"><i
-								class="fa fa-bars"></i></a>
-					</div> -->
+				<a href="/admin/addEduProgram" class="btn add-btn px-4" ><i
+                        class="fa fa-plus"></i>پروګرام ثبت کړی</a>
 				</div>
 			</div>
 		</div>
@@ -100,7 +94,7 @@ hahahaha
 
 		<!-- Search Filter -->
 		@if(count($programs) !== 0)
-					<form action="/searchEducationalProgram" method="POST">
+					<form action="/admin/searchEducationalProgram" method="POST">
 						{{ method_field('POST') }}
 						{{ csrf_field() }}
 						@if ($errors->any())
@@ -150,20 +144,20 @@ hahahaha
 		<!-- Search Filter -->
 		<div class="row">
 			@foreach($programs as $program)
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="card p-0" id="program">
 					<div class="card-body p-1">
 						<div class="dropdown dropdown-action profile-action">
 							<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
 									class="material-icons">more_vert</i></a>
 							<div class="dropdown-menu dropdown-menu-right">
-							<a class="dropdown-item" href="/educationalProgramList/{{$program->id}}/edit"  ><i
+							<a class="dropdown-item" href="/admin/educationalProgramList/{{$program->id}}/edit"  ><i
 									class="fa fa-pencil m-r-5"></i>معلومات اصلاح کړی</a>
-							<a class="dropdown-item" href="/educationalProgramList/{{$program->id}}" data-toggle="modal"
+							<a class="dropdown-item" href="/admin/educationalProgramList/{{$program->id}}" data-toggle="modal"
 												data-target="#delete_project" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 							</div>
 						</div>
-						<a href="/educationalPrograminfo/{{$program->id}}">
+						<a href="/admin/educationalPrograminfo/{{$program->id}}">
 							<div class="job-list-desc" style="padding: 15px 15px 5px 15px">
 								<h3 class="job-list-title text-center pb-2"> {{$program->topic}} </h3>
 								<!-- <br> -->
@@ -180,11 +174,11 @@ hahahaha
 									{{$program->campus_name}}
 								</li>
 								<!-- <br>-->
-								<li class="ml-1 d-inline-block"><i class="fa fa-calendar text-danger"></i> <strong> نېټه:
-									</strong> {{$program->year}} - {{$program->month}} - {{$program->start_day}}</li> 
-									<!-- <br>
-									<li class="ml-1 d-inline-block"><i class="fa fa fa-clock-o text-danger" aria-hidden="true"></i> <strong>د شروع کېدو وخت: </strong>
-										{{$program->start_time}}</li> -->
+								<li class="ml-1 d-inline-block" dir="rtl"><i class="fa fa-calendar text-danger"></i> <strong> نېټه:
+									</strong> {{date('Y - m - d ', strtotime($program->date))}}</li> 
+									
+									<li class="ml-1 d-inline-block" dir="rtl"><i class="fa fa fa-clock-o text-danger" aria-hidden="true"></i> <strong>وخت: </strong>
+									{{date('A H:i', strtotime($program->date))}}</li>
 								</ul>
 							</div>            
 						</a>
@@ -262,7 +256,14 @@ hahahaha
 @endif
 @if(Session::has('warn_search'))
 	<script>
-	swal('وبخښئ',"{!! Session::get('warn_search') !!}", "warning", {
+	swal('وبخښئ',"{!! Session::get('warn_search') !!}", "success", {
+		button: "مننه",
+	});
+	</script>
+@endif
+@if(Session::has('success'))
+	<script>
+	swal('وبخښئ',"{!! Session::get('success') !!}", "success", {
 		button: "مننه",
 	});
 	</script>

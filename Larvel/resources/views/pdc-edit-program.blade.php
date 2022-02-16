@@ -73,6 +73,17 @@ label {
 						<!-- <p class="account-subtitle"></p> -->
                         <hr !important>
 						<!-- Account Form -->
+                        @if ($errors->any())
+                            <div class="mb-5" id="alertMassege">
+                                <ul style="list-style-type:none" class="p-0 m-0">
+                                    @foreach ($errors->all() as $error)
+                                    <li class="rounded p-2 m-1 alert alert-danger" >
+                                        {{ $error }}
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form action="/admin/pdcProgramList/{{$editProgram->id}}" method="POST" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
@@ -287,6 +298,7 @@ label {
                                 </div>
                             
                             </div>
+                            @if( count($editProgram->getFacilities) != 0 )
                             <hr !important>
 
                             <div class="row">
@@ -297,52 +309,49 @@ label {
                                         <input placeholder="د پروګرام سهولت" class="form-control" type="text" name="facility[{{$loop->index}}]" value="{{$facility->facility}}">
                                     </div>
                                     @endforeach
-                                    @if( count($editProgram->getFacilities) === 0 )
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <input placeholder="د پروګرام سهولت" class="form-control" type="text" name="facility[0]" value="">
-                                    </div>
-                                    @endif
+                                    </div> -->
                                 </div>
                                 <div class="form-group m-auto" id="ad">
                                     <button type="button" id="times"
-                                        class="btn btn-info mx-auto rounded-circle" style="font-size: 20px;"
-                                        onclick="rmv()">&times;</button>
+                                    class="btn btn-info mx-auto rounded-circle" style="font-size: 20px;"
+                                    onclick="rmv()">&times;</button>
                                     <button type="button" class="btn btn-info mx-auto rounded-circle"
-                                        style="font-size: 20px;;" onclick="afterText()">&plus;</button>
+                                    style="font-size: 20px;;" onclick="afterText()">&plus;</button>
                                     <!-- <label class="ml-5 col-form-label col-lg-2" style="display: block;">add more questions!</label> -->
                                 </div>
                             </div>
+                            @endif
+                            @if( count($editProgram->getAgendas) != 0 )
                             <hr !important>
-
                             <div class="row mt-5">
                             <label class="col-md-12">د پروګرام اجنډا</label>
                                 <div class="form-group col-md-12" id="agendas">
                                 @foreach($editProgram->getAgendas as $agenda)
                                     <div class="form-group">
-                                        <input placeholder="د پروګرام اجنډا" class="form-control" type="text" name="agenda[0]" value="{{$agenda->agenda}}">
+                                        <input placeholder="د پروګرام اجنډا" class="form-control" type="text" name="agenda[{{$loop->index}}]" value="{{$agenda->agenda}}">
                                     </div>
                                 @endforeach
-                                @if( count($editProgram->getAgendas) === 0 )
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <input placeholder="د پروګرام اجنډا" class="form-control" type="text" name="agenda[0]" value="">
-                                    </div>
-                                @endif
+                                    </div> -->
                                 </div>
                                 <div class="form-group m-auto">
-                                @if( count($editProgram->getAgendas) === 0 )
                                     <button type="button" id="remove-agenda"
                                         class="btn btn-info mx-auto rounded-circle" style="font-size: 20px; display:none;"
                                         onclick="removeAgenda()">&times;</button>
-                                @elseif(count($editProgram->getAgendas) != 0)
-                                <button type="button" id="remove-agenda"
+                                
+                                    <button type="button" id="remove-agenda"
                                         class="btn btn-info mx-auto rounded-circle" style="font-size: 20px;"
                                         onclick="removeAgenda()">&times;</button>
-                                @endif
-                                    <button type="button" class="btn btn-info mx-auto rounded-circle"
+                                        <button type="button" class="btn btn-info mx-auto rounded-circle"
                                         style="font-size: 20px;;" onclick="addAgenda()">&plus;</button>
-                                    <!-- <label class="ml-5 col-form-label col-lg-2" style="display: block;">add more questions!</label> -->
+                                        <!-- <label class="ml-5 col-form-label col-lg-2" style="display: block;">add more questions!</label> -->
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
+                            @if( count($editProgram->getResults) != 0 )
                             <hr !important>
                             <div class="row mt-5">
                             <label class="col-md-12">د پروګرام پایلي</label>
@@ -351,23 +360,23 @@ label {
                                     <div class="form-group">
                                         <input placeholder="د پروګرام پایله" class="form-control" type="text" name="result[0]" value="{{$result->result}}">
                                     </div>
-                                @endforeach
-                                @if( count($editProgram->getResults) === 0 )
+                                    @endforeach
                                     <div class="form-group">
                                         <input placeholder="د پروګرام پایله" class="form-control" type="text" name="result[0]" value="">
                                     </div>
-                                @endif
                                 </div>
                                 <div class="form-group m-auto">
                                     <button type="button" id="remove-result"
-                                        class="btn btn-info mx-auto rounded-circle" style="font-size: 20px;"
-                                        onclick="removeResult()">&times;</button>
+                                    class="btn btn-info mx-auto rounded-circle" style="font-size: 20px;"
+                                    onclick="removeResult()">&times;</button>
                                     <button type="button" class="btn btn-info mx-auto rounded-circle"
-                                        style="font-size: 20px;;" onclick="addResult()">&plus;</button>
+                                    style="font-size: 20px;;" onclick="addResult()">&plus;</button>
                                     <!-- <label class="ml-5 col-form-label col-lg-2" style="display: block;">add more questions!</label> -->
                                 </div>
                             </div>
+                            @endif
                         
+                            @if( count($editProgram->getEvaluations) != 0 )
                             <hr !important>
                             <div class="row mt-5">
                             <label class="col-md-12">د پروګرام ارزوني</label>
@@ -377,22 +386,21 @@ label {
                                         <input placeholder="د پروګرام ارزونه" class="form-control" type="text" name="evaluation[0]" value="{{$evaluation->evaluation}}">
                                     </div>
                                 @endforeach
-                                @if( count($editProgram->getEvaluations) === 0 )
                                     <div class="form-group">
                                         <input placeholder="د پروګرام ارزونه" class="form-control" type="text" name="evaluation[0]" value="">
                                     </div>
-                                @endif
                                 </div>
                                 <div class="form-group m-auto">
                                     <button type="button" id="remove-evaluation"
-                                        class="btn btn-info mx-auto rounded-circle" style="font-size: 20px;"
-                                        onclick="removeEvaluation()">&times;</button>
+                                    class="btn btn-info mx-auto rounded-circle" style="font-size: 20px;"
+                                    onclick="removeEvaluation()">&times;</button>
                                     <button type="button" class="btn btn-info mx-auto rounded-circle"
-                                        style="font-size: 20px;;" onclick="addEvaluation()">&plus;</button>
+                                    style="font-size: 20px;;" onclick="addEvaluation()">&plus;</button>
                                     <!-- <label class="ml-5 col-form-label col-lg-2" style="display: block;">add more questions!</label> -->
                                 </div>
                             </div>
-                        
+                            @endif
+                            
 
                             <div class="row mt-5">
                                 <div class="input-group col-md-12">
