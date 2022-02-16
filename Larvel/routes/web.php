@@ -67,6 +67,7 @@ use App\Http\Controllers\facilitatorandparticipantController;
        Route::resource('/storeMaterials', materialController::class);
        Route::resource('/feedbackFormInsertion', fquestionnaireController::class);
        Route::resource('/facilitatorProfileForProgram', programfacilitatorController::class);
+       Route::resource('/searchPdcProgram', programController::class);
     //    Route::resource('/pdcProgramDelete', programController::class);
 
 
@@ -88,7 +89,6 @@ use App\Http\Controllers\facilitatorandparticipantController;
        Route::resource('/searchEducationalProgram', eduprogramController::class);
        Route::resource('/searchFacilitator', programfacilitatorController::class);
        Route::resource('/searchParticipant', programparticipantController::class);
-       Route::resource('/searchPdcProgram', programController::class);
        Route::resource('/deleteMaterial', materialController::class);
        Route::resource('/memberStore', facilitatorandparticipantController::class);
        Route::resource('/participantProfile', programparticipantController::class);

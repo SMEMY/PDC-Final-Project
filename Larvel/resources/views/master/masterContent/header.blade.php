@@ -4,7 +4,7 @@
 
 <!-- Logo -->
 <div class="header-left">
-    <a href="dashboard" class="logo">
+    <a href="/admin/dashboard" class="logo">
         <img src="{{asset('assets/img/logo.png')}}" width="40" height="40" alt="">
     </a>
 </div>

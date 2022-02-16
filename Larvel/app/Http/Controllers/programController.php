@@ -71,6 +71,7 @@ class programController extends Controller
         // this part is belongs to Program Model
         if($request->path() === 'admin/searchPdcProgram')
         {
+            // return "alkdfj";
             $request->validate([
                 'search_type' => 'bail|required|string|in:month,year,manager,supporter,sponsor,type,name',
                 'search_content' => 'bail|required',
@@ -82,8 +83,8 @@ class programController extends Controller
                 return back()->with('warn_search', 'یاد پروګرام په سیسټم کي ونه موندل سو!');
             }
             else{
-                redirect('searchPdcProgram')->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
-                return view('pdc-list-all-program', compact('programs', 'path'));
+                // redirect('admin/searchPdcProgram')->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
+                return view('pdc-list-all-program', compact('programs', 'path'))->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');;
             }
             // $path = '/pdcProgramList';
             // $programs =  Program::where($request->search_type, $request->search_content)->get();

@@ -139,7 +139,7 @@ hahahaha
     <!-- /Page Header -->
 
     <!-- Search Filter -->
-            <form action="/searchPdcProgram" method="POST">
+            <form action="/admin/searchPdcProgram" method="POST">
 				{{ method_field('POST') }}
       			{{ csrf_field() }}
                         <div class="row">
@@ -207,10 +207,9 @@ hahahaha
                         <h3 class="job-list-title text-center" style="font-size:18px"> {{$program->name}} </h3>
                         <br>
                         <h4 class="job-department "><strong>د پروګرام ډول: </strong> {{$program->type}} </h4>
-                        <!-- <h4 class="job-department mt-4"><strong>د پروګرام تسهیلونکی: </strong> {{$program->facilitator}} -->
+                      
                         </h4>
-                        <!-- <p class="text-muted mt-4 col-md-12"><strong>معلومات: </strong> {{$program->program_description}}
-                        </p> -->
+                       
                     </div>
 
                     <div class="job-list-footer p-0"  id="foot" style="border-radius:0px 5px 5px 0px !important;">
