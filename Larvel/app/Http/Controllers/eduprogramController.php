@@ -147,6 +147,7 @@ class eduprogramController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request->path();
 
         $request->validate([
             'topic' => 'bail|required|string|max:100',
@@ -185,7 +186,7 @@ class eduprogramController extends Controller
         $program->block_number = $request->block_number;
         $program->room_number = $request->room_number;
         $program->save();
-        return redirect('admin/educationalPrograminfo/'.$id)->with('success', 'د یاد پروګرام معلومات په سیسټم کي په کامیابۍ سره تغیر ورکړل سو!');
+        return redirect('admin/educationalProgramList')->with('success', 'د یاد پروګرام معلومات په سیسټم کي په کامیابۍ سره تغیر ورکړل سو!');
 
 
     }
