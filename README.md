@@ -36,5 +36,5 @@ when ever you have clone the project for the first time, so your Laravel (php ar
 # After adding all files for tracing, these files should be commited(mean should clearify what changes done to the files?)
 * git commit -m "the message you should write."
 # Now you able to push the new changes to the remote repositry.
-* git push -u origin (current using branch name)
+* git push -u origin (current branch name)
 
