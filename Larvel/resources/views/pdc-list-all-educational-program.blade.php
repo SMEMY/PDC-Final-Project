@@ -340,7 +340,7 @@ hahahaha
 				`
 				<div class="col-sm-6 col-md-5" id="search_input">
 				<div class="form-group">
-					<input type="text" class="form-control floating p-4" name="search_content" id="searchInput" placeholder="د استاد تخلص وپلټئ>
+					<input type="text" class="form-control floating p-4" name="search_content" id="searchInput" placeholder="د استاد د تخلص وپلټئ">
 				</div>
 				</div>
 				`;
