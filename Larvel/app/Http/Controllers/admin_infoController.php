@@ -75,7 +75,7 @@ class admin_infoController extends Controller
                 $admin->third_answer = $request->third_answer;
 
                 $admin->save();
-                return redirect('admin/login');
+                return redirect('login');
             }
             else{
                 return back()->with('dif_questions', "د آدمېن محافظوي پوښتني باید بېل بېل وي!");

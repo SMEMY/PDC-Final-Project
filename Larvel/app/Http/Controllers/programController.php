@@ -91,7 +91,7 @@ class programController extends Controller
             // return view('pdc-list-all-program', compact('programs', 'path'));
         }
         elseif($request->path() === 'admin/pdcProgramList'){
-            return "akdsfjaksjflj";
+            // return "akdsfjaksjflj";
             $validate = $request->validate([
                 'name' => 'bail|required|string|max:100',
                 'type' => 'bail|required|string|in:ورکشاپ,سیمینار,سمفوزیم,کنفرانس',
@@ -119,7 +119,7 @@ class programController extends Controller
                 // 'days_duration' => 'bail|required|integer',
                 'program_description' => 'bail|required|string|max:2000',
             ]);
-            return $request->start_date;
+            // return $request->start_date;
             if($request->fee_able == 1){
                 // return "lsdflds";
                 $validate = $request->validate([

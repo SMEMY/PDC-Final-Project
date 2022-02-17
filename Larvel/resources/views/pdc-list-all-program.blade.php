@@ -216,7 +216,7 @@ hahahaha
                             <ul class="m-0" style="padding:5px 10px; background: linear-gradient(to left, #88e5ff 0%, #3687ff8c 120%); border-radius: 0 0 4px 4px;">
                                 <li class="ml-1 text-dark d-inline-block"><i class="fa fa-map-signs text-danger"></i> <strong>ادرس: </strong>{{$program->campus_name}}</li>
                                 <!-- <br> -->
-                                <li class="ml-2 text-dark d-inline-block"><i class="fa fa-clock-o text-danger"></i> <strong>دوام:</strong> {{$program->days_duration}} ورځي</li>
+                                <li class="ml-2 text-dark d-inline-block"><i class="fa fa-calendar text-danger"></i> <strong>نېټه:</strong>{{date(' Y - m - d ', strtotime($program->start_date))}}</li>
                                 <!-- <br> -->
                                 <li class="ml-2 text-dark d-inline-block"><i class="fa fa-money text-danger"></i> <strong>فیس: </strong>{{$program->fee}} {{$program->fee_type}} </li>
                             </ul>

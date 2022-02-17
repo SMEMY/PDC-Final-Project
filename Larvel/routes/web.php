@@ -42,6 +42,7 @@ use App\Http\Controllers\admin_infoController;
     
     
     Route::resource('/admin/registration', admin_infoController::class);
+    Route::view('/login', 'login');
     
     ///// Admin user paths
     Route::prefix('admin')->group(function(){
@@ -125,7 +126,6 @@ use App\Http\Controllers\admin_infoController;
 
 // Route::view('/registration', 'facilitatorParticipantRegisteration');
 // Route::view('/chart', 'chart');
-// Route::view('/login', 'login');
 // Route::view('/list', 'pdc-programs-employees-list');
 // Route::view('/programEnrollment', 'enroll-program-info');
 

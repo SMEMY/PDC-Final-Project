@@ -49,6 +49,41 @@
 			<script src="assets/js/html5shiv.min.js"></script>
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
+	<style>
+		*{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+		}
+		label {
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+			font-size:25px !important;
+		}
+		select:focus {
+			box-shadow: 0px 0px 2px #000 !important;
+			transition: all 0.1s;
+			transform: scale(1.01);
+		}
+		select{
+			font-size:20px !important;
+		}
+		input:focus {
+			box-shadow: 0px 0px 2px #000 !important;
+			transition: all 0.1s;
+			transform: scale(1.02);
+			font-size:20px !important;
+		}
+		textarea:focus {
+			box-shadow: 0px 0px 2px #000 !important;
+		}
+        input {
+			background: #f0fcff !important;
+		}
+		textarea{
+			background: #f0fcff !important;
+		}
+		h3{
+			font-size:30px !important;
+		}
+	</style>
 </head>
 
 <body class="account-page">
@@ -67,13 +102,13 @@
 
 				<div class="account-box">
 					<div class="account-wrapper">
-						<h3 class="account-title">Login</h3>
+						<h3 class="account-title"></h3>
 						<p class="account-subtitle">Access to our dashboard</p>
 
 						<!-- Account Form -->
 						<form action="index.html">
 							<div class="form-group">
-								<label>برېښنالیک</label>
+								<label>نوم</label>
 								<input class="form-control" type="text" name="user_name">
 							</div>
 							<div class="form-group">
