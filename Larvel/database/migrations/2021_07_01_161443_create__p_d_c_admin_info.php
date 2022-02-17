@@ -20,6 +20,16 @@ class CreatePDCAdminInfo extends Migration
             $table->string('email')->unique();
             $table->string('phone_number')->unique();
             $table->string('password');
+
+            $table->string('first_question');
+            $table->string('first_answer');
+
+            $table->string('second_question');
+            $table->string('second_answer');
+
+            $table->string('third_question');
+            $table->string('third_answer');
+
             $table->rememberToken();
             $table->timestamps();
         });

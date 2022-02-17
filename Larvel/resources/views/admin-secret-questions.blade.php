@@ -57,7 +57,7 @@
 		}
 		label {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-			font-size:25px !important;
+			font-size:20px !important;
 		}
 
 		select:focus {
@@ -66,9 +66,16 @@
 			transition: all 0.1s;
 			transform: scale(1.01);
 		}
+		.sel {
+		transform: translate3d(10px, 32px, 0px) !important;
+		}
+		input:focus{
+			/* border-color: #5092f4 !important; */
+			box-shadow: 0px 0px 5px #5092f4 !important;
+		}
 		select{
-			font-size:20px !important;
-
+			font-size: 20px !important;
+			background:#e3e3e3 !important;
 		}
 
 		input:focus {
@@ -112,7 +119,7 @@
 
 				<div class="account-box " style="width: 1000px;">
 					<div class="account-wrapper" style="">
-						<h3 class="account-title p-3">د اډمین راجسټر پاڼه</h3>
+						<h3 class="account-title p-3">د اډمین محافظوي پوښتنو پاڼه</h3>
 						<hr>
 						<!-- <p class="account-subtitle"></p> -->
 
@@ -130,48 +137,15 @@
 											</ul>
 										</div>
 									@endif
-							<dvi class="row p-3">
-								<div class="form-group col-md-6 p-3">
-									<label>نوم</label>
-									<input class="form-control" name="name" type="text" placeholder="داډمېن نوم" value="{{old('name')}}">
-								</div>
-								<div class="form-group col-md-6 p-3">
-									<label>تخلص</label>
-									<input class="form-control" name="last_name" type="text" placeholder="داډمېن تخلص" value="{{old('last_name')}}">
-								</div>
-								<div class="form-group col-md-6 p-3">
-									<label>برېښنالیک</label>
-									<input class="form-control" name="email" type="email" placeholder="داډمېن برېښنالیک" value="{{old('email')}}">
-								</div>
-								<div class="form-group col-md-6 p-3">
-									<label>ټلیفون شمېره</label>
-									<input class="form-control" name="phone_number" type="text" placeholder="داډمېن برېښنالیک" value="{{old('phone_number')}}">
-								</div>
-								<div class="form-group col-md-6 p-3">
-									<label>پاسورډ</label>
-									<input class="form-control" name="password" type="password" placeholder="نوی پاسورډ" value="{{old('password')}}">
-								</div>
-								<div class="form-group col-md-6 p-3">
-									<label>پاسورډ تائید کړئ</label>
-									<input class="form-control" type="password" name="confirm_password" placeholder="نوی پاسورډ تائید کړئ" value="{{old('password')}}">
-								</div>
-								<!-- <div class="form-group text-center col-md-4 m-auto">
-									<button class="btn btn-primary  account-btn col-md-12" type="submit">اډمېن ثبت
-										کړئ</button>
-								</div> -->
-							</dvi>
-							<hr style="width:70%">
-							<h3 class="account-title p-3">د اډمین محافظوي پوښتنو پاڼه</h3>
-
-							<div class="row p-3">
+									<div class="row p-3">
 											<div class="col-sm-6 col-md-12" id="search_content">
 											<div class="form-group form-focus select-focus">
 											<label>لمړي پوښتنه</label>
 
-												<select class="custom-select p-2 h-100 searchInput" name="first_question">
+												<select class="custom-select p-2 h-100 searchInput" name="search_type">
 													<a href="/facilitatorList"><option selected value="">پوښتنه مو انتخاب کړی!</option></a>
 													<option value="ستاسي د خوښي خواړه کوم دي؟">ستاسي د خوښي خواړه کوم دي؟</option>
-													<option value="د خوښي حیوان مو کوم یو دی؟">د خوښي حیوان مو کوم یو دی؟</option>
+													<option value="کوم حیوان مو خوښ دی؟">کوم حیوان مو خوښ دی؟</option>
 													<option value="د خوښي رنګ مو کوم رنګ دی؟">د خوښي رنګ مو کوم رنګ دی؟</option>
 													<option value="په کور کي مو د ناز نوم څه دی؟">په کور کي مو د ناز نوم څه دی؟</option>
 													<option value="ستاسي د خوښي مېوه کوم یو دی؟">ستاسي د خوښي مېوه کوم یو دی؟</option>
@@ -182,19 +156,19 @@
 										</div>
 										<div class="form-group col-md-12 p-3">
 											<label>ځواب</label>
-											<input class="form-control" name="first_answer" type="text" placeholder="داډمېن تخلص" value="{{old('last_name')}}">
+											<input class="form-control" name="last_name" type="text" placeholder="داډمېن تخلص" value="{{old('last_name')}}">
 										</div>
 									</div>				
 							<hr style="width:70%">
 							<div class="row p-3">
 									<div class="col-sm-6 col-md-12" id="search_content">
 										<div class="form-group form-focus select-focus">
-											<label>دویمه پوښتنه</label>
+											<label>دریمه پوښتنه</label>
 
-											<select class="custom-select p-2 h-100 searchInput" name="second_question">
+											<select class="custom-select p-2 h-100 searchInput" name="search_type">
 												<a href="/facilitatorList"><option selected value="">پوښتنه مو انتخاب کړی!</option></a>
 												<option value="ستاسي د خوښي خواړه کوم دي؟">ستاسي د خوښي خواړه کوم دي؟</option>
-													<option value="د خوښي حیوان مو کوم یو دی؟">د خوښي حیوان مو کوم یو دی؟</option>
+													<option value="کوم حیوان مو خوښ دی؟">کوم حیوان مو خوښ دی؟</option>
 													<option value="د خوښي رنګ مو کوم رنګ دی؟">د خوښي رنګ مو کوم رنګ دی؟</option>
 													<option value="په کور کي مو د ناز نوم څه دی؟">په کور کي مو د ناز نوم څه دی؟</option>
 													<option value="ستاسي د خوښي مېوه کوم یو دی؟">ستاسي د خوښي مېوه کوم یو دی؟</option>
@@ -205,7 +179,7 @@
 									</div>
 									<div class="form-group col-md-12 p-3">
 										<label>ځواب</label>
-										<input class="form-control" name="second_answer" type="text" placeholder="داډمېن تخلص" value="{{old('last_name')}}">
+										<input class="form-control" name="last_name" type="text" placeholder="داډمېن تخلص" value="{{old('last_name')}}">
 									</div>
 							</div>
 							<hr style="width:70%">
@@ -213,12 +187,12 @@
 							<div class="row p-3">
 								<div class="col-sm-6 col-md-12" id="search_content">
 									<div class="form-group form-focus select-focus">
-									<label>دریمه پوښتنه</label>
+									<label>لمړي پوښتنه</label>
 
-										<select class="custom-select p-2 h-100 searchInput" name="third_question">
+										<select class="custom-select p-2 h-100 searchInput" name="search_type">
 											<a href="/facilitatorList"><option selected value="">پوښتنه مو انتخاب کړی!</option></a>
 											<option value="ستاسي د خوښي خواړه کوم دي؟">ستاسي د خوښي خواړه کوم دي؟</option>
-													<option value="د خوښي حیوان مو کوم یو دی؟">د خوښي حیوان مو کوم یو دی؟</option>
+													<option value="کوم حیوان مو خوښ دی؟">کوم حیوان مو خوښ دی؟</option>
 													<option value="د خوښي رنګ مو کوم رنګ دی؟">د خوښي رنګ مو کوم رنګ دی؟</option>
 													<option value="په کور کي مو د ناز نوم څه دی؟">په کور کي مو د ناز نوم څه دی؟</option>
 													<option value="ستاسي د خوښي مېوه کوم یو دی؟">ستاسي د خوښي مېوه کوم یو دی؟</option>
@@ -229,12 +203,12 @@
 								</div>
 								<div class="form-group col-md-12 p-3">
 									<label>ځواب</label>
-									<input class="form-control" name="third_answer" type="text" placeholder="داډمېن تخلص" value="{{old('last_name')}}">
+									<input class="form-control" name="last_name" type="text" placeholder="داډمېن تخلص" value="{{old('last_name')}}">
 								</div>
 								
-								<div class="form-group text-center col-md-4 m-auto">
+								<!-- <div class="form-group text-center col-md-4 m-auto">
 									<button class="btn btn-primary  account-btn col-md-12" type="submit">ثبت کړئ</button>
-								</div>
+								</div> -->
 							</div>
 							<!-- <div class="account-footer">
 								<p>Already have an account? <a href="login.html">Login</a></p>
@@ -277,13 +251,6 @@
 			@if(Session::has('confirm_password'))
             <script>
             swal('وبخښی!',"{!! Session::get('confirm_password') !!}", "warning", {
-                button: "مننه",
-            });
-            </script>
-        	@endif
-			@if(Session::has('dif_questions'))
-            <script>
-            swal('وبخښی!',"{!! Session::get('dif_questions') !!}", "warning", {
                 button: "مننه",
             });
             </script>

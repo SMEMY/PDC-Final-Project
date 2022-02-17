@@ -21,6 +21,7 @@ use App\Http\Controllers\programEnrollmentController;
 use App\Http\Controllers\deleteFeedbackQuestion;
 use App\Http\Controllers\searchController;
 use App\Http\Controllers\facilitatorandparticipantController;
+use App\Http\Controllers\admin_infoController;
 
 
 /*
@@ -40,11 +41,14 @@ use App\Http\Controllers\facilitatorandparticipantController;
     // });
     
     
+    Route::resource('/admin/registration', admin_infoController::class);
     
     ///// Admin user paths
     Route::prefix('admin')->group(function(){
         // ROUTES
-       Route::view('/registration', 'admin-registeration')->name('registration');
+
+
+    //    Route::view('/registration', 'admin-registeration')->name('registration');
        Route::view('/dashboard', 'index')->name('dashboard');
        Route::view('/addPdcProgram', 'pdc-add-program')->name('addPdcprogram');
        Route::view('/addEduProgram', 'pdc-add-educational-program')->name('addEduProgram');

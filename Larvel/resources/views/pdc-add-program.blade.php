@@ -166,21 +166,15 @@ label {
                                         <input placeholder="" class="form-control" type="text" name="manager" value="{{old('manager')}}">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="">د پروګرام تسهیلونکی</label>
-                                        <input placeholder="" class="form-control" type="text" name="facilitator" value="{{old('facilitator')}}">
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
+                                <!--  -->
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class=""><span class="text-danger">*</span> د پروګرام د معلوماتو شمېره</label>
                                         <input placeholder="" class="form-control" type="text" name="info_mobile_number" value="{{old('info_mobile_number')}}">
 
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label><span class="text-danger">*</span> د پروګرام د ګډون والو کچه</label>
                                         <input placeholder="" class="form-control" type="number" name="participant_amount" value="{{old('participant_amount')}}">

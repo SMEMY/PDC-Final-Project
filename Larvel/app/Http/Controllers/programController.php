@@ -91,42 +91,42 @@ class programController extends Controller
             // return view('pdc-list-all-program', compact('programs', 'path'));
         }
         elseif($request->path() === 'admin/pdcProgramList'){
-            // return "akdsfjaksjflj";
-            // $validate = $request->validate([
-            //     'name' => 'bail|required|string|max:100',
-            //     'type' => 'bail|required|string|in:ورکشاپ,سیمینار,سمفوزیم,کنفرانس',
-            //     'sponsor' => 'bail|required|string|max:30',
-            //     'supporter' => 'bail|required|string|max:30',
-            //     'manager' => 'bail|required|string|max:30',
-            //     'facilitator' => 'bail|nullable|string|max:30',
-            //     'info_mobile_number' => 'bail|required|string|max:13',
-            //     'participant_amount' => 'bail|required|integer|between:1,1000',
-            //     'fund' => 'bail|required|integer',
-            //     'fund_type' => 'bail|required|string|in:افغانۍ,ډالر',
-            //     'fee_able' => 'bail|required|integer|in:0,1',
-            //     'fee' => 'bail|integer|required_unless:fee_able,=,1|integer|gte:1',
-            //     'fee_unit' => 'bail|string|required_if:fee_able,=,1|in:افغانۍ,ډالر',
-            //     'campus_name' => 'bail|required|string|max:30',
-            //     'block_name' => 'bail|required|string|max:30',
-            //     'block_number' => 'bail|required|integer|between:1,30',
-            //     'room_number' => 'bail|required|integer|between:1,30',
-            //     'start_date' => 'bail|required|date',
-            //     'end_date' => 'bail|required|date',
-            //     // 'start_day' => 'bail|required|integer|between:1,31',
-            //     // 'end_day' => 'bail|required|integer|between:1,31',
-            //     // 'start_time' => 'bail|required|date_format:H:i',
-            //     // 'end_time' => 'bail|required|date_format:H:i',
-            //     // 'days_duration' => 'bail|required|integer',
-            //     'program_description' => 'bail|required|string|max:2000',
-            // ]);
-            // return $request->start_date;
-            // if($request->fee_able == 1){
-            //     // return "lsdflds";
-            //     $validate = $request->validate([
-            //         'fee' => 'bail|integer|required',
-            //         'fee_unit' => 'bail|string|required|in:افغانۍ,ډالر',
-            //     ]);
-            // }
+            return "akdsfjaksjflj";
+            $validate = $request->validate([
+                'name' => 'bail|required|string|max:100',
+                'type' => 'bail|required|string|in:ورکشاپ,سیمینار,سمفوزیم,کنفرانس',
+                'sponsor' => 'bail|required|string|max:30',
+                'supporter' => 'bail|required|string|max:30',
+                'manager' => 'bail|required|string|max:30',
+                'facilitator' => 'bail|nullable|string|max:30',
+                'info_mobile_number' => 'bail|required|string|max:13',
+                'participant_amount' => 'bail|required|integer|between:1,1000',
+                'fund' => 'bail|required|integer',
+                'fund_type' => 'bail|required|string|in:افغانۍ,ډالر',
+                'fee_able' => 'bail|required|integer|in:0,1',
+                'fee' => 'bail|integer|required_unless:fee_able,=,1|integer|gte:1',
+                'fee_unit' => 'bail|string|required_if:fee_able,=,1|in:افغانۍ,ډالر',
+                'campus_name' => 'bail|required|string|max:30',
+                'block_name' => 'bail|required|string|max:30',
+                'block_number' => 'bail|required|integer|between:1,30',
+                'room_number' => 'bail|required|integer|between:1,30',
+                'start_date' => 'bail|required|date',
+                'end_date' => 'bail|required|date',
+                // 'start_day' => 'bail|required|integer|between:1,31',
+                // 'end_day' => 'bail|required|integer|between:1,31',
+                // 'start_time' => 'bail|required|date_format:H:i',
+                // 'end_time' => 'bail|required|date_format:H:i',
+                // 'days_duration' => 'bail|required|integer',
+                'program_description' => 'bail|required|string|max:2000',
+            ]);
+            return $request->start_date;
+            if($request->fee_able == 1){
+                // return "lsdflds";
+                $validate = $request->validate([
+                    'fee' => 'bail|integer|required',
+                    'fee_unit' => 'bail|string|required|in:افغانۍ,ډالر',
+                ]);
+            }
             // return $request->start_date;
             $start = Carbon::parse($request->input('start_date'));
             $end = Carbon::parse($request->input('end_date'));
