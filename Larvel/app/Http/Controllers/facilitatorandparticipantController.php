@@ -81,7 +81,7 @@ class facilitatorandparticipantController extends Controller
             $validate = $request->validate([
                 'member_name' => 'bail|required|string|max:30',
                 'last_name' => 'bail|required|string|max:30',
-                'father_name' => 'bail|required|string|max:30',
+                // 'father_name' => 'bail|required|string|max:30',
                 'phone_number' => 'bail|required|string|max:13',
                 'email' => 'bail|required|email|max:50',
                 'gender' => 'bail|required|string|in:نارینه,ښځینه',
