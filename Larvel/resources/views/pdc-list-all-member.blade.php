@@ -49,7 +49,7 @@ select{
 				@if(count($members) !== 0)
 
 				<!-- Search Filter -->
-				<form action="memberList" method="POST">
+				<form action="/admin/memberList" method="POST">
 					{{ method_field('POST') }}
 					{{ csrf_field() }}
 					<div class="row filter-row mb-5" id="search_parts">
@@ -178,6 +178,13 @@ select{
             });
             </script>
         @endif
+		@if(Session::has('warn_search'))
+            <script>
+            swal('وبخښۍ!',"{!! Session::get('warn_search') !!}", "warning", {
+                button: "مننه",
+            });
+            </script>
+        @endif
 <script>
 
 	function pathFinder(num)
@@ -280,6 +287,7 @@ select{
 				`;
 				$('#search_parts').children().first().remove()
 				$("#search_content").before(content);
+			
 
 			}
 			if(state === 'office_building')

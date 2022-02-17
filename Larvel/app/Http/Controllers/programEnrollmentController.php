@@ -86,16 +86,16 @@ class programEnrollmentController extends Controller
                     $partEnrollment->save();
                     if($request->user_address === 'member')
                     {
-                        return redirect('memberProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم غړی په کامیابۍ سره و پروګرام ته د ګډونوال په حیث شامل کړل سو!');
+                        return redirect('admin/memberProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم غړی په کامیابۍ سره و پروګرام ته د ګډونوال په حیث شامل کړل سو!');
                         
                     }
                     elseif($request->user_address === 'facilitator')
                     {
                         
-                        return redirect('facilitatorProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم تسهیلونکی په کامیابۍ سره و پروګرام ته د ګډونوال په حیث شامل کړل سو!');
+                        return redirect('admin/facilitatorProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم تسهیلونکی په کامیابۍ سره و پروګرام ته د ګډونوال په حیث شامل کړل سو!');
                     }
                     else{
-                        return redirect('participantProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم ګډونوال په کامیابۍ سره و پروګرام ته د ګډونوال په حیث شامل کړل سو!');
+                        return redirect('admin/participantProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم ګډونوال په کامیابۍ سره و پروګرام ته د ګډونوال په حیث شامل کړل سو!');
                     }
                 } 
                 else{

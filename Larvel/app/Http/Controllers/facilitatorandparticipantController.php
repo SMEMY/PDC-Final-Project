@@ -171,6 +171,7 @@ class facilitatorandparticipantController extends Controller
                     return "nullllllllllll member registration!";
                 }
             }
+           
             else{
                 return "facil and part controller has faced with error in store function!";
             }
@@ -209,6 +210,33 @@ class facilitatorandparticipantController extends Controller
             $member->save();
             return back()->with('add', 'تاسي په کامیابۍ سره سیستم کي ثبت سولاست!');
         }
+        elseif($request->path() === 'admin/memberList')
+        {
+            // return "i am member List!";
+            $request->validate([
+                'search_type' => 'bail|required|string|in:office_position_category,office_position,office_department,office_building,gender,educational_rank,phone_number,email,name',
+                'search_content' => 'bail|required',
+            ]);
+            $path = '/pdcMemberList';
+            $members =  DB::table('facilitatorsandparticipants')->where($request->search_type, $request->search_content)->get();
+            // return $programs;
+            // return count($members);
+
+            if(count($members) == 0 )
+            {
+                
+                return back()->with('warn_search', 'یاد شخص په سیسټم کي ونه موندل سو!');
+            }
+            else{
+                $path = 'member';
+                $searchPath = '/searchMember';
+                $page = 'عمومي ګډونوال';
+    
+                return view('pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'))->with('success_search', 'لاندي ستاسي پلټل سوی شخص دی!');;
+            }
+        }
+
+
     }
 
     /**
