@@ -111,7 +111,7 @@ label {
 											<input class="form-control" type="text" value="participant" name="return">
 										</div>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<!-- <div class="form-group">
 											<label class="col-form-label">نوم <span class="text-danger">*</span></label>
 											<input class="form-control" type="text"  name="member_name" value="{{old('')}}">
@@ -121,18 +121,18 @@ label {
 											<input class="form-control " type="text" name="member_name" value="{{old('member_name')}}">
 										</div>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<div class="form-group">
 											<label class="col-form-label">تخلص</label>
 											<input class="form-control " type="text" name="last_name" value="{{old('last_name')}}">
 										</div>
 									</div>
-									<div class="col-md-4">
+									<!-- <div class="col-md-4">
 										<div class="form-group">
 											<label class="col-form-label">پلار نوم</label>
 											<input class="form-control " type="text" name="father_name" value="{{old('father_name')}}">
 										</div>
-									</div>
+									</div> -->
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="col-form-label">ټلیفون شمېره<span
