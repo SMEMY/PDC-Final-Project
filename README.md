@@ -21,6 +21,16 @@ when ever you have clone the project for the first time, so your Laravel (php ar
 # 2- npm install
 # 3- cp .env.example .env
 # 4- php artisan key:generate
+# For authentication INSTALL (fortify) 
+* composer require laravel/fortify
+* php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
+# then add this line in ( config/app.php ) file:
+* App\Providers\FortifyServiceProvider::class,
+* ![image](https://user-images.githubusercontent.com/57432794/154793426-de1a0418-721c-420c-ad03-c5486280b32a.png)
+
+
+
+
 # After all configuration, test the command (php artisan serve).
 * NOTE: these steps requires when you are cloning the project for the first time.
 # making new branch.
@@ -37,7 +47,3 @@ when ever you have clone the project for the first time, so your Laravel (php ar
 * git commit -m "the message you should write."
 # Now you able to push the new changes to the remote repositry.
 * git push -u origin (current branch name)
-# For authentication INSTALL (fortify) 
-* composer require laravel/fortify
-* php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
-
