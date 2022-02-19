@@ -24,6 +24,11 @@ when ever you have clone the project for the first time, so your Laravel (php ar
 # For authentication INSTALL (fortify) 
 * composer require laravel/fortify
 * php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
+# then add this line in ( config/app.php ) file:
+* App\Providers\FortifyServiceProvider::class,
+* ![image](https://user-images.githubusercontent.com/57432794/154793426-de1a0418-721c-420c-ad03-c5486280b32a.png)
+
+
 
 
 # After all configuration, test the command (php artisan serve).
