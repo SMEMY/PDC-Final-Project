@@ -36,13 +36,14 @@ use App\Http\Controllers\admin_infoController;
 */
 
 
-// Route::get('/', function () {
-    //     return view('chart');
-    // });
+Route::get('/home', function () {
+        dd(\Illuminate\Support\Facades\Auth::user());
+    });
     
+    
+    Route::view('/login', 'login');
     
     Route::resource('/admin/registration', admin_infoController::class);
-    Route::view('/login', 'login');
     
     ///// Admin user paths
     Route::prefix('admin')->group(function(){
@@ -287,4 +288,4 @@ use App\Http\Controllers\admin_infoController;
 // })->middleware(['auth'])->name('dashboard');
 
 
-// require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';

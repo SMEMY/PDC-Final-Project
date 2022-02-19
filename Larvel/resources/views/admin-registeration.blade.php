@@ -117,9 +117,9 @@
 						<!-- <p class="account-subtitle"></p> -->
 
 						<!-- Account Form -->
-						<form action="/admin/registration" method="POST">
+						<form action="/register" method="POST">
 							@csrf
-							@if ($errors->any())
+									@if ($errors->any())
 										<div class="mb-5" id="alertMassege">
 											<ul style="list-style-type:none" class="p-0 m-0">
 												@foreach ($errors->all() as $error)
