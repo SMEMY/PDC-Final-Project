@@ -19,6 +19,7 @@ class CreatePDCProgram extends Migration
             $table->string('type', 30);	
             $table->string('sponsor', 30);	
             $table->string('supporter', 30);	
+            $table->string('facilitator', 30)->nullable();	
             $table->string('manager', 30);	
             $table->bigInteger('fund');	
             $table->string('fund_type', 15);

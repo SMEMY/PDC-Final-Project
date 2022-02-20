@@ -35,82 +35,83 @@ use App\Http\Controllers\admin_infoController;
 |
 */
 
+Route::middleware(['auth'])->group(function () {
+    Route::view('/admin/dashboard', 'index')->name('dashboard');
+//     Route::view('home', 'home')->name('home');
+});
 
-Route::get('/home', function () {
-        dd(\Illuminate\Support\Facades\Auth::user());
-    });
-    
-    
-    Route::view('/login', 'login');
-    
-    Route::resource('/admin/registration', admin_infoController::class);
-    
-    ///// Admin user paths
-    Route::prefix('admin')->group(function(){
-        // ROUTES
+Route::prefix('admin')->group(function(){
+    // ROUTES
+   Route::view('/addPdcProgram', 'pdc-add-program')->name('addPdcprogram');
+   Route::view('/addEduProgram', 'pdc-add-educational-program')->name('addEduProgram');
+   Route::view('/memberRegisteration', 'pdc-add-member')->name('userRegistration');
+   Route::resource('/memberRegisterationTwo', facilitatorandparticipantController::class);
+   Route::get('/deleteQuestion/{id}', [deleteFeedbackQuestion::class, 'deleteQuestion'])->name('');
+   Route::get('/deleteQuestionnaire/{id}', [deleteFeedbackQuestion::class, 'deleteProgramQuestionnaire'])->name('');
+   
+   Route::resource('/pdcProgramList', programController::class);
+   Route::resource('/memberStoreTwo', facilitatorandparticipantController::class);
 
-
-    //    Route::view('/registration', 'admin-registeration')->name('registration');
-       Route::view('/dashboard', 'index')->name('dashboard');
-       Route::view('/addPdcProgram', 'pdc-add-program')->name('addPdcprogram');
-       Route::view('/addEduProgram', 'pdc-add-educational-program')->name('addEduProgram');
-       Route::view('/memberRegisteration', 'pdc-add-member')->name('userRegistration');
-       Route::resource('/memberRegisterationTwo', facilitatorandparticipantController::class);
-       Route::get('/deleteQuestion/{id}', [deleteFeedbackQuestion::class, 'deleteQuestion'])->name('');
-       Route::get('/deleteQuestionnaire/{id}', [deleteFeedbackQuestion::class, 'deleteProgramQuestionnaire'])->name('');
-       
-       Route::resource('/pdcProgramList', programController::class);
-       Route::resource('/memberStoreTwo', facilitatorandparticipantController::class);
-
-       Route::resource('/pdcProgramInfo', programController::class);
-       Route::resource('/pdcProgramAttendance', attendanceController::class);
-       Route::resource('/pdcProgramFacility', facilityController::class);
-       Route::resource('/pdcProgramAgenda', agendaController::class);
-       Route::resource('/pdcProgramEvaluation', evaluationController::class);
-       Route::resource('/pdcProgramResult', resultController::class);
-       Route::resource('/pdcProgramPhoto', photoController::class);
-       Route::resource('/deletePhoto', photoController::class);
-       Route::resource('/storeMaterials', materialController::class);
-       Route::resource('/feedbackFormInsertion', fquestionnaireController::class);
-       Route::resource('/facilitatorProfileForProgram', programfacilitatorController::class);
-       Route::resource('/searchPdcProgram', programController::class);
+   Route::resource('/pdcProgramInfo', programController::class);
+   Route::resource('/pdcProgramAttendance', attendanceController::class);
+   Route::resource('/pdcProgramFacility', facilityController::class);
+   Route::resource('/pdcProgramAgenda', agendaController::class);
+   Route::resource('/pdcProgramEvaluation', evaluationController::class);
+   Route::resource('/pdcProgramResult', resultController::class);
+   Route::resource('/pdcProgramPhoto', photoController::class);
+   Route::resource('/deletePhoto', photoController::class);
+   Route::resource('/storeMaterials', materialController::class);
+   Route::resource('/feedbackFormInsertion', fquestionnaireController::class);
+   Route::resource('/facilitatorProfileForProgram', programfacilitatorController::class);
+   Route::resource('/searchPdcProgram', programController::class);
     //    Route::resource('/pdcProgramDelete', programController::class);
 
 
 
-       //////////////////////////
-       Route::resource('/educationalProgramList', eduprogramController::class);
-       Route::resource('/facilitatorList', programfacilitatorController::class);
-       Route::resource('/participantList', programparticipantController::class);
-       Route::resource('/memberList', facilitatorandparticipantController::class);
-       
-       Route::resource('/feedback', feedBackController::class);
-       Route::resource('/feedbackAnswer', feedBackController::class);
-       Route::resource('/specificeProgramParticipants', programparticipantController::class);
-       Route::resource('/pdcProgramAttendancePaper', attendanceController::class);
-       Route::resource('/pdcProgramAttendanceReport', attendanceController::class);
-       Route::resource('/pdcProgramFeedbackReport', fquestionnaireController::class);
-       Route::resource('/materials', materialController::class);
-       Route::resource('/pdcProgramAttendanceEntry', attendanceController::class);
-       Route::resource('/searchEducationalProgram', eduprogramController::class);
-       Route::resource('/searchFacilitator', programfacilitatorController::class);
-       Route::resource('/searchParticipant', programparticipantController::class);
-       Route::resource('/deleteMaterial', materialController::class);
-       Route::resource('/memberStore', facilitatorandparticipantController::class);
-       Route::resource('/participantProfile', programparticipantController::class);
-       Route::resource('/facilitatorProfile', programfacilitatorController::class);
-       Route::resource('/memberProfile', facilitatorandparticipantController::class);
-       Route::resource('/facilitatorEnrollmentForProgram', programEnrollmentController::class);
-       Route::resource('/participantEnrollmentForProgram', programEnrollmentController::class);
-       Route::resource('/memberEnrollmentForProgram', programEnrollmentController::class);
-       Route::resource('/participantEnrolledPrograms', programparticipantController::class);
-       Route::resource('/facilitatorEnrolledPrograms', programfacilitatorController::class);
-       Route::resource('/downloadPhoto', photoController::class);
-       Route::resource('/educationalPrograminfo', eduprogramController::class);
-       Route::resource('/downloadMaterial', materialController::class);
-       Route::resource('/deleteMaterial', materialController::class);
-       Route::resource('/deleteFacilitatorForProgram', programfacilitatorController::class);
+   //////////////////////////
+   Route::resource('/educationalProgramList', eduprogramController::class);
+   Route::resource('/facilitatorList', programfacilitatorController::class);
+   Route::resource('/participantList', programparticipantController::class);
+   Route::resource('/memberList', facilitatorandparticipantController::class);
+   
+   Route::resource('/feedback', feedBackController::class);
+   Route::resource('/feedbackAnswer', feedBackController::class);
+   Route::resource('/specificeProgramParticipants', programparticipantController::class);
+   Route::resource('/pdcProgramAttendancePaper', attendanceController::class);
+   Route::resource('/pdcProgramAttendanceReport', attendanceController::class);
+   Route::resource('/pdcProgramFeedbackReport', fquestionnaireController::class);
+   Route::resource('/materials', materialController::class);
+   Route::resource('/pdcProgramAttendanceEntry', attendanceController::class);
+   Route::resource('/searchEducationalProgram', eduprogramController::class);
+   Route::resource('/searchFacilitator', programfacilitatorController::class);
+   Route::resource('/searchParticipant', programparticipantController::class);
+   Route::resource('/deleteMaterial', materialController::class);
+   Route::resource('/memberStore', facilitatorandparticipantController::class);
+   Route::resource('/participantProfile', programparticipantController::class);
+   Route::resource('/facilitatorProfile', programfacilitatorController::class);
+   Route::resource('/memberProfile', facilitatorandparticipantController::class);
+   Route::resource('/facilitatorEnrollmentForProgram', programEnrollmentController::class);
+   Route::resource('/participantEnrollmentForProgram', programEnrollmentController::class);
+   Route::resource('/memberEnrollmentForProgram', programEnrollmentController::class);
+   Route::resource('/participantEnrolledPrograms', programparticipantController::class);
+   Route::resource('/facilitatorEnrolledPrograms', programfacilitatorController::class);
+   Route::resource('/downloadPhoto', photoController::class);
+   Route::resource('/educationalPrograminfo', eduprogramController::class);
+   Route::resource('/downloadMaterial', materialController::class);
+   Route::resource('/deleteMaterial', materialController::class);
+   Route::resource('/deleteFacilitatorForProgram', programfacilitatorController::class);
 });
+
+// Route::get('/home', function () {
+//         dd(\Illuminate\Support\Facades\Auth::user());
+//     });
+    
+    
+    // Route::view('/login', 'login');
+    
+    // Route::resource('/admin/registration', admin_infoController::class);
+    
+    ///// Admin user paths
 
 
 

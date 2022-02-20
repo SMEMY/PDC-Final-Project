@@ -96,20 +96,27 @@
 
 				<!-- Account Logo -->
 				<div class="account-logo">
-					<a href="index.html"><img src="assets/img/logo2.png" alt="Dreamguy's Technologies"></a>
+					<img src="assets/img/logo2.png" alt="Dreamguy's Technologies">
 				</div>
 				<!-- /Account Logo -->
 
-				<div class="account-box">
+				<div class="account-box px-4 rounded">
 					<div class="account-wrapper">
-						<h3 class="account-title"></h3>
-						<p class="account-subtitle">Access to our dashboard</p>
+						<h3 class="account-title">داخلېدو پاڼه</h3>
 
 						<!-- Account Form -->
-						<form action="index.html">
+						<form action="/login" method="POST">
+							@csrf
 							<div class="form-group">
-								<label>نوم</label>
-								<input class="form-control" type="text" name="user_name">
+								<label>برېښنالیک</label>
+								<input class="form-control" type="text" name="email" value="{{old('email')}}">
+								@error('email')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
 							</div>
 							<div class="form-group">
 								<div class="row">
@@ -122,10 +129,17 @@
 										</a>
 									</div>
 								</div>
-								<input class="form-control" type="password" name="user_password">
+								<input class="form-control" type="password" name="password">
+								@error('password')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
 							</div>
-							<div class="form-group text-center col-md-4 m-auto">
-								<button class="btn btn-primary  account-btn col-md-12" type="submit">داخلېدل</button>
+							<div class="form-group text-center col-md-12 ">
+								<button class="btn btn-primary submit-btn" type="submit">داخلېدل</button>
 							</div>
 							<div class="account-footer mt-3">
 								<p>تر اوسه جاري حساب نلری؟ <a href="register.html">ځان ثبت کړی</a></p>

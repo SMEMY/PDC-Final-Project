@@ -137,7 +137,7 @@ class programController extends Controller
             $addProgram->supporter = $request->supporter;
             $addProgram->manager = $request->manager;
             $addProgram->info_mobile_number = $request->info_mobile_number;
-            // $addProgram->facilitator = $request->facilitator;
+            $addProgram->facilitator = $request->facilitator;
             $addProgram->participant_amount = $request->participant_amount;
             $addProgram->fund = $request->fund;
             $addProgram->fund_type = $request->fund_type;

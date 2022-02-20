@@ -97,7 +97,7 @@ class facilitatorandparticipantController extends Controller
             $member = new Facilitatorsandparticipant;
             $member->name = $request->member_name;
             $member->last_name = $request->last_name;
-            $member->father_name = $request->father_name;
+            // $member->father_name = $request->father_name;
             $member->phone_number = $request->phone_number;
             $member->email = $request->email;
             $member->gender = $request->gender;

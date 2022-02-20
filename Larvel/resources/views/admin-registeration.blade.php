@@ -145,7 +145,7 @@
 								</div>
 								<div class="form-group col-md-6 p-3">
 									<label>ټلیفون شمېره</label>
-									<input class="form-control" name="phone_number" type="text" placeholder="داډمېن برېښنالیک" value="{{old('phone_number')}}">
+									<input class="form-control" name="phone_number" type="text" placeholder="داډمېن ټلیفون شمېره" value="{{old('phone_number')}}">
 								</div>
 								<div class="form-group col-md-6 p-3">
 									<label>پاسورډ</label>
@@ -153,7 +153,7 @@
 								</div>
 								<div class="form-group col-md-6 p-3">
 									<label>پاسورډ تائید کړئ</label>
-									<input class="form-control" type="password" name="confirm_password" placeholder="نوی پاسورډ تائید کړئ" value="{{old('password')}}">
+									<input class="form-control" type="password" name="password_confirmation" placeholder="نوی پاسورډ تائید کړئ" value="{{old('password_confirmation')}}">
 								</div>
 								<!-- <div class="form-group text-center col-md-4 m-auto">
 									<button class="btn btn-primary  account-btn col-md-12" type="submit">اډمېن ثبت
@@ -182,7 +182,7 @@
 										</div>
 										<div class="form-group col-md-12 p-3">
 											<label>ځواب</label>
-											<input class="form-control" name="first_answer" type="text" placeholder="داډمېن تخلص" value="{{old('last_name')}}">
+											<input class="form-control" name="first_answer" type="text" placeholder="داډمېن تخلص" value="{{old('first_answer')}}">
 										</div>
 									</div>				
 							<hr style="width:70%">
@@ -205,7 +205,7 @@
 									</div>
 									<div class="form-group col-md-12 p-3">
 										<label>ځواب</label>
-										<input class="form-control" name="second_answer" type="text" placeholder="داډمېن تخلص" value="{{old('last_name')}}">
+										<input class="form-control" name="second_answer" type="text" placeholder="داډمېن تخلص" value="{{old('second_answer')}}">
 									</div>
 							</div>
 							<hr style="width:70%">
@@ -229,11 +229,11 @@
 								</div>
 								<div class="form-group col-md-12 p-3">
 									<label>ځواب</label>
-									<input class="form-control" name="third_answer" type="text" placeholder="داډمېن تخلص" value="{{old('last_name')}}">
+									<input class="form-control" name="third_answer" type="text" placeholder="داډمېن تخلص" value="{{old('third_answer')}}">
 								</div>
 								
 								<div class="form-group text-center col-md-4 m-auto">
-									<button class="btn btn-primary  account-btn col-md-12" type="submit">ثبت کړئ</button>
+									<button class="btn btn-primary submit-btn" type="submit">ثبت کړئ</button>
 								</div>
 							</div>
 							<!-- <div class="account-footer">

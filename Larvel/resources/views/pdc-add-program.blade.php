@@ -20,6 +20,11 @@ label {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
             font-size: 20px !important;
 		}
+        strong{
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 15px !important;
+
+        }
         button{
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
             font-size: 20px !important;
@@ -80,7 +85,7 @@ label {
                         <hr !important>
 						<!-- Account Form -->
                         
-                        @if ($errors->any())
+                        <!-- @if ($errors->any())
                             <div class="mb-5" id="alertMassege">
                                 <ul style="list-style-type:none" class="p-0 m-0">
                                     @foreach ($errors->all() as $error)
@@ -90,7 +95,7 @@ label {
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                        @endif -->
                         <form action="/admin/pdcProgramList" method="POST" enctype="multipart/form-data">
                                 @csrf
                             <div class="row">
@@ -98,6 +103,13 @@ label {
                                     <div class="form-group">
                                         <label><span class="text-danger">*</span> د پروګرام نوم</label>
                                         <input class="form-control" type="text" name="name" value="{{old('name')}}">
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -138,6 +150,13 @@ label {
                                             <option value="کنفرانس">کنفرانس</option>
                                             @endif
                                         </select>
+                                        @error('type')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -149,6 +168,13 @@ label {
                                         <label><span class="text-danger">*</span> د پروګرام سپانسر</label>
                                         <!-- <div class="cal-icon"> -->
                                         <input class="form-control" type="text" name="sponsor" value="{{old('sponsor')}}">
+                                        @error('sponsor')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                         <!-- </div> -->
                                     </div>
                                 </div>
@@ -157,6 +183,13 @@ label {
                                         <label> <span class="text-danger">*</span> د پروګرام حمایه کوونکی</label>
                                         <!-- <div class="cal-icon"> -->
                                         <input class="form-control" type="text" name="supporter" value="{{old('supporter')}}">
+                                        @error('supporter')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                         <!-- </div> -->
                                     </div>
                                 </div>
@@ -164,20 +197,54 @@ label {
                                     <div class="form-group">
                                         <label> <span class="text-danger">*</span> د پروګرام تنظیمونکی</label>
                                         <input placeholder="" class="form-control" type="text" name="manager" value="{{old('manager')}}">
+                                        @error('manager')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label> <span class="text-danger">*</span> د پروګرام تسهیلونکی</label>
+                                        <input placeholder="" class="form-control" type="text" name="facilitator" value="{{old('facilitator')}}">
+                                        @error('facilitator')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!--  -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class=""><span class="text-danger">*</span> د پروګرام د معلوماتو شمېره</label>
                                         <input placeholder="" class="form-control" type="text" name="info_mobile_number" value="{{old('info_mobile_number')}}">
+                                        @error('info_mobile_number')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
 
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label><span class="text-danger">*</span> د پروګرام د ګډون والو کچه</label>
                                         <input placeholder="" class="form-control" type="number" name="participant_amount" value="{{old('participant_amount')}}">
+                                        @error('participant_amount')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -189,6 +256,13 @@ label {
                                     <div class="form-group">
                                         <label> <span class="text-danger">*</span>د پروګرام یودیجه</label>
                                         <input placeholder="$" class="form-control" type="number" name="fund" value="{{old('fund')}}">
+                                        @error('fund')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -210,6 +284,13 @@ label {
                                             <option value="ډالر">ډالر</option>
                                             @endif
                                         </select>
+                                        @error('fund_type')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- <h3 class="col-md-12 m-auto">د پروګرام ادرس</h3> -->
@@ -236,6 +317,13 @@ label {
                                             <option value="0">یا</option>
                                             @endif
                                         </select>
+                                        @error('fee_able')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
 
                                     </div>
                                 </div>
@@ -243,6 +331,13 @@ label {
                                     <div class="form-group">
                                         <label class="col-form-label"><span class="text-danger">*</span> د پروګرام فیس</label>
                                         <input placeholder="$" class="form-control" type="number" name="fee" value="{{old('fee')}}">
+                                        @error('fee')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6 d-none" id="fee_type">
@@ -264,6 +359,13 @@ label {
                                             <option value="ډالر">ډالر</option>
                                             @endif
                                         </select>
+                                        @error('fee_unit')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
 
                                     </div>
                                 </div>
@@ -274,24 +376,52 @@ label {
                                     <div class="form-group">
                                         <label><span class="text-danger">*</span> د پروګرام د رامنځته کولو ساحه</label>
                                         <input placeholder="" class="form-control" type="text" name="campus_name" value="{{old('campus_name')}}">
+                                        @error('campus_name')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label> <span class="text-danger">*</span> د پروګرام د رامنځته کولو تعمیر نوم</label>
                                         <input placeholder="" class="form-control" type="text" name="block_name" value="{{old('block_name')}}">
+                                        @error('block_name')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label> <span class="text-danger">*</span> د پروګرام د رامنځته کولو تعمیر نمبر</label>
                                         <input placeholder="" class="form-control" type="number" name="block_number" value="{{old('block_number')}}">
+                                        @error('block_number')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label><span class="text-danger">*</span> د پروګرام د اطاق نمبر</label>
                                         <input placeholder="" class="form-control" type="number" name="room_number" value="{{old('room_number')}}">
+                                        @error('room_number')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -301,12 +431,26 @@ label {
                                     <div class="form-group">
                                         <label><span class="text-danger">*</span> د پېل کېدو تاریخ</label>
                                         <input placeholder="" class="form-control" type="datetime-local" name="start_date" value="{{old('start_date')}}">
+                                        @error('start_date')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label><span class="text-danger">*</span> د ختمېدو تاریخ</label>
                                         <input placeholder="" class="form-control" type="datetime-local" name="end_date" value="{{old('end_date')}}">
+                                        @error('end_date')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- <div class="col-md-3">
@@ -348,6 +492,13 @@ label {
                                     </div>
                                     <textarea class="form-control" style="height: 100px;"
                                         aria-label="With textarea" name="program_description">{{old('program_description')}}</textarea>
+                                        @error('program_description')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{$message}}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                 </div>
                             </div>
 
