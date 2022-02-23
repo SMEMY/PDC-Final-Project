@@ -41,4 +41,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    function getAttendances()
+    {
+        return $this->hasMany('App\Models\User_attendance');
+    }
+    function userInfos()
+    {
+        return $this->hasOne('App\Models\User_info');
+    }
+    function getPayments()
+    {
+        return $this->hasMany('App\Models\User_payment');
+    }
+    function getProgramFacilitators()
+    {
+        return $this->belongsToMany(Program::class, 'User_role');
+    }
+    function getProgramsParticipants()
+    {
+        return $this->belongsToMany(Program::class, 'User_role');
+    }
+    function getProgramsFeedbacks()
+    {
+        return $this->hasMany('App\Models\Feedbak');
+    }
 }

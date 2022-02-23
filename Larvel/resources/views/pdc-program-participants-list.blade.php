@@ -9,7 +9,7 @@ hahahaha
 			thead tr th{
 				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 				font-size: 20px !important;
-				
+
 			}
 			label{
 				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
@@ -17,7 +17,7 @@ hahahaha
 			}
 			h3, p, button{
 				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-				
+
 			}
 			h3{
 				font-size: 25px !important;
@@ -51,7 +51,7 @@ hahahaha
             <div class="page-wrapper">
 				<!-- Page Content -->
                 <div class="content container-fluid">
-				
+
 					<!-- Page Header -->
 					<div class="page-header">
 						<div class="row align-items-center">
@@ -61,9 +61,9 @@ hahahaha
 						</div>
 					</div>
 					<!-- /Page Header -->
-					
+
 					<!-- Search Filter -->
-					<form action="/admin/programSpecificParticipant/{{$programID}}" method="get">
+					{{-- <form action="/admin/programSpecificParticipant/{{$programID}}" method="get">
 						{{ method_field('GET') }}
 						{{ csrf_field() }}
 						<div class="row filter-row">
@@ -86,9 +86,9 @@ hahahaha
 
 							</div>
 						</div>
-					</form>
+					</form> --}}
 					<!-- /Search Filter -->
-					
+
 					<div class="row">
 						<div class="col-md-12">
 							<div class="table-responsive">
@@ -167,7 +167,7 @@ hahahaha
 				</div>
 <!-- /Delete Project Modal -->
             </div>
-			<!-- /Page Wrapper -->		
+			<!-- /Page Wrapper -->
         </div>
 
 

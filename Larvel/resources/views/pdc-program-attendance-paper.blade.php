@@ -31,13 +31,13 @@
 
 <!-- Main CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    
+
 <!-- Select2 CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/select2.min.css')}}">
 
 <!-- Datetimepicker CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/bootstrap-datetimepicker.min.css')}}">
-    
+
 <!-- Tagsinput CSS -->
 <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
 
@@ -48,13 +48,13 @@
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
 	<style>
-		
+
 		td{
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			text-align: center !important;
 			border-radius: 2px !important;
 			padding:0px 5px !important;
-			
+
 
 		}
 		th{
@@ -69,7 +69,7 @@
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-weight: bold !important;
 			font-size: 20px !important;
-			
+
 
 		}
 		h5{
@@ -122,8 +122,8 @@
 							<h4 class="page-title">کندهار پوهنتون</h4>
 							<h4 class="page-title">مسلکي پرختیائي مرکز</h4>
 							<h4 class="page-title">د مکتوب لیکني او (ې) ګانو پېږندلګلوي ورکشاپ د ګډون حاضري</h4>
-							<h5 class="text-left pl-4">د شروع نېټه: {{$program[0]->year}} - {{$program[0]->month}} - {{$program[0]->start_day}} </h5>
-							<h5 class="text-left pl-4">د ختم نېټه: {{$program[0]->year}} - {{$program[0]->month}} - {{$program[0]->end_day}} </h5>
+							<h5 class="text-left pl-4">د شروع نېټه: {{date('d - m - Y ', strtotime($program[0]->start_date))}} </h5>
+							<h5 class="text-left pl-4">د ختم نېټه: {{date('d - m - Y ', strtotime($program[0]->start_date))}}</h5>
 						</div>
 					</div>
 				</div>
@@ -160,7 +160,7 @@
 										<th class="col-md-1">10</th> -->
 
 									</tr>
-									
+
 								</thead>
 								<tbody>
 									@foreach($participants as $participant)
@@ -178,7 +178,7 @@
 											@for($index = 0; $index<$program[0]->days_duration;$index++)
 											<td class="border border-dark p-0"></td>
 											@endfor
-										
+
 										<td class="border border-dark p-0"></td>
 
 									</tr>

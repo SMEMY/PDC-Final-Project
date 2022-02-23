@@ -18,7 +18,7 @@ th{
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 
 	font-size:25px !important;
-	
+
 }
 td{
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
@@ -57,9 +57,9 @@ li{
 			font-size: 18px;
 		}
 @endsection
-	
-	
-	
+
+
+
 <!-- here we add dynamic content -->
 @section('content')
 
@@ -95,7 +95,7 @@ li{
 												{{ $error }}
 											</li>
 											@endforeach
-											
+
 										</ul>
 									</div>
 								@endif
@@ -115,12 +115,12 @@ li{
 
 								</thead>
 								<tbody class="overflow-hidden">
-									<form action="admin/pdcProgramAttendanceEntry" class="" method="POST">
+									<form action="/admin/pdcProgramAttendanceEntry" class="" method="POST">
 
 										{{ method_field('POST') }}
 										{{ csrf_field() }}
 										<input type="text" class="d-none" name="program_id"  value="{{$programID}}">
-										@if(count($participants) === 0 )
+										@if(count($unAttendancedParticipants) === 0 )
 										<tr class="p-0">
 											<td colspan="3"  class="p-0">
 												<div class="" id="alertMassege">
@@ -133,17 +133,17 @@ li{
 											</td>
 										</tr>
 										@else
-											@foreach($participants as $participant)
-											
+											@foreach($unAttendancedParticipants as $participant)
+
 											<tr class="border col-12">
 												<td class="border-left p-3 col-2" style="font-weight: bold;">
 													{{$participant->name}} {{$participant->last_name}}
 												</td>
 												<td class="text-center p-1 border-left ">
-													<input class="form-control text-center col-11 m-auto" type="number" placeholder="سوبتیا" name="presence[{{$loop->index}}]" value="{{old('presence[0]')}}"> 
+													<input class="form-control text-center col-11 m-auto" type="number" placeholder="سوبتیا" name="presence[{{$loop->index}}]" value="{{old('presence[0]')}}">
 												</td>
 												<td class="text-center p-1 border-left ">
-													<input class="form-control text-center col-11 m-auto" type="number" placeholder="ناسوبتیا" name="absence[{{$loop->index}}]"> 
+													<input class="form-control text-center col-11 m-auto" type="number" placeholder="ناسوبتیا" name="absence[{{$loop->index}}]">
 												</td>
 												<td class="d-none">
 													<input type="text" class="d-none" name="participant_id[{{$loop->index}}]" id="" value="{{$participant->id}}">

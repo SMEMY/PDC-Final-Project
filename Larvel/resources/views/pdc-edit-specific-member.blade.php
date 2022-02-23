@@ -68,15 +68,16 @@ label {
 				</div> -->
 				<!-- /Account Logo -->
 
-				<div class="account-box" style="width: 1100px; margin-top: 75px; margin-right:140px;" id="for">
+                {{-- <a href="#" class="btn btn-primary apply-btn mt-5" onclick="history.back()">See Programs</a> --}}
+				<div class="account-box" style="width: 1100px; margin-top: 100px; margin-right:140px;" id="for">
 					<div class="account-wrapper mt-3" style="">
-						<h3 class="account-title mb-5" style="font-size:35px !important; font-weight: bolder;">د مسلکي پرمختیائي مرکز پروګرام تسهيلونکی ثبت کړی</h3>
+                        <h3 class="account-title mb-5" style="font-size:35px !important; font-weight: bolder;">د مسلکي پرمختیائي مرکز پروګرام تسهيلونکی ثبت کړی</h3>
 						<!-- <p class="account-subtitle"></p> -->
-<hr !important>
+                        <hr !important>
 						<!-- Account Form -->
-						<form action="/admin/{{$path}}List/{{$member[0]->id}}" method="POST">
-								{{ method_field('PUT') }}
-      					 	    {{ csrf_field() }}
+						<form action="/admin/specificeProgramParticipants/{{$member[0]->id}}" method="POST">
+                            {{ method_field('PUT') }}
+                            {{ csrf_field() }}
 								    @if ($errors->any())
 										<div class="mb-5" id="alertMassege">
 											<ul style="list-style-type:none" class="p-0 m-0">
@@ -289,7 +290,19 @@ label {
 
 
 @section('custom-js')
+@if(Session::has('member_edited'))
+<script>
+swal('ډېر ښه!',"{!! Session::get('member_edited') !!}", "success", {
+    button: "سمده",
+});
+</script>
+@endif
 	<script>
+        $("button.swal-button").click(function()
+        {
+            // console.log("aklsdjf");
+            history.go(-2);
+        });
 		var s = true;
 		$("select.rankS").change(function () {
 			var state = $(this).children("option:selected").val();

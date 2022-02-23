@@ -20,7 +20,7 @@ class CreatePDCPmaterial extends Migration
             $table->string('path');
             $table->string('size');
             $table->string('extension');
-            $table->unsignedInteger('program_id');	
+            $table->unsignedBigInteger('program_id');
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->timestamps();
         });

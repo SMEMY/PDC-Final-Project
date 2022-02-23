@@ -16,7 +16,7 @@ class CreatePDCPresult extends Migration
         Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('result');
-            $table->unsignedInteger('program_id');	
+            $table->unsignedBigInteger('program_id');
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->timestamps();
         });

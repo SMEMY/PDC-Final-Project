@@ -36,7 +36,7 @@ li, h3{
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-weight: bold !important;
 			font-size: 20px !important;
-			
+
 
 		}
 		h5{
@@ -62,9 +62,9 @@ li{
 			font-size:17px !important;
 		}
 @endsection
-	
-	
-	
+
+
+
 <!-- here we add dynamic content -->
 @section('content')
 
@@ -105,7 +105,7 @@ li{
 										<th class="text-center border col-3 p-2" style="font-size: 18px;">
 											<strong>ناسوبتیا</strong>
 										</th>
-										
+
 										<th class="text-center border col-1 p-2" style="font-size: 18px;">
 											<strong>عملیه</strong>
 										</th>
@@ -118,7 +118,7 @@ li{
 
 										{{ method_field('POST') }}
 										{{ csrf_field() }}
-										
+
 
 										@foreach($attendanceReport as $participant)
 										<tr class="border col-12">
@@ -138,14 +138,14 @@ li{
 												<div class="dropdown dropdown-action">
 													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 													<div class="dropdown-menu dropdown-menu-left">
-														<a class="dropdown-item" href="/pdcProgramAttendanceReport/{{$participant->id}}/edit"><i class="fa fa-pencil m-r-5"></i> اصلاح يې کړی</a>
-														<a class="dropdown-item" href="/pdcProgramAttendanceReport/{{$participant->p_id}}" data-toggle="modal" data-target="#delete_employee" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
+														<a class="dropdown-item" href="/admin/pdcProgramAttendanceReport/{{$participant->id}}/edit"><i class="fa fa-pencil m-r-5"></i> اصلاح يې کړی</a>
+														<a class="dropdown-item" href="/admin/pdcProgramAttendanceReport/{{$participant->p_id}}" data-toggle="modal" data-target="#delete_employee" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 													</div>
 												</div>
 											</td>
 										</tr>
 										@endforeach
-										
+
 
 									</form>
 

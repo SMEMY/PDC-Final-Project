@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePDCProgram extends Migration
+class CreatePDCPrograms extends Migration
 {
     /**
      * Run the migrations.
@@ -14,22 +14,22 @@ class CreatePDCProgram extends Migration
     public function up()
     {
         Schema::create('programs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');	
-            $table->string('type', 30);	
-            $table->string('sponsor', 30);	
-            $table->string('supporter', 30);	
-            $table->string('facilitator', 30)->nullable();	
-            $table->string('manager', 30);	
-            $table->bigInteger('fund');	
+            $table->id();
+            $table->string('name');
+            $table->string('type', 30);
+            $table->string('sponsor', 30);
+            $table->string('supporter', 30);
+            $table->string('facilitator', 30)->nullable();
+            $table->string('manager', 30);
+            $table->bigInteger('fund');
             $table->string('fund_type', 15);
-            $table->boolean('fee_able');	
-            $table->bigInteger('fee')->nullable();	
-            $table->string('fee_type',20)->nullable();	
-            $table->string('info_mobile_number');	
-            $table->longText('program_description');	
+            $table->boolean('fee_able');
+            $table->bigInteger('fee')->nullable();
+            $table->string('fee_type',20)->nullable();
+            $table->string('info_mobile_number');
+            $table->longText('program_description');
             $table->bigInteger('participant_amount');
-            $table->text('facilitator_code');	
+            $table->text('facilitator_code');
             $table->text('participant_code');
 
             // $table->string('');
@@ -47,13 +47,13 @@ class CreatePDCProgram extends Migration
 
             $table->integer('days_duration');
 
-            $table->string('campus_name', 30);	
+            $table->string('campus_name', 30);
             $table->string('block_name', 30);
-            $table->integer('block_number');	
-            $table->integer('room_number');	
-            // $table->unsignedInteger('address_id');	
+            $table->integer('block_number');
+            $table->integer('room_number');
+            // $table->unsignedInteger('address_id');
             // $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
-            // $table->unsignedInteger('time_id');	
+            // $table->unsignedInteger('time_id');
             // $table->foreign('time_id')->references('id')->on('times')->onDelete('cascade');
         });
     }
@@ -65,6 +65,10 @@ class CreatePDCProgram extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('user_roles');
+        Schema::dropIfExists('user_attendances');
+        Schema::dropIfExists('user_payments');
+        Schema::dropIfExists('user_infos');
         Schema::dropIfExists('programs');
     }
 }

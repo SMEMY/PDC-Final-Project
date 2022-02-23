@@ -55,15 +55,15 @@ h4 {
 @section('content')
 <!-- Page Wrapper -->
 <div class="page-wrapper">
-	
+
 	<!-- Page Content -->
 	<div class="content">
 
 
 		<!-- Account Logo -->
-		
+
 		<!-- /Account Logo -->
-		@foreach($userProfile as $profile) 
+		@foreach($userProfile as $profile)
 		<div class="row">
 			<div class="col-md-12">
 				<h4 class="text-center d-block rounded p-3 bg-info" style="font-weight: bold"><i class="pr-2 fa fa-"></i>د اړونده {{$name}} په اړه بشپړ معلومات</h4>
@@ -73,8 +73,8 @@ h4 {
 								<div class="dropdown-file">
 									<a href="" class="dropdown-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
 									<div class="dropdown-menu dropdown-menu-right">
-										<a href="/facilitatorProfileForProgram/{{$profile->id}}/edit" class="dropdown-item"><i class="fa fa-download m-r-5"></i>معلومات  اصلاح کول</a>
-										<a class="dropdown-item" href="/deleteFacilitatorForProgram/{{$profile->id}}" data-toggle="modal"
+										<a href="/admin/facilitatorProfileForProgram/{{$profile->id}}/edit" class="dropdown-item"><i class="fa fa-download m-r-5"></i>معلومات  اصلاح کول</a>
+										<a class="dropdown-item" href="/admin/deleteFacilitatorForProgram/{{$profile->id}}" data-toggle="modal"
 											data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i>معلومات له منځه یې اوسی</a>
 									</div>
 								</div>
@@ -97,10 +97,10 @@ h4 {
 
 					</ul>
 				</div>
-				
+
 			</div>
 			<div class="col-md-4" id="cards_headings">
-				
+
 				<div class="job-det-info job-widget" style=" box-shadow:0px 0px 0px 1px #00beff; border-radius: 5px; " id="small">
 					<h4 class="account-title">د {{$name}} اړونده کړني</h4>
 					<a class="btn job-btn mt-3 p-2 " href="/facilitatorEnrolledPrograms/{{$profile->id}}" >د {{$name}} پروګرامونه</a>
@@ -152,6 +152,13 @@ h4 {
             });
             </script>
         @endif
+        @if(Session::has('member_edited'))
+        <script>
+        swal('ډېر ښه!',"{!! Session::get('member_edited') !!}", "success", {
+            button: "سمده",
+        });
+        </script>
+    @endif
 <script>
 		function pathFinder(num)
 					{

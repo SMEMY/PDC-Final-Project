@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePDCPopenspeaker extends Migration
+class CreateUserRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreatePDCPopenspeaker extends Migration
      */
     public function up()
     {
-        Schema::create('openerspeakers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('last_name');
-            $table->string('position');
+        Schema::create('user_roles', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->unsignedBigInteger('program_id');
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
+
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ class CreatePDCPopenspeaker extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('openerspeakers');
+        Schema::dropIfExists('user_roles');
     }
 }

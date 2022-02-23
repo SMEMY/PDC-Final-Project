@@ -18,7 +18,7 @@ th{
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 
 	font-size:25px !important;
-	
+
 }
 td{
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
@@ -40,9 +40,9 @@ li{
 			font-size:17px !important;
 		}
 @endsection
-	
-	
-	
+
+
+
 <!-- here we add dynamic content -->
 @section('content')
 
@@ -85,10 +85,21 @@ li{
 
 								</thead>
 								<tbody class="overflow-hidden">
-									<form action="/pdcProgramAttendanceReport/{{$participantAttendance[0]->id}}" class="" method="POST">
+									<form action="/admin/pdcProgramAttendanceReport/{{$participantAttendance[0]->id}}" class="" method="POST">
 
 										{{ method_field('PATCH') }}
 										{{ csrf_field() }}
+                                        @if ($errors->any())
+										<div class="mb-5" id="alertMassege">
+											<ul style="list-style-type:none" class="p-0 m-0">
+												@foreach ($errors->all() as $error)
+												<li class="rounded p-2 m-1 alert alert-danger" >
+													{{ $error }}
+												</li>
+												@endforeach
+											</ul>
+										</div>
+									@endif
 
 										<tr class="border col-12">
 											<td class="border-left p-3 col-2">
@@ -105,7 +116,7 @@ li{
 
 											</td>
 										</tr>
-										
+
 										<tr>
 											<td colspan="3" class="text-center"><button type="submit"
 													class="btn btn-info btn-lg col-4">معلومات ثبت کړی</button></td>

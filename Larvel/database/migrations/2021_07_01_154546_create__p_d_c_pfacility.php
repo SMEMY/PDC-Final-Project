@@ -16,9 +16,9 @@ class CreatePDCPfacility extends Migration
         Schema::create('facilities', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('facility');
-            $table->unsignedInteger('program_id');	
+            $table->unsignedBigInteger('program_id');
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
-            
+
             $table->timestamps();
         });
     }

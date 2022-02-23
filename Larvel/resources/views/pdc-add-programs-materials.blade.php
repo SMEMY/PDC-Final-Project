@@ -40,7 +40,7 @@
 
 	<!-- Tagsinput CSS -->
 	<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
-	
+
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -66,7 +66,7 @@
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-size: 17px !important;
 		}
-		
+
 		#alertMassege li{
 				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 					font-size: 20px !important;
@@ -115,7 +115,7 @@
 
 		<!-- Logo -->
 		<div class="account-logo mt-5">
-			<a href="index.html"><img src="{{asset('assets/img/logo2.png')}}" alt="Dreamguy's Technologies"></a>
+			<a href="#"><img src="{{asset('assets/img/logo2.png')}}" alt="Dreamguy's Technologies"></a>
 		</div>
 		<!-- /Logo -->
 
@@ -125,7 +125,7 @@
 				<div class="card-header p-3">
 					<h4 class="card-title mb-0">د اوړنده پروکرام اړونده فایلونه اپلوډ کړئ</h4>
 				</div>
-				<form action="/materials" method="POST" enctype="multipart/form-data" name="formName" id="filesUploads">
+				<form action="/admin/storeMaterials" method="POST" enctype="multipart/form-data" name="formName" id="filesUploads">
 					{{ method_field('POST') }}
       				{{ csrf_field() }}
 						<input class="d-none" type="text" name="program_id" id="prog" value="{{$program_id}}">
@@ -166,7 +166,7 @@
 									  <option value="وډیو">وډیو</option>
 									  <option value="آډیو">آډیو</option>
 								  </select>
-	  
+
 							  </div>
 						  </div>
 					  </div>
@@ -232,11 +232,11 @@
 		}
 		function bootstrapAlert(){
 				   $('.bootstrap-growl').remove();
-	   
+
 				   $.bootstrapGrowl("د پروګرام فایلونه په کامیابۍ سره سیسټم ته اضافه کړل سول!", {
 					   type:"success",
 					   offset: {from: "top", amount: 200},
-					   align: "center", 
+					   align: "center",
 					   width: 1000,
 					   delay: 3000,
 					   allow_dismiss: true,
@@ -247,12 +247,12 @@
 					swal('وبخښئ!',"د یاد پروګرام لپاره فایلونه سیسټم ته داخل کړل سوه!", "success", {
 					button: "مننه",
 				}).then(function()
-				{ 
+				{
 						var program = $('#prog').val();
 						console.log(program);
 						window.location = `/pdcProgramInfo/${program}`;
 				});
-				}	  
+				}
 	</script>
 		<script type="text/javascript">
 
@@ -280,15 +280,15 @@ $(function() {
             complete: function(xhr) {
                 bootstrapAlert1();
 				$('#show').addClass('d-none');
-				
-				// window.setTimeout(function () {
-				// 	var program = $('#prog').val();
-				// 	console.log(program);
-				// 	// window.location = `/pdcProgramInfo/${program}`;
-				// }, 3000);
+
+				window.setTimeout(function () {
+					var program = $('#prog').val();
+					console.log(program);
+					window.location = `/admin/pdcProgramInfo/${program}`;
+				}, 1000);
             }
           });
-    }); 
+    });
  });
 
 </script>
@@ -301,7 +301,7 @@ $(function() {
 		@endif
 	<script>
 
-		
+
 
 		var count4 = 2;
 		var indexFile = 1;

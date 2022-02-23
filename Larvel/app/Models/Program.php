@@ -36,7 +36,7 @@ class Program extends Model
     }
     function getAttendance()
     {
-        return $this->hasMany('App\Models\Attendance');
+        return $this->hasMany('App\Models\User_attendance');
     }
     function getPayment()
     {
