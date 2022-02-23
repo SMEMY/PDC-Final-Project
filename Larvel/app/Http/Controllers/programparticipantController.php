@@ -21,16 +21,20 @@ class programparticipantController extends Controller
     public function index()
     {
         //
-        $members =  DB::table('facilitatorsandparticipants')
-            ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
-            ->select('facilitatorsandparticipants.*')
+        $members =  DB::table('users')
+            ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
+            ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
+            ->select('users.*', 'user_infos.*')
             ->distinct()
+            ->where([
+                ['user_roles.role_id', 3]
+            ])
             ->get();
-        $searchPath = '/searchParticipant';
-        $path = 'participant';
-        $page = 'د پروګرامونو ګډونوال';
+        // $searchPath = '/searchParticipant';
+        // $path = 'participant';
+        // $page = 'د پروګرامونو ګډونوال';
 
-        return view('pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'));
+        return view('pdc-list-all-participant', compact('members'));
     }
 
     /**
@@ -72,15 +76,16 @@ class programparticipantController extends Controller
     public function show(Request $request, $id)
     {
         if ($request->path() === 'admin/participantProfile/' . $id) {
-            $userProfile = DB::table('facilitatorsandparticipants')
-                ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
-                ->select('facilitatorsandparticipants.*')
-                ->where('facilitatorsandparticipants.id', $id)
+            $userProfile = DB::table('users')
+                ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
+                ->select('users.*', 'user_infos.*')
+                ->where('users.id', $id)
                 ->get();
-            $name = 'ګډونوال';
-            $path = 'participantList';
+
+            // $name = 'ګډونوال';
+            // $path = 'participantList';
             $user_request = 'participant';
-            return view('pdc-user-info', compact('userProfile', 'name', 'path', 'user_request'));
+            return view('pdc-participant-info', compact('userProfile', 'user_request'));
         } elseif ($request->path() === 'admin/specificeProgramParticipants/' . $id) {
             // return "alskdfjalfkdj";
             $participants =  DB::table('users')
@@ -130,20 +135,27 @@ class programparticipantController extends Controller
             }
         } elseif ($request->path() === 'admin/participantEnrolledPrograms/' . $id) {
             $enrolledPrograms = DB::table('programs')
-                ->join('programsparticipants', 'programs.id', '=', 'programsparticipants.program_id')
+                ->join('user_roles', 'programs.id', '=', 'user_roles.program_id')
                 ->select('programs.*')
-                ->where('programsparticipants.participant_id', '=', $id)
+                ->where([
+                    ['user_roles.user_id', $id],
+                    ['user_roles.role_id', 3]
+                ])
                 ->get();
-            $programsID = array();
-            $rec = DB::table('programsparticipants')->where('programsparticipants.participant_id', $id)->select('program_id')->get();
-            foreach ($rec as $r) {
-                array_push($programsID, $r->program_id);
-            }
-            $notEnrolledPrograms = DB::table('programs')
-                ->select('programs.*')
-                ->whereNotIn('id', $programsID)
-                ->get();
-            return view('pdc-facilitator-participant-enrolled-programs', compact('enrolledPrograms', 'notEnrolledPrograms'));
+            // $enrolledPrograms = DB::table('programs')
+            //     ->join('programsparticipants', 'programs.id', '=', 'programsparticipants.program_id')
+            //     ->select('programs.*')
+            //     ->where('programsparticipants.participant_id', '=', $id)
+            //     ->get();
+            // $programsID = array();
+            // $rec = DB::table('programsparticipants')->where('programsparticipants.participant_id', $id)->select('program_id')->get();
+            // foreach ($rec as $r) {
+            //     array_push($programsID, $r->program_id);
+            // }
+            // $notEnrolledPrograms = DB::table('programs')
+            //     ->select('programs.*')
+            //     ->get();
+            return view('pdc-admin-participant-enrolled-programs', compact('enrolledPrograms'));
         } else {
             return "no path matched!";
         }
@@ -175,6 +187,20 @@ class programparticipantController extends Controller
             // return $member;
             $path = 'participant';
             return view('pdc-edit-specific-member', compact('member', 'path'));
+        } elseif ($request->path() === 'admin/participantAllList/' . $id . "/edit") {
+            $member =  DB::table('users')
+                ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
+                ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
+                ->select('users.*', 'user_infos.*', 'user_roles.program_id')
+                // ->where('programsfacilitators.program_id', $id)
+                ->where([
+                    ['user_roles.user_id', $id],
+                    ['user_roles.role_id', 3]
+                ])
+                ->get();
+            // return $member;
+            $path = 'participant';
+            return view('pdc-edit-participant', compact('member', 'path'));
         }
     }
 
@@ -189,6 +215,73 @@ class programparticipantController extends Controller
     {
         // return $request->path();
         if ($request->path() === 'admin/specificeProgramParticipants/' . $id) {
+            $validate = $request->validate([
+                'member_name' => 'bail|required|string|max:30',
+                'last_name' => 'bail|required|string|max:30',
+                'phone_number' => 'bail|required|string|max:13',
+                'email' => 'bail|required|email|max:50',
+                'gender' => 'bail|required|string|in:نارینه,ښځینه',
+                'office_campus' => 'bail|nullable|string|in:کندهار پوهتون',
+                'office_building' => 'bail|required|string|in:ساینس,ادبیات,شرعیات,اقتصاد,زراعت,ژورنالیزم,حقوق,ساینس,انجنیري,طب,اداري معاونیت,ریاست مقام,محصلینو چارو معاونیت,تعلیم او تربیه,اداره ئې عامه,کمپیوټر ساینس',
+                'office_department' => 'bail|required|string|max:30',
+                'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
+                'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
+                'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
+            ]);
+            $member = User::find($id);
+            $user = User_info::find($id);
+            // return $user;
+            // return $user->last_name;
+            // return $request->last_name;
+            $member->name = $request->member_name;
+            $member->email = $request->email;
+            $user->last_name = $request->last_name;
+            $user->phone_number = $request->phone_number;
+            $user->gender = $request->gender;
+            $user->office_campus = $request->office_campus;
+            $user->office_building = $request->office_building;
+            $user->office_department = $request->office_department;
+            $user->office_position = $request->office_position;
+            $user->office_position_category = $request->office_position_category;
+            $user->educational_rank = $request->educational_rank;
+            $member->save();
+            $user->save();
+            return back()->with('member_edited', 'د یاد غړي معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
+        } elseif ($request->path() === 'admin/participantAllList/' . $id) {
+            $validate = $request->validate([
+                'member_name' => 'bail|required|string|max:30',
+                'last_name' => 'bail|required|string|max:30',
+                'phone_number' => 'bail|required|string|max:13',
+                'email' => 'bail|required|email|max:50',
+                'gender' => 'bail|required|string|in:نارینه,ښځینه',
+                'office_campus' => 'bail|nullable|string|in:کندهار پوهتون',
+                'office_building' => 'bail|required|string|in:ساینس,ادبیات,شرعیات,اقتصاد,زراعت,ژورنالیزم,حقوق,ساینس,انجنیري,طب,اداري معاونیت,ریاست مقام,محصلینو چارو معاونیت,تعلیم او تربیه,اداره ئې عامه,کمپیوټر ساینس',
+                'office_department' => 'bail|required|string|max:30',
+                'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
+                'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
+                'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
+            ]);
+            $member = User::find($id);
+            $user = User_info::find($id);
+            // return $user;
+            // return $user->last_name;
+            // return $request->last_name;
+            $member->name = $request->member_name;
+            $member->email = $request->email;
+            $user->last_name = $request->last_name;
+            $user->phone_number = $request->phone_number;
+            $user->gender = $request->gender;
+            $user->office_campus = $request->office_campus;
+            $user->office_building = $request->office_building;
+            $user->office_department = $request->office_department;
+            $user->office_position = $request->office_position;
+            $user->office_position_category = $request->office_position_category;
+            $user->educational_rank = $request->educational_rank;
+            $member->save();
+            $user->save();
+            return redirect('admin/participantList')->with('member_edited', 'د یاد غړي معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
+        } else {
+
             $validate = $request->validate([
                 'member_name' => 'bail|required|string|max:30',
                 'last_name' => 'bail|required|string|max:30',
@@ -218,38 +311,9 @@ class programparticipantController extends Controller
             $user->office_position = $request->office_position;
             $user->office_position_category = $request->office_position_category;
             $user->educational_rank = $request->educational_rank;
+            $member->save();
             $user->save();
-            return back()->with('member_edited', 'د یاد غړي معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
-        } else {
-
-            $validate = $request->validate([
-                'member_name' => 'bail|required|string|max:30',
-                'last_name' => 'bail|required|string|max:30',
-                'phone_number' => 'bail|required|string|max:13',
-                'email' => 'bail|required|email|max:50',
-                'gender' => 'bail|required|string|in:نارینه,ښځینه',
-                'office_campus' => 'bail|nullable|string|in:کندهار پوهتون',
-                'office_building' => 'bail|required|string|in:ساینس,ادبیات,شرعیات,اقتصاد,زراعت,ژورنالیزم,حقوق,ساینس,انجنیري,طب,اداري معاونیت,ریاست مقام,محصلینو چارو معاونیت,تعلیم او تربیه,اداره ئې عامه,کمپیوټر ساینس',
-                'office_department' => 'bail|required|string|max:30',
-                'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
-                'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
-                'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
-            ]);
-            $facilitator_participant = Facilitatorsandparticipant::find($id);
-            // return $request->last_name;
-            $facilitator_participant->name = $request->member_name;
-            $facilitator_participant->last_name = $request->last_name;
-            $facilitator_participant->phone_number = $request->phone_number;
-            $facilitator_participant->email = $request->email;
-            $facilitator_participant->gender = $request->gender;
-            $facilitator_participant->office_campus = $request->office_campus;
-            $facilitator_participant->office_building = $request->office_building;
-            $facilitator_participant->office_department = $request->office_department;
-            $facilitator_participant->office_position = $request->office_position;
-            $facilitator_participant->office_position_category = $request->office_position_category;
-            $facilitator_participant->educational_rank = $request->educational_rank;
-            $facilitator_participant->save();
-            return redirect('admin/participantList')->with('member_edited', 'د یاد غړي معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
+            // return redirect('admin/participantList')->with('member_edited', 'د یاد غړي معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
         }
     }
 
@@ -262,7 +326,7 @@ class programparticipantController extends Controller
     public function destroy(Request $request, $id)
     {
         //
-        // return $request->page;
+        // return $request->path();
         if ($request->page == 'pdc-program-participants-list') {
             // return $id;
             $facilitator =  DB::table('user_roles')
@@ -292,8 +356,8 @@ class programparticipantController extends Controller
             } else {
                 return back()->with('warn', "یاد کس په پروګرام کي شتون نلري د له منځه وړلو لپاره!");
             }
-        } elseif ($request->paht('admin/participantList/' . $id)) {
-            // return "ksjdfds";
+        } elseif ($request->path() === 'admin/participantList/' . $id) {
+            return "ksjdfds";
             $deleteParticipant = Facilitatorsandparticipant::find($id);
             $deleteParticipant->delete();
 
@@ -307,6 +371,28 @@ class programparticipantController extends Controller
             //     ->get();
 
             return redirect('admin/participantList');
+        } elseif ($request->path() === 'admin/participantAllList/' . $id) {
+            // return "kssdfsdfsdfssjdfds";
+            // $deleteParticipant = Facilitatorsandparticipant::find($id);
+            $participant =  DB::table('user_roles')
+                ->select('user_roles.*')
+                ->where([
+                    ['user_roles.user_id', $id],
+                    ['user_roles.role_id', 3]
+                ])
+                ->delete();
+            // $deleteParticipant->delete();
+
+            // return $facilitator =  DB::table('user_roles')
+            //     ->select('user_roles.*')
+            //     ->where([
+            //         ['user_roles.user_id', $id],
+            //         ['user_roles.role_id', 3],
+            //         ['user_roles.program_id', $request->program_id]
+            //     ])
+            //     ->get();
+
+            return redirect('admin/participantList')->with('success', "یاد ګډونوال له سیسټم څخه له منځه ولاړ!");
         }
     }
 }

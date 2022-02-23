@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Program;
+use App\Models\User_role;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Programsfacilitator;
 use App\Models\Programsparticipant;
 
@@ -56,11 +59,11 @@ class programEnrollmentController extends Controller
                     if($request->user_address === 'member')
                     {
                         return redirect('admin/memberProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم غړی په کامیابۍ سره و پروګرام ته د تسهیلونکی په حیث شامل کړل سو!');
-                        
+
                     }
                     elseif($request->user_address === 'facilitator')
                     {
-                        
+
                         return redirect('admin/facilitatorProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم تسهیلونکی په کامیابۍ سره و پروګرام ته د تسهیلونکی په حیث شامل کړل سو!');
                     }
                     else{
@@ -70,37 +73,42 @@ class programEnrollmentController extends Controller
                 else{
                     return back()->with('program_code_not_found', "تاسي د دې دمخه لا په یاد پروګرام کي د تسهیلونکي په حیث ګډون لری!");
                 }
-               
+
             }
             elseif(count($programForParticipant) !== 0)
             {
-                $history =  Programsparticipant::where([
-                    ['program_id', '=', $programForParticipant[0]->id],
-                    ['participant_id', '=', $request->member_id]
+                $history =  DB::table('programs')
+                ->join('user_roles', 'programs.id', '=', 'user_roles.program_id' )
+                ->where([
+                    ['programs.participant_code', '=', $request->program_enrollment_code],
+                    ['user_roles.user_id', '=', $programForParticipant[0]->id],
+                    ['role_id', 3]
                 ])->get();
-                if(count($history) === 0)
+                // return $history;
+                if(count($history) == 0)
                 {
-                    $partEnrollment = new Programsparticipant;
-                    $partEnrollment->participant_id = $request->member_id;
+                    $partEnrollment = new User_role;
+                    $partEnrollment->user_id = $request->member_id;
                     $partEnrollment->program_id = $programForParticipant[0]->id;
+                    $partEnrollment->role_id = 3;
                     $partEnrollment->save();
                     if($request->user_address === 'member')
                     {
                         return redirect('admin/memberProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم غړی په کامیابۍ سره و پروګرام ته د ګډونوال په حیث شامل کړل سو!');
-                        
+
                     }
                     elseif($request->user_address === 'facilitator')
                     {
-                        
+
                         return redirect('admin/facilitatorProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم تسهیلونکی په کامیابۍ سره و پروګرام ته د ګډونوال په حیث شامل کړل سو!');
                     }
                     else{
                         return redirect('admin/participantProfile/'.$request->member_id)->with('added_to_program', 'یاد  د سیسټم ګډونوال په کامیابۍ سره و پروګرام ته د ګډونوال په حیث شامل کړل سو!');
                     }
-                } 
+                }
                 else{
-                    return back()->with('program_code_not_found', "تاسي د دې دمخه لا په یاد پروګرام کي د ګډونوال په حیث ګډون لری!");
-                } 
+                    return redirect('admin/participantProfile/'.$request->member_id)->with('program_code_not_found', "تاسي د دې دمخه لا په یاد پروګرام کي د ګډونوال په حیث ګډون لری!");
+                }
             }
             else{
                 return back()->with('program_code_not_found', "یاد کوډ په سیسټم کي هیڅ شتون نلري!");
@@ -117,7 +125,7 @@ class programEnrollmentController extends Controller
     public function show(Request $request, $id)
     {
         //
-        
+
         if($request->path() === 'admin/memberEnrollmentForProgram/'.$id)
         {
             $member_id = $id;
@@ -132,6 +140,7 @@ class programEnrollmentController extends Controller
             return view('pdc-program-enrollment', compact('member_id', 'user_address'));
         }
         else{
+            // return "sdfsd";
             $member_id = $id;
             $user_address = 'participant';
 

@@ -36,10 +36,10 @@ select{
 				<div class="page-header">
 					<div class="row align-items-center">
 						<div class="col">
-							<h3 class="page-title">{{$page}}</h3>
+							<h3 class="page-title">تسهیلونکي</h3>
 							<ul class="breadcrumb">
 								<li class="breadcrumb-item"><a href="index.html">اډمېن پاڼه</a></li>
-								<li class="breadcrumb-item active">{{$page}}</li>
+								<li class="breadcrumb-item active">تسهیلونکي</li>
 							</ul>
 						</div>
 
@@ -49,7 +49,7 @@ select{
 				@if(count($members) !== 0)
 
 				<!-- Search Filter -->
-				<form action="/admin/{{$path}}List" method="POST">
+				<form action="/admin/searchFacilitator" method="POST">
 					{{ method_field('POST') }}
 					{{ csrf_field() }}
 					<div class="row filter-row mb-5" id="search_parts">
@@ -91,19 +91,19 @@ select{
 					<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3" >
 						<div class="profile-widget" style="box-shadow: 0px 0px 2px 1px #89d0e5;">
 							<div class="profile-img">
-								<a href="{{$path}}Profile/{{$member->id}}" class="avatar"><i class="mt-2 fa fa-user-o text-info" style="font-size:60px; margin-left:0px;     "></i></a>
+								<a href="facilitorProfile/{{$member->id}}" class="avatar"><i class="mt-2 fa fa-user-o text-info" style="font-size:60px; margin-left:0px;     "></i></a>
 							</div>
 							<div class="dropdown profile-action" dir="rtl">
 								<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
 									aria-expanded="false"><i class="material-icons">more_vert</i></a>
 								<div class="sel dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="/admin/{{$path}}List/{{$member->id}}/edit"  ><i
+								<a class="dropdown-item" href="/admin/facilitatorList/{{$member->id}}/edit"  ><i
                                 class="fa fa-pencil m-r-5"></i> اصلاح یې کړی</a>
-									<a class="dropdown-item" href="/admin/{{$path}}List/{{$member->id}}" data-toggle="modal"
+									<a class="dropdown-item" href="/admin/facilitatorList/{{$member->id}}" data-toggle="modal"
 										data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 								</div>
 							</div>
-							<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="{{$path}}Profile/{{$member->id}}">{{ $member->educational_rank }} {{ $member->name }} {{ $member->last_name }}</a></h4>
+							<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="facilitatorProfile/{{$member->id}}">{{ $member->educational_rank }} {{ $member->name }} {{ $member->last_name }}</a></h4>
 							<!-- <h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.html">Barry Cuda</a></h5> -->
 							<div class="small text-muted">{{ $member->office_building }}</div>
 							<div class="small text-muted">{{ $member->email }}</div>

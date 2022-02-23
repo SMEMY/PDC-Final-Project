@@ -36,10 +36,10 @@ select{
 				<div class="page-header">
 					<div class="row align-items-center">
 						<div class="col">
-							<h3 class="page-title">{{$page}}</h3>
+							<h3 class="page-title">د پروګرامونو ګډونوال</h3>
 							<ul class="breadcrumb">
 								<li class="breadcrumb-item"><a href="index.html">اډمېن پاڼه</a></li>
-								<li class="breadcrumb-item active">{{$page}}</li>
+								<li class="breadcrumb-item active">د پروګرامونو ګډونوال</li>
 							</ul>
 						</div>
 
@@ -49,14 +49,14 @@ select{
 				@if(count($members) !== 0)
 
 				<!-- Search Filter -->
-				<form action="/admin/{{$path}}List" method="POST">
+				<form action="/admin/participantList" method="POST">
 					{{ method_field('POST') }}
 					{{ csrf_field() }}
 					<div class="row filter-row mb-5" id="search_parts">
 						<div class="col-sm-6 col-md-5" id="search_input">
 							<div class="form-group form-focus">
 								<input type="text" class="form-control floating disable" name="search_content" disabled id="searchInput">
-								<label class="focus-label">تسهیلونکی وپلټی</label>
+								<label class="focus-label">ګډونوال وپلټی</label>
 							</div>
 						</div>
 
@@ -91,19 +91,19 @@ select{
 					<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3" >
 						<div class="profile-widget" style="box-shadow: 0px 0px 2px 1px #89d0e5;">
 							<div class="profile-img">
-								<a href="{{$path}}Profile/{{$member->id}}" class="avatar"><i class="mt-2 fa fa-user-o text-info" style="font-size:60px; margin-left:0px;     "></i></a>
+								<a href="/admin/participantProfile/{{$member->id}}" class="avatar"><i class="mt-2 fa fa-user-o text-info" style="font-size:60px; margin-left:0px;     "></i></a>
 							</div>
 							<div class="dropdown profile-action" dir="rtl">
 								<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
 									aria-expanded="false"><i class="material-icons">more_vert</i></a>
 								<div class="sel dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="/admin/{{$path}}List/{{$member->id}}/edit"  ><i
+								<a class="dropdown-item" href="/admin/participantAllList/{{$member->id}}/edit"  ><i
                                 class="fa fa-pencil m-r-5"></i> اصلاح یې کړی</a>
-									<a class="dropdown-item" href="/admin/{{$path}}List/{{$member->id}}" data-toggle="modal"
+									<a class="dropdown-item" href="/admin/participantAllList/{{$member->id}}" data-toggle="modal"
 										data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 								</div>
 							</div>
-							<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="{{$path}}Profile/{{$member->id}}">{{ $member->educational_rank }} {{ $member->name }} {{ $member->last_name }}</a></h4>
+							<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="admin/participantProfile/{{$member->id}}">{{ $member->educational_rank }} {{ $member->name }} {{ $member->last_name }}</a></h4>
 							<!-- <h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.html">Barry Cuda</a></h5> -->
 							<div class="small text-muted">{{ $member->office_building }}</div>
 							<div class="small text-muted">{{ $member->email }}</div>
@@ -121,7 +121,7 @@ select{
 						<div class="" id="alertMassege">
 							<ul style="list-style-type:none " class="p-0 mt-5">
 								<li class="rounded p-5 my-3  success alert-success text-center"  style="font-size: 35px !important;">
-									تــر اوســـه په سیــسټم کــي {{$page}} شتـــون نلـــري!
+									تــر اوســـه په سیــسټم کــي ګډونوال شتـــون نلـــري!
 								</li>
 							</ul>
 						</div>
@@ -178,6 +178,13 @@ select{
             });
             </script>
         @endif
+        @if(Session::has('success'))
+        <script>
+        swal('ډېر ښه!',"{!! Session::get('success') !!}", "success", {
+            button: "مننه",
+        });
+        </script>
+    @endif
 		@if(Session::has('warn_search'))
             <script>
             swal('وبخښۍ!',"{!! Session::get('warn_search') !!}", "warning", {

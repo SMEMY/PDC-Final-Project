@@ -159,6 +159,53 @@ class userController extends Controller
                 'educational_rank' =>  $request->educational_rank,
             ]);
             return back()->with('member_added', 'یاد شخص سسیسټم ته په کامیابۍ سره ثبت کړل سو!');
+        } elseif ($request->path() === 'admin/memberList') {
+            // return "i am member List!";
+            $request->validate([
+                'search_type' => 'bail|required|string|in:office_position_category,office_position,office_department,office_building,gender,educational_rank,phone_number,email,name',
+                'search_content' => 'bail|required',
+            ]);
+            $path = '/admin/pdcMemberList';
+            $members =  DB::table('users')
+                ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
+                ->where($request->search_type, $request->search_content)->get();
+            // return $programs;
+            // return count($members);
+
+            if (count($members) == 0) {
+
+                return back()->with('warn_search', 'یاد شخص په سیسټم کي ونه موندل سو!');
+            } else {
+                $path = 'member';
+                $searchPath = '/admin/searchMember';
+                $page = 'عمومي ګډونوال';
+
+                return view('pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'))->with('success_search', 'لاندي ستاسي پلټل سوی شخص دی!');;
+            }
+        }
+        elseif ($request->path() === 'admin/facilitorList') {
+            // return "i am member List!";
+            $request->validate([
+                'search_type' => 'bail|required|string|in:office_position_category,office_position,office_department,office_building,gender,educational_rank,phone_number,email,name',
+                'search_content' => 'bail|required',
+            ]);
+            $path = '/admin/pdcMemberList';
+            $members =  DB::table('users')
+                ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
+                ->where($request->search_type, $request->search_content)->get();
+            // return $programs;
+            // return count($members);
+
+            if (count($members) == 0) {
+
+                return back()->with('warn_search', 'یاد شخص په سیسټم کي ونه موندل سو!');
+            } else {
+                $path = 'member';
+                $searchPath = '/admin/searchMember';
+                $page = 'عمومي ګډونوال';
+
+                return view('pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'))->with('success_search', 'لاندي ستاسي پلټل سوی شخص دی!');;
+            }
         }
     }
 
@@ -200,8 +247,8 @@ class userController extends Controller
         //
         if ($request->path() === 'admin/memberList/' . $id . '/edit') {
             $member = User::join('user_infos', 'users.id', '=', 'user_infos.user_id')
-            ->where('users.id', $id)
-            ->get(['users.*', 'user_infos.*']);
+                ->where('users.id', $id)
+                ->get(['users.*', 'user_infos.*']);
             $path = 'member';
             // return $member;
 

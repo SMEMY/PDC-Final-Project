@@ -38,11 +38,7 @@ use App\Http\Controllers\admin_infoController;
 
 */
 
-Route::group(['middleware' => 'auth'], function () {
-});
-// Route::middleware(['auth'])->group(function () {
-Route::prefix('admin')->group(function () {
-    // ROUTES
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::view('/dashboard', 'index')->name('dashboard');
     Route::view('/addPdcProgram', 'pdc-add-program')->name('addPdcprogram');
     Route::view('/addEduProgram', 'pdc-add-educational-program')->name('addEduProgram');
@@ -75,6 +71,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('/educationalProgramList', eduprogramController::class);
     Route::resource('/facilitatorList', programfacilitatorController::class);
     Route::resource('/participantList', programparticipantController::class);
+    Route::resource('/participantAllList', programparticipantController::class);
     Route::resource('/memberList', userController::class);
 
     Route::resource('/feedback', feedBackController::class);
@@ -94,15 +91,20 @@ Route::prefix('admin')->group(function () {
     Route::resource('/facilitatorProfile', programfacilitatorController::class);
     Route::resource('/memberProfile', userController::class);
     Route::resource('/facilitatorEnrollmentForProgram', programEnrollmentController::class);
+    Route::resource('/participantEnrolledPrograms', programparticipantController::class);
     Route::resource('/participantEnrollmentForProgram', programEnrollmentController::class);
     Route::resource('/memberEnrollmentForProgram', programEnrollmentController::class);
-    Route::resource('/participantEnrolledPrograms', programparticipantController::class);
     Route::resource('/facilitatorEnrolledPrograms', programfacilitatorController::class);
     Route::resource('/downloadPhoto', photoController::class);
     Route::resource('/educationalPrograminfo', eduprogramController::class);
     Route::resource('/downloadMaterial', materialController::class);
     Route::resource('/deleteMaterial', materialController::class);
     Route::resource('/deleteFacilitatorForProgram', programfacilitatorController::class);
+});
+// Route::middleware(['auth'])->group(function () {
+Route::prefix('admin')->group(function () {
+    // ROUTES
+
 });
 //         // Route::view('home', 'home')->name('home');
 // });
