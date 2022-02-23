@@ -14,6 +14,7 @@ use App\Http\Controllers\userAttendanceController;
 use App\Http\Controllers\attendanceController;
 use App\Http\Controllers\resultController;
 use App\Http\Controllers\facilityController;
+use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\agendaController;
 use App\Http\Controllers\evaluationController;
 use App\Http\Controllers\fquestionnaireController;
@@ -39,7 +40,8 @@ use App\Http\Controllers\admin_infoController;
 */
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::view('/dashboard', 'index')->name('dashboard');
+    // Route::view('/', 'index')->name('dashboard');
+    Route::resource('/dashboard', dashboardController::class);
     Route::view('/addPdcProgram', 'pdc-add-program')->name('addPdcprogram');
     Route::view('/addEduProgram', 'pdc-add-educational-program')->name('addEduProgram');
     Route::resource('/memberRegisterationTwo', userController::class);

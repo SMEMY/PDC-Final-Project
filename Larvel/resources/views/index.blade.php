@@ -9,7 +9,16 @@ hahahaha
 
 @section('custom-css')
 
+h3{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 
+
+}
+
+.font{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
+}
 @endsection
 
 
@@ -24,9 +33,9 @@ hahahaha
 				<div class="page-header">
 					<div class="row">
 						<div class="col-sm-12">
-							<h3 class="page-title">Welcome Admin!</h3>
+							<h3 class="page-title">ښه راغلاست اډمېن</h3>
 							<ul class="breadcrumb">
-								<li class="breadcrumb-item active">Dashboard</li>
+								<li class="breadcrumb-item active font">اډمېن پاڼه</li>
 							</ul>
 						</div>
 					</div>
@@ -34,53 +43,76 @@ hahahaha
 				<!-- /Page Header -->
 
 				<div class="row">
-					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
 						<div class="card dash-widget">
 							<div class="card-body">
-								<span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
-								<div class="dash-widget-info">
-									<h3>112</h3>
-									<span>Projects</span>
+								<span class="dash-widget-icon"><i class="fa fa-pencil-square-o"></i></span>
+								<div class="dash-widget-info font">
+									<h3>{{$programs}}</h3>
+									<span>پروګرامونه</span>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
 						<div class="card dash-widget">
 							<div class="card-body">
-								<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
-								<div class="dash-widget-info">
-									<h3>44</h3>
-									<span>Clients</span>
+								<span class="dash-widget-icon"><i class="fa fa-pencil-square-o"></i></span>
+								<div class="dash-widget-info font">
+									<h3>{{$eduPrograms}}</h3>
+									<span>علمي ترفېعات</span>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-						<div class="card dash-widget">
-							<div class="card-body">
-								<span class="dash-widget-icon"><i class="fa fa-diamond"></i></span>
-								<div class="dash-widget-info">
-									<h3>37</h3>
-									<span>Tasks</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
 						<div class="card dash-widget">
 							<div class="card-body">
 								<span class="dash-widget-icon"><i class="fa fa-user"></i></span>
-								<div class="dash-widget-info">
-									<h3>218</h3>
-									<span>Employees</span>
+								<div class="dash-widget-info font">
+									<h3>{{$users}}</h3>
+									<span>د سیسټم ګډونوال</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+						<div class="card dash-widget">
+							<div class="card-body">
+								<span class="dash-widget-icon"><i class="fa fa-user"></i></span>
+								<div class="dash-widget-info font">
+									<h3>{{$facilitators}}</h3>
+									<span>تسهیلونکي</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+						<div class="card dash-widget">
+							<div class="card-body">
+								<span class="dash-widget-icon"><i class="fa fa-user"></i></span>
+								<div class="dash-widget-info font">
+									<h3>{{$participants}}</h3>
+									<span>د پروګرامونو ګډونوال</span>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+						<div class="card dash-widget">
+							<div class="card-body">
+								<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
+								<div class="dash-widget-info font">
+									<h3>{{$participants}}</h3>
+									<span>د پروګرامونو پیسې</span>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="row">
+				{{-- <div class="row">
 					<div class="col-md-12">
 						<div class="row">
 							<div class="col-md-6 text-center">
@@ -101,9 +133,9 @@ hahahaha
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 
-				<div class="row">
+				{{-- <div class="row">
 					<div class="col-md-12">
 						<div class="card-group m-b-30">
 							<div class="card">
@@ -183,10 +215,10 @@ hahahaha
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 
 				<!-- Statistics Widget -->
-				<div class="row">
+				{{-- <div class="row">
 					<div class="col-md-12 col-lg-12 col-xl-4 d-flex">
 						<div class="card flex-fill dash-statistics">
 							<div class="card-body">
@@ -325,10 +357,10 @@ hahahaha
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 				<!-- /Statistics Widget -->
 
-				<div class="row">
+				{{-- <div class="row">
 					<div class="col-md-6 d-flex">
 						<div class="card card-table flex-fill">
 							<div class="card-header">
@@ -443,9 +475,9 @@ hahahaha
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 
-				<div class="row">
+				{{-- <div class="row">
 					<div class="col-md-6 d-flex">
 						<div class="card card-table flex-fill">
 							<div class="card-header">
@@ -835,7 +867,7 @@ hahahaha
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 
 			</div>
 			<!-- /Page Content -->

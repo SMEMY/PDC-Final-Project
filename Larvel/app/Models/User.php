@@ -41,7 +41,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    
     function getAttendances()
     {
         return $this->hasMany('App\Models\User_attendance');
