@@ -27,14 +27,16 @@ class programparticipantController extends Controller
             ->select('users.*', 'user_infos.*')
             ->distinct()
             ->where([
-                ['user_roles.role_id', 3]
+                ['user_roles.role_id', 3],
+                // ['users.id', '=', 'user_infos.user_id']
             ])
             ->get();
+            // return $members;
         // $searchPath = '/searchParticipant';
         // $path = 'participant';
         // $page = 'د پروګرامونو ګډونوال';
 
-        return view('pdc-list-all-participant', compact('members'));
+        return view('admin.pdc-list-all-participant', compact('members'));
     }
 
     /**
@@ -78,14 +80,18 @@ class programparticipantController extends Controller
         if ($request->path() === 'admin/participantProfile/' . $id) {
             $userProfile = DB::table('users')
                 ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
+                ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
                 ->select('users.*', 'user_infos.*')
-                ->where('users.id', $id)
+                ->where([
+                    ['users.id', $id],
+                ])
                 ->get();
 
             // $name = 'ګډونوال';
             // $path = 'participantList';
+            // return $userProfile;
             $user_request = 'participant';
-            return view('pdc-participant-info', compact('userProfile', 'user_request'));
+            return view('admin.pdc-participant-info', compact('userProfile', 'user_request'));
         } elseif ($request->path() === 'admin/specificeProgramParticipants/' . $id) {
             // return "alskdfjalfkdj";
             $participants =  DB::table('users')
@@ -142,20 +148,7 @@ class programparticipantController extends Controller
                     ['user_roles.role_id', 3]
                 ])
                 ->get();
-            // $enrolledPrograms = DB::table('programs')
-            //     ->join('programsparticipants', 'programs.id', '=', 'programsparticipants.program_id')
-            //     ->select('programs.*')
-            //     ->where('programsparticipants.participant_id', '=', $id)
-            //     ->get();
-            // $programsID = array();
-            // $rec = DB::table('programsparticipants')->where('programsparticipants.participant_id', $id)->select('program_id')->get();
-            // foreach ($rec as $r) {
-            //     array_push($programsID, $r->program_id);
-            // }
-            // $notEnrolledPrograms = DB::table('programs')
-            //     ->select('programs.*')
-            //     ->get();
-            return view('pdc-admin-participant-enrolled-programs', compact('enrolledPrograms'));
+            return view('admin.pdc-admin-participant-enrolled-programs', compact('enrolledPrograms'));
         } else {
             return "no path matched!";
         }
@@ -200,7 +193,7 @@ class programparticipantController extends Controller
                 ->get();
             // return $member;
             $path = 'participant';
-            return view('pdc-edit-participant', compact('member', 'path'));
+            return view('admin.pdc-edit-participant', compact('member', 'path'));
         }
     }
 
@@ -262,9 +255,9 @@ class programparticipantController extends Controller
                 'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
             ]);
             $member = User::find($id);
-            $user = User_info::find($id);
+            $user = User_info::where('user_id', $id)->first();
+            // return $request->last_n/ame;
             // return $user;
-            // return $user->last_name;
             // return $request->last_name;
             $member->name = $request->member_name;
             $member->email = $request->email;

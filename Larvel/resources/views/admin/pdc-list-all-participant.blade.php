@@ -91,15 +91,15 @@ select{
 					<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3" >
 						<div class="profile-widget" style="box-shadow: 0px 0px 2px 1px #89d0e5;">
 							<div class="profile-img">
-								<a href="/admin/participantProfile/{{$member->id}}" class="avatar"><i class="mt-2 fa fa-user-o text-info" style="font-size:60px; margin-left:0px;     "></i></a>
+								<a href="/admin/participantProfile/{{$member->user_id}}" class="avatar"><i class="mt-2 fa fa-user-o text-info" style="font-size:60px; margin-left:0px;     "></i></a>
 							</div>
 							<div class="dropdown profile-action" dir="rtl">
 								<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
 									aria-expanded="false"><i class="material-icons">more_vert</i></a>
 								<div class="sel dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="/admin/participantAllList/{{$member->id}}/edit"  ><i
+								<a class="dropdown-item" href="/admin/participantAllList/{{$member->user_id}}/edit"  ><i
                                 class="fa fa-pencil m-r-5"></i> اصلاح یې کړی</a>
-									<a class="dropdown-item" href="/admin/participantAllList/{{$member->id}}" data-toggle="modal"
+									<a class="dropdown-item" href="/admin/participantAllList/{{$member->user_id}}" data-toggle="modal"
 										data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
 								</div>
 							</div>

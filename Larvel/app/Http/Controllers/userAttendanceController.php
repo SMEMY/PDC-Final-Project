@@ -98,7 +98,7 @@ class userAttendanceController extends Controller
                 ->select('programs.*')
                 ->where('programs.id', $programID)
                 ->get();
-            return view('pdc-program-attendance-paper', compact('participants', 'program'));
+            return view('admin.pdc-program-attendance-paper', compact('participants', 'program'));
         } elseif ($request->path() == 'admin/pdcProgramAttendanceReport/' . $id) {
             $attendanceReport =  DB::table('users')
                 ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
@@ -110,7 +110,7 @@ class userAttendanceController extends Controller
             if (count($attendanceReport) === 0) {
                 return back()->with('warn', "تر اوس د یاد پروګرام حاضري سیسټم ته نده اضافه کړل سوې!");
             } else {
-                return view('pdc-program-attendance-report', compact('attendanceReport', 'programID'));
+                return view('admin.pdc-program-attendance-report', compact('attendanceReport', 'programID'));
             }
         } elseif ($request->path() === 'admin/pdcProgramAttendance/' . $id) {
             $participants =  DB::table('users')
@@ -147,7 +147,7 @@ class userAttendanceController extends Controller
 
             // return $unAttendancedParticipants;
             if ($unAttendancedParticipants != null) {
-                return view('pdc-program-attendance', compact('unAttendancedParticipants', 'programID'));
+                return view('admin.pdc-program-attendance', compact('unAttendancedParticipants', 'programID'));
             } else {
                 return back()->with('warn', "یاد پروګرام لپاره تر اوسه ګډونوال ندي اضافه کړل سوي!");
             }
@@ -204,7 +204,7 @@ class userAttendanceController extends Controller
         ->select('users.name','user_infos.last_name','user_attendances.*')
         ->where('user_attendances.id', $id)
         ->get();
-        return view('edit-pdc-program-attendance', compact('participantAttendance'));
+        return view('admin.edit-pdc-program-attendance', compact('participantAttendance'));
     }
 
     /**

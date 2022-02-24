@@ -32,7 +32,7 @@ hahahaha
 		}
 		select:focus {
 			box-shadow: 0px 0px 2px #000 !important;
-			
+
 			transition: all 0.1s;
 			transform: scale(1.01);
 		}
@@ -53,13 +53,13 @@ hahahaha
             padding:5px;
             border-radius:3px;
         }
-		
+
         #program{
 			transition:all 0.3s;
 
         }
         #program:hover{
-            background: #d4f0ff !important; 
+            background: #d4f0ff !important;
             border: 1px solid blue;
 			transition:all 0.3s;
 
@@ -117,7 +117,7 @@ hahahaha
 									<label class="focus-label">علمي پروګرام وپلټئ</label>
 								</div>
 							</div>
-							
+
 							<div class="col-sm-6 col-md-5" id="search_content">
 								<div class="form-group form-focus select-focus">
 									<select class="custom-select p-2 h-100 searchInput" name="search_type">
@@ -163,7 +163,7 @@ hahahaha
 								<!-- <br> -->
 								<h4 class="job-department "><strong>دشخص نوم:  </strong> {{$program->teacher_name}} {{$program->teacher_last_name}}</h4>
 								<h4 class="job-department "><strong>د پروګرام ډول: </strong> {{$program->type}} </h4>
-							
+
 								<!-- <p class="text-muted mt-4 col-md-12"><strong>پوهنتون: </strong> {{$program->university}}
 								<p class="text-muted mt-4 col-md-12"><strong>پوهنځۍ: </strong> {{$program->faculty}} -->
 								<!-- </p> -->
@@ -175,12 +175,12 @@ hahahaha
 								</li>
 								<!-- <br>-->
 								<li class="ml-1 d-inline-block" dir="rtl"><i class="fa fa-calendar text-danger"></i> <strong> نېټه:
-									</strong> {{date('Y - m - d ', strtotime($program->date))}}</li> 
-									
+									</strong> {{date('Y - m - d ', strtotime($program->date))}}</li>
+
 									<li class="ml-1 d-inline-block" dir="rtl"><i class="fa fa fa-clock-o text-danger" aria-hidden="true"></i> <strong>وخت: </strong>
 									{{date('A H:i', strtotime($program->date))}}</li>
 								</ul>
-							</div>            
+							</div>
 						</a>
 					</div>
 				</div>
@@ -225,7 +225,7 @@ hahahaha
 								<form action="" method="post" id="pathGetter">
 									{{ method_field('DELETE') }}
 									{{ csrf_field() }}
-												
+
 									<button type="submit" class="btn btn-primary continue-btn col-md-12">له منځه یې اوسی</button>
 								</form>
 							</div>
@@ -241,7 +241,7 @@ hahahaha
 	</div>
 	<!-- /Delete Project Modal -->
 
-	
+
 </div>
 <!-- /Page Wrapper -->
 @endsection
@@ -256,7 +256,7 @@ hahahaha
 @endif
 @if(Session::has('warn_search'))
 	<script>
-	swal('وبخښئ',"{!! Session::get('warn_search') !!}", "success", {
+	swal('وبخښئ',"{!! Session::get('warn_search') !!}", "warning", {
 		button: "مننه",
 	});
 	</script>
@@ -274,7 +274,7 @@ hahahaha
 			var state = $(this).children("option:selected").val();
 			if(state === 'topic')
 			{
-				var content = 
+				var content =
 				`
 				<div class="col-sm-6 col-md-5" id="search_input">
 				<div class="form-group">
@@ -287,7 +287,7 @@ hahahaha
 			}
 			if(state === 'type')
 			{
-				var content = 
+				var content =
 				`
 				<div class="col-sm-6 col-md-5" id="search_input">
 				<div class="form-group">
@@ -307,7 +307,7 @@ hahahaha
 			}
 			if(state === 'teacher_name')
 			{
-				var content = 
+				var content =
 				`
 				<div class="col-sm-6 col-md-5" id="search_input">
 				<div class="form-group">
@@ -322,7 +322,7 @@ hahahaha
 			}
 			if(state === 'father_name')
 			{
-				var content = 
+				var content =
 				`
 				<div class="col-sm-6 col-md-5" id="search_input">
 				<div class="form-group">
@@ -336,7 +336,7 @@ hahahaha
 			}
 			if(state === 'teacher_last_name')
 			{
-				var content = 
+				var content =
 				`
 				<div class="col-sm-6 col-md-5" id="search_input">
 				<div class="form-group">
@@ -350,7 +350,7 @@ hahahaha
 			}
 			if(state === 'university')
 			{
-				var content = 
+				var content =
 				`
 				<div class="col-sm-6 col-md-5" id="search_input">
 				<div class="form-group">
@@ -369,14 +369,14 @@ hahahaha
 			}
 			if(state === 'faculty')
 			{
-				var content = 
+				var content =
 				`
 				<div class="col-sm-6 col-md-5" id="search_input">
 				<div class="form-group form-focus">
 				<select class="custom-select"
                                             style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="search_content">
-                                        
-                                          
+
+
                                             <option selected value=""></option>
                                             <option  value="طب">طب</option>
                                             <option  value="انجنیري">انجنیري</option>
@@ -399,7 +399,7 @@ hahahaha
 			}
 			if(state === 'department')
 			{
-				var content = 
+				var content =
 				`
 				<div class="col-sm-6 col-md-5" id="search_input">
 				<div class="form-group form-focus">
@@ -415,7 +415,7 @@ hahahaha
 			}
 			if(state === 'year')
 			{
-				var content = 
+				var content =
 				`
 				<div class="col-sm-6 col-md-5" id="search_input">
 				<div class="form-group form-focus">
@@ -431,7 +431,7 @@ hahahaha
 			}
 			if(state === '')
 			{
-				var content = 
+				var content =
 				`
 				<div class="col-sm-6 col-md-5" id="search_input">
 					<div class="form-group form-focus">

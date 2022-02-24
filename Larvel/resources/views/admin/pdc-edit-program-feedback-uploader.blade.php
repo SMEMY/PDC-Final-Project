@@ -35,7 +35,7 @@ h4 {
 		input, select, label, button{
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-size:20px !important;
-			
+
 
 		}
 		input{
@@ -43,7 +43,7 @@ h4 {
 		}
 		select:focus {
 			box-shadow: 0px 0px 2px #000 !important;
-			
+
 			transition: all 0.1s;
 			transform: scale(1.01);
 		}
@@ -54,10 +54,10 @@ h4 {
 			transform: scale(1.02);
 		}
 		select{
-			height: 44px  !important; 
-			border-radius: 3px  !important; 
+			height: 44px  !important;
+			border-radius: 3px  !important;
 			outline: none;
-			background-color:#f0fcff  !important; 
+			background-color:#f0fcff  !important;
 			border:1px solid #e3e3e3  !important;
 		}
 @endsection
@@ -80,7 +80,7 @@ h4 {
 								<h4 class="card-title mb-0 text-center">د اړونده پروګرام د کیفیت لپاره پوښټنلیک پوښتني اصلاح کړی</h4>
 							</div>
 							<div class="card-body">
-								<form action="/feedback/{{$program_id}}" method="POST">
+								<form action="/admin/feedback/{{$program_id}}" method="POST">
 								{{ method_field('PATCH') }}
                             	{{ csrf_field() }}
 								<input class="d-none" type="text" name="program_id" id="" value="{{$program_id}}">
@@ -93,7 +93,7 @@ h4 {
 												{{ $error }}
 											</li>
 											@endforeach
-											
+
 										</ul>
 									</div>
 								@endif
@@ -161,7 +161,7 @@ h4 {
 												</label>
                                             </div>
                                         </div>
-										
+
 									</div>
 									<div class="row mt-3">
 										<div class="form-group m-auto ">
@@ -246,7 +246,7 @@ h4 {
 			}
 
 		}
-		
+
 
 
 	</script>

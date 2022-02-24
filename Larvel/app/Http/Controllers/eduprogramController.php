@@ -21,7 +21,7 @@ class eduprogramController extends Controller
         $programs =  Eduprogram::orderBy('id', 'desc')->get();
         $path = '/educationalProgramList';
         // return $programs;
-        return view('pdc-list-all-educational-program', compact('programs', 'path'));
+        return view('admin.pdc-list-all-educational-program', compact('programs', 'path'));
     }
 
     /**
@@ -45,21 +45,27 @@ class eduprogramController extends Controller
         //
         // return $request->path();
         if($request->path() === 'admin/searchEducationalProgram'){
-            $request->validate([
-                'search_type' => 'bail|required|string|in:year,department,faculty,university,teacher_last_name,teacher_name,teacher_name,type,topic',
-                'search_content' => 'bail|required',
-            ]);
-            $path = '/admin/educationalProgramList';
-            $programs =  DB::table('eduprograms')->where($request->search_type, $request->search_content)->get();
-            if(count($programs) === 0)
+            // $request->validate([
+            //     'search_type' => 'bail|required|string|in:year,department,faculty,university,teacher_last_name,teacher_name,teacher_name,type,topic',
+            //     'search_content' => 'bail|required',
+            // ]);
+            if($request->search_type === null || $request->search_content === null)
             {
-                return back()->with('warn_search', 'یاد پروګرام په سیسټم کي ونه موندل سو!');
+                return redirect('admin/educationalProgramList');
+
             }
-            else{
-                // return "asdf";
-                // redirect('admin/educafdfdftionalProgramList')->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
-                return view('pdc-list-all-educational-program', compact('programs', 'path'))->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
-            }
+                $path = '/admin/educationalProgramList';
+                $programs =  DB::table('eduprograms')->where($request->search_type, $request->search_content)->get();
+                if(count($programs) === 0)
+                {
+                    return back()->with('warn_search', 'یاد پروګرام په سیسټم کي ونه موندل سو!');
+                }
+                else{
+                    // return "asdf";
+                    // redirect('admin/educafdfdftionalProgramList')->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
+                    return view('admin.pdc-list-all-educational-program', compact('programs', 'path'))->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
+                }
+
         }
         else if($request->path() === 'admin/educationalProgramList'){
             // return $request->date;
@@ -102,7 +108,7 @@ class eduprogramController extends Controller
             $program->block_number = $request->block_number;
             $program->room_number = $request->room_number;
             $program->save();
-    
+
             return back()->with('success', 'یاد پروګرام په کامیابۍ سره سیسټم اضافه کړل سو!');
         }
         else{
@@ -121,10 +127,10 @@ class eduprogramController extends Controller
     {
         //
         $program = Eduprogram::find($id);
-        return view('pdc-educational-program-info', compact('program'));
-        
+        return view('admin.pdc-educational-program-info', compact('program'));
+
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -133,9 +139,9 @@ class eduprogramController extends Controller
      */
     public function edit($id)
     {
-        
+
         $program = Eduprogram::find($id);
-        return view('pdc-edit-educational-program', compact('program'));
+        return view('admin.pdc-edit-educational-program', compact('program'));
     }
 
     /**

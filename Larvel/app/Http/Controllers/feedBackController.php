@@ -43,7 +43,7 @@ class feedBackController extends Controller
     public function store(Request $request)
     {
         //
-          
+
             $request->validate([
                 'materials_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
                 'facilities_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
@@ -60,26 +60,26 @@ class feedBackController extends Controller
                 // ->where('id', $request->feedback_form_id)
                 // ->update(['comment'=> $request->comment]);
             // echo $request->facilities[0];
-            
-            for ($i=0; $i <count($request->materials) ; $i++) { 
+
+            for ($i=0; $i <count($request->materials) ; $i++) {
                 $questionAnswer = new Feedbackanswer;
                 $questionAnswer->answer = $request->materials_answer[$i];
                 $questionAnswer->question_id = $request->materials[$i];
                 $questionAnswer->save();
             }
-            for ($i=0; $i <count($request->facilities) ; $i++) { 
+            for ($i=0; $i <count($request->facilities) ; $i++) {
                 $questionAnswer = new Feedbackanswer;
                 $questionAnswer->answer = $request->facilities_answer[$i];
                 $questionAnswer->question_id = $request->facilities[$i];
                 $questionAnswer->save();
             }
-            for ($i=0; $i <count($request->locations) ; $i++) { 
+            for ($i=0; $i <count($request->locations) ; $i++) {
                 $questionAnswer = new Feedbackanswer;
                 $questionAnswer->answer =  $request->locations_answer[$i];
                 $questionAnswer->question_id = $request->locations[$i];
                 $questionAnswer->save();
             }
-            for ($i=0; $i <count($request->opinions) ; $i++) { 
+            for ($i=0; $i <count($request->opinions) ; $i++) {
                 $questionAnswer = new Feedbackanswer;
                 $questionAnswer->answer = $request->opinions_answer[$i];
                 $questionAnswer->question_id = $request->opinions[$i];
@@ -87,8 +87,8 @@ class feedBackController extends Controller
             }
             return redirect('admin/pdcProgramInfo/'.$request->program_id)->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
             // return back()->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
-        
-       
+
+
     }
 
     /**
@@ -145,7 +145,7 @@ class feedBackController extends Controller
                 return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
             }
             else{
-                return view('pdc-feedback', compact('materials','facilities','locations','comments', 'program_id'));
+                return view('admin.pdc-feedback', compact('materials','facilities','locations','comments', 'program_id'));
             }
         }
         elseif($request->path() === 'admin/feedbackAnswer/'.$id)
@@ -192,12 +192,16 @@ class feedBackController extends Controller
             {
                 return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
             }
+            if(count($materials) === 0 || count($facilities) === 0 || count($locations) === 0 || count($comments) === 0)
+            {
+                return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
+            }
             else{
-                return view('pdc-feedback-answer', compact('materials','facilities','locations','comments', 'program_id'));
+                return view('admin.pdc-feedback-answer', compact('materials','facilities','locations','comments', 'program_id'));
             }
         }
-        
-       
+
+
         // return "i am feed show function()";
     }
 
@@ -210,7 +214,7 @@ class feedBackController extends Controller
     public function edit(Request $request, $id)
     {
         //
-        if($request->path() === 'feedback/'.$id.'/edit'){
+        if($request->path() === 'admin/feedback/'.$id.'/edit'){
             $materials =  DB::table('feedbacks')
             ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
             ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
@@ -244,7 +248,7 @@ class feedBackController extends Controller
             //
             // $programs = DB::table('programs')->get();
             // return $facilities;
-            return view('pdc-edit-program-feedback-uploader', compact('materials','facilities','locations','comments', 'program_id'));
+            return view('admin.pdc-edit-program-feedback-uploader', compact('materials','facilities','locations','comments', 'program_id'));
         }
     }
 
@@ -259,8 +263,9 @@ class feedBackController extends Controller
     {
         //
 
-        if($request->path() === 'feedback/'.$request->program_id)
+        if($request->path() === 'admin/feedback/'.$request->program_id)
         {
+            // return "sdfmsd";
             $request->validate([
                 'feedback_question_category.*' => 'bail|required|string|in:د ورکشاپ/ټرېنینګ مواد,آسانتیاوي,ځاي,عمومي نظر',
                 'feedback_question.*' => 'bail|required|string|max:100',
@@ -284,7 +289,7 @@ class feedBackController extends Controller
             if(count($request->feedback_new_question) > 1)
             {
                 $feedFormId = DB::table('fquestionnaires')->select('fquestionnaires.feedback_form_id')->where('id', $request->question_id[0])->get();
-                
+
                 $request->validate([
                     'feedback_question_new_category.*' => 'bail|required|string|in:د ورکشاپ/ټرېنینګ مواد,آسانتیاوي,ځاي,عمومي نظر',
                     'feedback_new_question.*' => 'bail|required|string|max:100',
@@ -292,7 +297,7 @@ class feedBackController extends Controller
                 DB::table('feedbacks')->insert(['program_id' => $request->program_id]);
                 $programID =  DB::table('feedbacks')->select('feedbacks.id')->where('created_at',DB::table('feedbacks')->max('created_at') )->get();
                 for($index = 1; $index < count($request->feedback_new_question);$index++)
-                {   
+                {
                     $questionnairQuestion = new Fquestionnaire;
                     $questionnairQuestion->question_category = $request->feedback_question_new_category[$index];
                     $questionnairQuestion->question = $request->feedback_new_question[$index];
@@ -300,7 +305,7 @@ class feedBackController extends Controller
                     $questionnairQuestion->save();
                 }
             }
-         return redirect('feedback/'.$request->program_id)->with('feedback_edited', "پوښتنلیک په کامیابۍ سره اصلاح کړل سو!");
+         return redirect('admin/feedback/'.$request->program_id)->with('feedback_edited', "پوښتنلیک په کامیابۍ سره اصلاح کړل سو!");
         }
     }
 

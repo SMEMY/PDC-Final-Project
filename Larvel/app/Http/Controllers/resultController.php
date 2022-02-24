@@ -59,7 +59,7 @@ class resultController extends Controller
     {
         //
         $programID = $id;
-        return view('pdc-program-result', compact('programID'));
+        return view('admin.pdc-program-result', compact('programID'));
     }
 
     /**

@@ -21,6 +21,7 @@ use App\Http\Controllers\fquestionnaireController;
 use App\Http\Controllers\photoController;
 use App\Http\Controllers\programEnrollmentController;
 use App\Http\Controllers\deleteFeedbackQuestion;
+use App\Http\Controllers\commmonUserController;
 use App\Http\Controllers\searchController;
 use App\Http\Controllers\facilitatorandparticipantController;
 use App\Http\Controllers\userController;
@@ -42,10 +43,10 @@ use App\Http\Controllers\admin_infoController;
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     // Route::view('/', 'index')->name('dashboard');
     Route::resource('/dashboard', dashboardController::class);
-    Route::view('/addPdcProgram', 'pdc-add-program')->name('addPdcprogram');
-    Route::view('/addEduProgram', 'pdc-add-educational-program')->name('addEduProgram');
+    Route::view('/addPdcProgram', 'admin.pdc-add-program')->name('addPdcprogram');
+    Route::view('/addEduProgram', 'admin.pdc-add-educational-program')->name('addEduProgram');
     Route::resource('/memberRegisterationTwo', userController::class);
-    Route::view('/memberRegisteration', 'pdc-add-member')->name('userRegistration');
+    Route::view('/memberRegisteration', 'admin.pdc-add-member')->name('userRegistration');
     Route::get('/deleteQuestion/{id}', [deleteFeedbackQuestion::class, 'deleteQuestion'])->name('');
     Route::get('/deleteQuestionnaire/{id}', [deleteFeedbackQuestion::class, 'deleteProgramQuestionnaire'])->name('');
 
@@ -108,6 +109,10 @@ Route::prefix('admin')->group(function () {
     // ROUTES
 
 });
+
+Route::resource('/programs', programController::class);
+Route::resource('/userRegistration', commmonUserController::class);
+
 //         // Route::view('home', 'home')->name('home');
 // });
 
@@ -149,7 +154,6 @@ Route::prefix('admin')->group(function () {
 // Route::resource('/programSpecificParticipant', programparticipantController::class);
 // Route::resource('/feedbackFormEdition', fquestionnaireController::class);
 // Route::resource('/enrolledPdcProgramInfo', programController::class);
-// Route::resource('/comAllPrograms', programController::class);
 // // Route::resource('/participantEnrolledPrograms', programparticipantController::class);
 // Route::resource('/facilitatorMaterials', materialController::class);
 // // Route::resource('/participantFacilitatorStore', facilitatorandparticipantController::class);

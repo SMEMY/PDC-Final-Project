@@ -59,7 +59,7 @@ class agendaController extends Controller
     {
         //
         $programID = $id;
-        return view('pdc-program-agenda', compact('programID'));
+        return view('admin.pdc-program-agenda', compact('programID'));
     }
 
     /**

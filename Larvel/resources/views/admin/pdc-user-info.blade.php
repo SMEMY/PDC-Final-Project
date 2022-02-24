@@ -72,8 +72,8 @@ h4 {
 								<div class="dropdown-file">
 									<a href="" class="dropdown-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
 									<div class="dropdown-menu dropdown-menu-right">
-										<a href="/admin/{{$path}}/{{$userProfile[0]->id}}/edit" class="dropdown-item"><i class="fa fa-download m-r-5"></i>معلومات  اصلاح کول</a>
-										<a class="dropdown-item" href="/admin/{{$path}}/{{$userProfile[0]->id}}" data-toggle="modal"
+										<a href="/admin/{{$path}}/{{$userProfile[0]->user_id}}/edit" class="dropdown-item"><i class="fa fa-download m-r-5"></i>معلومات  اصلاح کول</a>
+										<a class="dropdown-item" href="/admin/{{$path}}/{{$userProfile[0]->user_id}}" data-toggle="modal"
 											data-target="#delete_client" id="path" onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i>معلومات له منځه یې اوسی</a>
 									</div>
 								</div>
@@ -103,9 +103,9 @@ h4 {
 				<div class="job-det-info job-widget" style=" box-shadow:0px 0px 0px 1px #00beff; border-radius: 5px; " id="small">
 					<h4 class="account-title">د {{$name}} اړونده کړني</h4>
 					@if($name !== 'ثبت سوی شخص')
-					<a class="btn job-btn mt-3 p-2 " href="/admin/{{$user_request}}EnrolledPrograms/{{$userProfile[0]->id}}" >د {{$name}} پروګرامونه</a>
+					<a class="btn job-btn mt-3 p-2 " href="/admin/{{$user_request}}EnrolledPrograms/{{$userProfile[0]->user_id}}" >د {{$name}} پروګرامونه</a>
 					@endif
-					<a class="btn job-btn mt-3 p-2 " href="/admin/{{$user_request}}EnrollmentForProgram/{{$userProfile[0]->id}}" > {{$name}} پروګرام ته شاملول</a>
+					<a class="btn job-btn mt-3 p-2 " href="/admin/{{$user_request}}EnrollmentForProgram/{{$userProfile[0]->user_id}}" > {{$name}} پروګرام ته شاملول</a>
 				</div>
 			</div>
 		</div>

@@ -93,7 +93,7 @@ class materialController extends Controller
         // return $request->path()
         if ($request->path() === 'admin/storeMaterials/' . $id) {
             $program_id = $id;
-            return view('pdc-add-programs-materials', compact('program_id'));
+            return view('admin.pdc-add-programs-materials', compact('program_id'));
         } elseif ($request->path() === 'admin/materials/' . $id) {
             $program_id = $id;
             // return $program_id;
@@ -102,13 +102,13 @@ class materialController extends Controller
 
 
             if (count($programMaterialsCheck) !== 0) {
-                return view('files-download', compact('programMaterials', 'program_id'));
+                return view('admin.files-download', compact('programMaterials', 'program_id'));
             } else {
                 return back()->with('warn', 'د یاد پروګرام لپاره تر اوسه فایلونه ندي اضافه سوي سیسټم کي !');
             }
         } elseif ($request->path() === 'facilitatorMaterials/' . $id) {
             $program_id = $id;
-            return view('facilitator-programs-materials', compact('program_id'));
+            return view('admin.facilitator-programs-materials', compact('program_id'));
         } elseif ($request->path() === 'downloadMaterial/' . $id) {
             // return "hi";
             return Storage::download('public/programFiles/' . $id);

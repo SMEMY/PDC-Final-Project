@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Photo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -40,22 +41,21 @@ class photoController extends Controller
         $request->validate([
             'photo' => 'required',
             'photo.*' => 'mimes:jpeg,jpg,png,gif,csv|max:10240',
-          ]);
+        ]);
         // $request->validate([
         //     'photo.*' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
         // ]);
 
-        foreach($request->file('photo') as $photo)
-        {
-                $imageName = time().'.'.$photo->extension();
-                $photo->storeAs('public/images', $imageName);
-                sleep(1);   
-                $imageSave = new Photo;
-                $imageSave->program_id = $request->program_id;
-                $imageSave->path = $imageName;
-                $imageSave->save();
+        foreach ($request->file('photo') as $photo) {
+            $imageName = time() . '.' . $photo->extension();
+            $photo->storeAs('public/images', $imageName);
+            sleep(1);
+            $imageSave = new Photo;
+            $imageSave->program_id = $request->program_id;
+            $imageSave->path = $imageName;
+            $imageSave->save();
         }
-        return redirect('admin/pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده تفرقې په کامیابۍ سره سیسټم ته داخل کړل سوه!");
+        return redirect('admin/pdcProgramInfo/' . $request->program_id)->with('program_part_added', "پروګرام اړونده تفرقې په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**
@@ -67,15 +67,13 @@ class photoController extends Controller
     public function show(Request $request, $id)
     {
         //
-        if($request->path() === 'admin/pdcProgramPhoto/'.$id)
-        {
-            $programID=$id;
-            return view('pdc-program-photo', compact('programID'));
+        if ($request->path() === 'admin/pdcProgramPhoto/' . $id) {
+            $programID = $id;
+            return view('admin.pdc-program-photo', compact('programID'));
+        } elseif ($request->path() === 'admin/downloadPhoto/' . $id) {
+            return Storage::download('public/images/' . $id);
         }
-        elseif ($request->path() === 'admin/downloadPhoto/'.$id) {
-            return Storage::download('public/images/'.$id);
-        }
-        
+
         // return "i am photo!";
     }
 
@@ -113,9 +111,9 @@ class photoController extends Controller
         //
         // return "hahahahmmmmmmmmma";
         // return $id;
-        Storage::delete('public/images/'.$id);
+        Storage::delete('public/images/' . $id);
         Photo::where('path', $id)->delete();
         // $deletematerial->delete();
-        return redirect('admin/pdcProgramInfo/'.$request->program_id);
+        return redirect('admin/pdcProgramInfo/' . $request->program_id);
     }
 }

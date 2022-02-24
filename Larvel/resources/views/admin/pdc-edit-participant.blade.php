@@ -70,11 +70,11 @@ label {
 
 				<div class="account-box" style="width: 1100px; margin-top: 75px; margin-right:140px;" id="for">
 					<div class="account-wrapper mt-3" style="">
-						<h3 class="account-title mb-5" style="font-size:35px !important; font-weight: bolder;">د مسلکي پرمختیائي مرکز پروګرام تسهيلونکی ثبت کړی</h3>
+						<h3 class="account-title mb-5" style="font-size:35px !important; font-weight: bolder;">د مسلکي پرمختیائي مرکز د ګډونوال معلومات اصلاح کړی</h3>
 						<!-- <p class="account-subtitle"></p> -->
 <hr !important>
 						<!-- Account Form -->
-						<form action="/admin/{{$path}}List/{{$member[0]->id}}" method="POST">
+						<form action="/admin/participantAllList/{{$member[0]->user_id}}" method="POST">
 								{{ method_field('PUT') }}
       					 	    {{ csrf_field() }}
 								    @if ($errors->any())
@@ -300,7 +300,7 @@ swal('ډېر ښه!',"{!! Session::get('member_edited') !!}", "success", {
         $("button.swal-button").click(function()
         {
             // console.log("aklsdjf");
-            history.go(-2);
+            // history.go(-2);
             // location.reload ();
             // document.referrer ? window.location = document.referrer : history.go(-2)
             // location.href = document.referrer:history.go(-2)

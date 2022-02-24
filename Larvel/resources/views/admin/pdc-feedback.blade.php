@@ -51,7 +51,7 @@
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
             font-size: 20px !important;
         }
-        
+
         h4 {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 
@@ -136,7 +136,7 @@
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-        <a href="/pdcProgramInfo/{{$program_id}}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
+        <a href="/admin/pdcProgramInfo/{{$program_id}}" class="btn btn-primary apply-btn">پروګرام ووینی</a>
         <div class="account-content">
             <!-- <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a> -->
             <div class="container ">
@@ -149,12 +149,12 @@
 
                 <div class="account-box border board-danger" style="width: 1000px;">
                 @if(count($comments) !== 0 || count($locations) !== 0 || count($facilities) !== 0 || count($materials) !== 0)
-                   
+
                     <div class="dropdown dropdown-action profile-action" id="edit1">
                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
                                 class="material-icons">more_vert</i></a>
                         <div class="dropdown-menu dropdown-menu-left">
-                            <a class="dropdown-item" href="/feedback/{{$program_id}}/edit"  ><i
+                            <a class="dropdown-item" href="/admin/feedback/{{$program_id}}/edit"  ><i
                                     class="fa fa-pencil m-r-5"></i>معلومات اصلاح کړی</a>
                                     <a class="dropdown-item"  data-toggle="modal"
                                         data-target="#delete_project" id="path" ><i class="fa fa-trash-o m-r-5"></i> له منځه یې اوسی</a>
@@ -180,10 +180,10 @@
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
                                                         class="material-icons">more_vert</i></a>
                                                 <div class="dropdown-menu dropdown-menu-left">
-                                                    <a class="dropdown-item" href="/deleteQuestion/{{$material->id}}"><i class="fa fa-trash-o m-r-5"></i>یاده پوښتنه له سیسټم څخه له منځه یوسی</a>
+                                                    <a class="dropdown-item" href="/admin/deleteQuestion/{{$material->id}}"><i class="fa fa-trash-o m-r-5"></i>یاده پوښتنه له سیسټم څخه له منځه یوسی</a>
                                                 </div>
                                             </div>
-                                            <p class="mb-0 p-2 " style="background:#d7e5ff6e;border-radius:5px;">( {{$loop->iteration}} ) <i class="fa fa-hand-o-left"></i> 
+                                            <p class="mb-0 p-2 " style="background:#d7e5ff6e;border-radius:5px;">( {{$loop->iteration}} ) <i class="fa fa-hand-o-left"></i>
                                             {{$material->question}}
                                              </p>
                                         </div>
@@ -248,7 +248,7 @@
                             </div>
                             @endforeach
                         @endif
-                            
+
                             @if( count($comments) !== 0)
                             <h4 class="bg-primary p-3 rounded text-center mt-3" style=" font-size: 25px;"> <strong>
                                     عمومي نظر</strong></h4>
@@ -277,23 +277,23 @@
                             @endforeach
                         @endif
                         @if(count($comments) === 0 && count($locations) === 0 && count($facilities) === 0 && count($materials) === 0)
-                   
+
                             <div class="mb-5" id="alertMassege">
-                               
+
                                     <div class="rounded p-5 m-1 alert alert-danger text-center" >
                                        د یاد پروګرام لپاره پوښتنلیک شتون نلري!
                                     </div>
-                                   
-                                    
+
+
                                 </ul>
                             </div>
-                        
+
                         @endif
                     </div>
                 </div>
             </div>
         </div>
-        
+
 <!-- Delete Project Modal -->
             <div class="modal custom-modal fade" id="delete_project" role="dialog">
 				<div class="modal-dialog modal-dialog-centered">
@@ -377,7 +377,7 @@
 
         function colorChanger(option){
             $(option).addClass('bg-primary');
-          
+
         }
     </script>
 

@@ -62,7 +62,7 @@
      overflow: hidden;
      text-overflow: ellipsis;
 }
-      
+
     </style>
 </head>
 
@@ -93,7 +93,7 @@
         <div class="row">
         @foreach($programs as $program)
             <div class="col-md-12">
-                <a class="job-list  border border-info" href="/comAllPrograms/{{$program->id}}">
+                <a class="job-list  border border-info" href="programs/{{$program->id}}">
                     <div class="job-list-det">
                         <div class="job-list-desc">
                             <h3 class="job-list-title">{{$program->name}}</h3>
@@ -102,7 +102,7 @@
                             <br !important>
                             <p class="text-muted"><strong>د پروګرام معلومات: </strong>{{$program->program_description}}</p>
                         </div>
-                       
+
                     </div>
                     <div class="job-list-footer" style="background:#ddedef;">
                         <ul>

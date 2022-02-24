@@ -41,7 +41,7 @@ class fquestionnaireController extends Controller
     {
         if($request->path() === 'admin/feedbackFormInsertion')
         {
-            
+
             $request->validate([
                 'feedback_question_category.*' => 'bail|required|string|in:د ورکشاپ/ټرېنینګ مواد,آسانتیاوي,ځاي,عمومي نظر',
                 'feedback_question.*' => 'bail|required|string|max:100',
@@ -49,7 +49,7 @@ class fquestionnaireController extends Controller
             DB::table('feedbacks')->insert(['program_id' => $request->program_id]);
             $programID =  DB::table('feedbacks')->select('feedbacks.id')->where('created_at',DB::table('feedbacks')->max('created_at') )->get();
             for($index = 0; $index < count($request->feedback_question);$index++)
-            {   
+            {
                 $questionnairQuestion = new Fquestionnaire;
                 $questionnairQuestion->question_category = $request->feedback_question_category[$index];
                 $questionnairQuestion->question = $request->feedback_question[$index];
@@ -57,12 +57,12 @@ class fquestionnaireController extends Controller
                 $questionnairQuestion->save();
             }
             return redirect('admin/pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده پوښتنلیک په کامیابۍ سره سیسټم ته داخل کړل سو!");
-              
+
         }
         else{
             return "fquestionnaireController Store() function!";
         }
-      
+
     }
 
     /**
@@ -78,7 +78,7 @@ class fquestionnaireController extends Controller
             $programID = $id;
             $check = DB::table('feedbacks')->where('program_id', $id)->get();
             if(count($check) === 0){
-                return view('pdc-program-feedback-uploader', compact('programID'));
+                return view('admin.pdc-program-feedback-uploader', compact('programID'));
             }
             elseif(count($check) !== 0)
             {
@@ -97,7 +97,7 @@ class fquestionnaireController extends Controller
             $second = array();
             $third = array();
             $fourth = array();
-            for ($index=0; $index < count($questions); $index++) { 
+            for ($index=0; $index < count($questions); $index++) {
                 $firstStateAnswerCounts = DB::table('feedbacks')
                 ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
                 ->join('feedbackanswers', 'fquestionnaires.id', '=', 'feedbackanswers.question_id')
@@ -120,7 +120,7 @@ class fquestionnaireController extends Controller
                     ['feedbackanswers.answer', '=', 'ډېر ښه'],
                 ])->get();
                 array_push( $second, count( $secondStateAnswerCounts));
-                
+
 
                 $thirdStateAnswerCounts = DB::table('feedbacks')
                 ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
@@ -133,7 +133,7 @@ class fquestionnaireController extends Controller
                     ])->get();
                     array_push( $third, count( $thirdStateAnswerCounts));
 
-                    
+
                 $fourthStateAnswerCounts = DB::table('feedbacks')
                 ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
                 ->join('feedbackanswers', 'fquestionnaires.id', '=', 'feedbackanswers.question_id')
@@ -153,7 +153,7 @@ class fquestionnaireController extends Controller
                 return back()->with('warn', 'د یاد پروګرام د پوښتنلیک راپور تر اوسه سیسټم کي وجود نلري!');
             }
             else{
-                return view('chart', compact('questions', 'first', 'second', 'third', 'fourth',  'comments'));
+                return view('admin.chart', compact('questions', 'first', 'second', 'third', 'fourth',  'comments'));
             }
         }
 

@@ -23,7 +23,7 @@ class dashboardController extends Controller
         $facilitators = count(DB::table('users')->join('user_roles', 'users.id', '=', 'user_roles.user_id')->where('user_roles.role_id', 2)->distinct()->get());
         // $users = $users - 1;
 
-        return view('index', compact('programs', 'users', 'participants', 'facilitators', 'eduPrograms'));
+        return view('admin.index', compact('programs', 'users', 'participants', 'facilitators', 'eduPrograms'));
     }
 
     /**

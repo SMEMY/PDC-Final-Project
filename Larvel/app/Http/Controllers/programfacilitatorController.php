@@ -41,7 +41,7 @@ class programfacilitatorController extends Controller
         $path = 'facilitator';
         $page = 'تسهیلونکی';
         $searchPath = '/searchFacilitator';
-        return view('pdc-list-all-facilitator', compact('members', 'path', 'searchPath', 'page'));
+        return view('admin.pdc-list-all-facilitator', compact('members', 'path', 'searchPath', 'page'));
     }
 
     /**
@@ -96,7 +96,7 @@ class programfacilitatorController extends Controller
                 // $searchPath = '/admin/searchMember';
                 // $page = 'عمومي ګډونوال';
 
-                return view('pdc-list-all-facilitator', compact('members'))->with('success_search', 'لاندي ستاسي پلټل سوی شخص دی!');;
+                return view('admin.pdc-list-all-facilitator', compact('members'))->with('success_search', 'لاندي ستاسي پلټل سوی شخص دی!');;
             }
         }
     }
@@ -118,7 +118,7 @@ class programfacilitatorController extends Controller
             $name = 'تسهیلونکی';
             $path = 'facilitatorList';
             $user_request = 'facilitator';
-            return view('pdc-user-info', compact('userProfile', 'name', 'path', 'user_request'));
+            return view('admin.pdc-user-info', compact('userProfile', 'name', 'path', 'user_request'));
         } elseif ($request->path() === 'admin/facilitatorProfileForProgram/' . $id) {
 
             $userProfile =  DB::table('users')
@@ -138,24 +138,22 @@ class programfacilitatorController extends Controller
             } else {
                 return back()->with('warn', "د پروګرام لپاره تر اوسه تسهیلونکي ندی اضافه کړل سوی!");
             }
-        }
-        //facilitatorEnrolledPrograms
-        elseif ($request->path() === 'admin/facilitatorEnrolledPrograms/' . $id) {
+        } elseif ($request->path() === 'admin/facilitatorEnrolledPrograms/' . $id) {
             $enrolledPrograms = DB::table('programs')
-                ->join('programsfacilitators', 'programs.id', '=', 'programsfacilitators.program_id')
+                ->join('user_roles', 'programs.id', '=', 'user_roles.program_id')
                 ->select('programs.*')
-                ->where('programsfacilitators.facilitator_id', '=', $id)
+                ->where([
+                    ['user_roles.user_id', '=', $id],
+                    ['user_roles.role_id', '=', 2]
+                ])
                 ->get();
-            $rec = DB::table('programsfacilitators')->where('programsfacilitators.facilitator_id', $id)->select('program_id')->get();
-            $programsID = array();
-            foreach ($rec as $r) {
-                array_push($programsID, $r->program_id);
-            }
-            $notEnrolledPrograms = DB::table('programs')
-                ->select('programs.*')
-                ->whereNotIn('id', $programsID)
-                ->get();
-            return view('pdc-facilitator-participant-enrolled-programs', compact('enrolledPrograms', 'notEnrolledPrograms'));
+            // $rec = DB::table('programsfacilitators')->where('programsfacilitators.facilitator_id', $id)->select('program_id')->get();
+            // $programsID = array();
+            // foreach ($rec as $r) {
+            //     array_push($programsID, $r->program_id);
+            // }
+            // $notEnrolledPrograms = $enrolledPrograms;
+            return view('admin.pdc-admin-facilitator-enrolled-programs', compact('enrolledPrograms'));
         } elseif (0) {
         }
     }
@@ -178,7 +176,7 @@ class programfacilitatorController extends Controller
                 ->where('users.id', $id)
                 ->get();
             $path = 'facilitator';
-            return view('pdc-edit-member', compact('member', 'path'));
+            return view('admin.pdc-edit-member', compact('member', 'path'));
         } elseif ($request->path() === 'admin/facilitatorProfileForProgram/' . $id . "/edit") {
             // $member = Facilitatorsandparticipant::find($id);
             // $program_id =  DB::table('facilitatorsandparticipants')
@@ -267,7 +265,7 @@ class programfacilitatorController extends Controller
             ]);
             // return "slkdfjsdlkf";
             $member = User::find($id);
-            $user = User_info::find($id);
+            $user = User_info::where('user_id', $id)->first();
             // return $user;
             // return $user->last_name;
             // return $request->last_name;
@@ -284,7 +282,7 @@ class programfacilitatorController extends Controller
             $user->educational_rank = $request->educational_rank;
             $member->save();
             $user->save();
-            return back()->with('member_edited', 'د یاد تسهیلونکی معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
+            return redirect('admin/facilitatorList')->with('member_edited', 'د یاد تسهیلونکی معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
             // return redirect('admin/facilitatorProfileForProgram/' . $request->program_id)->with('member_edited', 'د یاد غړي معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
 
             // if ($request->path() === 'admin/facilitatorList/' . $id) {
@@ -333,7 +331,7 @@ class programfacilitatorController extends Controller
             $userProfile = DB::table('user_roles')
                 ->where('user_roles.user_id', $id)
                 ->delete();
-            return redirect('admin/facilitatorList')->with('facilitator_deleted', 'یاد تسهیلونکي له سیسټم څخه ایسته کړل سو!');;
+            return redirect('admin/facilitatorList')->with('facilitator_deleted', 'یاد تسهیلونکي له سیسټم څخه ایسته کړل سو!');
         }
 
         //    $deleteParticipant = Programsfacilitator::where('facilitator_id', $id)->get();

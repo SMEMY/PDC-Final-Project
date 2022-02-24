@@ -31,7 +31,7 @@ label {
         }
 		select:focus {
 			box-shadow: 0px 0px 2px #000 !important;
-			
+
 			transition: all 0.1s;
 			transform: scale(1.01);
 		}
@@ -44,7 +44,7 @@ label {
 
 		textarea:focus {
 			box-shadow: 0px 0px 2px #000 !important;
-            
+
 		}
         input {
 			background: #f0fcff !important;
@@ -72,7 +72,7 @@ label {
 
 
 @section('content')
-       
+
 	<!-- Main Wrapper -->
 	<div class="main-wrapper">
 		<div class="account-content">
@@ -84,7 +84,7 @@ label {
 						<!-- <p class="account-subtitle"></p> -->
                         <hr !important>
 						<!-- Account Form -->
-                        
+
                         <!-- @if ($errors->any())
                             <div class="mb-5" id="alertMassege">
                                 <ul style="list-style-type:none" class="p-0 m-0">
@@ -117,7 +117,7 @@ label {
                                         <label> <span class="text-danger">*</span> د پروګرام ډول</label>
                                         <select class="custom-select"
                                             style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="type">
-                                          
+
                                             @if(old('type') === 'ورکشاپ')
                                             <option ></option>
                                             <option selected value="ورکشاپ">ورکشاپ</option>
@@ -251,7 +251,7 @@ label {
                             <hr !important>
 
                             <div class="row">
-                    
+
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label> <span class="text-danger">*</span>د پروګرام یودیجه</label>
@@ -515,10 +515,10 @@ label {
 	</div>
 	<!-- /Main Wrapper -->
     @endsection
-    
-    
-    
-    
+
+
+
+
     @section('custom-js')
         @if(Session::has('program_added'))
             <script>
@@ -527,7 +527,7 @@ label {
             });
             </script>
         @endif
-        
+
 	    <script>
         function bootstrapAlert(){
             $('.bootstrap-growl').remove();
@@ -535,7 +535,7 @@ label {
             $.bootstrapGrowl("this is success!", {
                 type:"danger",
                 offset: {from: "top", amount: 100},
-                align: "center", 
+                align: "center",
                 width: 600,
                 delay: 3000,
                 allow_dismiss: true,
@@ -543,7 +543,7 @@ label {
             });
         }
 		$('#addProgram').addClass('active');
-	
+
 
 		var s = true;
 		$("select.rankS").change(function () {

@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Facility;
 
 use Illuminate\Http\Request;
 
-class facilityController extends Controller
+class commmonUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +14,7 @@ class facilityController extends Controller
     public function index()
     {
         //
+        return view('facilitatorParticipantRegisteration');
     }
 
     /**
@@ -36,18 +36,6 @@ class facilityController extends Controller
     public function store(Request $request)
     {
         //
-        // return "sdfsd";
-        $request->validate([
-            'facility.*' => 'bail|required|max:100',
-        ]);
-        for($index=0; $index<count($request->facility); $index++)
-        {
-            $facility = new Facility;
-            $facility->facility = $request->facility[$index];
-            $facility->program_id = $request->program_id;
-            $facility->save();
-        }
-        return redirect('admin/pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده سهولتونه په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**
@@ -59,8 +47,6 @@ class facilityController extends Controller
     public function show($id)
     {
         //
-        $programID = $id;
-        return view('admin.pdc-program-facility', compact('programID'));
     }
 
     /**

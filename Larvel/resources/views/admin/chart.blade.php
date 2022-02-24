@@ -7,7 +7,7 @@ label {
 	}
     h3{
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-            
+
 
         }
         input{
@@ -18,16 +18,16 @@ label {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
             font-size: 20px !important;
 
-			height: 44px  !important; 
-			border-radius: 3px  !important; 
+			height: 44px  !important;
+			border-radius: 3px  !important;
 			outline: none;
-			background-color:#f0fcff  !important; 
+			background-color:#f0fcff  !important;
 			border:1px solid #e3e3e3  !important;
-			
+
 		}
 		select:focus {
 			box-shadow: 0px 0px 2px #000 !important;
-			
+
 			transition: all 0.1s;
 			transform: scale(1.01);
 		}
@@ -112,7 +112,7 @@ label {
 							@for($index = 0; $index< count($questions); $index++)
 							<div class="col-md-6 border p-3 rounded">
 								<h3 class=" p-3 rounded " style="background: #0000001a; font-size:20px"><span class="text-danger ">{{$index+1}}- سوال:  </span> {{$questions[$index]->question}}</h3>
-							
+
 								<div class="row  text-center" id="answers">
 									<div class="col-md-3 my-2">
 										<div class="bg-info  rounded text-center" style="background:#009efb73 !important;">
@@ -138,7 +138,7 @@ label {
 											<div class="col-md-12 ">{{$fourth[$index]}}</div>
 										</div>
 									</div>
-								
+
 								</div>
 								<!-- <div id="container" class="m-3" style="width:80%;">
 									<canvas id="myChart" width="200" height="200"></canvas>
@@ -146,8 +146,8 @@ label {
 							</div>
 							@endfor
 						</div>
-						<h5 class="col-md-12 p-3 d-block text-center rounded my-3" style="background: #0000001a; font-size:20px">د پوښتنلیک نظرونه</h5>
-						<div class="row px-3" style="height: 300px !important;  overflow-y: scroll;">
+						<h5 class="col-md-12 p-3 d-block text-center rounded my-3" style="background: #0000001a; font-size:20px">د ډګوونکو نظرونه</h5>
+						<div class="row px-3" style="min-height: 200px; height: auto; !important; ">
 						@for($index = 0; $index< count($comments); $index++)
 							<!-- <div class="col-md-6 p-2"> -->
 								<div class="col-md-12 my-2 rounded p-3 "  style="background: #71caff5c !important;font-size:18px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;">
@@ -202,7 +202,7 @@ label {
 		// 		labels: ['ښه', 'ډېر ښه', 'متوسط', 'بد'],
 		// 		datasets: [{
 		// 			label: '# of Votes',
-		// 			data: 
+		// 			data:
 		// 			backgroundColor: [
 		// 				'rgba(255, 99, 132, 0.2)',
 		// 				'rgba(54, 162, 235, 0.2)',

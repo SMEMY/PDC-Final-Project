@@ -28,16 +28,16 @@ class programController extends Controller
 
         // return $request->path();
        $programs =  Program::orderBy('id', 'desc')->get();
-     
-       
+
+
        $path = '/pdcProgramList';
     //    return "lakdjf";
 
        if($request->path() === 'admin/pdcProgramList')
        {
-           return view('pdc-list-all-program', compact('programs', 'path'));
+           return view('admin.pdc-list-all-program', compact('programs', 'path'));
        }
-       else if($request->path() === 'comAllPrograms')
+       else if($request->path() === 'programs')
        {
         return view('notenrolled-program', compact('programs'));
        }
@@ -64,10 +64,10 @@ class programController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   
+
     public function store(Request $request)
     {
-        
+
         // this part is belongs to Program Model
         if($request->path() === 'admin/searchPdcProgram')
         {
@@ -161,10 +161,10 @@ class programController extends Controller
             // $request->session()->put('program_added', "پروګرام يه کامیابۍ سره سیسټم ته اضافه سو!");
             return back()->with('program_added', "پروګرام په کامیابۍ سره سیسټم ته اضافه سو!");
         }
-        
-        
 
-        // $add_program->name = 
+
+
+        // $add_program->name =
     }
 
     /**
@@ -176,20 +176,20 @@ class programController extends Controller
     public function show(Request $request, $id)
     {
         // comAllPrograms
-        if($request->path() === 'comAllPrograms/'.$id)
+        if($request->path() === 'programs/'.$id)
         {
             $programs = Program::with('getFacilities', 'getResults')->find($id);
             return view('not-enreolled-program-info', compact('programs'));
        }
         //participantEnrolledPrograms
-      
+
        elseif($request->path() == 'admin/pdcProgramInfo/'.$id){
             $programs = Program::with('getFacilities', 'getResults', 'getEvaluations', 'getAgendas', 'getPhotos', )->find($id);
             $program_id = $id;
             // return $programs->start_date;
             // return Carbon::parse($programs->start_date)->format('M');
-        
-            return view('pdc-program-info', compact('programs', 'program_id'));
+
+            return view('admin.pdc-program-info', compact('programs', 'program_id'));
        }
        elseif($request->path() == 'enrolledPdcProgramInfo/'.$id){
             $programs = Program::with('getFacilities', 'getResults', 'getEvaluations')->find($id);
@@ -214,9 +214,9 @@ class programController extends Controller
         {
             // return "i am edit.";
             $editProgram = Program::with('getResults', 'getFacilities', 'getAgendas', 'getEvaluations')->find($id);
-            return view('pdc-edit-program', compact('editProgram'));
+            return view('admin.pdc-edit-program', compact('editProgram'));
         }
- 
+
     }
 
     /**
@@ -345,7 +345,7 @@ class programController extends Controller
                     // sleep(1);
                 }
             }
-            
+
             // return "done";
             return redirect('admin/pdcProgramList')->with('program_edited', "پروګرام په کامیابۍ سره سیسټم کي اصلاح کړل سو!");
         }

@@ -29,7 +29,7 @@ class userController extends Controller
 
             // return $members;
 
-            return view('pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'));
+            return view('admin.pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'));
         }
     }
 
@@ -180,7 +180,7 @@ class userController extends Controller
                 $searchPath = '/admin/searchMember';
                 $page = 'عمومي ګډونوال';
 
-                return view('pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'))->with('success_search', 'لاندي ستاسي پلټل سوی شخص دی!');;
+                return view('admin.pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'))->with('success_search', 'لاندي ستاسي پلټل سوی شخص دی!');;
             }
         }
         elseif ($request->path() === 'admin/facilitorList') {
@@ -204,7 +204,7 @@ class userController extends Controller
                 $searchPath = '/admin/searchMember';
                 $page = 'عمومي ګډونوال';
 
-                return view('pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'))->with('success_search', 'لاندي ستاسي پلټل سوی شخص دی!');;
+                return view('admin.pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'))->with('success_search', 'لاندي ستاسي پلټل سوی شخص دی!');;
             }
         }
     }
@@ -221,14 +221,16 @@ class userController extends Controller
         // return "sdfjksldf";
         if ($request->path() === 'admin/memberRegisterationTwo/' . $id) {
             $program_id = $id;
-            return view('pdc-add-member-two', compact('program_id'));
+            return view('admin.pdc-add-member-two', compact('program_id'));
         } elseif ($request->path() === 'admin/memberProfile/' . $id) {
             $userProfile = User::join('user_infos', 'users.id', '=', 'user_infos.user_id')
+            ->where('user_infos.user_id', $id)
                 ->get(['users.*', 'user_infos.*']);
+                // return $id;
             $name  = 'ثبت سوی شخص';
-            $path = 'admin/memberList';
+            $path = 'memberList';
             $user_request = 'member';
-            return view('pdc-user-info', compact('userProfile', 'name', 'path', 'user_request'));
+            return view('admin.pdc-user-info', compact('userProfile', 'name', 'path', 'user_request'));
         }
     }
 
@@ -252,7 +254,7 @@ class userController extends Controller
             $path = 'member';
             // return $member;
 
-            return view('pdc-edit-member', compact('member', 'path'));
+            return view('admin.pdc-edit-member', compact('member', 'path'));
         }
     }
 
@@ -280,8 +282,8 @@ class userController extends Controller
                 'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
                 'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
             ]);
-            $member = User::with('userInfos')->find($id);
-            $user = User_info::find($id);
+            $member = User::find($id);
+            $user = User_info::where('user_id', $id)->first();
             // return $user;
             // return $user->last_name;
             // return $request->last_name;
@@ -296,6 +298,7 @@ class userController extends Controller
             $user->office_position = $request->office_position;
             $user->office_position_category = $request->office_position_category;
             $user->educational_rank = $request->educational_rank;
+            $member->save();
             $user->save();
             return redirect('admin/memberList')->with('member_edited', 'د یاد تسهیلونکی معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
         }
@@ -312,8 +315,14 @@ class userController extends Controller
         //
 
         if ($request->path() === 'admin/memberList/' . $id) {
-            Facilitatorsandparticipant::find($id)->delete();
-            return redirect('admin/memberList');
+            // Facilitatorsandparticipant::find($id)->delete();
+            DB::table('users')
+            ->where('id', $id)
+            ->delete();
+            DB::table('user_roles')
+            ->where('user_roles.user_id', $id)
+            ->delete();
+            return redirect('admin/memberList')->with('member_deleted', 'یاد کس له سیسټم څخه ایسته کړل سو!');
         }
     }
 }
