@@ -21,12 +21,12 @@ when ever you have clone the project for the first time, so your Laravel (php ar
 # 2- npm install
 # 3- cp .env.example .env
 # 4- php artisan key:generate
-# For authentication INSTALL (fortify) 
-* composer require laravel/fortify
-* php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
-# then add this line in ( config/app.php ) file:
-* App\Providers\FortifyServiceProvider::class,
-* ![image](https://user-images.githubusercontent.com/57432794/154793426-de1a0418-721c-420c-ad03-c5486280b32a.png)
+# 5- create data base (pdc-db)
+# 6- migrate all migration files.
+# NOte: if the was an error so clear the cache and retry agian:
+- php artisan config:cache
+- php artisan cache:clear
+
 
 
 
