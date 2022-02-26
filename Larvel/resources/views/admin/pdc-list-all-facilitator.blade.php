@@ -22,6 +22,11 @@
     select{
     font-size: 20px !important;
     }
+    nav{
+    width: fit-content;
+    margin: 0 auto;
+    }
+    }
 
 @endsection
 
@@ -61,7 +66,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-md-5" id="search_content">
+                        <div class="col-sm-6 col-md-5" id="search_content" onclick="audio.play()">
                             <div class="form-group form-focus select-focus">
                                 <select class="custom-select p-2 h-100 searchInput" name="search_type">
                                     <a href="/facilitatorList">
@@ -91,7 +96,7 @@
 
                 <div class="row staff-grid-row">
                     @foreach ($members as $member)
-                        <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+                        <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3" onclick="audio.play()">
                             <div class="profile-widget" style="box-shadow: 0px 0px 2px 1px #89d0e5;">
                                 <div class="profile-img">
                                     <a href="/admin/facilitatorProfile/{{ $member->user_id }}" class="avatar"><i
@@ -102,7 +107,8 @@
                                     <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
                                         aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                     <div class="sel dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="/admin/facilitatorList/{{ $member->user_id }}/edit"><i
+                                        <a class="dropdown-item"
+                                            href="/admin/facilitatorList/{{ $member->user_id }}/edit"><i
                                                 class="fa fa-pencil m-r-5"></i> اصلاح یې کړی</a>
                                         <a class="dropdown-item" href="/admin/facilitatorList/{{ $member->user_id }}"
                                             data-toggle="modal" data-target="#delete_client" id="path"
@@ -121,6 +127,7 @@
                             </div>
                         </div>
                     @endforeach
+                    {{ $members->links() }}
                 </div>
             @else
                 <div class="row">

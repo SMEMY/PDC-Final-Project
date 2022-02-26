@@ -12,41 +12,41 @@
 								<!-- <li><a class="active" href="test">پروګرامونه</a></li> -->
 
 								<li class="submenu">
-									<a href="#" class="active"><span> پروګرام ثبتول</span> <span class="menu-arrow"></span></a>
+									<a href="#" class="active" onclick="audio.play()"><span> پروګرام ثبتول</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="{{route('addPdcprogram')}}" >د (پي ډي سي) پروګرام ثبتول</a></li>
-										<li><a href="{{route('addEduProgram')}}">دعلمي ترفېع/ تقرر پروګرام ثبتول</a></li>
+										<li><a href="{{route('addPdcprogram')}}" onclick="audio.play()">د (پي ډي سي) پروګرام ثبتول</a></li>
+										<li><a href="{{route('addEduProgram')}}" onclick="audio.play()">دعلمي ترفېع/ تقرر پروګرام ثبتول</a></li>
 									</ul>
 								</li>
 								<li class="submenu">
-									<a href="#" class=""><span> پروګرامونو لیست</span> <span class="menu-arrow"></span></a>
+									<a href="#" class="" onclick="audio.play()"><span> پروګرامونو لیست</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="/admin/pdcProgramList" dir="rtl">د (پي ډي سي) پروګرامونه</a></li>
-										<li><a href="/admin/educationalProgramList">دعلمي ترفېع/ تقرر پروګرامونه</a></li>
+										<li><a href="/admin/pdcProgramList" dir="rtl" onclick="audio.play()">د (پي ډي سي) پروګرامونه</a></li>
+										<li><a href="/admin/educationalProgramList" onclick="audio.play()">دعلمي ترفېع/ تقرر پروګرامونه</a></li>
 									</ul>
 								</li>
 								<!-- <li><a href="addProgram">پروګرام ثبتول</a></li>
 								<li><a href="addEduProgeam">دعلمي ترفېع/ تقرر پروګرام ثبتول </a></li> -->
 							</ul>
 
-							
+
 						</li>
 						<li class="submenu">
 							<a href="#"> <span> ګدونوال</span> <i class="fa fa-users" style="font-size:20px;"></i> <span class="menu-arrow"></span></a>
 							<ul style="display: none;">
 								<!-- <li><a class="active" href="test">پروګرامونه</a></li> -->
 								<li class="submenu">
-									<a href="#" class=""><span>غړی ثبتول</span> <span class="menu-arrow"></span></a>
+									<a href="#" class="" onclick="audio.play()"><span>غړی ثبتول</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="/admin/memberRegisteration">سیسټم ته غړی اضافه کول</a></li>
+										<li><a href="/admin/memberRegisteration" onclick="audio.play()">سیسټم ته غړی اضافه کول</a></li>
 									</ul>
 								</li>
 								<li class="submenu">
 									<a href="#" class=""><span>ګدونوالو لیست</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="/admin/facilitatorList" dir="rtl">د پروګرام تسهیلونکي </a></li>
-										<li><a href="/admin/participantList">د پروګرام ګډونوال</a></li>
-										<li><a href="/admin/memberList">د سیسټم عمومي ګډونوال</a></li>
+										<li><a href="/admin/facilitatorList" dir="rtl" onclick="audio.play()">د پروګرام تسهیلونکي </a></li>
+										<li><a href="/admin/participantList" onclick="audio.play()">د پروګرام ګډونوال</a></li>
+										<li><a href="/admin/memberList" onclick="audio.play()">د سیسټم عمومي ګډونوال</a></li>
 									</ul>
 								</li>
 								<!-- <li><a href="addProgram">پروګرام ثبتول</a></li>
@@ -58,15 +58,15 @@
 							<ul style="display: none;">
 								<!-- <li><a class="active" href="test">پروګرامونه</a></li> -->
 								<li class="submenu">
-									<a href="#" class=""><span> میاشت واره راپور</span></a>
+									<a href="#" class="" onclick="audio.play()"><span> میاشت واره راپور</span></a>
 								</li>
 								<li class="submenu">
-									<a href="#" class=""><span>ربعه واره راپور</span></a>
-									
+									<a href="#" class="" onclick="audio.play()"><span>ربعه واره راپور</span></a>
+
 								</li>
 								<li class="submenu">
-									<a href="#" class=""><span>کلنی راپور</span> </a>
-									
+									<a href="#" class="" onclick="audio.play()"><span>کلنی راپور</span> </a>
+
 								</li>
 								<!-- <li><a href="addProgram">پروګرام ثبتول</a></li>
 								<li><a href="addEduProgeam">دعلمي ترفېع/ تقرر پروګرام ثبتول </a></li> -->
@@ -139,7 +139,7 @@
 							<a href="tickets.html"> <span>Tickets</span><i class="la la-ticket"></i></a>
 						</li>
 					 -->
-	
+
 					</ul>
 				</div>
 			</div>

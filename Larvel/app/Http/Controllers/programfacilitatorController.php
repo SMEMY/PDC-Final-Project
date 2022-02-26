@@ -33,10 +33,8 @@ class programfacilitatorController extends Controller
             ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
             ->select('users.*', 'user_infos.*')
             ->distinct()
-            ->where([
-                ['user_roles.role_id', 2]
-            ])
-            ->get();
+            ->where('user_roles.role_id', 2)
+            ->paginate(12);
         // return DB::table('facilitatorsandparticipants')->groupBy('phone_number')->having('Phone_number', '!=', '0008343043')->get();
         $path = 'facilitator';
         $page = 'تسهیلونکی';
@@ -62,40 +60,20 @@ class programfacilitatorController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // return "sadfasdf";
-        // if ($request->path() === 'admin/searchFacilitator') {
-        //     $members = DB::table('facilitatorsandparticipants')
-        //         ->join('programsfacilitators', 'facilitatorsandparticipants.id', '=', 'programsfacilitators.facilitator_id')
-        //         ->select('facilitatorsandparticipants.*')
-        //         ->where($request->search_type, $request->search_content)
-        //         ->get();
-        //     $path = 'facilitator';
-
-        //     $searchPath = '/searchFacilitator';
-        //     return view('ListfacilitatorAndParticipant', compact('members', 'path', 'searchPath'));
-        // }
         if ($request->path() === 'admin/searchFacilitator') {
-            // return "i am member List!";
             $request->validate([
                 'search_type' => 'bail|required|string|in:office_position_category,office_position,office_department,office_building,gender,educational_rank,phone_number,email,name',
                 'search_content' => 'bail|required',
             ]);
-            // $path = '/admin/facilitatorList';
             $members =  DB::table('users')
                 ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
-                ->where($request->search_type, $request->search_content)->get();
-            // return $programs;
-            // return count($members);
-
+                ->where($request->search_type, $request->search_content)->paginate(10);
             if (count($members) == 0) {
-
                 return back()->with('warn_search', 'یاد شخص په سیسټم کي ونه موندل سو!');
             } else {
                 // $path = 'facilitor';
                 // $searchPath = '/admin/searchMember';
                 // $page = 'عمومي ګډونوال';
-
                 return view('admin.pdc-list-all-facilitator', compact('members'))->with('success_search', 'لاندي ستاسي پلټل سوی شخص دی!');;
             }
         }
@@ -134,7 +112,7 @@ class programfacilitatorController extends Controller
             $name = 'تسهیلونکی';
             $program_id = $id;
             if (count($userProfile) !== 0) {
-                return view('pdc-program-user-info', compact('userProfile', 'name', 'program_id'));
+                return view('admin.pdc-program-user-info', compact('userProfile', 'name', 'program_id'));
             } else {
                 return back()->with('warn', "د پروګرام لپاره تر اوسه تسهیلونکي ندی اضافه کړل سوی!");
             }

@@ -30,8 +30,8 @@ class programparticipantController extends Controller
                 ['user_roles.role_id', 3],
                 // ['users.id', '=', 'user_infos.user_id']
             ])
-            ->get();
-            // return $members;
+            ->paginate(12);
+        // return $members;
         // $searchPath = '/searchParticipant';
         // $path = 'participant';
         // $page = 'د پروګرامونو ګډونوال';
@@ -57,15 +57,22 @@ class programparticipantController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->path() === 'searchParticipant') {
-            $members = DB::table('facilitatorsandparticipants')
-                ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
-                ->select('facilitatorsandparticipants.*')
-                ->where($request->search_type, $request->search_content)
-                ->get();
-            $path = 'particiapnt';
-            $searchPath = '/searchParticipant';
-            return view('ListfacilitatorAndParticipant', compact('members', 'path', 'searchPath'));
+        // return "fdads";
+        if ($request->path() === 'admin/searchParticipant') {
+            if($request->search_type === null || $request->search_content === null)
+            {
+                return redirect('admin/participantList');
+            }
+            else{
+                $members =  DB::table('users')
+                    ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
+                    ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
+                    ->distinct()
+                    ->where($request->search_type, $request->search_content)->paginate(10);
+                $path = 'particiapnt';
+                $searchPath = '/searchParticipant';
+                return view('admin.pdc-list-all-participant', compact('members', 'path', 'searchPath'));
+            }
         }
     }
 

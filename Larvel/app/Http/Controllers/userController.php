@@ -22,11 +22,11 @@ class userController extends Controller
         //
         if ($request->path() === 'admin/memberList') {
             $members = User::join('user_infos', 'users.id', '=', 'user_infos.user_id')
-                ->get(['users.*', 'user_infos.*']);
+                ->paginate(10);
             $path = 'member';
             $searchPath = '/searchMember';
             $page = 'عمومي ګډونوال';
-
+            // $members = User::paginate(5);
             // return $members;
 
             return view('admin.pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'));
@@ -182,8 +182,7 @@ class userController extends Controller
 
                 return view('admin.pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'))->with('success_search', 'لاندي ستاسي پلټل سوی شخص دی!');;
             }
-        }
-        elseif ($request->path() === 'admin/facilitorList') {
+        } elseif ($request->path() === 'admin/facilitorList') {
             // return "i am member List!";
             $request->validate([
                 'search_type' => 'bail|required|string|in:office_position_category,office_position,office_department,office_building,gender,educational_rank,phone_number,email,name',
@@ -224,9 +223,9 @@ class userController extends Controller
             return view('admin.pdc-add-member-two', compact('program_id'));
         } elseif ($request->path() === 'admin/memberProfile/' . $id) {
             $userProfile = User::join('user_infos', 'users.id', '=', 'user_infos.user_id')
-            ->where('user_infos.user_id', $id)
+                ->where('user_infos.user_id', $id)
                 ->get(['users.*', 'user_infos.*']);
-                // return $id;
+            // return $id;
             $name  = 'ثبت سوی شخص';
             $path = 'memberList';
             $user_request = 'member';
@@ -317,11 +316,11 @@ class userController extends Controller
         if ($request->path() === 'admin/memberList/' . $id) {
             // Facilitatorsandparticipant::find($id)->delete();
             DB::table('users')
-            ->where('id', $id)
-            ->delete();
+                ->where('id', $id)
+                ->delete();
             DB::table('user_roles')
-            ->where('user_roles.user_id', $id)
-            ->delete();
+                ->where('user_roles.user_id', $id)
+                ->delete();
             return redirect('admin/memberList')->with('member_deleted', 'یاد کس له سیسټم څخه ایسته کړل سو!');
         }
     }

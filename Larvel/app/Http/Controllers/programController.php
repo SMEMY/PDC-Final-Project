@@ -11,8 +11,9 @@ use App\Models\Evaluation;
 use App\Models\Material;
 use Carbon\Carbon;
 use App\Models\Photo;
-Use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 
 
@@ -27,25 +28,22 @@ class programController extends Controller
     {
 
         // return $request->path();
-       $programs =  Program::orderBy('id', 'desc')->get();
+        $programs =  Program::orderBy('id', 'desc')->paginate(10);
 
 
-       $path = '/pdcProgramList';
-    //    return "lakdjf";
+        $path = '/pdcProgramList';
+        //    return "lakdjf";
+        if (Gate::denies(ability: 'logged-in')) {
+            return "no access allowed!";
+        }
 
-       if($request->path() === 'admin/pdcProgramList')
-       {
-           return view('admin.pdc-list-all-program', compact('programs', 'path'));
-       }
-       else if($request->path() === 'programs')
-       {
-        return view('notenrolled-program', compact('programs'));
-       }
-       else{
-        return "path not matched!";
-       }
-
-
+        if ($request->path() === 'admin/pdcProgramList') {
+            return view('admin.pdc-list-all-program', compact('programs', 'path'));
+        } else if ($request->path() === 'programs') {
+            return view('notenrolled-program', compact('programs'));
+        } else {
+            return "path not matched!";
+        }
     }
 
     /**
@@ -67,30 +65,28 @@ class programController extends Controller
 
     public function store(Request $request)
     {
-
+        if (Gate::denies(ability: 'logged-in')) {
+            return "no access allowed!";
+        }
         // this part is belongs to Program Model
-        if($request->path() === 'admin/searchPdcProgram')
-        {
+        if ($request->path() === 'admin/searchPdcProgram') {
             // return "alkdfj";
             $request->validate([
                 'search_type' => 'bail|required|string|in:month,year,manager,supporter,sponsor,type,name',
                 'search_content' => 'bail|required',
             ]);
             $path = '/pdcProgramList';
-            $programs =  DB::table('programs')->where($request->search_type, $request->search_content)->get();
-            if(count($programs) === 0)
-            {
+            $programs =  DB::table('programs')->where($request->search_type, $request->search_content)->paginate(10);
+            if (count($programs) === 0) {
                 return back()->with('warn_search', 'یاد پروګرام په سیسټم کي ونه موندل سو!');
-            }
-            else{
+            } else {
                 // redirect('admin/searchPdcProgram')->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
-                return view('pdc-list-all-program', compact('programs', 'path'))->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');;
+                return view('admin.pdc-list-all-program', compact('programs', 'path'))->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');;
             }
             // $path = '/pdcProgramList';
             // $programs =  Program::where($request->search_type, $request->search_content)->get();
             // return view('pdc-list-all-program', compact('programs', 'path'));
-        }
-        elseif($request->path() === 'admin/pdcProgramList'){
+        } elseif ($request->path() === 'admin/pdcProgramList') {
             // return "akdsfjaksjflj";
             $validate = $request->validate([
                 'name' => 'bail|required|string|max:100',
@@ -120,7 +116,7 @@ class programController extends Controller
                 'program_description' => 'bail|required|string|max:2000',
             ]);
             // return $request->start_date;
-            if($request->fee_able == 1){
+            if ($request->fee_able == 1) {
                 // return "lsdflds";
                 $validate = $request->validate([
                     'fee' => 'bail|integer|required',
@@ -175,30 +171,27 @@ class programController extends Controller
      */
     public function show(Request $request, $id)
     {
+
         // comAllPrograms
-        if($request->path() === 'programs/'.$id)
-        {
+        if ($request->path() === 'programs/' . $id) {
             $programs = Program::with('getFacilities', 'getResults')->find($id);
             return view('not-enreolled-program-info', compact('programs'));
-       }
+        }
         //participantEnrolledPrograms
 
-       elseif($request->path() == 'admin/pdcProgramInfo/'.$id){
-            $programs = Program::with('getFacilities', 'getResults', 'getEvaluations', 'getAgendas', 'getPhotos', )->find($id);
+        elseif ($request->path() == 'admin/pdcProgramInfo/' . $id) {
+            $programs = Program::with('getFacilities', 'getResults', 'getEvaluations', 'getAgendas', 'getPhotos',)->find($id);
             $program_id = $id;
             // return $programs->start_date;
             // return Carbon::parse($programs->start_date)->format('M');
 
             return view('admin.pdc-program-info', compact('programs', 'program_id'));
-       }
-       elseif($request->path() == 'enrolledPdcProgramInfo/'.$id){
+        } elseif ($request->path() == 'enrolledPdcProgramInfo/' . $id) {
             $programs = Program::with('getFacilities', 'getResults', 'getEvaluations')->find($id);
             return view('facil-part-enroll-program-info', compact('programs'));
-
-       }
-       else{
-           return "path not found!";
-       }
+        } else {
+            return "path not found!";
+        }
     }
 
     /**
@@ -209,14 +202,15 @@ class programController extends Controller
      */
     public function edit(Request $request, $id)
     {
+        if (Gate::denies(ability: 'logged-in')) {
+            return "no access allowed!";
+        }
         //
-        if($request->path() === 'admin/pdcProgramList/'.$id."/edit")
-        {
+        if ($request->path() === 'admin/pdcProgramList/' . $id . "/edit") {
             // return "i am edit.";
             $editProgram = Program::with('getResults', 'getFacilities', 'getAgendas', 'getEvaluations')->find($id);
             return view('admin.pdc-edit-program', compact('editProgram'));
         }
-
     }
 
     /**
@@ -228,9 +222,11 @@ class programController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::denies(ability: 'logged-in')) {
+            return "no access allowed!";
+        }
         //
-        if($request->path() === 'admin/pdcProgramList/'.$id)
-        {
+        if ($request->path() === 'admin/pdcProgramList/' . $id) {
             // return "i am edit.";
             // return $request->fee_able;
             $validate = $request->validate([
@@ -260,15 +256,15 @@ class programController extends Controller
                 // 'days_duration' => 'bail|required|integer',
                 'program_description' => 'bail|required|string|max:2000',
             ]);
-            if($request->fee_able == 1){
-                    // return ;
+            if ($request->fee_able == 1) {
+                // return ;
                 $validate = $request->validate([
-                   'fee' => 'bail|integer|required',
-                   'fee_type' => 'bail|string|required|in:افغانۍ,ډالر',
-                   'agenda.*' => 'bail|string|required',
-                   'facility.*' => 'bail|string|required',
-                   'result.*' => 'bail|string|required',
-                   'evaluation.*' => 'bail|string|required',
+                    'fee' => 'bail|integer|required',
+                    'fee_type' => 'bail|string|required|in:افغانۍ,ډالر',
+                    'agenda.*' => 'bail|string|required',
+                    'facility.*' => 'bail|string|required',
+                    'result.*' => 'bail|string|required',
+                    'evaluation.*' => 'bail|string|required',
                 ]);
             }
             // if($request->result == null)
@@ -296,8 +292,7 @@ class programController extends Controller
             $addProgram->block_number = $request->block_number;
             $addProgram->room_number = $request->room_number;
             $addProgram->save();
-            if($request->facility != null)
-            {
+            if ($request->facility != null) {
                 // this part belongs to Facility Model
                 Facility::where('program_id', $id)->delete();
                 foreach ($request->facility as  $value) {
@@ -308,8 +303,7 @@ class programController extends Controller
                     // sleep(1);
                 }
             }
-            if($request->agenda != null)
-            {
+            if ($request->agenda != null) {
                 // this part belongs to Agenda Model
                 Agenda::where('program_id', $id)->delete();
                 foreach ($request->agenda as  $value) {
@@ -320,8 +314,7 @@ class programController extends Controller
                     // sleep(1);
                 }
             }
-            if($request->result != null)
-            {
+            if ($request->result != null) {
                 // this part belongs to result Model
                 Result::where('program_id', $id)->delete();
                 foreach ($request->result as  $value) {
@@ -333,8 +326,7 @@ class programController extends Controller
                 }
             }
 
-            if($request->evaluation != null)
-            {
+            if ($request->evaluation != null) {
                 // this part belongs to evaluation Model
                 Evaluation::where('program_id', $id)->delete();
                 foreach ($request->evaluation as  $value) {
@@ -360,13 +352,15 @@ class programController extends Controller
     public function destroy(Request $request, $id)
     {
         //
-
+        if (Gate::denies(ability: 'logged-in')) {
+            return "no access allowed!";
+        }
         // if($request->path() === 'admin/pdcProgramDelete/'.$id){
         //     $deleteProgram = Program::find($id);
         //     $deleteProgram->delete();
         //     return redirect('/pdcProgramList');
         // }
-        if($request->path() === 'admin/pdcProgramList/'.$id){
+        if ($request->path() === 'admin/pdcProgramList/' . $id) {
             $deleteProgram = Program::find($id);
             $deleteProgram->delete();
             return redirect('/admin/pdcProgramList');

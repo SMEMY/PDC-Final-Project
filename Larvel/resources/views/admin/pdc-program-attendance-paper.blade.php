@@ -100,15 +100,15 @@
         <!-- /Sidebar -->
 
         <!-- Page Wrapper -->
-        <div class="m-3" id="ignorePDF">
-            <div class="content container-fluid col-12">
+        <div class="m-3">
+            <div class="content container-fluid col-12" id="ignorePDF">
 
                 {{-- Page Header --> --}}
                 <div class=" mt-5">
                     <div class="row">
                         <div class="col-sm-12 text-center">
 
-                            <h4 class="page-title">د لوړو زده کړو وزارت</h4>
+                            <h4 class="page-title" onclick="pdf()">د لوړو زده کړو وزارت</h4>
                             <h4 class="page-title">کندهار پوهنتون</h4>
                             <h4 class="page-title">مسلکي پرختیائي مرکز</h4>
                             <h4 class="page-title">د مکتوب لیکني او (ې) ګانو پېږندلګلوي ورکشاپ د ګډون حاضري</h4>
@@ -191,6 +191,9 @@
                     </div>
                 </div>
             </div>
+            <button type="button" onclick="convertHTMLToPDF()"
+                style="margin-left: 350px;padding: 7px; color: white; background-color: darkslategrey;">PDF olarak
+                Kaydet</button>
             <!-- /Page Content -->
 
             <!-- Attendance Modal -->
@@ -314,7 +317,7 @@
     <!-- Slimscroll JS -->
     <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
     <!-- Chart JS -->
-    <script src="{{ asset('assets/plugins/morris/morris.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/plugins/morris/morris.min.js') }}"></script> --}}
     <script src="{{ asset('assets/plugins/raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('assets/js/chart.js') }}"></script>
     <!-- Custom JS -->
@@ -328,24 +331,42 @@
     <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
     <script src="{{ asset('assets/js/jspdf.umd.min.js') }}"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.2.0/jspdf.umd.min.js"></script> --}}
+    <script src="<https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js>"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+
+
     <script>
-        var doc = new jsPDF();
-        var elementHandler = {
-            '#ignorePDF': function(element, renderer) {
-                return true;
-            }
-        };
+        // import html2PDF from 'jspdf-html2canvas';
+        function convertHTMLToPDF() {
+            // const {
+            //     jsPDF
+            // } = window.jspdf;
+            html2canvas(document.body, {
+                onrendered: function(canvas)
+                {
+                    var img = canvas.toDataURL("image/png");
+                    var doc = new jsPDF();
 
-        var source = window.document.getElementsByTagName("body")[0];
-        doc.fromHTML(
-            source,
-            15,
-            15, {
-                'width': 180,
-                'elementHandlers': elementHandler
-            });
+                    doc.addImage(img, 'JPEG', 20, 20);
+                    doc.save("output.pdf");
 
-        doc.output("dataurlnewwindow");
+
+                }
+            } );
+            // var doc = new jsPDF('l', 'mm', [1200, 1810]);
+            // var pdfjs = document.querySelector('#ignorePDF');
+
+            // doc.html(pdfjs, {
+            //     callback: function(doc) {
+            //         doc.save("output.pdf");
+            //     },
+            //     x: 10,
+            //     y: 10
+            // });
+
+            // doc.output('dataurlnewwindow');
+        }
     </script>
 
 

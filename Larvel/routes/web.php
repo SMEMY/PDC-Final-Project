@@ -13,6 +13,7 @@ use App\Http\Controllers\feedBackController;
 use App\Http\Controllers\userAttendanceController;
 use App\Http\Controllers\attendanceController;
 use App\Http\Controllers\resultController;
+use App\Http\Controllers\commonUserController;
 use App\Http\Controllers\facilityController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\agendaController;
@@ -40,8 +41,20 @@ use App\Http\Controllers\admin_infoController;
 
 */
 
+Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+    Route::resource('/userEnroledPrograms', commonUserController::class);
+    Route::resource('/enrolledPdcProgramInfo', commonUserController::class);
+    Route::resource('/materials', commonUserController::class);
+    Route::resource('/downloadMaterial', commonUserController::class);
+    Route::resource('/viewMaterial', commonUserController::class);
+
+});
+Route::resource('/userRegister', commonUserController::class);
+Route::view('/test', 'check.facilitatorParticipantRegisteration')->name('addPdcprogram');
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     // Route::view('/', 'index')->name('dashboard');
+    Route::resource('/pdcProgramList', programController::class);
     Route::resource('/dashboard', dashboardController::class);
     Route::view('/addPdcProgram', 'admin.pdc-add-program')->name('addPdcprogram');
     Route::view('/addEduProgram', 'admin.pdc-add-educational-program')->name('addEduProgram');
@@ -50,7 +63,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/deleteQuestion/{id}', [deleteFeedbackQuestion::class, 'deleteQuestion'])->name('');
     Route::get('/deleteQuestionnaire/{id}', [deleteFeedbackQuestion::class, 'deleteProgramQuestionnaire'])->name('');
 
-    Route::resource('/pdcProgramList', programController::class);
     Route::resource('/memberStoreTwo', userController::class);
 
     Route::resource('/pdcProgramInfo', programController::class);
@@ -101,6 +113,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('/downloadPhoto', photoController::class);
     Route::resource('/educationalPrograminfo', eduprogramController::class);
     Route::resource('/downloadMaterial', materialController::class);
+    Route::resource('/viewMaterial', materialController::class);
     Route::resource('/deleteMaterial', materialController::class);
     Route::resource('/deleteFacilitatorForProgram', programfacilitatorController::class);
 });

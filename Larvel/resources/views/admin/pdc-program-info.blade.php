@@ -9,7 +9,7 @@ hahahaha
 h4 {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			font-size:30px !important;
-		
+
 		}
 		#info h4{
 			color: black !important;
@@ -31,7 +31,7 @@ h4 {
 			color: black !important;
 
 		}
-	
+
         h3 {
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 			color: black !important;
@@ -67,27 +67,27 @@ h4 {
 			border: 1px solid gray;
 		}
 		#images_home{
-			
+
 			<!-- width: 45% !important; -->
 		}
 		#images ul{
 		}
-		
-        
-		
+
+
+
 @endsection
 
 <!-- here we add dynamic content -->
 @section('content')
 <!-- Page Wrapper -->
 <div class="page-wrapper">
-	
+
 	<!-- Page Content -->
 	<div class="content">
 
 
 		<!-- Account Logo -->
-		
+
 		<!-- /Account Logo -->
 		<div class="row" >
 			<div class="col-md-12 p-0" style="padding:0px !important; padding-left:20px !important;">
@@ -131,11 +131,11 @@ h4 {
 						<li class="col-md-12"><i class="pr-2 fa fa-qrcode"></i>د پروګرام کوډ د ګډونوالو لپاره: <span
 								class="text-white bg-info p-1" style="border-radius: 5px; font-weight:bold">(- {{$programs->participant_code}} -)</span></li>
 						<li class="col-md-12"><i class="pr- fa fa-qrcode"></i> د پروګرام کوډ د تسهیلونکو لپاره : <span
-								class="text-white bg-info p-1" style="border-radius: 5px; font-weight:bold">(- {{$programs->facilitator_code}} -)</span></li>		
+								class="text-white bg-info p-1" style="border-radius: 5px; font-weight:bold">(- {{$programs->facilitator_code}} -)</span></li>
 					</ul>
 				</div>
 				<div class="job-content job-widget col-md-12" id="info">
-					
+
 					<div class="job-desc-title">
 						<h4 class="text-center mt-4 p-3 rounded">د اړونده پروګرام په اړه وضاحت</h4>
 					</div>
@@ -147,11 +147,11 @@ h4 {
 					</div>
 					<div class="job-description">
 						<ul class="square-list">
-					
+
 
 							@foreach( $programs->getFacilities as $facility)
 							<li> {{ $facility->facility }} </li>
-							
+
 							@endforeach
 						</ul>
 					</div>
@@ -160,11 +160,11 @@ h4 {
 					</div>
 					<div class="job-description">
 						<ul class="square-list">
-					
+
 
 							@foreach( $programs->getAgendas as $agenda)
 							<li> {{ $agenda->agenda }} </li>
-							
+
 							@endforeach
 						</ul>
 					</div>
@@ -173,11 +173,11 @@ h4 {
 					</div>
 					<div class="job-description">
 						<ul class="square-list">
-					
+
 
 							@foreach( $programs->getResults as $result)
 							<li> {{ $result->result }} </li>
-							
+
 							@endforeach
 						</ul>
 					</div>
@@ -186,11 +186,11 @@ h4 {
 					</div>
 					<div class="job-description">
 						<ul class="square-list">
-					
+
 
 							@foreach( $programs->getEvaluations as $evaluation)
 							<li> {{ $evaluation->evaluation }} </li>
-							
+
 							@endforeach
 						</ul>
 					</div>
@@ -216,21 +216,21 @@ h4 {
 							@endforeach
 						</ul>
 					</div>
-					
-					
+
+
 				</div>
 			</div>
-			<div class="row col-md-12" id="small" > 
+			<div class="row col-md-12" id="small" >
 				<div class="col-md-6" Style="padding:0px !important; padding-left:20px !important;">
 					<div class="job-det-info job-widget col-md-12" style=" border-radius: 5px; box-shadow:1px 0px 3px 0px #00beff" id="date">
 						<h4 class="account-title">نېټه</h4>
-						
+
 						<ul class="job-post-det ">
 							<li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د جوړېدو نېټه: </strong><span class="text-blue">{{date('d - m - Y ', strtotime($programs->start_date))}}</span></li>
 							<li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د ختمېدو نېټه: </strong><span class="text-blue">{{date('d - m - Y ', strtotime($programs->end_date))}}</span></li>
 							<li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د شروع کېدو وخت: </strong><span class="text-blue">{{date('H:i A', strtotime($programs->start_date))}}</span></li>
 							<li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د ختم کېدو وخت: </strong><span class="text-blue">{{date('H:i', strtotime($programs->end_date))}}</span></li>
-						
+
 						</ul>
 						<!-- <a class="btn job-btn" href="#" data-toggle="modal" data-target="#apply_job">Enroll</a> -->
 					</div>
@@ -238,13 +238,13 @@ h4 {
 				<div class="col-md-6" Style="padding:0px !important; padding-right:20px !important;">
 					<div class="job-det-info job-widget col-md-12" style=" box-shadow:1px 0px 3px 0px #00beff; border-radius: 5px; " id="address">
 						<h4 class="account-title">پته   </h4>
-					
+
 						<ul class="job-post-det">
 							<li class="col-md-12"><i class="pr-2 fa fa-university"></i><strong>د ساحې نوم:  </strong><span class="text-blue">{{ $programs->campus_name }}</span></li>
 							<li class="col-md-12"><i class="pr-2 fa fa-building"></i><strong> د ودانۍ نوم:  </strong><span class="text-blue">{{ $programs->block_name }}</span></li>
 							<li class="col-md-12"><i class="pr-2 fa fa-calculator"></i><strong> د ودانۍ شمېره: </strong><span class="text-blue">{{ $programs->block_number }}</span></li>
 							<li class="col-md-12"><i class="pr-2 fa fa-calculator"></i><strong> د صالون شمېره: </strong><span class="text-blue">{{ $programs->room_number }}</span></li>
-						
+
 						</ul>
 						<!-- <a class="btn job-btn" href="#" data-toggle="modal" data-target="#apply_job">Enroll</a> -->
 					</div>
@@ -252,37 +252,37 @@ h4 {
 				<div class="col-md-6" Style="padding:0px !important; padding-left:20px !important;">
 					<div class="job-det-info job-widget col-md-12" style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="save_info">
 						<h4 class="account-title">معلومات ثبتول</h4>
-	
-						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramAttendance/{{$programs->id}}" >د پروګرام د ګډونوالو حاضري ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramFacility/{{$programs->id}}" >د پروګرام سهولتونه ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramAgenda/{{$programs->id}}" >د پروګرام اجنډاوي ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramEvaluation/{{$programs->id}}" >د پروګرام ارزوني ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramResult/{{$programs->id}}" >د پروګرام پایلي ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramPhoto/{{$programs->id}}" >د پروګرام تفرقه ثبتول</a>
-						<a class="btn job-btn mt-3 p-2" href="/admin/storeMaterials/{{$programs->id}}" >د پروګرام درسي موادو ثبتول</a>
+
+						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramAttendance/{{$programs->id}}" onclick="audio.play()">د پروګرام د ګډونوالو حاضري ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramFacility/{{$programs->id}}" onclick="audio.play()">د پروګرام سهولتونه ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramAgenda/{{$programs->id}}" onclick="audio.play()">د پروګرام اجنډاوي ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramEvaluation/{{$programs->id}}" onclick="audio.play()">د پروګرام ارزوني ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramResult/{{$programs->id}}" onclick="audio.play()">د پروګرام پایلي ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/pdcProgramPhoto/{{$programs->id}}" onclick="audio.play()">د پروګرام تفرقه ثبتول</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/storeMaterials/{{$programs->id}}" onclick="audio.play()">د پروګرام درسي موادو ثبتول</a>
 						<a class="btn job-btn mt-3 p-2" href="/admin/feedbackFormInsertion/{{$programs->id}}" >د پروګرام پوښتنلیک ثبتول</a>
 					</div>
 				</div>
 				<div class=" col-md-6" Style="padding:0px !important; padding-right:20px !important;">
 					<div class="job-det-info job-widget col-md-12" style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="save_info">
 						<h4 class="account-title">د پروګرام  نور معلومات </h4>
-	
-						<a class="btn job-btn mt-3 p-2" href="/admin/facilitatorProfileForProgram/{{$program_id}}" >د پروګرام تسهیلونکی</a>
-						<a class="btn job-btn mt-3 p-2" href="/admin/specificeProgramParticipants/{{$programs->id}}" >د پروګرام د ګډونوالو لیست</a>
-						<a class="btn job-btn mt-3 p-2 bg-danger" href="/admin/pdcProgramAttendancePaper/{{$programs->id}}" >د پروګرام د ګډونوالو حاضري پاڼه</a>
-						<a class="btn job-btn mt-3 p-2 " href="/admin/pdcProgramAttendanceReport/{{$programs->id}}" >د پروګرام د ګډونوالو د سوبتیا راپور </a>
-						<a class="btn job-btn mt-3 p-2" href="/admin/feedback/{{$programs->id}}" >د پروګرام پوښتنلیک </a>
-						<a class="btn job-btn mt-3 p-2 " href="/admin/feedbackAnswer/{{$programs->id}}" >د پروګرام پوښتنلیک ځوابول</a>
-						<a class="btn job-btn mt-3 p-2 " href="/admin/pdcProgramFeedbackReport/{{$programs->id}}" >د پروګرام پوښتنلیک راپور</a>
-						<a class="btn job-btn mt-3 p-2" href="/admin/materials/{{$programs->id}}" >د پروګرام تدریسي مواد</a>
-	
+
+						<a class="btn job-btn mt-3 p-2" href="/admin/facilitatorProfileForProgram/{{$program_id}}" onclick="audio.play()">د پروګرام تسهیلونکی</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/specificeProgramParticipants/{{$programs->id}}" onclick="audio.play()">د پروګرام د ګډونوالو لیست</a>
+						<a class="btn job-btn mt-3 p-2 bg-danger" href="/admin/pdcProgramAttendancePaper/{{$programs->id}}" onclick="audio.play()">د پروګرام د ګډونوالو حاضري پاڼه</a>
+						<a class="btn job-btn mt-3 p-2 " href="/admin/pdcProgramAttendanceReport/{{$programs->id}}" onclick="audio.play()">د پروګرام د ګډونوالو د سوبتیا راپور </a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/feedback/{{$programs->id}}" onclick="audio.play()">د پروګرام پوښتنلیک </a>
+						<a class="btn job-btn mt-3 p-2 " href="/admin/feedbackAnswer/{{$programs->id}}" onclick="audio.play()" >د پروګرام پوښتنلیک ځوابول</a>
+						<a class="btn job-btn mt-3 p-2 " href="/admin/pdcProgramFeedbackReport/{{$programs->id}}"onclick="audio.play()">د پروګرام پوښتنلیک راپور</a>
+						<a class="btn job-btn mt-3 p-2" href="/admin/materials/{{$programs->id}}" onclick="audio.play()">د پروګرام تدریسي مواد</a>
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 <!-- /Page Content -->
-			
+
 <!-- Delete Project Modal -->
 			<div class="modal custom-modal fade" id="delete_project" role="dialog">
 				<div class="modal-dialog modal-dialog-centered">
@@ -311,7 +311,7 @@ h4 {
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="modal custom-modal fade" id="delete_photo" role="dialog">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
@@ -326,7 +326,7 @@ h4 {
                           				<form action="" method="post" id="pathGettertwo">
                             					{{ method_field('DELETE') }}
                            						{{ csrf_field() }}
-												   
+
 												   <input type="hidden"  name="program_id" id="" value="{{$programs->id}}">
                            					 <button type="submit" class="btn btn-primary continue-btn col-md-12">له منځه یې اوسی</button>
                        					</form>
@@ -426,7 +426,7 @@ h4 {
 
 		function pathFindertwo(numtwo)
 					{
-					
+
 						document.getElementById("pathGettertwo").action = numtwo.href;
 
 					}

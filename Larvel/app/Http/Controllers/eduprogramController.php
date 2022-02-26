@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Eduprogram;
-Use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -17,8 +17,8 @@ class eduprogramController extends Controller
     public function index(Request $request)
     {
         // return "asldfkja";
-// return $request->method();
-        $programs =  Eduprogram::orderBy('id', 'desc')->get();
+        // return $request->method();
+        $programs =  Eduprogram::orderBy('id', 'desc')->paginate(10);
         $path = '/educationalProgramList';
         // return $programs;
         return view('admin.pdc-list-all-educational-program', compact('programs', 'path'));
@@ -44,30 +44,25 @@ class eduprogramController extends Controller
     {
         //
         // return $request->path();
-        if($request->path() === 'admin/searchEducationalProgram'){
+        if ($request->path() === 'admin/searchEducationalProgram') {
             // $request->validate([
             //     'search_type' => 'bail|required|string|in:year,department,faculty,university,teacher_last_name,teacher_name,teacher_name,type,topic',
             //     'search_content' => 'bail|required',
             // ]);
-            if($request->search_type === null || $request->search_content === null)
-            {
+            if ($request->search_type === null || $request->search_content === null) {
                 return redirect('admin/educationalProgramList');
-
             }
-                $path = '/admin/educationalProgramList';
-                $programs =  DB::table('eduprograms')->where($request->search_type, $request->search_content)->get();
-                if(count($programs) === 0)
-                {
-                    return back()->with('warn_search', 'یاد پروګرام په سیسټم کي ونه موندل سو!');
-                }
-                else{
-                    // return "asdf";
-                    // redirect('admin/educafdfdftionalProgramList')->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
-                    return view('admin.pdc-list-all-educational-program', compact('programs', 'path'))->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
-                }
-
-        }
-        else if($request->path() === 'admin/educationalProgramList'){
+            $path = '/admin/educationalProgramList';
+            $programs =  DB::table('eduprograms')->where($request->search_type, $request->search_content)->paginate(10);
+            // return count($programs);
+            if (count($programs) === 0) {
+                return back()->with('warn_search', 'یاد پروګرام په سیسټم کي ونه موندل سو!');
+            } else {
+                // return "asdf";
+                // redirect('admin/educafdfdftionalProgramList')->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
+                return view('admin.pdc-list-all-educational-program', compact('programs', 'path'))->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
+            }
+        } else if ($request->path() === 'admin/educationalProgramList') {
             // return $request->date;
             $request->validate([
                 'topic' => 'bail|required|string|max:100',
@@ -110,11 +105,9 @@ class eduprogramController extends Controller
             $program->save();
 
             return back()->with('success', 'یاد پروګرام په کامیابۍ سره سیسټم اضافه کړل سو!');
-        }
-        else{
+        } else {
             return "not found path!!!";
         }
-
     }
 
     /**
@@ -128,7 +121,6 @@ class eduprogramController extends Controller
         //
         $program = Eduprogram::find($id);
         return view('admin.pdc-educational-program-info', compact('program'));
-
     }
 
     /**
@@ -193,8 +185,6 @@ class eduprogramController extends Controller
         $program->room_number = $request->room_number;
         $program->save();
         return redirect('admin/educationalProgramList')->with('success', 'د یاد پروګرام معلومات په سیسټم کي په کامیابۍ سره تغیر ورکړل سو!');
-
-
     }
 
     /**
@@ -205,14 +195,11 @@ class eduprogramController extends Controller
      */
     public function destroy($id)
     {
-        if(count(DB::table('eduprograms')->where('id', $id)->get()) === 1)
-        {
+        if (count(DB::table('eduprograms')->where('id', $id)->get()) === 1) {
             $program = Eduprogram::find($id);
             $program->delete();
             return redirect('admin/educationalProgramList')->with('success', 'د یاد پروګرام معلومات له سیسټم څخه په کامیابۍ سره له منځه لاړ!');
-        }
-        elseif(count(DB::table('eduprograms')->where('id', $id)->get()) === 0)
-        {
+        } elseif (count(DB::table('eduprograms')->where('id', $id)->get()) === 0) {
             return redirect('admin/educationalProgramList')->with('warn', 'یاد پروګرام په سیسټم کي د له منځه وړلو لپاره نسو پیدا!');
         }
 

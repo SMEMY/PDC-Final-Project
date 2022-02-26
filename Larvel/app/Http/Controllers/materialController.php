@@ -90,7 +90,6 @@ class materialController extends Controller
     public function show(Request $request, $id)
     {
         //
-        // return $request->path()
         if ($request->path() === 'admin/storeMaterials/' . $id) {
             $program_id = $id;
             return view('admin.pdc-add-programs-materials', compact('program_id'));
@@ -113,6 +112,15 @@ class materialController extends Controller
             // return "hi";
             return Storage::download('public/programFiles/' . $id);
             // return Storage::download('public/programFiles/'.$id, $name, $headers);
+        } elseif ($request->path() === 'admin/downloadMaterial/' . $id) {
+            return Storage::download('public/programFiles/' . $id);
+            return $id;
+        } elseif ($request->path() === 'admin/viewMaterial/' . $id) {
+            // return Storage::download('public/programFiles/' . $id);
+            $path = 'storage/programFiles/' . $id;
+            return view('admin.viewFile', compact('path'));
+
+            // return $path;
         }
     }
 
@@ -151,11 +159,13 @@ class materialController extends Controller
 
         // $deletematerial->delete();
         // return redirect('materials/'.$request->program_id);
-        return $id;
+        // return $request->program_id;
+        // return $id;
         Storage::delete('public/programFiles/' . $id);
-        $delete = Material::where('path', $id)->get();
-        if ($delete->program_id === $request->program_id) {
-            $delete->delete();
+        // return "del";
+        $delete = DB::table('materials')->where('materials.path', $id)->get();
+        if ($delete[0]->program_id == $request->program_id) {
+            DB::table('materials')->where('materials.path', $id)->delete();
         } else {
             return back()->with('warn', " یاد فایل چي تاسي غواړی  له منځه یوسی پدې پروګرام پوري اړه نلري!");
         }

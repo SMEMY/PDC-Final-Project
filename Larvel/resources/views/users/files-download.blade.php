@@ -93,7 +93,7 @@
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-        <a href="/admin/pdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn">پروګرام ووینی</a>
+        <a href="/user/enrolledPdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn">پروګرام ووینی</a>
 
 
 
@@ -252,10 +252,14 @@
                                                                                     له منځه یې اوسی</a>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="card-file-thumb">
+                                                                        <div class="card-file-thumb" style="height: 150px !important">
                                                                             @if ($material->extension === 'jpeg' || $material->extension === 'png' || $material->extension === 'jpg' || $material->extension === 'gif' || $material->extension === 'svg')
-                                                                                <i class="fa fa-file-image-o"
-                                                                                    style="color: rgb(81, 182, 255);"></i>
+                                                                                {{-- <i class="fa fa-file-image-o"
+                                                                                    style="color: rgb(81, 182, 255);"></i> --}}
+                                                                                <img src="{{ asset('storage/programFiles/' . $material->path) }}"
+                                                                                    alt="none"
+                                                                                    class="img-fluid rounded  mx-auto  rounded mt-5"
+                                                                                    srcset="" height="202" width="300" style="height: 128px !important">
                                                                             @else
                                                                             @endif
                                                                         </div>
@@ -286,26 +290,21 @@
                                                                                     class="fa fa-ellipsis-v"></i></a>
                                                                             <div
                                                                                 class="dropdown-menu dropdown-menu-right">
-                                                                                <a href="/admin/downloadMaterial/{{ $material->path }}"
+                                                                                <a href="/user/downloadMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"><i
                                                                                         class="fa fa-download m-r-5"></i>Download</a>
-                                                                                <a href="/admin/viewMaterial/{{ $material->path }}"
-                                                                                    class="dropdown-item"><i
+                                                                                <a href="/user/viewMaterial/{{ $material->path }}"
+                                                                                    class="dropdown-item"
+                                                                                    target="__blank"><i
                                                                                         class="fa fa-download m-r-5"></i>view</a>
-                                                                                <a class="dropdown-item"
-                                                                                    href="/admin/deleteMaterial/{{ $material->path }}"
-                                                                                    data-toggle="modal"
-                                                                                    data-target="#delete_client"
-                                                                                    id="path"
-                                                                                    onclick="pathFinder(this)"><i
-                                                                                        class="fa fa-trash-o m-r-5"></i>
-                                                                                    له منځه یې اوسی</a>
+
                                                                             </div>
                                                                         </div>
-                                                                        <div class="card-file-thumb">
+                                                                        <div class="card-file-thumb" style="height: 150px !important">
                                                                             @if ($material->extension === 'mp4')
-                                                                                <i class="fa fa-file-movie-o"
-                                                                                    style="color: rgb(81, 182, 255);"></i>
+                                                                                {{-- <i class="fa fa-file-movie-o"
+                                                                                    style="color: rgb(81, 182, 255);"></i> --}}
+                                                                                    <video src="{{ asset('storage/programFiles/' . $material->path) }}"controls="" height="100" width="100%" style="height: 128px !important"></video>
                                                                             @else
                                                                             @endif
                                                                         </div>
