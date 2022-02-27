@@ -93,7 +93,7 @@ class commonUserController extends Controller
             $programs = DB::table('programs')->where('programs.id', $id)->get();
             $programs = DB::table('programs')->where('programs.id', $id)->get();
             $programs = DB::table('programs')->where('programs.id', $id)->get();
-            return view('check.facil-part-enroll-program-info', compact('programs', 'results', 'evaluations', 'facilities'));
+            return view('users.facil-part-enroll-program-info', compact('programs', 'results', 'evaluations', 'facilities'));
         } elseif ($request->path() == 'user/materials/' . $id) {
             $programMaterials = Program::with('getMaterials')->find($id);
             $program_id = $id;
@@ -103,8 +103,58 @@ class commonUserController extends Controller
             return Storage::download('public/programFiles/' . $id);
             // return view('users.files-download', compact('programMaterials', 'program_id'));
         } elseif ($request->path() == 'user/viewMaterial/' . $id) {
-            $path = 'storage/programFiles/'.$id;
+            $path = 'storage/programFiles/' . $id;
             return view('users.viewFile', compact('path'));
+        } elseif ($request->path() == 'user/feedbackAnswer/' . $id) {
+
+            $materials =  DB::table('feedbacks')
+            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+            ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
+            ->where([
+                ['feedbacks.program_id', '=', $id],
+                ['fquestionnaires.question_category', '=', 'د ورکشاپ/ټرېنینګ مواد']
+               ])
+            ->get();
+            $facilities =  DB::table('feedbacks')
+            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+            ->select('feedbacks.id', 'fquestionnaires.*')
+            ->where([
+                ['feedbacks.program_id', '=', $id],
+                ['fquestionnaires.question_category', '=', 'آسانتیاوي']
+            ])
+            ->get();
+            $locations =  DB::table('feedbacks')
+            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+            ->select('feedbacks.id', 'fquestionnaires.*')
+            ->where([
+                ['feedbacks.program_id', '=', $id],
+                ['fquestionnaires.question_category', '=', 'ځاي']
+             ] )
+            ->get();
+            $comments =  DB::table('feedbacks')
+            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+            ->select('feedbacks.id', 'fquestionnaires.*')
+            ->where([
+                ['feedbacks.program_id', '=', $id],
+                ['fquestionnaires.question_category', '=', 'عمومي نظر']
+               ] )
+            ->get();
+            $program_id = $id;
+            //
+            // $programs = DB::table('programs')->get();
+            // return $facilities;
+            // $program_id = $id;
+            if(count($materials) === 0 && count($facilities) === 0 && count($locations) === 0 && count($comments) === 0)
+            {
+                return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
+            }
+            if(count($materials) === 0 || count($facilities) === 0 || count($locations) === 0 || count($comments) === 0)
+            {
+                return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
+            }
+            else{
+                return view('users.pdc-feedback-answer', compact('materials','facilities','locations','comments', 'program_id'));
+            }
         }
     }
 

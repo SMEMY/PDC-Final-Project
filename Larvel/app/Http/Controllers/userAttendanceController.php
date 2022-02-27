@@ -127,7 +127,7 @@ class userAttendanceController extends Controller
             $genrallParticipantIds = array();
 
             foreach ($participants as $participant) {
-                array_push($genrallParticipantIds, $participant->id);
+                array_push($genrallParticipantIds, $participant->user_id);
             }
 
             $enteredAttendanceParticipantIds = array();
@@ -135,12 +135,13 @@ class userAttendanceController extends Controller
             $unAttendancedParticipants =  DB::table('users')
                 // ->join('user_attendances', 'users.id', '=', 'user_attendances.user_id')
                 ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
+                ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
                 ->select('users.*', 'user_infos.*')
-                // ->where([
-                //     ['user_roles.program_id', $id],
-                //     ['user_roles.role_id', 3]
-                //     ])
-                ->whereNotIn('users.id', function ($q) {
+                ->where([
+                    ['user_roles.program_id', $id],
+                    ['user_roles.role_id', 3]
+                    ])
+                ->whereNotIn('user_infos.user_id', function ($q) {
                     $q->select('user_id')->from('user_attendances');
                 })
                 ->get();
@@ -151,36 +152,7 @@ class userAttendanceController extends Controller
             } else {
                 return back()->with('warn', "یاد پروګرام لپاره تر اوسه ګډونوال ندي اضافه کړل سوي!");
             }
-            // $ParticipantsIDs = array();
-            // foreach ($Participants as $participant) {
-            //     array_push($ParticipantsIDs, $participant->id);
-            // }
-            // $participantsAttendanced =  DB::table('facilitatorsandparticipants')
-            //     ->join('attendances', 'facilitatorsandparticipants.id', '=', 'attendances.participant_id')
-            //     ->select('facilitatorsandparticipants.*')
-            //     ->where('attendances.program_id', $id)
-            //     ->get();
-            // $attendancedParticipantsIDs = array();
-            // foreach ($participantsAttendanced as $participant) {
-            //     array_push($attendancedParticipantsIDs, $participant->id);
-            // }
-            // $notAttendancedParticipantsIDs = array_diff($ParticipantsIDs, $attendancedParticipantsIDs);
-            // $remainAttendance = array();
-            // foreach ($notAttendancedParticipantsIDs as $notID) {
-            //     array_push($remainAttendance, $notID);
-            // }
-            // $participants =  DB::table('facilitatorsandparticipants')
-            //     ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
-            //     ->select('facilitatorsandparticipants.*')
-            //     ->whereIn('programsparticipants.participant_id', $remainAttendance)
-            //     ->distinct()
-            //     ->get();
-            // $programID = $id;
-            // $check =  DB::table('facilitatorsandparticipants')
-            //     ->join('programsparticipants', 'facilitatorsandparticipants.id', '=', 'programsparticipants.participant_id')
-            //     ->select('facilitatorsandparticipants.*')
-            //     ->where('programsparticipants.program_id', $id)
-            //     ->get();
+
         }
     }
 

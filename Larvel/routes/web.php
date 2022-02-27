@@ -41,16 +41,25 @@ use App\Http\Controllers\admin_infoController;
 
 */
 
+Route::resource('/userRegister', commonUserController::class);
+Route::view('/test', 'check.facilitatorParticipantRegisteration')->name('addPdcprogram');
+
 Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+    Route::resource('/programs', programController::class);
+    Route::resource('/programEnrolment', programEnrollmentController::class);
+    Route::resource('/memberEnrollmentForProgram', programEnrollmentController::class);
+
     Route::resource('/userEnroledPrograms', commonUserController::class);
     Route::resource('/enrolledPdcProgramInfo', commonUserController::class);
     Route::resource('/materials', commonUserController::class);
     Route::resource('/downloadMaterial', commonUserController::class);
     Route::resource('/viewMaterial', commonUserController::class);
+    Route::resource('/feedbackAnswer', commonUserController::class);
+    Route::resource('/feedback', feedBackController::class);
+    Route::resource('/facilitatorMaterials', materialController::class);
+    Route::resource('/storeMaterials', materialController::class);
 
 });
-Route::resource('/userRegister', commonUserController::class);
-Route::view('/test', 'check.facilitatorParticipantRegisteration')->name('addPdcprogram');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     // Route::view('/', 'index')->name('dashboard');

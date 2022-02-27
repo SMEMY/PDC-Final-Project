@@ -39,8 +39,8 @@ class programController extends Controller
 
         if ($request->path() === 'admin/pdcProgramList') {
             return view('admin.pdc-list-all-program', compact('programs', 'path'));
-        } else if ($request->path() === 'programs') {
-            return view('notenrolled-program', compact('programs'));
+        } else if ($request->path() === 'user/programs') {
+            return view('users.notenrolled-program', compact('programs'));
         } else {
             return "path not matched!";
         }
@@ -65,9 +65,7 @@ class programController extends Controller
 
     public function store(Request $request)
     {
-        if (Gate::denies(ability: 'logged-in')) {
-            return "no access allowed!";
-        }
+        
         // this part is belongs to Program Model
         if ($request->path() === 'admin/searchPdcProgram') {
             // return "alkdfj";
@@ -173,9 +171,9 @@ class programController extends Controller
     {
 
         // comAllPrograms
-        if ($request->path() === 'programs/' . $id) {
+        if ($request->path() === 'user/programs/' . $id) {
             $programs = Program::with('getFacilities', 'getResults')->find($id);
-            return view('not-enreolled-program-info', compact('programs'));
+            return view('users.not-enreolled-program-info', compact('programs'));
         }
         //participantEnrolledPrograms
 
@@ -189,6 +187,8 @@ class programController extends Controller
         } elseif ($request->path() == 'enrolledPdcProgramInfo/' . $id) {
             $programs = Program::with('getFacilities', 'getResults', 'getEvaluations')->find($id);
             return view('facil-part-enroll-program-info', compact('programs'));
+        } elseif ($request->path() == 'user/programEnrolment/' . $id) {
+            return view();
         } else {
             return "path not found!";
         }

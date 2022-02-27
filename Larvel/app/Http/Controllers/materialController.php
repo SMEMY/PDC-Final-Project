@@ -42,43 +42,76 @@ class materialController extends Controller
      */
     public function store(Request $request)
     {
+        // return "sljdkfj";
 
-        // $request->validate([
-        //     'materials' => 'required',
-        //     'materials.*' => 'mimes:png,jpg,jpeg,mp4,pdf,docx,doc,docm,rtf,txt,pptx,pptm,ppt,xlsx,xlsm,xlsb,xltx,gif,csv,mp3,m4a,mkv,avi,wmv,mov|max:1048576',
-        //     // 'file_name' => 'required',
-        //     'file_name.*' => 'required|string|max:20',
-        //     // 'file_type' => 'required',
-        //     'file_type.*' => 'required|string|in:آډیو,وډیو,انځور,کتاب,لکچر',
-        // ]);
-        $index = 0;
-        // return "sldkfjsdf";
-        // return $request->file('materials');
-        foreach ($request->file('materials') as $material) {
-            if (!empty($request->file_name[$index]) && !empty($request->file_type[$index])) {
-                // return "slakdj";
-                $fileName = time() . '.' . $material->extension();
-                $kb = $material->getSize() / 1024;
-                $mb = $kb / 1024;
-                $gb = $mb / 1024;
-                $material->storeAs('public/programFiles', $fileName);
-                sleep(1);
-                $fileSave = new Material;
-                $fileSave->name = $request->file_name[$index];
-                $fileSave->type = $request->file_type[$index];
-                $fileSave->path = $fileName;
-                $fileSave->size =  round($mb, 2);
-                $fileSave->extension =  $material->extension();
-                $fileSave->program_id = $request->program_id;
-                $fileSave->save();
-                $index++;
-            } elseif (empty($request->file_name[$index])) {
-                return back()->with('warn', "د فایل نوم باید وجود ولري!");
-            } elseif (empty($request->file_type[$index])) {
-                return back()->with('warn', "د فایل ډول باید وجود ولري!");
+        if ($request->path() == 'admin/storeMaterials') {
+            $index = 0;
+            // return "sldkfjsdf";
+            // return $request->file('materials');
+            foreach ($request->file('materials') as $material) {
+                if (!empty($request->file_name[$index]) && !empty($request->file_type[$index])) {
+                    // return "slakdj";
+                    $fileName = time() . '.' . $material->extension();
+                    $kb = $material->getSize() / 1024;
+                    $mb = $kb / 1024;
+                    $gb = $mb / 1024;
+                    $material->storeAs('public/programFiles', $fileName);
+                    sleep(1);
+                    $fileSave = new Material;
+                    $fileSave->name = $request->file_name[$index];
+                    $fileSave->type = $request->file_type[$index];
+                    $fileSave->path = $fileName;
+                    $fileSave->size =  round($mb, 2);
+                    $fileSave->extension =  $material->extension();
+                    $fileSave->program_id = $request->program_id;
+                    $fileSave->save();
+                    $index++;
+                } elseif (empty($request->file_name[$index])) {
+                    return back()->with('warn', "د فایل نوم باید وجود ولري!");
+                } elseif (empty($request->file_type[$index])) {
+                    return back()->with('warn', "د فایل ډول باید وجود ولري!");
+                }
             }
+            return redirect('admin/pdcProgramInfo/' . $request->program_id)->with('program_materials_added', "پروګرام اړونده فایلونه په کامیابۍ سره سیسټم ته داخل کړل سوه!");
+        } elseif ($request->path() == 'user/storeMaterials') {
+            // return "i am store mat";
+            $request->validate([
+                'materials' => 'required',
+                'materials.*' => 'mimes:png,jpg,jpeg,mp4,pdf,docx,doc,docm,rtf,txt,pptx,pptm,ppt,xlsx,xlsm,xlsb,xltx,gif,csv,mp3,m4a,mkv,avi,wmv,mov|max:1048576',
+                // 'file_name' => 'required',
+                'file_name.*' => 'required|string|max:20',
+                // 'file_type' => 'required',
+                'file_type.*' => 'required|string|in:آډیو,وډیو,انځور,کتاب,لکچر',
+            ]);
+            $index = 0;
+            // return "sldkfjsdf";
+            // return $request->file('materials');
+            foreach ($request->file('materials') as $material) {
+                if (!empty($request->file_name[$index]) && !empty($request->file_type[$index])) {
+                    // return "slakdj";
+                    $fileName = time() . '.' . $material->extension();
+                    $kb = $material->getSize() / 1024;
+                    $mb = $kb / 1024;
+                    $gb = $mb / 1024;
+                    $material->storeAs('public/programFiles', $fileName);
+                    sleep(1);
+                    $fileSave = new Material;
+                    $fileSave->name = $request->file_name[$index];
+                    $fileSave->type = $request->file_type[$index];
+                    $fileSave->path = $fileName;
+                    $fileSave->size =  round($mb, 2);
+                    $fileSave->extension =  $material->extension();
+                    $fileSave->program_id = $request->program_id;
+                    $fileSave->save();
+                    $index++;
+                } elseif (empty($request->file_name[$index])) {
+                    return back()->with('warn', "د فایل نوم باید وجود ولري!");
+                } elseif (empty($request->file_type[$index])) {
+                    return back()->with('warn', "د فایل ډول باید وجود ولري!");
+                }
+            }
+            return redirect('user/enrolledPdcProgramInfo/' . $request->program_id)->with('program_materials_added', "پروګرام اړونده فایلونه په کامیابۍ سره سیسټم ته داخل کړل سوه!");
         }
-        return redirect('admin/pdcProgramInfo/' . $request->program_id)->with('program_materials_added', "پروګرام اړونده فایلونه په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**
@@ -105,9 +138,9 @@ class materialController extends Controller
             } else {
                 return back()->with('warn', 'د یاد پروګرام لپاره تر اوسه فایلونه ندي اضافه سوي سیسټم کي !');
             }
-        } elseif ($request->path() === 'facilitatorMaterials/' . $id) {
+        } elseif ($request->path() === 'user/facilitatorMaterials/' . $id) {
             $program_id = $id;
-            return view('admin.facilitator-programs-materials', compact('program_id'));
+            return view('users.pdc-add-programs-materials', compact('program_id'));
         } elseif ($request->path() === 'downloadMaterial/' . $id) {
             // return "hi";
             return Storage::download('public/programFiles/' . $id);

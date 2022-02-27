@@ -132,11 +132,11 @@
                         <a href="/admin/addPdcProgram" class="btn add-btn px-4"><i class="fa fa-plus"></i>پروګرام ثبت
                             کړی</a>
                         <!-- <div class="view-icons">
-                        <a href="projects.html" class="grid-view btn btn-link active"><i
-                                class="fa fa-th"></i></a>
-                        <a href="project-list.html" class="list-view btn btn-link"><i
-                                class="fa fa-bars"></i></a>
-                    </div> -->
+                                    <a href="projects.html" class="grid-view btn btn-link active"><i
+                                            class="fa fa-th"></i></a>
+                                    <a href="project-list.html" class="list-view btn btn-link"><i
+                                            class="fa fa-bars"></i></a>
+                                </div> -->
                     </div>
                 </div>
             </div>
@@ -168,7 +168,7 @@
 
                         <div class="col-sm-6 col-md-5" id="search_content" onclick="audio.play()">
                             <div class="form-group form-focus select-focus" onclick="audio.play()">
-                                <select class="custom-select p-2 h-100 searchInput" name="search_type" >
+                                <select class="custom-select p-2 h-100 searchInput" name="search_type">
                                     <a href="/facilitatorList">
                                         <option selected value="">د پلټني عنصر انتخاب کړی!</option>
                                     </a>
@@ -186,7 +186,8 @@
                         </div>
                         <div class="col-sm-6 col-md-2">
                             <!-- <a href="#" class="">پلټنه </a> -->
-                            <button type="submit" class="btn btn-success btn-block h3 p-1" onclick="audio.play()">پلټنه</button>
+                            <button type="submit" class="btn btn-success btn-block h3 p-1"
+                                onclick="audio.play()">پلټنه</button>
                         </div>
                     </div>
                 </form>
@@ -240,6 +241,20 @@
                                                 <li class="ml-2 text-dark d-inline-block"><i
                                                         class="fa fa-money text-danger"></i> <strong>فیس:
                                                     </strong>{{ $program->fee }} {{ $program->fee_type }} </li>
+
+                                                @if ($program->start_date <= Carbon\Carbon::today() &&  $program->end_date >= Carbon\Carbon::today())
+                                                    <li class="ml-2 text-dark d-inline-block"><i
+                                                            class="fa fa-unlock text-danger"></i> <strong>حالت:
+                                                        </strong> جاري</li>
+                                                @elseif(Carbon\Carbon::today() < $program->start_date )
+                                                    <li class="ml-2 text-dark d-inline-block"><i
+                                                            class="fa fa-lock text-danger"></i> <strong>حالت:
+                                                        </strong>راتلونکی </li>
+                                                @else
+                                                <li class="ml-2 text-dark d-inline-block"><i
+                                                    class="fa fa-lock text-danger"></i> <strong>حالت:
+                                                </strong>ختم </li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </a>
@@ -535,40 +550,40 @@
 
 
                             <!-- <hr !important>
-                                <div class="row " id="files">
-                                    <div class=" col-md-6">
-                                        <div class="form-group custom-file ">
-                                            <input type="file" class="custom-file-input" id="customFile"
-                                                onchange="nameShow(this)" name="filename[0]">
-                                            <label class="custom-file-label" for="customFile">د پروګرام اړونده
-                                                فایل
-                                                انتخاب کړی</label>
-                                        </div>
-                                    </div>
-                                    <div class=" col-md-6 mb-3" id="">
-                                        <div class="form-group">
-                                            <select class="custom-select"
-                                                style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="filetype[0]">
-                                                <option selected></option>
-                                                <option value="پریشینټېشن">پریشینټېشن</option>
-                                                <option value="وډیو">وډیو</option>
-                                                <option value="آډیو">آډیو</option>
-                                            </select>
+                                            <div class="row " id="files">
+                                                <div class=" col-md-6">
+                                                    <div class="form-group custom-file ">
+                                                        <input type="file" class="custom-file-input" id="customFile"
+                                                            onchange="nameShow(this)" name="filename[0]">
+                                                        <label class="custom-file-label" for="customFile">د پروګرام اړونده
+                                                            فایل
+                                                            انتخاب کړی</label>
+                                                    </div>
+                                                </div>
+                                                <div class=" col-md-6 mb-3" id="">
+                                                    <div class="form-group">
+                                                        <select class="custom-select"
+                                                            style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="filetype[0]">
+                                                            <option selected></option>
+                                                            <option value="پریشینټېشن">پریشینټېشن</option>
+                                                            <option value="وډیو">وډیو</option>
+                                                            <option value="آډیو">آډیو</option>
+                                                        </select>
 
-                                        </div>
-                                    </div>
+                                                    </div>
+                                                </div>
 
 
-                                </div>
-                                <div class="row">
-                                    <div class="form-group m-auto ">
-                                        <button type="button" id="file-remover"
-                                            class="btn btn-info mx-auto rounded-circle d-none" style="font-size: 20px;"
-                                            onclick="removeFile()">&times;</button>
-                                        <button type="button" class="btn btn-info mx-auto rounded-circle"
-                                            style="font-size: 20px;;" onclick="addFile(), el()">&plus;</button>
-                                    </div>
-                                </div> -->
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group m-auto ">
+                                                    <button type="button" id="file-remover"
+                                                        class="btn btn-info mx-auto rounded-circle d-none" style="font-size: 20px;"
+                                                        onclick="removeFile()">&times;</button>
+                                                    <button type="button" class="btn btn-info mx-auto rounded-circle"
+                                                        style="font-size: 20px;;" onclick="addFile(), el()">&plus;</button>
+                                                </div>
+                                            </div> -->
 
                             <div class="row mt-5">
                                 <div class="input-group col-md-12">

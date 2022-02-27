@@ -129,12 +129,16 @@
             opacity: 1 !important;
         }
 
+        input:invalid:required {
+            border: 3px solid red !important;
+        }
+
     </style>
 </head>
 
 <body>
     <!-- Main Wrapper -->
-    <a href="/user/pdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
+    <a href="/user/enrolledPdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
     <div class="main-wrapper m-auto col-md-8">
 
 
@@ -150,7 +154,7 @@
                 <div class="card-header p-3">
                     <h4 class="card-title mb-0">د اوړنده پروکرام اړونده فایلونه اپلوډ کړئ</h4>
                 </div>
-                <form action="/admin/storeMaterials" method="POST" enctype="multipart/form-data" name="formName"
+                <form action="/user/storeMaterials" method="POST" enctype="multipart/form-data" name="formName"
                     id="filesUploads">
                     {{ method_field('POST') }}
                     {{ csrf_field() }}
@@ -211,8 +215,13 @@
                         <div class="bar" style="background-color: white-blue"></div>
                         <div class="percent ">0%</div>
                     </div>
+                    {{-- <div>
+                        <button onclick="abortForm()" id="btn-abort" class="btn btn-primary col-md-2 d-none"
+                            style="display:block; margin: 10px auto !important;  ">cancel</button>
+
+                    </div> --}}
                     <div class="m-auto" style="width: fit-content;">
-                        <button type="submit" class="btn btn-primary p-2" style="width: 300px; text-align: center;"
+                        <button type="submit" class="btn btn-primary p-2 " style="width: 300px; text-align: center;"
                             id="btn">ثبت کړی</button>
                         <!-- <button type="submit" class="btn btn-primary p-2" style="width: 300px; text-align: center;" >ثبت
        کړی</button> -->
@@ -291,11 +300,15 @@
             $(document).ready(function() {
                 var bar = $('.bar');
                 var percent = $('.percent');
-                $('#filesUploads').ajaxForm({
+                var forr = $('#filesUploads');
+                forr.ajaxForm({
                     beforeSend: function() {
                         var percentVal = '0%';
                         bar.width(percentVal)
                         percent.html(percentVal);
+                        // console.log($('input').val());
+                        $('#btn-abort').removeClass('d-none');
+
                     },
                     uploadProgress: function(event, position, total, percentComplete) {
                         $('#show').removeClass('d-none');
@@ -314,12 +327,16 @@
                         window.setTimeout(function() {
                             var program = $('#prog').val();
                             console.log(program);
-                            window.location = `/admin/pdcProgramInfo/${program}`;
+                            window.location = `/user/enrolledPdcProgramInfo/${program}`;
                         }, 1000);
                     }
                 });
             });
         });
+
+        function abortForm() {
+            forr.abort();
+        }
     </script>
     @if (Session::has('warn'))
         <script>

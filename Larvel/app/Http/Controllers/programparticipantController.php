@@ -59,11 +59,9 @@ class programparticipantController extends Controller
     {
         // return "fdads";
         if ($request->path() === 'admin/searchParticipant') {
-            if($request->search_type === null || $request->search_content === null)
-            {
+            if ($request->search_type === null || $request->search_content === null) {
                 return redirect('admin/participantList');
-            }
-            else{
+            } else {
                 $members =  DB::table('users')
                     ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
                     ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
@@ -104,15 +102,16 @@ class programparticipantController extends Controller
             $participants =  DB::table('users')
                 ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
                 ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
-                ->select('users.*', 'user_infos.*', 'user_roles.program_id')
+                ->select('users.name', 'users.email', 'user_infos.*', 'user_roles.program_id')
                 ->where([
                     ['user_roles.role_id', 3],
                     ['user_roles.program_id', $id]
                 ])
                 ->get();
+                // return $participants;
             $programID = $id;
             if (count($participants) !== 0) {
-                return view('pdc-program-participants-list', compact('participants', 'programID'));
+                return view('admin.pdc-program-participants-list', compact('participants', 'programID'));
             } else {
                 return back()->with('warn', "د پروګرام لپاره تر اوسه ګډونوال ندي اضافه کړل سوي!");
             }

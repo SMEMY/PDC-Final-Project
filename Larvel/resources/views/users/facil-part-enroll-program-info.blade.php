@@ -185,5 +185,12 @@
 @endsection
 
 @section('cutom-js')
+@if (Session::has('program_materials_added'))
+        <script>
+            swal('ډېر ښه!', "{!! Session::get('program_materials_added') !!}", "success", {
+                button: "مننه",
+            });
+        </script>
+    @endif
 
 @endsection
