@@ -82,11 +82,11 @@
     <div class="content container">
         <div class="row">
             <div class="col-md-1 p-3 ">
-                <a href="index.html" class="btn btn-primary ">login</a>
+                <a href="/login" class="btn btn-primary ">login</a>
 
             </div>
             <div class="col-md-1 p-3">
-                <a href="index.html" class="btn btn-primary ">register</a>
+                <a href="/user/register" class="btn btn-primary ">register</a>
 
             </div>
 
@@ -116,7 +116,7 @@
         <div class="row">
             @foreach ($programs as $program)
                 <div class="col-md-12">
-                    <a class="job-list  border border-info" href="programs/{{ $program->id }}">
+                    <a class="job-list  border border-info" href="/user/programs/{{ $program->id }}">
                         <div class="job-list-det">
                             <div class="job-list-desc">
                                 <h3 class="job-list-title">{{ $program->name }}</h3>
@@ -165,6 +165,8 @@
     <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
     <!-- sweet alert -->
     <script src="{{ asset('assets/sweet-alert/sweetalert.min.js') }}"></script>
+
+    
 </body>
 
 </html>

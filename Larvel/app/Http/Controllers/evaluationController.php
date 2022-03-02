@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class evaluationController extends Controller
 {
@@ -35,17 +37,20 @@ class evaluationController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'program_evaluation.*' => 'bail|required|max:100',
-        ]);
-        for($index=0; $index<count($request->program_evaluation); $index++)
-        {
-            $evaluation = new Evaluation;
-            $evaluation->evaluation = $request->program_evaluation[$index];
-            $evaluation->program_id = $request->program_id;
-            $evaluation->save();
+        if (Gate::allows(ability: 'is-admin')) {
+            $request->validate([
+                'program_evaluation.*' => 'bail|required|max:100',
+            ]);
+            for ($index = 0; $index < count($request->program_evaluation); $index++) {
+                $evaluation = new Evaluation;
+                $evaluation->evaluation = $request->program_evaluation[$index];
+                $evaluation->program_id = $request->program_id;
+                $evaluation->save();
+            }
+            return redirect('admin/pdcProgramInfo/' . $request->program_id)->with('program_part_added', "پروګرام اړونده ارزوني په کامیابۍ سره سیسټم ته داخل کړل سوه!");
+        } else {
+            dd('you need to be admin');
         }
-        return redirect('admin/pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده ارزوني په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**
@@ -57,8 +62,12 @@ class evaluationController extends Controller
     public function show($id)
     {
         //
-        $programID = $id;
-        return view('admin.pdc-program-evaluation', compact('programID'));
+        if (Gate::allows(ability: 'is-admin')) {
+            $programID = $id;
+            return view('admin.pdc-program-evaluation', compact('programID'));
+        } else {
+            dd('you need to be admin');
+        }
     }
 
     /**

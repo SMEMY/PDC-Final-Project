@@ -43,12 +43,14 @@
     <style>
         h4 {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            color: black !important;
             font-size: 30px !important;
         }
 
         p,
         h5 {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            color: black !important;
             font-size: 20px !important;
         }
 
@@ -59,10 +61,12 @@
         li {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
             font-size: 20px !important;
+            color: black;
         }
 
         h3 {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            color: black;
 
         }
 
@@ -83,6 +87,27 @@
             transition: all 0.4s;
         }
 
+        #alertMassege {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
+        }
+
+        .swal-modal div {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 20px !important;
+        }
+
+        .swal-text {
+            text-align: center;
+            color: black;
+        }
+
+        .swal-title {
+            color: black;
+            font-size: 37px !important;
+
+        }
+
     </style>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -100,7 +125,7 @@
 
         <!-- Account Logo -->
         <div class="account-logo my-5">
-            <a href="index.html"><img src="{{ asset('assets/img/logo2.png') }}" alt="Dreamguy's Technologies"></a>
+            <a href="/home"><img src="{{ asset('assets/img/logo2.png') }}" alt="Dreamguy's Technologies"></a>
         </div>
         <!-- /Account Logo -->
         <div class="row col-md-12">
@@ -187,7 +212,8 @@
                     </div>
 
                     <div class="">
-                        <a class="btn job-btn mt-3 p-2" href="/user/programEnrolment/{{ $programs->id }}">په پروګرام کي
+                        <a class="btn job-btn mt-3 p-2" href="/user/programEnrolment/{{ $programs->id }}">په پروګرام
+                            کي
                             ځان ثبتول</a>
                     </div>
                 </div>
@@ -236,8 +262,43 @@
     <!-- /Page Content -->
 
 
-
-
+    <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
+    <!-- Bootstrap Core JS -->
+    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <!-- Slimscroll JS -->
+    <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
+    <!-- Chart JS -->
+    <script src="{{ asset('assets/plugins/morris/morris.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/raphael/raphael.min.js') }}"></script>
+    <script src="{{ asset('assets/js/chart.js') }}"></script>
+    <!-- Custom JS -->
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <!-- Datetimepicker JS -->
+    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <!-- Select2 JS -->
+    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
+    <!-- Tagsinput JS -->
+    <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
+    <!-- bootstrap growl js -->
+    <script src="{{ asset('assets/growl/jquery.bootstrap-growl.min.js') }}"></script>
+    <!-- sweet alert -->
+    <script src="{{ asset('assets/sweet-alert/sweetalert.min.js') }}"></script>
+    <!-- chart-js -->
+    <script src="{{ asset('assets/chart-js/dist/chart.min.js') }}"></script>
+    <!-- <script src="{{ asset('node_modules/jspdf/dist/jspdf.umd.min.js') }}"></script> -->
+    <script>
+        const audio = new Audio();
+        audio.src = "{{ asset('assets/clickSounds/click.mp3') }}";
+    </script>
+    @if (Session::has('registered_to_program'))
+        <script>
+            swal('ډېر ښه!', "{!! Session::get('registered_to_program') !!}", "success", {
+                button: "مننه",
+            });
+        </script>
+    @endif
 
 
 </body>

@@ -23,12 +23,12 @@ class CreateUserInfosTable extends Migration
 
             $table->string('phone_number', 30);
             $table->string('last_name', 30);
-            $table->string('gender');
-            $table->string('office_campus', 30);
-            $table->string('office_building', 30);
-            $table->string('office_department', 30);
-            $table->string('office_position', 30);
-            $table->string('office_position_category', 30);
+            $table->string('gender')->nullable();
+            $table->string('office_campus', 30)->nullable();
+            $table->string('office_building', 30)->nullable();
+            $table->string('office_department', 30)->nullable();
+            $table->string('office_position', 30)->nullable();
+            $table->string('office_position_category', 30)->nullable();
             $table->string('educational_rank', 30)->nullable();
             $table->timestamps();
         });

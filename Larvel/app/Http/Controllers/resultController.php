@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Result;
+use Illuminate\Support\Facades\Gate;
 
 class resultController extends Controller
 {
@@ -36,17 +37,20 @@ class resultController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'program_result.*' => 'bail|required|max:100',
-        ]);
-        for($index=0; $index<count($request->program_result); $index++)
-        {
-            $result = new Result;
-            $result->result = $request->program_result[$index];
-            $result->program_id = $request->program_id;
-            $result->save();
+        if (Gate::allows(ability: 'is-admin')) {
+            $request->validate([
+                'program_result.*' => 'bail|required|max:100',
+            ]);
+            for ($index = 0; $index < count($request->program_result); $index++) {
+                $result = new Result;
+                $result->result = $request->program_result[$index];
+                $result->program_id = $request->program_id;
+                $result->save();
+            }
+            return redirect('admin/pdcProgramInfo/' . $request->program_id)->with('program_part_added', "پروګرام اړونده پایلي په کامیابۍ سره سیسټم ته داخل کړل سوه!");
+        } else {
+            dd('you need to be admin');
         }
-        return redirect('admin/pdcProgramInfo/'.$request->program_id)->with('program_part_added', "پروګرام اړونده پایلي په کامیابۍ سره سیسټم ته داخل کړل سوه!");
     }
 
     /**
@@ -58,8 +62,12 @@ class resultController extends Controller
     public function show($id)
     {
         //
-        $programID = $id;
-        return view('admin.pdc-program-result', compact('programID'));
+        if (Gate::allows(ability: 'is-admin')) {
+            $programID = $id;
+            return view('admin.pdc-program-result', compact('programID'));
+        } else {
+            dd('you need to be admin');
+        }
     }
 
     /**

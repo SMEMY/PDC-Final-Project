@@ -16,10 +16,12 @@ class commonUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return "s";
+        if ($request->path() === 'user/register') {
+            return view('users.facilitatorParticipantRegisteration');
+        }
     }
 
     /**
@@ -53,25 +55,33 @@ class commonUserController extends Controller
     {
         //
         if ($request->path() == 'user/userEnroledPrograms/' . $id) {
+            // return "askdjflkas";
             if (Gate::denies(ability: 'logged-in')) {
                 return "no access allowed!";
             }
             $enrolledPrograms = DB::table('programs')
-                ->join('user_roles', 'programs.id', '=', 'user_roles.program_id')
+                ->join('role_user', 'programs.id', '=', 'role_user.program_id')
                 ->select('programs.*')
-                ->where('user_roles.user_id', $id)
+                ->where('role_user.user_id', auth()->user()->id)
                 ->get();
-            $programs = DB::table('user_roles')
-                // ->join('user_roles', 'programs.id', '=', 'user_roles.program_id')
-                ->select('user_roles.program_id')
-                ->where('user_roles.user_id', $id)
+            $programs = DB::table('role_user')
+                ->select('role_user.program_id')
+                ->where('role_user.user_id', auth()->user()->id)
                 ->get();
-            $programs_ids = json_decode($programs, true);
-            $notEnrolledPrograms  = DB::table('programs')
-                ->join('user_roles', 'programs.id', '=', 'user_roles.program_id')
-                ->select('programs.*')
-                ->whereNotIn('programs.id', $programs_ids)
-                ->get();
+
+            $programs_ids = array();
+
+            foreach ($programs as $program_id) {
+                array_push($programs_ids, $program_id->program_id);
+            }
+            // $notEnrolledPrograms  = DB::table('programs')
+
+            //     // ->join('role_user', 'programs.id', '=', 'role_user.program_id')
+            //     ->select('programs.*')
+            //     ->whereNotIn('programs.id', $programs_ids)
+            //     ->simplePaginate(10);
+            $notEnrolledPrograms = Program::whereNotIn('id', $programs_ids)->paginate(5);
+            // dd($programs_ids);
             // return $notEnrolledPrograms;
             return view('check.facilitator-participant-enrolled-programs', compact('enrolledPrograms', 'notEnrolledPrograms'));
         } elseif ($request->path() == 'user/enrolledPdcProgramInfo/' . $id) {
@@ -108,52 +118,49 @@ class commonUserController extends Controller
         } elseif ($request->path() == 'user/feedbackAnswer/' . $id) {
 
             $materials =  DB::table('feedbacks')
-            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-            ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
-            ->where([
-                ['feedbacks.program_id', '=', $id],
-                ['fquestionnaires.question_category', '=', 'د ورکشاپ/ټرېنینګ مواد']
-               ])
-            ->get();
+                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
+                ->where([
+                    ['feedbacks.program_id', '=', $id],
+                    ['fquestionnaires.question_category', '=', 'د ورکشاپ/ټرېنینګ مواد']
+                ])
+                ->get();
             $facilities =  DB::table('feedbacks')
-            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-            ->select('feedbacks.id', 'fquestionnaires.*')
-            ->where([
-                ['feedbacks.program_id', '=', $id],
-                ['fquestionnaires.question_category', '=', 'آسانتیاوي']
-            ])
-            ->get();
+                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                ->select('feedbacks.id', 'fquestionnaires.*')
+                ->where([
+                    ['feedbacks.program_id', '=', $id],
+                    ['fquestionnaires.question_category', '=', 'آسانتیاوي']
+                ])
+                ->get();
             $locations =  DB::table('feedbacks')
-            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-            ->select('feedbacks.id', 'fquestionnaires.*')
-            ->where([
-                ['feedbacks.program_id', '=', $id],
-                ['fquestionnaires.question_category', '=', 'ځاي']
-             ] )
-            ->get();
+                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                ->select('feedbacks.id', 'fquestionnaires.*')
+                ->where([
+                    ['feedbacks.program_id', '=', $id],
+                    ['fquestionnaires.question_category', '=', 'ځاي']
+                ])
+                ->get();
             $comments =  DB::table('feedbacks')
-            ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-            ->select('feedbacks.id', 'fquestionnaires.*')
-            ->where([
-                ['feedbacks.program_id', '=', $id],
-                ['fquestionnaires.question_category', '=', 'عمومي نظر']
-               ] )
-            ->get();
+                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                ->select('feedbacks.id', 'fquestionnaires.*')
+                ->where([
+                    ['feedbacks.program_id', '=', $id],
+                    ['fquestionnaires.question_category', '=', 'عمومي نظر']
+                ])
+                ->get();
             $program_id = $id;
             //
             // $programs = DB::table('programs')->get();
             // return $facilities;
             // $program_id = $id;
-            if(count($materials) === 0 && count($facilities) === 0 && count($locations) === 0 && count($comments) === 0)
-            {
+            if (count($materials) === 0 && count($facilities) === 0 && count($locations) === 0 && count($comments) === 0) {
                 return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
             }
-            if(count($materials) === 0 || count($facilities) === 0 || count($locations) === 0 || count($comments) === 0)
-            {
+            if (count($materials) === 0 || count($facilities) === 0 || count($locations) === 0 || count($comments) === 0) {
                 return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
-            }
-            else{
-                return view('users.pdc-feedback-answer', compact('materials','facilities','locations','comments', 'program_id'));
+            } else {
+                return view('users.pdc-feedback-answer', compact('materials', 'facilities', 'locations', 'comments', 'program_id'));
             }
         }
     }

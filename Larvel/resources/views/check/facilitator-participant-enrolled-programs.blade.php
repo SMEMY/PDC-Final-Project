@@ -39,6 +39,10 @@
     .mar{
     margin-top:10% !important;
     }
+    nav{
+    width: fit-content;
+    margin: 0 auto;
+    }
 @endsection
 
 <!-- here we add dynamic content -->
@@ -108,6 +112,7 @@
                             </a>
                         </div>
                     @endforeach
+                    {{-- {{ $enrolledPrograms->links() }} --}}
                 </div>
                 <div class="row tab-pane fade show " id="nav-unenroll" role="tabpanel" aria-labelledby="nav-unenroll-tab">
                     @foreach ($notEnrolledPrograms as $program)
@@ -140,6 +145,7 @@
                             </a>
                         </div>
                     @endforeach
+                    {{ $notEnrolledPrograms->links() }}
 
                 </div>
             </div>

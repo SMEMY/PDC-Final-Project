@@ -33,13 +33,13 @@
 
 <!-- Main CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    
+
 <!-- Select2 CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/select2.min.css')}}">
 
 <!-- Datetimepicker CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/bootstrap-datetimepicker.min.css')}}">
-    
+
 <!-- Tagsinput CSS -->
 <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
 
@@ -60,7 +60,7 @@
 	}
     h3{
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-            
+
 
         }
         input{
@@ -71,16 +71,16 @@
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
             font-size: 20px !important;
 
-			height: 44px  !important; 
-			border-radius: 3px  !important; 
+			height: 44px  !important;
+			border-radius: 3px  !important;
 			outline: none;
-			background-color:#f0fcff  !important; 
+			background-color:#f0fcff  !important;
 			border:1px solid #e3e3e3  !important;
-			
+
 		}
 		select:focus {
 			box-shadow: 0px 0px 2px #000 !important;
-			
+
 			transition: all 0.1s;
 			transform: scale(1.01);
 		}
@@ -111,14 +111,14 @@
 
 	<!-- Main Wrapper -->
 	<div class="main-wrapper">
-		<a href="programs-list.html" class="btn btn-primary apply-btn">پروګارمونه ته رجوع وکړی</a>
+		<a href="/home" class="btn btn-primary apply-btn">پروګارمونه ته رجوع وکړی</a>
 		<div class="account-content">
 			<!-- <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a> -->
 			<div class="container ">
 
 				<!-- Account Logo -->
 				<div class="account-logo mt-5">
-					<a href="index.html"><img src="assets/img/logo2.png" alt="Dreamguy's Technologies"></a>
+					<a href="index.html"><img src="{{asset('assets/img/logo2.png')}}" alt="Dreamguy's Technologies"></a>
 				</div>
 				<!-- /Account Logo -->
 
@@ -197,7 +197,7 @@
 
 										</div>
 									</div>
-								</div>	
+								</div>
 									<hr !important>
 								<div class="row" id="dynamic">
 									<div class="col-md-6">
@@ -221,7 +221,7 @@
 											<label class="col-form-label">کاري دفتر<span
 													class="text-danger">*</span></label>
 											<select class="custom-select " name="office_building">
-									
+
 												@if(old('office_building') === 'طب')
                                                 <option ></option>
                                                 <option selected value="طب">طب</option>
@@ -531,7 +531,7 @@
 												<option value="مرستیال">مرستیال</option>
 												<option value="ښوونکی">ښوونکی</option>
 												<option selected value="اداري کارمند">اداري کارمند</option>
-												@else 
+												@else
 												<option selected></option>
 												<option value="رئیس">رئیس</option>
 												<option value="مرستیال">مرستیال</option>
@@ -635,11 +635,11 @@
 							<hr !important>	<!-- this part has been hidden just for DB Facilitator role -->
 
 							<div class="form-group text-center col-md-4 m-auto">
-								<button class="btn btn-primary  account-btn col-md-12" type="submit">تسهیلونکی ثبت
+								<button class="btn btn-primary submit-btn" type="submit"> ثبت
 									کړی</button>
 							</div>
-							
-							
+
+
 						</form>
 						<!-- /Account Form -->
 
@@ -695,20 +695,20 @@
 				swal('ډېر ښه!',"{!! Session::get('add') !!}", "success", {
 				button: "مننه",
 			}).then(function()
-			{ 
-				
+			{
+
 				window.location = `/login`;
 			});
 				</script>
 			@endif
-<script>	
+<script>
  	// function bootstrapAlert1(){
-		
-	// 	}	
+
+	// 	}
 	// $(function() {
 	// 	$(document).ready(function()
 	// 	{
-		
+
 	// 		$('#publicStore').ajaxForm({
 	// 			beforeSend: function() {
 	// 				// var percentVal = '0%';
@@ -725,7 +725,7 @@
 	// 				console.log(xhr);
 	// 				bootstrapAlert1();
 	// 				// $('#show').addClass('d-none');
-					
+
 	// 				// window.setTimeout(function () {
 	// 				// 	var program = $('#prog').val();
 	// 				// 	console.log(program);
@@ -733,7 +733,7 @@
 	// 				// }, 3000);
 	// 			}
 	// 		});
-	// 	}); 
+	// 	});
 	// });
 		var s = true;
 		childCount = $('#dynamic').children("div").length;

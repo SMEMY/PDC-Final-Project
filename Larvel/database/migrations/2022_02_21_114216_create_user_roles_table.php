@@ -13,12 +13,12 @@ class CreateUserRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_roles', function (Blueprint $table) {
+        Schema::create('role_user', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedBigInteger('program_id');
+            $table->unsignedBigInteger('program_id')->nullable();
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
 
             $table->unsignedBigInteger('role_id');
@@ -34,6 +34,6 @@ class CreateUserRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_roles');
+        Schema::dropIfExists('role_user');
     }
 }

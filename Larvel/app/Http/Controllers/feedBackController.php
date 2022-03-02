@@ -9,6 +9,7 @@ use App\Models\Feedback;
 use App\Models\Feedbackcomment;
 use App\Models\Feedbackanswer;
 
+use Illuminate\Support\Facades\Gate;
 
 
 class feedBackController extends Controller
@@ -89,8 +90,7 @@ class feedBackController extends Controller
             return redirect('user/enrolledPdcProgramInfo/' . $request->program_id)->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
         } elseif ($request->path() == 'admin/feedback') {
             return redirect('admin/pdcProgramInfo/' . $request->program_id)->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
-        }
-        else{
+        } else {
             return "path not found!";
         }
         // return back()->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
@@ -107,97 +107,101 @@ class feedBackController extends Controller
     public function show(Request $request, $id)
     {
         // return Feedback::all();
-        if ($request->path() === 'admin/feedback/' . $id) {
-            // return "kjsda";
-            $materials =  DB::table('feedbacks')
-                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-                ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
-                ->where([
-                    ['feedbacks.program_id', '=', $id],
-                    ['fquestionnaires.question_category', '=', 'د ورکشاپ/ټرېنینګ مواد']
-                ])
-                ->get();
-            $facilities =  DB::table('feedbacks')
-                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-                ->select('feedbacks.id', 'fquestionnaires.*')
-                ->where([
-                    ['feedbacks.program_id', '=', $id],
-                    ['fquestionnaires.question_category', '=', 'آسانتیاوي']
-                ])
-                ->get();
-            $locations =  DB::table('feedbacks')
-                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-                ->select('feedbacks.id', 'fquestionnaires.*')
-                ->where([
-                    ['feedbacks.program_id', '=', $id],
-                    ['fquestionnaires.question_category', '=', 'ځاي']
-                ])
-                ->get();
-            $comments =  DB::table('feedbacks')
-                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-                ->select('feedbacks.id', 'fquestionnaires.*')
-                ->where([
-                    ['feedbacks.program_id', '=', $id],
-                    ['fquestionnaires.question_category', '=', 'عمومي نظر']
-                ])
-                ->get();
-            $program_id = $id;
-            //
-            // $programs = DB::table('programs')->get();
-            // return $facilities;
-            // $program_id = $id;
-            if (count($materials) === 0 && count($facilities) === 0 && count($locations) === 0 && count($comments) === 0) {
-                return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
-            } else {
-                return view('admin.pdc-feedback', compact('materials', 'facilities', 'locations', 'comments', 'program_id'));
+        if (Gate::allows(ability: 'is-admin')) {
+            if ($request->path() === 'admin/feedback/' . $id) {
+                // return "kjsda";
+                $materials =  DB::table('feedbacks')
+                    ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                    ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
+                    ->where([
+                        ['feedbacks.program_id', '=', $id],
+                        ['fquestionnaires.question_category', '=', 'د ورکشاپ/ټرېنینګ مواد']
+                    ])
+                    ->get();
+                $facilities =  DB::table('feedbacks')
+                    ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                    ->select('feedbacks.id', 'fquestionnaires.*')
+                    ->where([
+                        ['feedbacks.program_id', '=', $id],
+                        ['fquestionnaires.question_category', '=', 'آسانتیاوي']
+                    ])
+                    ->get();
+                $locations =  DB::table('feedbacks')
+                    ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                    ->select('feedbacks.id', 'fquestionnaires.*')
+                    ->where([
+                        ['feedbacks.program_id', '=', $id],
+                        ['fquestionnaires.question_category', '=', 'ځاي']
+                    ])
+                    ->get();
+                $comments =  DB::table('feedbacks')
+                    ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                    ->select('feedbacks.id', 'fquestionnaires.*')
+                    ->where([
+                        ['feedbacks.program_id', '=', $id],
+                        ['fquestionnaires.question_category', '=', 'عمومي نظر']
+                    ])
+                    ->get();
+                $program_id = $id;
+                //
+                // $programs = DB::table('programs')->get();
+                // return $facilities;
+                // $program_id = $id;
+                if (count($materials) === 0 && count($facilities) === 0 && count($locations) === 0 && count($comments) === 0) {
+                    return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
+                } else {
+                    return view('admin.pdc-feedback', compact('materials', 'facilities', 'locations', 'comments', 'program_id'));
+                }
+            } elseif ($request->path() === 'admin/feedbackAnswer/' . $id) {
+                // return "hasdkjadh";
+                $materials =  DB::table('feedbacks')
+                    ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                    ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
+                    ->where([
+                        ['feedbacks.program_id', '=', $id],
+                        ['fquestionnaires.question_category', '=', 'د ورکشاپ/ټرېنینګ مواد']
+                    ])
+                    ->get();
+                $facilities =  DB::table('feedbacks')
+                    ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                    ->select('feedbacks.id', 'fquestionnaires.*')
+                    ->where([
+                        ['feedbacks.program_id', '=', $id],
+                        ['fquestionnaires.question_category', '=', 'آسانتیاوي']
+                    ])
+                    ->get();
+                $locations =  DB::table('feedbacks')
+                    ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                    ->select('feedbacks.id', 'fquestionnaires.*')
+                    ->where([
+                        ['feedbacks.program_id', '=', $id],
+                        ['fquestionnaires.question_category', '=', 'ځاي']
+                    ])
+                    ->get();
+                $comments =  DB::table('feedbacks')
+                    ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                    ->select('feedbacks.id', 'fquestionnaires.*')
+                    ->where([
+                        ['feedbacks.program_id', '=', $id],
+                        ['fquestionnaires.question_category', '=', 'عمومي نظر']
+                    ])
+                    ->get();
+                $program_id = $id;
+                //
+                // $programs = DB::table('programs')->get();
+                // return $facilities;
+                // $program_id = $id;
+                if (count($materials) === 0 && count($facilities) === 0 && count($locations) === 0 && count($comments) === 0) {
+                    return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
+                }
+                if (count($materials) === 0 || count($facilities) === 0 || count($locations) === 0 || count($comments) === 0) {
+                    return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
+                } else {
+                    return view('admin.pdc-feedback-answer', compact('materials', 'facilities', 'locations', 'comments', 'program_id'));
+                }
             }
-        } elseif ($request->path() === 'admin/feedbackAnswer/' . $id) {
-            // return "hasdkjadh";
-            $materials =  DB::table('feedbacks')
-                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-                ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
-                ->where([
-                    ['feedbacks.program_id', '=', $id],
-                    ['fquestionnaires.question_category', '=', 'د ورکشاپ/ټرېنینګ مواد']
-                ])
-                ->get();
-            $facilities =  DB::table('feedbacks')
-                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-                ->select('feedbacks.id', 'fquestionnaires.*')
-                ->where([
-                    ['feedbacks.program_id', '=', $id],
-                    ['fquestionnaires.question_category', '=', 'آسانتیاوي']
-                ])
-                ->get();
-            $locations =  DB::table('feedbacks')
-                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-                ->select('feedbacks.id', 'fquestionnaires.*')
-                ->where([
-                    ['feedbacks.program_id', '=', $id],
-                    ['fquestionnaires.question_category', '=', 'ځاي']
-                ])
-                ->get();
-            $comments =  DB::table('feedbacks')
-                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-                ->select('feedbacks.id', 'fquestionnaires.*')
-                ->where([
-                    ['feedbacks.program_id', '=', $id],
-                    ['fquestionnaires.question_category', '=', 'عمومي نظر']
-                ])
-                ->get();
-            $program_id = $id;
-            //
-            // $programs = DB::table('programs')->get();
-            // return $facilities;
-            // $program_id = $id;
-            if (count($materials) === 0 && count($facilities) === 0 && count($locations) === 0 && count($comments) === 0) {
-                return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
-            }
-            if (count($materials) === 0 || count($facilities) === 0 || count($locations) === 0 || count($comments) === 0) {
-                return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
-            } else {
-                return view('admin.pdc-feedback-answer', compact('materials', 'facilities', 'locations', 'comments', 'program_id'));
-            }
+        } else {
+            dd('you need to be admin');
         }
 
 
@@ -213,41 +217,45 @@ class feedBackController extends Controller
     public function edit(Request $request, $id)
     {
         //
-        if ($request->path() === 'admin/feedback/' . $id . '/edit') {
-            $materials =  DB::table('feedbacks')
-                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-                ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
-                ->where('feedbacks.program_id', '=', $id)
-                ->get();
-            $facilities =  DB::table('feedbacks')
-                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-                ->select('feedbacks.id', 'fquestionnaires.*')
-                ->where([
-                    ['feedbacks.program_id', '=', $id],
-                    ['fquestionnaires.question_category', '=', 'آسانتیاوي']
-                ])
-                ->get();
-            $locations =  DB::table('feedbacks')
-                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-                ->select('feedbacks.id', 'fquestionnaires.*')
-                ->where([
-                    ['feedbacks.program_id', '=', $id],
-                    ['fquestionnaires.question_category', '=', 'ځاي']
-                ])
-                ->get();
-            $comments =  DB::table('feedbacks')
-                ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
-                ->select('feedbacks.id', 'fquestionnaires.*')
-                ->where([
-                    ['feedbacks.program_id', '=', $id],
-                    ['fquestionnaires.question_category', '=', 'عمومي نظر']
-                ])
-                ->get();
-            $program_id = $id;
-            //
-            // $programs = DB::table('programs')->get();
-            // return $facilities;
-            return view('admin.pdc-edit-program-feedback-uploader', compact('materials', 'facilities', 'locations', 'comments', 'program_id'));
+        if (Gate::allows(ability: 'is-admin')) {
+            if ($request->path() === 'admin/feedback/' . $id . '/edit') {
+                $materials =  DB::table('feedbacks')
+                    ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                    ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
+                    ->where('feedbacks.program_id', '=', $id)
+                    ->get();
+                $facilities =  DB::table('feedbacks')
+                    ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                    ->select('feedbacks.id', 'fquestionnaires.*')
+                    ->where([
+                        ['feedbacks.program_id', '=', $id],
+                        ['fquestionnaires.question_category', '=', 'آسانتیاوي']
+                    ])
+                    ->get();
+                $locations =  DB::table('feedbacks')
+                    ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                    ->select('feedbacks.id', 'fquestionnaires.*')
+                    ->where([
+                        ['feedbacks.program_id', '=', $id],
+                        ['fquestionnaires.question_category', '=', 'ځاي']
+                    ])
+                    ->get();
+                $comments =  DB::table('feedbacks')
+                    ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
+                    ->select('feedbacks.id', 'fquestionnaires.*')
+                    ->where([
+                        ['feedbacks.program_id', '=', $id],
+                        ['fquestionnaires.question_category', '=', 'عمومي نظر']
+                    ])
+                    ->get();
+                $program_id = $id;
+                //
+                // $programs = DB::table('programs')->get();
+                // return $facilities;
+                return view('admin.pdc-edit-program-feedback-uploader', compact('materials', 'facilities', 'locations', 'comments', 'program_id'));
+            }
+        } else {
+            dd('you need to be admin');
         }
     }
 
@@ -261,44 +269,47 @@ class feedBackController extends Controller
     public function update(Request $request, $id)
     {
         //
-
-        if ($request->path() === 'admin/feedback/' . $request->program_id) {
-            // return "sdfmsd";
-            $request->validate([
-                'feedback_question_category.*' => 'bail|required|string|in:د ورکشاپ/ټرېنینګ مواد,آسانتیاوي,ځاي,عمومي نظر',
-                'feedback_question.*' => 'bail|required|string|max:100',
-            ]);
-            for ($index = 0; $index < count($request->feedback_question); $index++) {
-                $check = Fquestionnaire::find($request->question_id[$index]);
-                if ($check !== null) {
-                    DB::table('fquestionnaires')
-                        ->where('fquestionnaires.id', $request->question_id[$index])
-                        ->update([
-                            'question' => $request->feedback_question[$index],
-                            'question_category' => $request->feedback_question_category[$index]
-                        ]);
-                } else {
-                    return back()->with('feedback_question_not_found', "یاد پوښتنه په سیسټم کي د اصلاح کولو لپاره شتون نلري!");
-                }
-            }
-            if (count($request->feedback_new_question) > 1) {
-                $feedFormId = DB::table('fquestionnaires')->select('fquestionnaires.feedback_form_id')->where('id', $request->question_id[0])->get();
-
+        if (Gate::allows(ability: 'is-admin')) {
+            if ($request->path() === 'admin/feedback/' . $request->program_id) {
+                // return "sdfmsd";
                 $request->validate([
-                    'feedback_question_new_category.*' => 'bail|required|string|in:د ورکشاپ/ټرېنینګ مواد,آسانتیاوي,ځاي,عمومي نظر',
-                    'feedback_new_question.*' => 'bail|required|string|max:100',
+                    'feedback_question_category.*' => 'bail|required|string|in:د ورکشاپ/ټرېنینګ مواد,آسانتیاوي,ځاي,عمومي نظر',
+                    'feedback_question.*' => 'bail|required|string|max:100',
                 ]);
-                DB::table('feedbacks')->insert(['program_id' => $request->program_id]);
-                $programID =  DB::table('feedbacks')->select('feedbacks.id')->where('created_at', DB::table('feedbacks')->max('created_at'))->get();
-                for ($index = 1; $index < count($request->feedback_new_question); $index++) {
-                    $questionnairQuestion = new Fquestionnaire;
-                    $questionnairQuestion->question_category = $request->feedback_question_new_category[$index];
-                    $questionnairQuestion->question = $request->feedback_new_question[$index];
-                    $questionnairQuestion->feedback_form_id = $feedFormId[0]->feedback_form_id;
-                    $questionnairQuestion->save();
+                for ($index = 0; $index < count($request->feedback_question); $index++) {
+                    $check = Fquestionnaire::find($request->question_id[$index]);
+                    if ($check !== null) {
+                        DB::table('fquestionnaires')
+                            ->where('fquestionnaires.id', $request->question_id[$index])
+                            ->update([
+                                'question' => $request->feedback_question[$index],
+                                'question_category' => $request->feedback_question_category[$index]
+                            ]);
+                    } else {
+                        return back()->with('feedback_question_not_found', "یاد پوښتنه په سیسټم کي د اصلاح کولو لپاره شتون نلري!");
+                    }
                 }
+                if (count($request->feedback_new_question) > 1) {
+                    $feedFormId = DB::table('fquestionnaires')->select('fquestionnaires.feedback_form_id')->where('id', $request->question_id[0])->get();
+
+                    $request->validate([
+                        'feedback_question_new_category.*' => 'bail|required|string|in:د ورکشاپ/ټرېنینګ مواد,آسانتیاوي,ځاي,عمومي نظر',
+                        'feedback_new_question.*' => 'bail|required|string|max:100',
+                    ]);
+                    DB::table('feedbacks')->insert(['program_id' => $request->program_id]);
+                    $programID =  DB::table('feedbacks')->select('feedbacks.id')->where('created_at', DB::table('feedbacks')->max('created_at'))->get();
+                    for ($index = 1; $index < count($request->feedback_new_question); $index++) {
+                        $questionnairQuestion = new Fquestionnaire;
+                        $questionnairQuestion->question_category = $request->feedback_question_new_category[$index];
+                        $questionnairQuestion->question = $request->feedback_new_question[$index];
+                        $questionnairQuestion->feedback_form_id = $feedFormId[0]->feedback_form_id;
+                        $questionnairQuestion->save();
+                    }
+                }
+                return redirect('admin/feedback/' . $request->program_id)->with('feedback_edited', "پوښتنلیک په کامیابۍ سره اصلاح کړل سو!");
             }
-            return redirect('admin/feedback/' . $request->program_id)->with('feedback_edited', "پوښتنلیک په کامیابۍ سره اصلاح کړل سو!");
+        } else {
+            dd('you need to be admin');
         }
     }
 

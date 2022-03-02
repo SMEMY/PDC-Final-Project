@@ -98,7 +98,7 @@
                         <!-- <p class="account-subtitle"></p> -->
                         <hr !important>
                         <!-- Account Form -->
-                        <form action="/admin/memberEnrollmentForProgram" method="post">
+                        <form action="/user/memberEnrollmentForProgram" method="post">
                             @csrf
 
                             <div class="form-group col-md-10 m-auto p-5">

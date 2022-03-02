@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 use Illuminate\Http\Request;
 
@@ -16,14 +17,18 @@ class dashboardController extends Controller
     public function index()
     {
         //
-        $programs = count(DB::table('programs')->get());
-        $users = count(DB::table('users')->get());
-        $eduPrograms = count(DB::table('eduPrograms')->get());
-        $participants = count(DB::table('users')->join('user_roles', 'users.id', '=', 'user_roles.user_id')->where('user_roles.role_id', 3)->distinct()->get());
-        $facilitators = count(DB::table('users')->join('user_roles', 'users.id', '=', 'user_roles.user_id')->where('user_roles.role_id', 2)->distinct()->get());
-        // $users = $users - 1;
+        if (Gate::allows(ability: 'is-admin')) {
+            $programs = count(DB::table('programs')->get());
+            $users = count(DB::table('users')->get());
+            $eduPrograms = count(DB::table('eduPrograms')->get());
+            $participants = count(DB::table('users')->join('role_user', 'users.id', '=', 'role_user.user_id')->where('role_user.role_id', 3)->distinct()->get());
+            $facilitators = count(DB::table('users')->join('role_user', 'users.id', '=', 'role_user.user_id')->where('role_user.role_id', 2)->distinct()->get());
+            // $users = $users - 1;
 
-        return view('admin.index', compact('programs', 'users', 'participants', 'facilitators', 'eduPrograms'));
+            return view('admin.index', compact('programs', 'users', 'participants', 'facilitators', 'eduPrograms'));
+
+        }
+        dd('you need to be admin');
     }
 
     /**

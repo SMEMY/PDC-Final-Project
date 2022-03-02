@@ -14,8 +14,8 @@
 								<li class="submenu">
 									<a href="#" class="active" onclick="audio.play()"><span> پروګرام ثبتول</span> <span class="menu-arrow"></span></a>
 									<ul style="display: none;">
-										<li><a href="{{route('addPdcprogram')}}" onclick="audio.play()">د (پي ډي سي) پروګرام ثبتول</a></li>
-										<li><a href="{{route('addEduProgram')}}" onclick="audio.play()">دعلمي ترفېع/ تقرر پروګرام ثبتول</a></li>
+										<li><a href="/admin/addPdcProgram" onclick="audio.play()">د (پي ډي سي) پروګرام ثبتول</a></li>
+										<li><a href="/admin/addEduProgram" onclick="audio.play()">دعلمي ترفېع/ تقرر پروګرام ثبتول</a></li>
 									</ul>
 								</li>
 								<li class="submenu">

@@ -21,6 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'f_q',
+        'f_a',
+        's_q',
+        's_a',
+        't_q',
+        't_a',
     ];
 
     /**
@@ -41,7 +47,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
     function getAttendances()
     {
         return $this->hasMany('App\Models\User_attendance');
@@ -65,5 +71,20 @@ class User extends Authenticatable
     function getProgramsFeedbacks()
     {
         return $this->hasMany('App\Models\Feedbak');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Models\Role');
+    }
+
+    public function hasAnyRole(string $role)
+    {
+        return null !== $this->roles()->where('name', $role)->first();
+    }
+
+    public function hasAnyRoles(array $role)
+    {
+        return null !== $this->roles()->where('name', $role)->first();
     }
 }

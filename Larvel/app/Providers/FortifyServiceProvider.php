@@ -12,8 +12,11 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use App\Models\Admin_info;
+use App\Models\User;
+
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Gate;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -49,11 +52,20 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
 
-        Fortify::registerView(
-            function () {
-                return view(view: ('admin.admin-registeration'));
-            }
-        );
+        $users = User::all();
+        if ($users === null) {
+            Fortify::registerView(
+                function () {
+                    return view(view: ('admin.admin-registeration'));
+                }
+            );
+        } elseif ($users !== null) {
+            Fortify::registerView(
+                function () {
+                    return view(view: ('users.facilitatorParticipantRegisteration'));
+                }
+            );
+        }
 
         Fortify::loginView(
             function () {
