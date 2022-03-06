@@ -282,7 +282,7 @@
             }).then(function() {
                 var program = $('#prog').val();
                 console.log(program);
-                window.location = `/pdcProgramInfo/${program}`;
+                window.location = `admin/pdcProgramInfo/${program}`;
             });
         }
     </script>

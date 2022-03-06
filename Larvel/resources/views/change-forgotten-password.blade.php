@@ -112,7 +112,7 @@
     <!-- Main Wrapper -->
     <div class="main-wrapper">
         <div class="account-content">
-            <a href="/admin/profile/{{ auth()->user()->id }}" class="btn btn-primary apply-btn">ادمېن معلومات</a>
+            <a href="#" class="btn btn-primary apply-btn">شاته</a>
             <div class="container pb-5 mb-5">
 
                 <!-- Account Logo -->
@@ -129,11 +129,11 @@
                         <!-- <p class="account-subtitle"></p> -->
 
                         <!-- Account Form -->
-                        <form action="/admin/passwordChange" method="POST" enctype="multipart/form-data">
+                        <form action="/addNewPassword" method="POST" enctype="multipart/form-data">
                             {{-- {{ method_field('PATCH') }} --}}
                             {{ csrf_field() }}
-                            <input class="" name="admin_id" type="hidden" placeholder="داډمېن نوم"
-                                value="">
+                            <input class="" name="user_name" type="hidden" placeholder="داډمېن نوم"
+                                value="{{ $user_name }}">
 
                             {{-- @if ($errors->any())
                                 <div class="mb-5" id="alertMassege">
@@ -171,7 +171,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-12 p-3">
+                                {{-- <div class="form-group col-md-12 p-3">
                                     <label>پخوانی پاسورډ</label>
                                     <input class="form-control" name="old_password" type="password" placeholder=""
                                         value="">
@@ -182,7 +182,7 @@
                                             </strong>
                                         </span>
                                     @enderror
-                                </div>
+                                </div> --}}
 
 
                                 <!-- <div class="form-group text-center col-md-4 m-auto">

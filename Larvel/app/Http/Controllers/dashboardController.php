@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Program;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
@@ -17,6 +19,7 @@ class dashboardController extends Controller
     public function index()
     {
         //
+        // return auth()->user();
         if (Gate::allows(ability: 'is-admin')) {
             $programs = count(DB::table('programs')->get());
             $users = count(DB::table('users')->get());
@@ -26,9 +29,10 @@ class dashboardController extends Controller
             // $users = $users - 1;
 
             return view('admin.index', compact('programs', 'users', 'participants', 'facilitators', 'eduPrograms'));
-
+        } else {
+            return redirect('user/userEnroledPrograms/' . auth()->user()->id);
         }
-        dd('you need to be admin');
+        // dd('you need to be admin');
     }
 
     /**

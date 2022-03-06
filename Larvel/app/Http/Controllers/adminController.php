@@ -61,6 +61,36 @@ class adminController extends Controller
 
                     return "old password incorrect!!!!!";
                 }
+            } elseif ($request->path() == 'admin/questionsChange') {
+                // return $request->f_a;
+                $request->validate([
+                    'f_q' => 'required|string',
+                    's_q' => 'required|string',
+                    't_q' => 'required|string',
+                    'f_a' => 'required|string',
+                    's_a' => 'required|string',
+                    't_a' => 'required|string',
+                    'old_password' => 'required|string',
+                ]);
+                if ($request->f_q !== $request->s_q && $request->s_q !== $request->t_q && $request->f_q !== $request->t_q) {
+                    if (Hash::check($request->old_password, auth()->user()->password)) {
+                        DB::table('users')
+                            ->where('id', auth()->user()->id)
+                            ->update([
+                                'f_q' => $request->f_q,
+                                'f_a' => $request->f_a,
+                                's_q' => $request->s_q,
+                                's_a' => $request->s_a,
+                                't_q' => $request->t_q,
+                                't_a' => $request->t_a,
+                            ]);
+                        return redirect('admin/profile/' . auth()->user()->id)->with('questions_changed', 'مخاظوي پوښتني بدلون وموند!');
+                    } else {
+                        throw ValidationException::withMessages(['old_password' => 'پخوانی پاسورډ صحیح ندی!']);
+                    }
+                } else {
+                    return back()->with('questions_dif', 'پوښتني باید بېل بېل وي!');
+                }
             }
         }
     }
@@ -89,8 +119,15 @@ class adminController extends Controller
             } elseif ($request->path() == 'admin/passwordChange/' . auth()->user()->id) {
                 // return "slkdfjskldfjsdlkfjsdlfksdjflksdjf";
                 return view('admin.admin-change-password');
+            } elseif ($request->path() == 'admin/questionsChange/' . auth()->user()->id) {
+                $questions = DB::table('users')
+                    ->where('users.id', auth()->user()->id)
+                    ->select('users.f_q', 'users.s_q', 'users.t_q')
+                    ->get();
+                // return $questions;
+                return view('admin.admin-secret-questions', compact('questions'));
+                return "sldkfjsdlk";
             } else {
-                return "no path matched!";
             }
         } else {
             dd('you need to be admin');

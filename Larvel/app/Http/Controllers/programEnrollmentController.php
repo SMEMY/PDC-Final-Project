@@ -205,20 +205,22 @@ class programEnrollmentController extends Controller
                 $member_id = $id;
                 $user_address = 'member';
                 return view('admin.pdc-program-enrollment', compact('member_id', 'user_address'));
+            } elseif ($request->path() === 'admin/facilitatorEnrollmentForProgram/' . $id) {
                 $member_id = $id;
                 $user_address = 'facilitator';
-
                 return view('admin.pdc-program-enrollment', compact('member_id', 'user_address'));
-            } elseif ($request->path() === 'admin/facilitatorEnrollmentForProgram/' . $id) {
+            } elseif ($request->path() === 'admin/programEnrollmentForFacilitator/' . $id) {
+                $member_id = $id;
+                $user_address = 'facilitator';
+                return view('admin.pdc-program-enrollment', compact('member_id', 'user_address'));
             } else {
-                // return "sdfsd";
                 $member_id = $id;
                 $user_address = 'participant';
 
                 return view('admin.pdc-program-enrollment', compact('member_id', 'user_address'));
             }
         } else {
-            // dd('you need to be admin');
+            dd('you need to be admin');
         }
     }
 

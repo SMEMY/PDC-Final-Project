@@ -1,11 +1,11 @@
 <!-- here we add the head.blade.php file for css links and more -->
-@include('master.masterContent.head')
+@include('mastercommon.masterContent.head')
 
 <!-- here we just define the generall div with main-wrapper class -->
 <div class="main-wrapper">
 
     <!-- here we the header.blade.php file -->
-    @include('master.masterContent.header')
+    @include('mastercommon.masterContent.header')
 
     <!-- here we add the sidebar.blade.php file -->
     {{-- @include('master.masterContent.sidebar') --}}
@@ -15,4 +15,4 @@
 </div>
 
 <!-- here we add the footer.blade.php for js links and more -->
-@include('master.masterContent.footer')
+@include('mastercommon.masterContent.footer')

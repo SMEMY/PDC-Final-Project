@@ -58,7 +58,7 @@
 
         label {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-            font-size: 25px !important;
+            font-size: 20px !important;
         }
 
         select:focus {
@@ -68,9 +68,18 @@
             transform: scale(1.01);
         }
 
+        .sel {
+            transform: translate3d(10px, 32px, 0px) !important;
+        }
+
+        input:focus {
+            /* border-color: #5092f4 !important; */
+            box-shadow: 0px 0px 5px #5092f4 !important;
+        }
+
         select {
             font-size: 20px !important;
-
+            background: #e3e3e3 !important;
         }
 
         input:focus {
@@ -119,14 +128,14 @@
 
                 <div class="account-box " style="width: 1000px;">
                     <div class="account-wrapper" style="">
-                        <h3 class="account-title p-3">د اډمین راجسټر پاڼه</h3>
+                        <h3 class="account-title p-3">پاسورډ د نوي کولو صفحه!</h3>
                         <hr>
                         <!-- <p class="account-subtitle"></p> -->
 
                         <!-- Account Form -->
-                        <form action="/register" method="POST">
-                            @csrf
-                            @if ($errors->any())
+                        <form action="/userChangePassword" method="GET">
+                            {{-- @csrf --}}
+                            {{-- @if ($errors->any())
                                 <div class="mb-5" id="alertMassege">
                                     <ul style="list-style-type:none" class="p-0 m-0">
                                         @foreach ($errors->all() as $error)
@@ -136,139 +145,126 @@
                                         @endforeach
                                     </ul>
                                 </div>
-                            @endif
-                            <input type="hidden" name="role" value="admin">
-                            <dvi class="row p-3">
-                                <div class="form-group col-md-6 p-3">
-                                    <label>نوم</label>
-                                    <input class="form-control" name="name" type="text" placeholder="داډمېن نوم"
-                                        value="{{ old('name') }}">
-                                </div>
-                                <div class="form-group col-md-6 p-3">
-                                    <label>تخلص</label>
-                                    <input class="form-control" name="last_name" type="text" placeholder="داډمېن تخلص"
-                                        value="{{ old('last_name') }}">
-                                </div>
-                                <div class="form-group col-md-6 p-3">
-                                    <label>برېښنالیک</label>
-                                    <input class="form-control" name="email" type="email"
-                                        placeholder="داډمېن برېښنالیک" value="{{ old('email') }}">
-                                </div>
-                                <div class="form-group col-md-6 p-3">
-                                    <label>ټلیفون شمېره</label>
-                                    <input class="form-control" name="phone_number" type="text"
-                                        placeholder="داډمېن ټلیفون شمېره" value="{{ old('phone_number') }}">
-                                </div>
-                                <div class="form-group col-md-6 p-3">
-                                    <label>پاسورډ</label>
-                                    <input class="form-control" name="password" type="password"
-                                        placeholder="نوی پاسورډ" value="{{ old('password') }}">
-                                </div>
-                                <div class="form-group col-md-6 p-3">
-                                    <label>پاسورډ تائید کړئ</label>
-                                    <input class="form-control" type="password" name="password_confirmation"
-                                        placeholder="نوی پاسورډ تائید کړئ"
-                                        value="{{ old('password_confirmation') }}">
-                                </div>
-                                <!-- <div class="form-group text-center col-md-4 m-auto">
-         <button class="btn btn-primary  account-btn col-md-12" type="submit">اډمېن ثبت
-          کړئ</button>
-        </div> -->
-                            </dvi>
-                            <hr style="width:70%">
-                            <h3 class="account-title p-3">د اډمین محافظوي پوښتنو پاڼه</h3>
-
+                            @endif --}}
+                            <input type="hidden" name="user_name" id="" value="{{ $user_name }}">
                             <div class="row p-3">
                                 <div class="col-sm-6 col-md-12" id="search_content">
-                                    <div class="form-group form-focus select-focus">
+                                    <div class="form-group form-focus select-focus mb-5">
                                         <label>لمړي پوښتنه</label>
 
-                                        <select class="custom-select p-2 h-100 searchInput" name="first_question">
-                                            <option selected value="">پوښتنه مو انتخاب کړی!</option>
-                                            <option value="ستاسي د خوښي خواړه کوم دي؟">ستاسي د خوښي خواړه کوم دي؟
+                                        <select class="custom-select p-2 h-100 searchInput" name="f_q">
+
+                                            <option value="">پوښتنه مو انتخاب کړی!</option>
+                                            <option value="{{ $questions[0]->f_q }}">
+                                                {{ $questions[0]->f_q }}
                                             </option>
-                                            <option value="د خوښي حیوان مو کوم یو دی؟">د خوښي حیوان مو کوم یو دی؟
+                                            <option value="{{ $questions[0]->s_q }}">
+                                                {{ $questions[0]->s_q }}
                                             </option>
-                                            <option value="د خوښي رنګ مو کوم رنګ دی؟">د خوښي رنګ مو کوم رنګ دی؟</option>
-                                            <option value="په کور کي مو د ناز نوم څه دی؟">په کور کي مو د ناز نوم څه دی؟
+                                            <option value="{{ $questions[0]->t_q }}">
+                                                {{ $questions[0]->t_q }}
                                             </option>
-                                            <option value="ستاسي د خوښي مېوه کوم یو دی؟">ستاسي د خوښي مېوه کوم یو دی؟
-                                            </option>
-                                            <!-- <option>Delta Infotech</option> -->
                                         </select>
-                                        <!-- <label class="focus-label">پروګرام انتخاب کړی</label> -->
+                                        @error('f_q')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{ $message }}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12 p-3">
                                     <label>ځواب</label>
-                                    <input class="form-control" name="first_answer" type="text"
-                                        placeholder="داډمېن تخلص" value="{{ old('first_answer') }}">
+                                    <input class="form-control" name="f_a" type="text" placeholder="داډمېن تخلص"
+                                        value="{{ old('f_a') }}">
+                                    @error('f_a')
+                                        <span class="invalid-feedback" role="alert" style="display:block">
+                                            <strong>
+                                                {{ $message }}
+                                            </strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <hr style="width:70%">
                             <div class="row p-3">
                                 <div class="col-sm-6 col-md-12" id="search_content">
-                                    <div class="form-group form-focus select-focus">
-                                        <label>دویمه پوښتنه</label>
-
-                                        <select class="custom-select p-2 h-100 searchInput" name="second_question">
-                                            <option selected value="">پوښتنه مو انتخاب کړی!</option>
-                                            <option value="ستاسي د خوښي خواړه کوم دي؟">ستاسي د خوښي خواړه کوم دي؟
-                                            </option>
-                                            <option value="د خوښي حیوان مو کوم یو دی؟">د خوښي حیوان مو کوم یو دی؟
-                                            </option>
-                                            <option value="د خوښي رنګ مو کوم رنګ دی؟">د خوښي رنګ مو کوم رنګ دی؟</option>
-                                            <option value="په کور کي مو د ناز نوم څه دی؟">په کور کي مو د ناز نوم څه دی؟
-                                            </option>
-                                            <option value="ستاسي د خوښي مېوه کوم یو دی؟">ستاسي د خوښي مېوه کوم یو دی؟
-                                            </option>
-                                            <!-- <option>Delta Infotech</option> -->
-                                        </select>
-                                        <!-- <label class="focus-label">پروګرام انتخاب کړی</label> -->
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12 p-3">
-                                    <label>ځواب</label>
-                                    <input class="form-control" name="second_answer" type="text"
-                                        placeholder="داډمېن تخلص" value="{{ old('second_answer') }}">
-                                </div>
-                            </div>
-                            <hr style="width:70%">
-
-                            <div class="row p-3">
-                                <div class="col-sm-6 col-md-12" id="search_content">
-                                    <div class="form-group form-focus select-focus">
+                                    <div class="form-group form-focus select-focus mb-5">
                                         <label>دریمه پوښتنه</label>
 
-                                        <select class="custom-select p-2 h-100 searchInput" name="third_question">
+                                        <select class="custom-select p-2 h-100 searchInput" name="s_q">
                                             <option selected value="">پوښتنه مو انتخاب کړی!</option>
-                                            <option value="ستاسي د خوښي خواړه کوم دي؟">ستاسي د خوښي خواړه کوم دي؟
+                                            <option value="{{ $questions[0]->f_q }}">{{ $questions[0]->f_q }}
                                             </option>
-                                            <option value="د خوښي حیوان مو کوم یو دی؟">د خوښي حیوان مو کوم یو دی؟
+                                            <option value="{{ $questions[0]->s_q }}">{{ $questions[0]->s_q }}
                                             </option>
-                                            <option value="د خوښي رنګ مو کوم رنګ دی؟">د خوښي رنګ مو کوم رنګ دی؟</option>
-                                            <option value="په کور کي مو د ناز نوم څه دی؟">په کور کي مو د ناز نوم څه دی؟
+                                            <option value="{{ $questions[0]->t_q }}">{{ $questions[0]->t_q }}
                                             </option>
-                                            <option value="ستاسي د خوښي مېوه کوم یو دی؟">ستاسي د خوښي مېوه کوم یو دی؟
-                                            </option>
-                                            <!-- <option>Delta Infotech</option> -->
                                         </select>
-                                        <!-- <label class="focus-label">پروګرام انتخاب کړی</label> -->
+                                        @error('s_q')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{ $message }}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12 p-3">
                                     <label>ځواب</label>
-                                    <input class="form-control" name="third_answer" type="text"
-                                        placeholder="داډمېن تخلص" value="{{ old('third_answer') }}">
-                                </div>
-
-                                <div class="form-group text-center col-md-4 m-auto">
-                                    <button class="btn btn-primary submit-btn" type="submit">ثبت کړئ</button>
+                                    <input class="form-control" name="s_a" type="text" placeholder="داډمېن تخلص"
+                                        value="{{ old('s_a') }}">
+                                    @error('s_a')
+                                        <span class="invalid-feedback" role="alert" style="display:block">
+                                            <strong>
+                                                {{ $message }}
+                                            </strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
-                            <!-- <div class="account-footer">
-        <p>Already have an account? <a href="login.html">Login</a></p>
-       </div> -->
+                            <hr style="width:70%">
+
+                            <div class="row p-3">
+                                <div class="col-sm-6 col-md-12" id="search_content">
+                                    <div class="form-group form-focus select-focus mb-5">
+                                        <label>دریمه پوښتنه</label>
+
+                                        <select class="custom-select p-2 h-100 searchInput" name="t_q">
+                                            <option selected value="">پوښتنه مو انتخاب کړی!</option>
+                                            <option value="{{ $questions[0]->f_q }}">{{ $questions[0]->f_q }}
+                                            </option>
+                                            <option value="{{ $questions[0]->s_q }}">{{ $questions[0]->s_q }}
+                                            </option>
+                                            <option value="{{ $questions[0]->t_q }}">{{ $questions[0]->t_q }}
+                                            </option>
+                                        </select>
+                                        @error('t_q')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{ $message }}
+                                                </strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 p-3">
+                                    <label>ځواب</label>
+                                    <input class="form-control" name="t_a" type="text" placeholder="داډمېن تخلص"
+                                        value="{{ old('t_a') }}">
+                                    @error('t_a')
+                                        <span class="invalid-feedback" role="alert" style="display:block">
+                                            <strong>
+                                                {{ $message }}
+                                            </strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group text-center col-md-4 m-auto">
+                                <button class="btn btn-primary submit-btn" type="submit">تغیر یې کړئ</button>
+                            </div>
                         </form>
                         <!-- /Account Form -->
 
@@ -304,17 +300,10 @@
     <!-- chart-js -->
     <script src="{{ asset('assets/chart-js/dist/chart.min.js') }}"></script>
 
-    @if (Session::has('confirm_password'))
+    @if (Session::has('full_fill'))
         <script>
-            swal('وبخښی!', "{!! Session::get('confirm_password') !!}", "warning", {
-                button: "مننه",
-            });
-        </script>
-    @endif
-    @if (Session::has('dif_questions'))
-        <script>
-            swal('وبخښی!', "{!! Session::get('dif_questions') !!}", "warning", {
-                button: "مننه",
+            swal('وبخښی!', "{!! Session::get('full_fill') !!}", "warning", {
+                button: "سمده",
             });
         </script>
     @endif

@@ -142,12 +142,7 @@
                         <li class="col-md-12"><i class="pr-2 fa fa-user-o"></i>د پروګرام ډول: <span
                                 class="text-blue">{{ $programs->type }}</span></li>
 
-                        <li class="col-md-12"><i class="pr-2 fa fa-calendar"></i>د شروع کېدو وخت:<span
-                                class="text-blue">{{ $programs->year }}/ {{ $programs->month }}/
-                                {{ $programs->start_day }}</span></li>
-                        <li class="col-md-12"><i class="pr-2 fa fa-calendar"></i>د ختمېدو وخت: <span
-                                class="text-blue"> {{ $programs->year }}/ {{ $programs->month }}/
-                                {{ $programs->end_day }} </span></li>
+
                         <li class="col-md-12"><i class="pr-2 fa fa-user-o"></i>د پروګرام تسهیلونکی: <span
                                 class="text-blue">{{ $programs->facilitator }}</span></li>
                         <li class="col-md-12"><i class="pr-2 fa fa-user-o"></i>د پروګرام سپانسر: <span
@@ -224,16 +219,22 @@
                     <h4 class="account-title">نېټه</h4>
                     <br>
                     <ul class="job-post-det col-md-12">
-                        <li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د جوړېدو نېټه:
-                            </strong><span class="text-blue">{{ $programs->year }} - {{ $programs->month }} -
-                                {{ $programs->start_day }}</span></li>
+                        <li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د شروع کېدو نېټه:
+                            </strong><span
+                                class="text-blue">{{ date('d - m - Y ', strtotime($programs->start_date)) }}</span>
+                        </li>
                         <li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د ختمېدو نېته:
-                            </strong><span class="text-blue">{{ $programs->year }} - {{ $programs->month }} -
-                                {{ $programs->end_day }}</span></li>
+                            </strong><span
+                                class="text-blue">{{ date('d - m - Y ', strtotime($programs->end_date)) }}</span>
+                        </li>
                         <li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د شروع کېدو وخت:
-                            </strong><span class="text-blue">{{ $programs->start_time }}</span></li>
+                            </strong><span class="text-blue"
+                                dir="ltr">{{ date('H: A', strtotime($programs->start_date)) }}</span></li>
                         <li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د ختمېدو وخت:
-                            </strong><span class="text-blue">{{ $programs->end_time }}</span></li>
+                            </strong><span class="text-blue"
+                                dir="ltr">{{ date('H: A', strtotime($programs->start_date)) }}</span>
+                        </li>
+
 
                     </ul>
                     <!-- <a class="btn job-btn" href="#" data-toggle="modal" data-target="#apply_job">Enroll</a> -->

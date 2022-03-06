@@ -9,8 +9,7 @@
         content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
-    <title>Login </title>
-
+    <title>Register - HRMS admin template</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}">
@@ -44,6 +43,8 @@
     <!-- Tagsinput CSS -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
 
+
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
    <script src="assets/js/html5shiv.min.js"></script>
@@ -52,28 +53,41 @@
     <style>
         * {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
         }
 
         label {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-            font-size: 25px !important;
+            font-size: 20px !important;
         }
 
         select:focus {
             box-shadow: 0px 0px 2px #000 !important;
+
             transition: all 0.1s;
             transform: scale(1.01);
         }
 
+        .sel {
+            transform: translate3d(10px, 32px, 0px) !important;
+        }
+
+        input:focus {
+            /* border-color: #5092f4 !important; */
+            box-shadow: 0px 0px 5px #5092f4 !important;
+        }
+
         select {
             font-size: 20px !important;
+            background: #e3e3e3 !important;
         }
 
         input:focus {
             box-shadow: 0px 0px 2px #000 !important;
             transition: all 0.1s;
-            transform: scale(1.02);
+            transform: scale(1.01);
             font-size: 20px !important;
+
         }
 
         textarea:focus {
@@ -86,10 +100,12 @@
 
         textarea {
             background: #f0fcff !important;
+
         }
 
         h3 {
             font-size: 30px !important;
+
         }
 
     </style>
@@ -100,58 +116,54 @@
     <!-- Main Wrapper -->
     <div class="main-wrapper">
         <div class="account-content">
-            <a href="/home" class="btn btn-primary apply-btn" style="border-radius: 18px;">ګور ته ورسی</a>
-            <div class="container">
+            <!-- <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a> -->
+            <div class="container ">
 
                 <!-- Account Logo -->
-                <div class="account-logo">
-                    <img src="assets/img/logo2.png" alt="Dreamguy's Technologies">
+                <div class="account-logo mt-5">
+                    <a href="index.html"><img src="{{ asset('assets/img/logo2.png') }}"
+                            alt="Dreamguy's Technologies"></a>
                 </div>
                 <!-- /Account Logo -->
 
-                <div class="account-box px-4 rounded">
-                    <div class="account-wrapper">
-                        <h3 class="account-title">داخلېدو پاڼه</h3>
+                <div class="account-box " style="width: 1000px;">
+                    <div class="account-wrapper" style="">
+                        <h3 class="account-title p-3">ستاسي برېښنالیک دننه کړئ!</h3>
+                        <hr>
+                        <!-- <p class="account-subtitle"></p> -->
 
                         <!-- Account Form -->
-                        <form action="/login" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <label>برېښنالیک</label>
-                                <input class="form-control" type="text" name="email" value="{{ old('email') }}">
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert" style="display:block">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col">
-                                        <label>پاسورډ</label>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a class="text-muted" href="/forgotPassword">
-                                            پاسورډ مو هېر سوی؟
-                                        </a>
-                                    </div>
+                        <form action="/getForgotPasswordQuestions" method="GET">
+                            {{-- @csrf --}}
+                            {{-- @if ($errors->any())
+                                <div class="mb-5" id="alertMassege">
+                                    <ul style="list-style-type:none" class="p-0 m-0">
+                                        @foreach ($errors->all() as $error)
+                                            <li class="rounded p-2 m-1 alert alert-danger">
+                                                {{ $error }}
+                                            </li>
+                                        @endforeach
+                                    </ul>
                                 </div>
-                                <input class="form-control" type="password" name="password">
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert" style="display:block">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
+                            @endif --}}
+                            <div class="row p-3">
+
+                                <div class="form-group col-md-12 p-3">
+                                    <label>برېښنالیک</label>
+                                    <input class="form-control" name="user_name" type="text" placeholder="برېښنالیک"
+                                        value="{{ old('user_name') }}">
+                                    @error('user_name')
+                                        <span class="invalid-feedback" role="alert" style="display:block">
+                                            <strong>
+                                                {{ $message }}
+                                            </strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                            <div class="form-group text-center col-md-12 ">
-                                <button class="btn btn-primary submit-btn" type="submit">داخلېدل</button>
-                            </div>
-                            <div class="account-footer mt-3">
-                                <p>تر اوسه جاري حساب نلری؟ <a href="/register">ځان ثبت کړی</a></p>
+
+                            <div class="form-group text-center col-md-4 m-auto">
+                                <button class="btn btn-primary submit-btn" type="submit">تغیر یې کړئ</button>
                             </div>
                         </form>
                         <!-- /Account Form -->
@@ -161,8 +173,6 @@
             </div>
         </div>
     </div>
-    <!-- /Main Wrapper -->
-
     <!-- jQuery -->
     <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
     <!-- Bootstrap Core JS -->
@@ -187,6 +197,23 @@
     <script src="{{ asset('assets/growl/jquery.bootstrap-growl.min.js') }}"></script>
     <!-- sweet alert -->
     <script src="{{ asset('assets/sweet-alert/sweetalert.min.js') }}"></script>
+    <!-- chart-js -->
+    <script src="{{ asset('assets/chart-js/dist/chart.min.js') }}"></script>
+
+    @if (Session::has('confirm_password'))
+        <script>
+            swal('وبخښی!', "{!! Session::get('confirm_password') !!}", "warning", {
+                button: "مننه",
+            });
+        </script>
+    @endif
+    @if (Session::has('questions_dif'))
+        <script>
+            swal('وبخښۍ!', "{!! Session::get('questions_dif') !!}", "warning", {
+                button: "سمده",
+            });
+        </script>
+    @endif
 
 
 </body>

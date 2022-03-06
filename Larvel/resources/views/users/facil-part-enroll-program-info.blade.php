@@ -2,7 +2,7 @@
 
 <!-- @section('page-title', 'hahahahah')
 @section('page-title')
-    hahahaha
+        hahahaha
 @endsection
 <!-- here we add css custom style -->
 @section('custom-css') -->
@@ -80,6 +80,7 @@
                                     class="text-blue">{{ $programs[0]->participant_amount }}</span></li>
                             <li class="col-md-12"><i class="pr-2 fa fa-eye"></i>د پروګرام فیس: <span
                                     class="text-blue">{{ $programs[0]->fee }}</span></li>
+
                         </ul>
                     </div>
                     <div class="job-content job-widget">
@@ -110,9 +111,8 @@
 
 
                                 @foreach ($results as $result)
-							<li> {{ $result->result }} </li>
-
-							@endforeach
+                                    <li> {{ $result->result }} </li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="job-desc-title">
@@ -123,9 +123,8 @@
 
 
                                 @foreach ($evaluations as $evaluation)
-							<li> {{ $evaluation->evaluation }} </li>
-
-							@endforeach
+                                    <li> {{ $evaluation->evaluation }} </li>
+                                @endforeach
                             </ul>
                         </div>
 
@@ -138,7 +137,7 @@
                         <h4 class="account-title">نېټه</h4>
                         <br>
                         <ul class="job-post-det col-md-12">
-                            <li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د جوړېدو نېټه:
+                            <li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د شروع کېدو نېټه:
                                 </strong><span
                                     class="text-blue">{{ date('d - m - Y ', strtotime($programs[0]->start_date)) }}</span>
                             </li>
@@ -185,7 +184,7 @@
 @endsection
 
 @section('cutom-js')
-@if (Session::has('program_materials_added'))
+    @if (Session::has('program_materials_added'))
         <script>
             swal('ډېر ښه!', "{!! Session::get('program_materials_added') !!}", "success", {
                 button: "مننه",

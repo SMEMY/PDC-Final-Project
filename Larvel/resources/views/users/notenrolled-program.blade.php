@@ -73,6 +73,11 @@
             text-overflow: ellipsis;
         }
 
+        nav {
+            width: fit-content;
+            margin: 0 auto;
+        }
+
     </style>
 </head>
 
@@ -86,7 +91,7 @@
 
             </div>
             <div class="col-md-1 p-3">
-                <a href="/user/register" class="btn btn-primary ">register</a>
+                <a href="/register" class="btn btn-primary ">register</a>
 
             </div>
 
@@ -113,7 +118,7 @@
             </div>
         </div>
         <!-- /Page Header -->
-        <div class="row">
+        <div class="row mb-5">
             @foreach ($programs as $program)
                 <div class="col-md-12">
                     <a class="job-list  border border-info" href="/user/programs/{{ $program->id }}">
@@ -141,6 +146,7 @@
                     </a>
                 </div>
             @endforeach
+            {{ $programs->links() }}
         </div>
     </div>
     <!-- jQuery -->
@@ -166,7 +172,7 @@
     <!-- sweet alert -->
     <script src="{{ asset('assets/sweet-alert/sweetalert.min.js') }}"></script>
 
-    
+
 </body>
 
 </html>

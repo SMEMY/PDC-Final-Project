@@ -36,7 +36,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('is-facilitator', function ($user) {
             return $user->hasAnyRole('facilitator');
         });
-
+        Gate::define('is-participant', function ($user) {
+            return $user->hasAnyRole('participant');
+        });
 
         //
     }

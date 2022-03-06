@@ -43,7 +43,7 @@ class programController extends Controller
 
 
         if ($request->path() === 'home') {
-            $programs =  Program::orderBy('id', 'desc')->paginate(10);
+            $programs =  Program::orderBy('id', 'desc')->paginate(5);
 
             return view('users.notenrolled-program', compact('programs'));
         } else {

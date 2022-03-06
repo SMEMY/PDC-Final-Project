@@ -102,7 +102,7 @@
             <!-- Page Content -->
             <div class="content container-fluid">
 
-            <video src="{{ asset( $path) }}" controls height="600" width="100%"></video>
+                <video src="{{ asset($path) }}" controls height="600" width="100%"></video>
 
             </div>
             <!-- /Page Content -->

@@ -105,8 +105,28 @@
                                         <li class="mb-2 ml-3"><i class="fa fa-money text-info"></i> <strong>د
                                                 پروګرام فیس: </strong>{{ $program->fee }} {{ $program->fee_type }}
                                         </li>
+                                        <li class="mb-2 ml-3"><i class="fa fa-calendar text-info"></i><strong>د جوړېدو
+                                                نېټه:
+                                            </strong>{{ date('d - m - Y ', strtotime($program->start_date)) }} </li>
                                         <li class="mb-2 ml-3"><i class="fa fa-clock-o text-info"></i> <strong>د
                                                 پروګرام دوام: </strong>{{ $program->days_duration }} ورځي</li>
+                                        @if ($program->start_date <= Carbon\Carbon::today() && $program->end_date >= Carbon\Carbon::today())
+                                            <li class="ml-2 text-dark d-inline-block"><i
+                                                    class="fa fa-unlock text-danger"></i>
+                                                <strong>حالت:
+                                                </strong> جاري
+                                            </li>
+                                        @elseif(Carbon\Carbon::today() < $program->start_date)
+                                            <li class="ml-2 text-dark d-inline-block"><i class="fa fa-lock text-danger"></i>
+                                                <strong>حالت:
+                                                </strong>راتلونکی
+                                            </li>
+                                        @else
+                                            <li class="ml-2 text-dark d-inline-block"><i class="fa fa-lock text-danger"></i>
+                                                <strong>حالت:
+                                                </strong>ختم
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </a>
@@ -117,7 +137,7 @@
                 <div class="row tab-pane fade show " id="nav-unenroll" role="tabpanel" aria-labelledby="nav-unenroll-tab">
                     @foreach ($notEnrolledPrograms as $program)
                         <div class="col-md-12">
-                            <a class="job-list  border border-info" href="/comAllPrograms/{{ $program->id }}">
+                            <a class="job-list  border border-info" href="/user/programs/{{ $program->id }}">
                                 <div class="job-list-det">
                                     <div class="job-list-desc">
                                         <h3 class="job-list-title">{{ $program->name }}</h3>
@@ -138,8 +158,28 @@
                                         <li class="mb-2 ml-3"><i class="fa fa-money text-info"></i> <strong>د
                                                 پروګرام فیس: </strong>{{ $program->fee }} {{ $program->fee_type }}
                                         </li>
+                                        <li class="mb-2 ml-3"><i class="fa fa-calendar text-info"></i><strong>د جوړېدو
+                                                نېټه:
+                                            </strong>{{ date('d - m - Y ', strtotime($program->start_date)) }} </li>
                                         <li class="mb-2 ml-3"><i class="fa fa-clock-o text-info"></i> <strong>د
                                                 پروګرام دوام: </strong>{{ $program->days_duration }} ورځي</li>
+                                        @if ($program->start_date <= Carbon\Carbon::today() && $program->end_date >= Carbon\Carbon::today())
+                                            <li class="ml-2 text-dark d-inline-block"><i
+                                                    class="fa fa-unlock text-danger"></i>
+                                                <strong>حالت:
+                                                </strong> جاري
+                                            </li>
+                                        @elseif(Carbon\Carbon::today() < $program->start_date)
+                                            <li class="ml-2 text-dark d-inline-block"><i class="fa fa-lock text-danger"></i>
+                                                <strong>حالت:
+                                                </strong>راتلونکی
+                                            </li>
+                                        @else
+                                            <li class="ml-2 text-dark d-inline-block"><i class="fa fa-lock text-danger"></i>
+                                                <strong>حالت:
+                                                </strong>ختم
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </a>

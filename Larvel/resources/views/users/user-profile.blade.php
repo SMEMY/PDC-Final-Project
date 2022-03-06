@@ -52,12 +52,32 @@
                                                         <li>
                                                             <div class="title">نوم: </div>
                                                             <div class="text"><a
-                                                                    href="">{{ $admin_info[0]->name }}</a></div>
+                                                                    href="">{{ $user_info[0]->name }}</a></div>
                                                         </li>
                                                         <li>
                                                             <div class="title">تخلص: </div>
                                                             <div class="text"><a
-                                                                    href="">{{ $admin_info[0]->last_name }}</a></div>
+                                                                    href="">{{ $user_info[0]->last_name }}</a></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="title">جنسیت: </div>
+                                                            <div class="text"><a
+                                                                    href="">{{ $user_info[0]->last_name }}</a></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="title">Phone:</div>
+                                                            <div class="text"><a
+                                                                    href="">{{ $user_info[0]->phone_number }}</a></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="title">برېښنالیک:</div>
+                                                            <div class="text"><a
+                                                                    href="">{{ $user_info[0]->email }}</a></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="title">کاري دفتر:</div>
+                                                            <div class="text"><a
+                                                                    href="">{{ $user_info[0]->email }}</a></div>
                                                         </li>
                                                     </ul>
 
@@ -65,15 +85,35 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <ul class="personal-info">
+
+
                                                     <li>
-                                                        <div class="title">Phone:</div>
-                                                        <div class="text"><a
-                                                                href="">{{ $admin_info[0]->phone_number }}</a></div>
+                                                        <div class="title">کاري بلاک:</div>
+                                                        <div class="text text-center"><a
+                                                                href="">{{ $user_info[0]->email }}</a></div>
                                                     </li>
                                                     <li>
-                                                        <div class="title">برېښنالیک:</div>
-                                                        <div class="text"><a
-                                                                href="">{{ $admin_info[0]->email }}</a></div>
+                                                        <div class="title " style="white-space: nowrap;">کاري
+                                                            دیپارټمنټ:</div>
+                                                        <div class="text text-center"><a
+                                                                href="">{{ $user_info[0]->email }}</a></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="title">کاري منصب:</div>
+                                                        <div class="text text-center"><a
+                                                                href="">{{ $user_info[0]->email }}</a></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="title" style="white-space: nowrap;">کاري منصب
+                                                            برخه:</div>
+                                                        <div class="text text-center"><a
+                                                                href="">{{ $user_info[0]->email }}</a></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="title" style="white-space: nowrap;"> علمي درجه:
+                                                        </div>
+                                                        <div class="text text-center"><a
+                                                                href="">{{ $user_info[0]->email }}</a></div>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -91,11 +131,6 @@
                             <i class="fa fa-key text-danger"></i>
                             <a href="/admin/passwordChange/{{ auth()->user()->id }}" class="text-danger"
                                 style="font-weight:bold">د اډمېن پاسورډ تغیرول</a>
-                        </div>
-                        <div class="col-md-12 p-3 pl-4" style="text-align: center">
-                            <i class="fa fa-key text-danger"></i>
-                            <a href="/admin/questionsChange/{{ auth()->user()->id }}" class="text-danger"
-                                style="font-weight:bold">د اډمېن محافظوي پوښتني تغیرول</a>
                         </div>
                     </div>
                 </div>
@@ -122,13 +157,6 @@
         @endif @if (Session::has('password_changed'))
             <script>
                 swal('مبارک', "{!! Session::get('password_changed') !!}", "success", {
-                    button: "مننه",
-                });
-            </script>
-        @endif
-        @if (Session::has('questions_changed'))
-            <script>
-                swal('مبارک', "{!! Session::get('questions_changed') !!}", "success", {
                     button: "مننه",
                 });
             </script>

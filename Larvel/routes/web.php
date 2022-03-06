@@ -43,12 +43,19 @@ use App\Http\Controllers\adminInfosCntroller;
 */
 
 Route::resource('/userRegister', commonUserController::class);
+Route::resource('/forgotPassword', commonUserController::class);
+Route::resource('/getForgotPasswordQuestions', commonUserController::class);
+Route::resource('/userChangePassword', commonUserController::class);
+Route::resource('/addNewPassword', commonUserController::class);
 Route::view('/test', 'check.facilitatorParticipantRegisteration')->name('addPdcprogram');
 
 Route::resource('/home', programController::class);
 Route::resource('/user/register', commonUserController::class);
 Route::resource('/user/programs', programController::class);
+
+
 Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+    Route::resource('/profile', commonUserController::class);
 
     Route::resource('/programEnrolment', programEnrollmentController::class);
     Route::resource('/memberEnrollmentForProgram', programEnrollmentController::class);
@@ -70,6 +77,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     Route::resource('/profile', adminController::class);
     Route::resource('/passwordChange', adminController::class);
+    Route::resource('/questionsChange', adminController::class);
     Route::resource('/dashboard', dashboardController::class);
     Route::resource('/pdcProgramList', programController::class);
     Route::resource('/addPdcProgram', programController::class);
@@ -117,6 +125,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('/participantEnrolledPrograms', programparticipantController::class);
     Route::resource('/participantEnrollmentForProgram', programEnrollmentController::class);
     Route::resource('/memberEnrollmentForProgram', programEnrollmentController::class);
+    Route::resource('/programEnrollmentForFacilitator', programEnrollmentController::class);
     Route::resource('/facilitatorEnrolledPrograms', programfacilitatorController::class);
     Route::resource('/downloadPhoto', photoController::class);
     Route::resource('/educationalPrograminfo', eduprogramController::class);

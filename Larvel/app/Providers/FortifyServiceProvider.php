@@ -52,20 +52,23 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
 
-        $users = User::all();
-        if ($users === null) {
-            Fortify::registerView(
-                function () {
+        // return $users;
+        Fortify::registerView(
+            function () {
+                // return $users = User::all();
+                $users = User::all();
+                if (count($users) == 0) {
                     return view(view: ('admin.admin-registeration'));
-                }
-            );
-        } elseif ($users !== null) {
-            Fortify::registerView(
-                function () {
+                } elseif (count($users) != 0) {
                     return view(view: ('users.facilitatorParticipantRegisteration'));
                 }
-            );
-        }
+            }
+        );
+        // Fortify::registerView(
+        //     function () {
+        //         return view(view: ('users.facilitatorParticipantRegisteration'));
+        //     }
+        // );
 
         Fortify::loginView(
             function () {
