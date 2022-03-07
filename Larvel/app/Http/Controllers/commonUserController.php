@@ -202,44 +202,44 @@ class commonUserController extends Controller
             // if (Gate::allows(ability: 'is-admin')) {
             //     $user_role = 1;
             // }
-            // if (Gate::allows(ability: 'is-facilitator')) {
-            //     $user_role = 2;
-            // }
+            if (Gate::allows(ability: 'is-facilitator') || Gate::allows(ability: 'is-participant')) {
+
+                $prog_role_user = DB::table('programs')
+                    ->join('role_user', 'programs.id', '=', 'role_user.program_id')
+                    ->select('role_user.role_id')
+                    ->where([['role_user.program_id', $id], ['role_user.user_id', auth()->user()->id]])
+                    ->get();
+                if ($prog_role_user[0]->role_id == 2) {
+                    $u_role = 2;
+                } elseif ($prog_role_user[0]->role_id == 3) {
+                    $u_role = 3;
+                }
+                // return $u_role;
+                $programs = DB::table('programs')->where('programs.id', $id)->get();
+                $results = DB::table('programs')
+                    ->join('results', 'programs.id', '=', 'results.program_id')
+                    ->where('programs.id', $id)->get();
+                $evaluations = DB::table('programs')
+                    ->join('evaluations', 'programs.id', '=', 'evaluations.program_id')
+                    ->where('programs.id', $id)->get();
+                $facilities = DB::table('programs')
+                    ->join('facilities', 'programs.id', '=', 'facilities.program_id')
+                    ->where('programs.id', $id)->get();
+
+                // return $facilities[0]->facility;
+                $materials = DB::table('programs')
+                    ->join('materials', 'programs.id', '=', 'materials.program_id')
+                    ->where('programs.id', $id)->get();
+                $programs = DB::table('programs')->where('programs.id', $id)->get();
+                $programs = DB::table('programs')->where('programs.id', $id)->get();
+                $programs = DB::table('programs')->where('programs.id', $id)->get();
+                $user_role = auth()->user()->id;
+
+                return view('users.facil-part-enroll-program-info', compact('programs', 'results', 'evaluations', 'facilities', 'u_role'));
+            }
             // if (Gate::allows(ability: 'is-participant')) {
             //     $user_role = 3;
             // }
-            $prog_role_user = DB::table('programs')
-                ->join('role_user', 'programs.id', '=', 'role_user.program_id')
-                ->select('role_user.role_id')
-                ->where([['role_user.program_id', $id], ['role_user.user_id', auth()->user()->id]])
-                ->get();
-            if ($prog_role_user[0]->role_id == 2) {
-                $u_role = 2;
-            } elseif ($prog_role_user[0]->role_id == 3) {
-                $u_role = 3;
-            }
-            // return $u_role;
-            $programs = DB::table('programs')->where('programs.id', $id)->get();
-            $results = DB::table('programs')
-                ->join('results', 'programs.id', '=', 'results.program_id')
-                ->where('programs.id', $id)->get();
-            $evaluations = DB::table('programs')
-                ->join('evaluations', 'programs.id', '=', 'evaluations.program_id')
-                ->where('programs.id', $id)->get();
-            $facilities = DB::table('programs')
-                ->join('facilities', 'programs.id', '=', 'facilities.program_id')
-                ->where('programs.id', $id)->get();
-
-            // return $facilities[0]->facility;
-            $materials = DB::table('programs')
-                ->join('materials', 'programs.id', '=', 'materials.program_id')
-                ->where('programs.id', $id)->get();
-            $programs = DB::table('programs')->where('programs.id', $id)->get();
-            $programs = DB::table('programs')->where('programs.id', $id)->get();
-            $programs = DB::table('programs')->where('programs.id', $id)->get();
-            $user_role = auth()->user()->id;
-
-            return view('users.facil-part-enroll-program-info', compact('programs', 'results', 'evaluations', 'facilities', 'u_role'));
         } elseif ($request->path() == 'user/materials/' . $id) {
             $programMaterials = Program::with('getMaterials')->find($id);
             $program_id = $id;

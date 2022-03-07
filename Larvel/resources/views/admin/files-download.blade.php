@@ -136,9 +136,17 @@
                                                                                     class="fa fa-ellipsis-v"></i></a>
                                                                             <div
                                                                                 class="dropdown-menu dropdown-menu-right">
-                                                                                <a href="/user/downloadMaterial/{{ $material->path }}"
+                                                                                <a href="/admin/downloadMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"><i
-                                                                                        class="fa fa-download m-r-5"></i>Download</a>
+                                                                                        class="fa fa-download m-r-5"></i>را کښته کړی</a>
+                                                                                <a class="dropdown-item"
+                                                                                    href="/admin/deleteMaterial/{{ $material->path }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#delete_client"
+                                                                                    id="path"
+                                                                                    onclick="pathFinder(this)"><i
+                                                                                        class="fa fa-trash-o m-r-5"></i>
+                                                                                    له منځه یې اوسی</a>
 
                                                                             </div>
                                                                         </div>
@@ -188,9 +196,17 @@
                                                                                     class="fa fa-ellipsis-v"></i></a>
                                                                             <div
                                                                                 class="dropdown-menu dropdown-menu-right">
-                                                                                <a href="/user/downloadMaterial/{{ $material->path }}"
+                                                                                <a href="/admin/downloadMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"><i
-                                                                                        class="fa fa-download m-r-5"></i>Download</a>
+                                                                                        class="fa fa-download m-r-5"></i>را کښته کړی</a>
+                                                                                <a class="dropdown-item"
+                                                                                    href="/admin/deleteMaterial/{{ $material->path }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#delete_client"
+                                                                                    id="path"
+                                                                                    onclick="pathFinder(this)"><i
+                                                                                        class="fa fa-trash-o m-r-5"></i>
+                                                                                    له منځه یې اوسی</a>
 
                                                                             </div>
                                                                         </div>
@@ -228,9 +244,17 @@
                                                                                     class="fa fa-ellipsis-v"></i></a>
                                                                             <div
                                                                                 class="dropdown-menu dropdown-menu-right">
-                                                                                <a href="/user/downloadMaterial/{{ $material->path }}"
+                                                                                <a href="/admin/downloadMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"><i
-                                                                                        class="fa fa-download m-r-5"></i>Download</a>
+                                                                                        class="fa fa-download m-r-5"></i>را کښته کړی</a>
+                                                                                <a class="dropdown-item"
+                                                                                    href="/admin/deleteMaterial/{{ $material->path }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#delete_client"
+                                                                                    id="path"
+                                                                                    onclick="pathFinder(this)"><i
+                                                                                        class="fa fa-trash-o m-r-5"></i>
+                                                                                    له منځه یې اوسی</a>
 
                                                                             </div>
                                                                         </div>
@@ -281,13 +305,21 @@
                                                                                     class="fa fa-ellipsis-v"></i></a>
                                                                             <div
                                                                                 class="dropdown-menu dropdown-menu-right">
-                                                                                <a href="/user/downloadMaterial/{{ $material->path }}"
+                                                                                <a href="/admin/downloadMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"><i
-                                                                                        class="fa fa-download m-r-5"></i>Download</a>
+                                                                                        class="fa fa-download m-r-5"></i>را کښته کړی</a>
+                                                                                <a class="dropdown-item"
+                                                                                    href="/admin/deleteMaterial/{{ $material->path }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#delete_client"
+                                                                                    id="path"
+                                                                                    onclick="pathFinder(this)"><i
+                                                                                        class="fa fa-trash-o m-r-5"></i>
+                                                                                    له منځه یې اوسی</a>
                                                                                 <a href="/user/viewMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"
                                                                                     target="__blank"><i
-                                                                                        class="fa fa-download m-r-5"></i>view</a>
+                                                                                        class="fa fa-eye m-r-5"></i>ننداره</a>
 
                                                                             </div>
                                                                         </div>
@@ -329,14 +361,22 @@
                                                                                     class="fa fa-ellipsis-v"></i></a>
                                                                             <div
                                                                                 class="dropdown-menu dropdown-menu-right">
-                                                                                <a href="/user/downloadMaterial/{{ $material->path }}"
+                                                                                <a href="/admin/downloadMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"><i
-                                                                                        class="fa fa-download m-r-5"></i>Download</a>
+                                                                                        class="fa fa-download m-r-5"></i>را کښته کړی</a>
+                                                                                <a class="dropdown-item"
+                                                                                    href="/admin/deleteMaterial/{{ $material->path }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#delete_client"
+                                                                                    id="path"
+                                                                                    onclick="pathFinder(this)"><i
+                                                                                        class="fa fa-trash-o m-r-5"></i>
+                                                                                    له منځه یې اوسی</a>
 
                                                                             </div>
                                                                         </div>
                                                                         <div class="card-file-thumb"
-                                                                            style="height:50px !important">
+                                                                            style="height:80px !important">
                                                                             @if ($material->extension === 'mp3' || $material->extension === 'wav' || $material->extension === 'm4a')
                                                                                 {{-- <i class="fa fa-file-audio-o d-block"
                                                                                     style="color: rgb(81, 182, 255);"></i> --}}

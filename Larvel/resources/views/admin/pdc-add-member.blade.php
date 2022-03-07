@@ -80,8 +80,8 @@
 
                 <!-- Account Logo -->
                 <!-- <div class="account-logo mt-5" style="width: 1150px;">
-                     <a href="index.html"><img src="assets/img/logo2.png" alt="Dreamguy's Technologies"></a>
-                    </div> -->
+                                             <a href="index.html"><img src="assets/img/logo2.png" alt="Dreamguy's Technologies"></a>
+                                            </div> -->
                 <!-- /Account Logo -->
 
                 <div class="account-box" style="width: 1100px; margin-top: 75px; margin-right:140px;" id="for">
@@ -114,9 +114,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <!-- <div class="form-group">
-                                            <label class="col-form-label">نوم <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="text"  name="member_name" value="{{ old('') }}">
-                                            </div> -->
+                                                                    <label class="col-form-label">نوم <span class="text-danger">*</span></label>
+                                                                    <input class="form-control" type="text"  name="member_name" value="{{ old('') }}">
+                                                                    </div> -->
                                     <div class="form-group">
                                         <label class="col-form-label">نوم</label>
                                         <input class="form-control " type="text" name="member_name"
@@ -131,16 +131,16 @@
                                     </div>
                                 </div>
                                 <!-- <div class="col-md-4">
-                                    <div class="form-group">
-                                    <label class="col-form-label">پلار نوم</label>
-                                    <input class="form-control " type="text" name="father_name" value="{{ old('father_name') }}">
-                                    </div>-->
+                                                            <div class="form-group">
+                                                            <label class="col-form-label">پلار نوم</label>
+                                                            <input class="form-control " type="text" name="father_name" value="{{ old('father_name') }}">
+                                                            </div>-->
                                 {{-- </div> --}}
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-form-label">ټلیفون شمېره<span
                                                 class="text-danger">*</span></label>
-                                        <input class="form-control" type="tel" name="phone_number"
+                                        <input class="form-control" type="number" name="phone_number"
                                             value="{{ old('phone_number') }}">
                                     </div>
                                 </div>
@@ -593,28 +593,112 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-form-label">پاسورډ<span class="text-danger">*</span></label>
-                                        <input class="form-control" type="password" name="password"
-                                            value="{{ old('password') }}">
+                                        <input class="form-control" type="text" name="password"
+                                            value="{{ $user_password }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-form-label">پاسورډ تائید کړی<span
                                                 class="text-danger">*</span></label>
-                                        <input class="form-control input-sm" type="password" name="password_confirmation"
-                                            value="{{ old('password_confirmation') }}">
+                                        <input class="form-control input-sm" type="text" name="password_confirmation"
+                                            value="{{ $user_password }}">
                                     </div>
                                 </div>
 
 
                             </div>
                             <hr !important> <!-- this part has been hidden just for DB Facilitator role -->
+                            <hr style="width:70%">
+                            <h3 class="account-title p-3">د ګډون کوونکی محافظوي پوښتنو پاڼه</h3>
 
-                            <div class="form-group text-center col-md-4 m-auto">
-                                <button class="btn btn-primary submit-btn" type="submit" onclick="audio.play()">تسهیلونکی
-                                    ثبت
-                                    کړی</button>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-12" id="search_content">
+                                    <div class="form-group form-focus select-focus">
+                                        <label>لمړي پوښتنه</label>
+
+                                        <select class="custom-select p-2 h-100 searchInput" name="f_q">
+                                            <option selected value="">پوښتنه مو انتخاب کړی!</option>
+                                            <option value="ستاسي د خوښي خواړه کوم دي؟">ستاسي د خوښي خواړه کوم دي؟
+                                            </option>
+                                            <option value="د خوښي حیوان مو کوم یو دی؟">د خوښي حیوان مو کوم یو دی؟
+                                            </option>
+                                            <option value="د خوښي رنګ مو کوم رنګ دی؟">د خوښي رنګ مو کوم رنګ دی؟</option>
+                                            <option value="په کور کي مو د ناز نوم څه دی؟">په کور کي مو د ناز نوم څه دی؟
+                                            </option>
+                                            <option value="ستاسي د خوښي مېوه کوم یو دی؟">ستاسي د خوښي مېوه کوم یو دی؟
+                                            </option>
+                                            <!-- <option>Delta Infotech</option> -->
+                                        </select>
+                                        <!-- <label class="focus-label">پروګرام انتخاب کړی</label> -->
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 p-3">
+                                    <label>ځواب</label>
+                                    <input class="form-control" name="f_a" type="text" placeholder=""
+                                        value="{{ old('f_a') }}">
+                                </div>
                             </div>
+                            <hr style="width:70%">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-12" id="search_content">
+                                    <div class="form-group form-focus select-focus">
+                                        <label>دویمه پوښتنه</label>
+
+                                        <select class="custom-select p-2 h-100 searchInput" name="s_q">
+                                            <option selected value="">پوښتنه مو انتخاب کړی!</option>
+                                            <option value="ستاسي د خوښي خواړه کوم دي؟">ستاسي د خوښي خواړه کوم دي؟
+                                            </option>
+                                            <option value="د خوښي حیوان مو کوم یو دی؟">د خوښي حیوان مو کوم یو دی؟
+                                            </option>
+                                            <option value="د خوښي رنګ مو کوم رنګ دی؟">د خوښي رنګ مو کوم رنګ دی؟</option>
+                                            <option value="په کور کي مو د ناز نوم څه دی؟">په کور کي مو د ناز نوم څه دی؟
+                                            </option>
+                                            <option value="ستاسي د خوښي مېوه کوم یو دی؟">ستاسي د خوښي مېوه کوم یو دی؟
+                                            </option>
+                                            <!-- <option>Delta Infotech</option> -->
+                                        </select>
+                                        <!-- <label class="focus-label">پروګرام انتخاب کړی</label> -->
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 p-3">
+                                    <label>ځواب</label>
+                                    <input class="form-control" name="s_a" type="text" placeholder=""
+                                        value="{{ old('s_a') }}">
+                                </div>
+                            </div>
+                            <hr style="width:70%">
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-12" id="search_content">
+                                    <div class="form-group form-focus select-focus">
+                                        <label>دریمه پوښتنه</label>
+
+                                        <select class="custom-select p-2 h-100 searchInput" name="t_q">
+                                            <option selected value="">پوښتنه مو انتخاب کړی!</option>
+                                            <option value="ستاسي د خوښي خواړه کوم دي؟">ستاسي د خوښي خواړه کوم دي؟
+                                            </option>
+                                            <option value="د خوښي حیوان مو کوم یو دی؟">د خوښي حیوان مو کوم یو دی؟
+                                            </option>
+                                            <option value="د خوښي رنګ مو کوم رنګ دی؟">د خوښي رنګ مو کوم رنګ دی؟</option>
+                                            <option value="په کور کي مو د ناز نوم څه دی؟">په کور کي مو د ناز نوم څه دی؟
+                                            </option>
+                                            <option value="ستاسي د خوښي مېوه کوم یو دی؟">ستاسي د خوښي مېوه کوم یو دی؟
+                                            </option>
+                                            <!-- <option>Delta Infotech</option> -->
+                                        </select>
+                                        <!-- <label class="focus-label">پروګرام انتخاب کړی</label> -->
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 p-3">
+                                    <label>ځواب</label>
+                                    <input class="form-control" name="t_a" type="text" placeholder=""
+                                        value="{{ old('t_a') }}">
+                                </div>
+                                <div class="form-group text-center col-md-4 m-auto">
+                                    <button class="btn btn-primary submit-btn" type="submit">تسهیلونکی ثبت
+                                        کړی</button>
+                                </div>
 
 
                         </form>
@@ -647,7 +731,6 @@
         </script>
     @endif
     <script>
-        
         var s = true;
         childCount = $('#dynamic').children("div").length;
         $("select.rankS").change(function() {

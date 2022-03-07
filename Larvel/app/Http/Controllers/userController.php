@@ -25,7 +25,7 @@ class userController extends Controller
         //
         if (Gate::allows(ability: 'is-admin')) {
             if ($request->path() === 'admin/memberList') {
-                $members = User::join('user_infos', 'users.id', '=', 'user_infos.user_id')
+                 $members = User::join('user_infos', 'users.id', '=', 'user_infos.user_id')
                     ->paginate(10);
                 $path = 'member';
                 $searchPath = '/searchMember';
@@ -35,7 +35,9 @@ class userController extends Controller
 
                 return view('admin.pdc-list-all-member', compact('members', 'path', 'searchPath', 'page'));
             } elseif ($request->path() === 'admin/memberRegisteration') {
-                return view('admin.pdc-add-member');
+                $user_password = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@$%&"), 0, 8);
+
+                return view('admin.pdc-add-member', compact('user_password'));
             }
         }
         dd('you need to be admin');
@@ -149,20 +151,26 @@ class userController extends Controller
                     'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
                     'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
                     'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
-                    'password' => 'bail|string|min:8|max:20|confirmed:password_confirmation',
+                    'password' => ['required', 'string', new Password, 'confirmed'],
                     'password_confirmation' => 'bail|string|min:8|max:20|',
+                    'f_q' => 'required|string',
+                    'f_a' => 'required|string',
+                    's_q' => 'required|string',
+                    's_a' => 'required|string',
+                    't_q' => 'required|string',
+                    't_a' => 'required|string',
                 ]);
                 $member = new User;
                 $member->name = $request->member_name;
                 $member->email = $request->email;
-                if ($request->password === $request->password_confirmation) {
-                    $member->password = Hash::make($request->password);
-                    $member->save();
-                }
-                // else
-                // {
-                //     return
-                // }
+                $member->f_q = $request->f_q;
+                $member->s_q = $request->s_q;
+                $member->t_q = $request->t_q;
+                $member->f_a = $request->f_a;
+                $member->s_a = $request->s_a;
+                $member->t_a = $request->t_a;
+                $member->password = Hash::make($request->password);
+                $member->save();
 
                 DB::table('user_infos')->insert([
                     'user_id' => $member->id,

@@ -96,37 +96,39 @@
 
                 <div class="row staff-grid-row">
                     @foreach ($members as $member)
-                        <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3" onclick="audio.play()">
-                            <div class="profile-widget" style="box-shadow: 0px 0px 2px 1px #89d0e5;">
-                                <div class="profile-img">
-                                    <a href="{{ $path }}Profile/{{ $member->user_id }}" class="avatar"><i
-                                            class="mt-2 fa fa-user-o text-info"
-                                            style="font-size:60px; margin-left:0px;     "></i></a>
-                                </div>
-                                <div class="dropdown profile-action" dir="rtl">
-                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
-                                        aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                    <div class="sel dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item"
-                                            href="/admin/{{ $path }}List/{{ $member->user_id }}/edit"><i
-                                                class="fa fa-pencil m-r-5"></i> اصلاح یې کړی</a>
-                                        <a class="dropdown-item"
-                                            href="/admin/{{ $path }}List/{{ $member->user_id }}"
-                                            data-toggle="modal" data-target="#delete_client" id="path"
-                                            onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې
-                                            اوسی</a>
+                        @if (auth()->user()->id !== $member->user_id)
+                            <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3" onclick="audio.play()">
+                                <div class="profile-widget" style="box-shadow: 0px 0px 2px 1px #89d0e5;">
+                                    <div class="profile-img">
+                                        <a href="{{ $path }}Profile/{{ $member->user_id }}"
+                                            class="avatar"><i class="mt-2 fa fa-user-o text-info"
+                                                style="font-size:60px; margin-left:0px;     "></i></a>
                                     </div>
+                                    <div class="dropdown profile-action" dir="rtl">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
+                                            aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                        <div class="sel dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item"
+                                                href="/admin/{{ $path }}List/{{ $member->user_id }}/edit"><i
+                                                    class="fa fa-pencil m-r-5"></i> اصلاح یې کړی</a>
+                                            <a class="dropdown-item"
+                                                href="/admin/{{ $path }}List/{{ $member->user_id }}"
+                                                data-toggle="modal" data-target="#delete_client" id="path"
+                                                onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i> له منځه یې
+                                                اوسی</a>
+                                        </div>
+                                    </div>
+                                    <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a
+                                            href="{{ $path }}Profile/{{ $member->user_id }}">{{ $member->educational_rank }}
+                                            {{ $member->name }} {{ $member->last_name }}</a></h4>
+                                    <!-- <h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.html">Barry Cuda</a></h5> -->
+                                    <div class="small text-muted">{{ $member->office_building }}</div>
+                                    <div class="small text-muted">{{ $member->email }}</div>
+                                    <!-- <a href="chat.html" class="btn btn-white btn-sm m-t-10">Message</a> -->
+                                    <!-- <a href="client-profile.html" class="btn btn-white btn-sm m-t-10">معلوت وګوری</a> -->
                                 </div>
-                                <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a
-                                        href="{{ $path }}Profile/{{ $member->id }}">{{ $member->educational_rank }}
-                                        {{ $member->name }} {{ $member->last_name }}</a></h4>
-                                <!-- <h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.html">Barry Cuda</a></h5> -->
-                                <div class="small text-muted">{{ $member->office_building }}</div>
-                                <div class="small text-muted">{{ $member->email }}</div>
-                                <!-- <a href="chat.html" class="btn btn-white btn-sm m-t-10">Message</a> -->
-                                <!-- <a href="client-profile.html" class="btn btn-white btn-sm m-t-10">معلوت وګوری</a> -->
                             </div>
-                        </div>
+                        @endif
                     @endforeach
                 </div>
                 {{ $members->links() }}

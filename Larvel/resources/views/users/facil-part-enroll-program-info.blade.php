@@ -137,7 +137,7 @@
                         <h4 class="account-title">نېټه</h4>
                         <br>
                         <ul class="job-post-det col-md-12">
-                            <li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د شروع کېدو نېټه:
+                            <li class="col-md-12"><i class="pr-2 fa fa-calendar"></i><strong>د شروع نېټه:
                                 </strong><span
                                     class="text-blue">{{ date('d - m - Y ', strtotime($programs[0]->start_date)) }}</span>
                             </li>
@@ -147,10 +147,10 @@
                             </li>
                             <li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د شروع کېدو وخت:
                                 </strong><span class="text-blue"
-                                    dir="ltr">{{ date('H: A', strtotime($programs[0]->start_date)) }}</span></li>
+                                    dir="ltr">{{ date('H:i A', strtotime($programs[0]->start_date)) }}</span></li>
                             <li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د ختمېدو وخت:
                                 </strong><span
-                                    class="text-blue">{{ date('H: A', strtotime($programs[0]->start_date)) }}</span>
+                                    class="text-blue" dir="ltr">{{ date('H:i A', strtotime($programs[0]->start_date)) }}</span>
                             </li>
 
                         </ul>

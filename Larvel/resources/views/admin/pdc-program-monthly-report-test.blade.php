@@ -70,7 +70,7 @@
         th {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
             text-align: center !important;
-            padding: 5px 4px !important;
+            padding: 10px 4px !important;
             line-height: 15px;
             font-size: 15px !important;
             font-weight: bold !important;
@@ -124,7 +124,7 @@
 <body>
     <!-- Main Wrapper -->
     <div class="main-wrapper m-0">
-        <a href="/admin/pdcProgramInfo/" class="btn btn-primary apply-btn " id="back"><i class="fa fa-arrow-left"
+        <a href="/admin/dashboard" class="btn btn-primary apply-btn " id="back"><i class="fa fa-arrow-left"
                 aria-hidden="true"></i></a>
 
         <!-- Header -->
@@ -141,64 +141,7 @@
 
                 {{-- Page Header --> --}}
                 <div class=" mt-5">
-                    <div class="row mt-5 mb-5" id="reportSearch">
-                        <div class="col-md-10 m-auto p-4" style="border: 1px solid #999999; border-radius:10px;">
-                            <form action="/admin/monthlyReport" method="POST">
-                                {{ method_field('POST') }}
-                                {{ csrf_field() }}
-                                @if ($errors->any())
-                                    <div class="mb-5" id="alertMassege">
-                                        <ul style="list-style-type:none" class="p-0 m-0">
-                                            @foreach ($errors->all() as $error)
-                                                <li class="rounded p-2 m-1 alert alert-danger">
-                                                    {{ $error }}
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-                                <div class="row filter-row " id="search_parts">
-                                    <div class="col-sm-6 col-md-5" id="search_content" onclick="audio.play()">
-                                        <div class="form-group form-focus select-focus" onclick="audio.play()">
-                                            <select class="custom-select p-2 h-100 searchInput" name="month"
-                                                style="border:1px solid rgb(113, 113, 113)">
-                                                <option value="">میاشت انتخاب کړئ!</option>
-                                                <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
-                                                <option value="">4</option>
-                                                <option value="">5</option>
-                                                <option value="">6</option>
-                                                <option value="">7</option>
-                                                <option value="">8</option>
-                                                <option value="">9</option>
-                                                <option value="">10</option>
-                                                <option value="">11</option>
-                                                <option value="">12</option>
 
-                                                <!-- <option>Delta Infotech</option> -->
-                                            </select>
-                                            <!-- <label class="focus-label">پروګرام انتخاب کړی</label> -->
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6 col-md-5" id="search_input">
-                                        <div class="form-group ">
-                                            <input type="number" class="form-control floating p-4" name="year"
-                                                id="searchInput" onclick="audio.play()"
-                                                style="border:1px solid rgb(113, 113, 113)" placeholder="کال انتخاب کړی">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-2">
-                                        <!-- <a href="#" class="">پلټنه </a> -->
-                                        <button type="submit" class="btn btn-success btn-block h3 p-1"
-                                            onclick="audio.play()">پلټنه</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
                     <div class="row m-0">
 
                         <div class="col-sm-12 m-0 text-center">
@@ -206,11 +149,72 @@
                             <h4 class="page-title">د لوړو زده کړو وزارت</h4>
                             <h4 class="page-title">کندهار پوهنتون</h4>
                             <h4 class="page-title">مسلکي پرختیائي مرکز</h4>
-                            <h4 class="page-title">د مسلکي پرمختیائي مرکز میاشتنی راپور</h4>
+                            <h4 class="page-title m-auto" style="width:fit-content ;margin: 20px auto !important">د
+                                مسلکي پرمختیائي مرکز میاشتنی راپور</h4>
+
                             {{-- <h5 class="text-left pl-4">د شروع نېټه:
                             </h5>
                             <h5 class="text-left pl-4">د ختم نېټه:
                             </h5> --}}
+                            <div class="row mt-5 " id="reportSearch">
+                                <div class="col-md-12 m-auto " style="border: 1px solid #ffffff; border-radius:10px;">
+                                    <form action="/admin/monthlyReport" method="POST">
+                                        {{ method_field('POST') }}
+                                        {{ csrf_field() }}
+                                        @if ($errors->any())
+                                            <div class="mb-5" id="alertMassege">
+                                                <ul style="list-style-type:none" class="p-0 m-0">
+                                                    @foreach ($errors->all() as $error)
+                                                        <li class="rounded p-2 m-1 alert alert-danger">
+                                                            {{ $error }}
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                        <div class="row filter-row " id="search_parts">
+                                            <div class="col-sm-6 col-md-5" id="search_content" onclick="audio.play()">
+                                                <div class="form-group form-focus select-focus" onclick="audio.play()">
+                                                    <select class="custom-select p-2 h-100 searchInput" name="month"
+                                                        style="border:1px solid rgb(113, 113, 113); background:#d0deff85;">
+                                                        <option value="">میاشت انتخاب کړئ!</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+
+                                                        <!-- <option>Delta Infotech</option> -->
+                                                    </select>
+                                                    <!-- <label class="focus-label">پروګرام انتخاب کړی</label> -->
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 col-md-5" id="search_input">
+                                                <div class="form-group ">
+                                                    <input type="number" class="form-control floating p-4" name="year"
+                                                        id="searchInput"
+                                                        style="border:1px solid rgb(113, 113, 113);background:#d0deff85;"
+                                                        placeholder="کال انتخاب کړی">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-2">
+                                                <!-- <a href="#" class="">پلټنه </a> -->
+                                                <button type="submit" class="btn btn-success btn-block h3 p-1"
+                                                    onclick="audio.play()">پلټنه</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -220,6 +224,8 @@
                 <div class="row" id="print">
                     <div class="col-lg-12 p-4">
                         <div class="table-responsive">
+                            <h4 class="page-title m-auto" style="width:fit-content ;margin: 20px auto !important">روزنیز
+                                پراګرامونه</h4>
                             <table class="table table-striped custom-table table-nowrap m-0">
                                 <thead>
                                     <tr>
@@ -242,8 +248,10 @@
                                             وال </th>
                                         <th class=" border border-dark bg-gradient-info px-0" style="width:100px">نېټه
                                         </th>
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">وخت
-                                        </th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">شروع
+                                            وخت</th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">ختم
+                                            وخت</th>
                                         <th class=" border border-dark bg-gradient-info px-0" style="width:100px">موده
                                         <th class=" border border-dark bg-gradient-info px-0" style="width:100px">
                                             برخوالو شمېر</th>
@@ -254,29 +262,99 @@
                                 </thead>
                                 <tbody>
                                     {{-- @foreach ($participants as $participant) --}}
-                                    <tr>
-                                        <td class="border border-dark">
-                                            {{-- {{ $loop->iteration }} --}}sdfsf
-                                        </td>
-                                        <td class="border border-dark px-0"> </td>
-                                        <td class="border border-dark px-0"> </td>
-                                        <td class="border border-dark px-0"> </td>
-                                        <td class="border border-dark px-0"></td>
-                                        {{-- <td class="border border-dark px-0">عبدالصبور</td> --}}
-                                        <td class="border border-dark px-0">
-                                        </td>
-                                        <td class="border border-dark px-0">
-                                        </td>
-                                        <td class="border border-dark px-0"></td>
-                                        <!-- <td class="border border-dark px-0 text-right"></td> -->
-                                        {{-- @for ($index = 0; $index < $program[0]->days_duration; $index++)
-                                                <td class="border border-dark p-0"></td>
-                                                <td class="border border-dark p-0"></td>
-                                            @endfor --}}
+                                    @for ($index = 0; $index < $countPrograms; $index++)
+                                        <tr>
 
-                                        <td class="border border-dark p-0"></td>
+                                            <td class="border border-dark">{{ $index + 1 }}</td>
+                                            <td class="border border-dark px-0"> {{ $programs[$index]->type }}</td>
+                                            <td class="border border-dark px-0">{{ $programs[$index]->name }} </td>
+                                            <td class="border border-dark px-0">{{ $programs[$index]->supporter }}
+                                            </td>
+                                            <td class="border border-dark px-0">{{ $programs[$index]->for }} </td>
+                                            <td class="border border-dark px-0">
+                                                {{ date('d - m - Y ', strtotime($programs[$index]->start_date)) }}
+                                            </td>
+                                            <td class="border border-dark px-0" dir="ltr">
+
+                                                {{ date('g:i A', strtotime($programs[$index]->start_date)) }}
+                                            </td>
+                                            <td class="border border-dark px-0" dir="ltr">
+
+
+
+                                                {{ date('g:i A', strtotime($programs[$index]->end_date)) }}
+
+                                            </td>
+
+                                            <td class="border border-dark px-0">
+                                                {{ $programs[$index]->days_duration }} </td>
+                                            <!-- <td class="border border-dark px-0 text-right"></td> -->
+
+                                            <td class="border border-dark p-0">
+                                                {{ $programs[$index]->participant_amount }} </td>
+
+                                        </tr>
+                                    @endfor
+                                    {{-- @endforeach --}}
+
+                                </tbody>
+                            </table>
+                            <h4 class="page-title mt-5" style="width:fit-content ;margin: 20px auto !important">علمي
+                                کنفراسونه</h4>
+                            <table class="table table-striped custom-table table-nowrap m-0">
+                                <thead>
+                                    <tr>
+                                        <th class=" border border-dark bg-gradient-info" style="width:30px">
+                                            شــ
+                                        </th>
+                                        <th class=" border border-dark bg-gradient-info px-1" style="width:100px">پوهنځۍ
+                                        </th>
+
+
+
+                                        <th class=" border border-dark bg-gradient-info px-1" style="width:100px">څانګه
+                                        </th>
+                                        {{-- <th class=" border border-dark bg-gradient-info px-1" style="width:100px">ولد
+                                        </th> --}}
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">استاد
+                                        </th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px"> موضوع
+                                        </th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">د
+                                            برخوالو شمېر</th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">د ثبت
+                                            ګڼه</th>
+
 
                                     </tr>
+
+                                </thead>
+                                <tbody>
+                                    {{-- @foreach ($participants as $participant) --}}
+                                    @for ($index = 0; $index < count($eduPrograms); $index++)
+                                        <tr>
+
+                                            <td class="border border-dark">{{ $index + 1 }}</td>
+                                            <td class="border border-dark px-0"> {{ $eduPrograms[$index]->faculty }}
+                                            </td>
+                                            <td class="border border-dark px-0">
+                                                {{ $eduPrograms[$index]->department }} </td>
+                                            <td class="border border-dark px-0">
+                                                {{ $eduPrograms[$index]->teacher_name }}{{ $eduPrograms[$index]->teacher_last_name }}
+                                            </td>
+                                            <td class="border border-dark px-0">{{ $eduPrograms[$index]->topic }}
+                                            </td>
+                                            <td class="border border-dark px-0">
+                                                {{ $eduPrograms[$index]->participant_amount }}
+                                            </td>
+
+
+
+
+                                            <td class="border border-dark p-0"> </td>
+
+                                        </tr>
+                                    @endfor
                                     {{-- @endforeach --}}
 
                                 </tbody>

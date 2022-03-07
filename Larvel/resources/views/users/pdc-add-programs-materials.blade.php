@@ -291,7 +291,7 @@
             }).then(function() {
                 var program = $('#prog').val();
                 console.log(program);
-                window.location = `/pdcProgramInfo/${program}`;
+                window.location = `/user/enrolledPdcProgramInfo/${program}`;
             });
         }
     </script>

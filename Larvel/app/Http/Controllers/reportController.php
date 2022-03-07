@@ -19,7 +19,9 @@ class reportController extends Controller
         //
         if (Gate::allows(ability: 'is-admin')) {
             if ($request->path() === 'admin/monthlyReport') {
-                return view('admin.pdc-program-monthly-report-test');
+                $count = 0;
+
+                return view('admin.pdc-program-monthly-report-test', compact('count'));
             } elseif ($request->path() === 'admin/quarterReport') {
                 // return "quarter";
                 return view('admin.pdc-program-monthly-report');
@@ -48,12 +50,19 @@ class reportController extends Controller
     public function store(Request $request)
     {
         //
-        return DB::table('programs')
+        $programs = DB::table('programs')
             ->whereYear('start_date', $request->year)
             ->wheremonth('start_date', $request->month)
             ->select('programs.*')
             ->get();
-        return "slkdfjds";
+        $eduPrograms = DB::table('eduprograms')
+            ->whereYear('date', $request->year)
+            ->wheremonth('date', $request->month)
+            ->select('eduprograms.*')
+            ->get();
+        $countPrograms =  count($programs);
+        $countEduPrograms =  count($eduPrograms);
+        return view('admin.pdc-program-monthly-report-test', compact('programs', 'countPrograms', 'eduPrograms', 'countEduPrograms'));
     }
 
     /**

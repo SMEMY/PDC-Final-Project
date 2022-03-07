@@ -135,7 +135,7 @@
                                                                                 class="dropdown-menu dropdown-menu-right">
                                                                                 <a href="/admin/downloadMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"><i
-                                                                                        class="fa fa-download m-r-5"></i>Download</a>
+                                                                                        class="fa fa-download m-r-5"></i>را کښته کړی</a>
                                                                                 <a class="dropdown-item"
                                                                                     href="/admin/deleteMaterial/{{ $material->path }}"
                                                                                     data-toggle="modal"
