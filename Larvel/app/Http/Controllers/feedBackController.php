@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Fquestionnaire;
 use App\Models\Feedback;
 use App\Models\Feedbackcomment;
 use App\Models\Feedbackanswer;
 
-use Illuminate\Support\Facades\Gate;
 
 
 class feedBackController extends Controller
@@ -44,54 +44,55 @@ class feedBackController extends Controller
     public function store(Request $request)
     {
         //
+        if (Gate::allows(ability: 'is-admin')) {
+            $request->validate([
+                'materials_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
+                'facilities_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
+                'locations_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
+                'opinions_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
+                'comment' => 'bail|required|max:500',
+            ]);
 
-        $request->validate([
-            'materials_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
-            'facilities_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
-            'locations_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
-            'opinions_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
-            'comment' => 'bail|required|max:500',
-        ]);
+            $comment = new Feedbackcomment;
+            $comment->feedback_form_id = $request->feedback_form_id;
+            $comment->comment = $request->comment;
+            $comment->save();
+            // $programId = DB::table('feedbackcomments')
+            // ->where('id', $request->feedback_form_id)
+            // ->update(['comment'=> $request->comment]);
+            // echo $request->facilities[0];
 
-        $comment = new Feedbackcomment;
-        $comment->feedback_form_id = $request->feedback_form_id;
-        $comment->comment = $request->comment;
-        $comment->save();
-        // $programId = DB::table('feedbackcomments')
-        // ->where('id', $request->feedback_form_id)
-        // ->update(['comment'=> $request->comment]);
-        // echo $request->facilities[0];
-
-        for ($i = 0; $i < count($request->materials); $i++) {
-            $questionAnswer = new Feedbackanswer;
-            $questionAnswer->answer = $request->materials_answer[$i];
-            $questionAnswer->question_id = $request->materials[$i];
-            $questionAnswer->save();
-        }
-        for ($i = 0; $i < count($request->facilities); $i++) {
-            $questionAnswer = new Feedbackanswer;
-            $questionAnswer->answer = $request->facilities_answer[$i];
-            $questionAnswer->question_id = $request->facilities[$i];
-            $questionAnswer->save();
-        }
-        for ($i = 0; $i < count($request->locations); $i++) {
-            $questionAnswer = new Feedbackanswer;
-            $questionAnswer->answer =  $request->locations_answer[$i];
-            $questionAnswer->question_id = $request->locations[$i];
-            $questionAnswer->save();
-        }
-        for ($i = 0; $i < count($request->opinions); $i++) {
-            $questionAnswer = new Feedbackanswer;
-            $questionAnswer->answer = $request->opinions_answer[$i];
-            $questionAnswer->question_id = $request->opinions[$i];
-            $questionAnswer->save();
-        }
-        if ($request->path() == 'user/feedback') {
-            return redirect('user/enrolledPdcProgramInfo/' . $request->program_id)->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
-        } elseif ($request->path() == 'admin/feedback') {
-            return redirect('admin/pdcProgramInfo/' . $request->program_id)->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
-        } else {
-            return "path not found!";
+            for ($i = 0; $i < count($request->materials); $i++) {
+                $questionAnswer = new Feedbackanswer;
+                $questionAnswer->answer = $request->materials_answer[$i];
+                $questionAnswer->question_id = $request->materials[$i];
+                $questionAnswer->save();
+            }
+            for ($i = 0; $i < count($request->facilities); $i++) {
+                $questionAnswer = new Feedbackanswer;
+                $questionAnswer->answer = $request->facilities_answer[$i];
+                $questionAnswer->question_id = $request->facilities[$i];
+                $questionAnswer->save();
+            }
+            for ($i = 0; $i < count($request->locations); $i++) {
+                $questionAnswer = new Feedbackanswer;
+                $questionAnswer->answer =  $request->locations_answer[$i];
+                $questionAnswer->question_id = $request->locations[$i];
+                $questionAnswer->save();
+            }
+            for ($i = 0; $i < count($request->opinions); $i++) {
+                $questionAnswer = new Feedbackanswer;
+                $questionAnswer->answer = $request->opinions_answer[$i];
+                $questionAnswer->question_id = $request->opinions[$i];
+                $questionAnswer->save();
+            }
+            if ($request->path() == 'user/feedback') {
+                return redirect('user/enrolledPdcProgramInfo/' . $request->program_id)->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
+            } elseif ($request->path() == 'admin/feedback') {
+                return redirect('admin/pdcProgramInfo/' . $request->program_id)->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
+            } else {
+                return "path not found!";
+            }
         }
         // return back()->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
 
@@ -143,7 +144,7 @@ class feedBackController extends Controller
                     ])
                     ->get();
                 $program_id = $id;
-                //
+                // return "sdjfhsdkj"
                 // $programs = DB::table('programs')->get();
                 // return $facilities;
                 // $program_id = $id;

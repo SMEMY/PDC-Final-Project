@@ -55,6 +55,29 @@ class userAttendanceController extends Controller
         // }
         // return "done";
         if (Gate::allows(ability: 'is-admin')) {
+            if ($request->path() === 'admin/searchUserAttendance') {
+                $request->validate([
+                    'search_type' => 'bail|required|string|in:name,email,phone_number',
+                    'search_content' => 'bail|required',
+                ]);
+                $attendanceReport =  DB::table('users')
+                    ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
+                    ->join('user_attendances', 'users.id', '=', 'user_attendances.user_id')
+                    ->select('users.id as p_id', 'users.name', 'users.email', 'user_infos.last_name', 'user_attendances.*')
+                    ->where([
+                        ['user_attendances.program_id', $request->program_id],
+                        ['users.' . $request->search_type,  $request->search_content]
+                    ])
+                    ->orderBy('users.name', 'asc')
+                    ->get();
+                $programID = $request->program_id;
+                // return $request->program_id;
+                if (count($attendanceReport) === 0) {
+                    return back()->with('warn_search', "یاد کس ونه موندل سو!");
+                } else {
+                    return view('admin.pdc-program-attendance-report-new', compact('attendanceReport', 'programID'));
+                }
+            }
             $total_days = Program::find($request->program_id);
             // return count($request->participant_id);
             for ($index = 0; $index < count($request->participant_id); $index++) {
@@ -97,25 +120,27 @@ class userAttendanceController extends Controller
                     ->join('role_user', 'users.id', '=', 'role_user.user_id')
                     ->select('users.*', 'user_infos.*')
                     ->where('role_user.program_id', $id)
+                    ->orderBy('name', 'asc')
                     ->get();
                 $programID = $id;
                 $program = DB::table('programs')
                     ->select('programs.*')
                     ->where('programs.id', $programID)
                     ->get();
-                return view('admin.pdc-program-attendance-paper', compact('participants', 'program'));
+                return view('admin.pdc-program-attendance-paper', compact('participants', 'program', 'programID'));
             } elseif ($request->path() == 'admin/pdcProgramAttendanceReport/' . $id) {
                 $attendanceReport =  DB::table('users')
                     ->join('user_infos', 'users.id', '=', 'user_infos.user_id')
                     ->join('user_attendances', 'users.id', '=', 'user_attendances.user_id')
                     ->select('users.id as p_id', 'users.name', 'user_infos.last_name', 'user_attendances.*')
                     ->where('user_attendances.program_id', $id)
+                    ->orderBy('users.name', 'asc')
                     ->get();
                 $programID = $id;
                 if (count($attendanceReport) === 0) {
                     return back()->with('warn', "تر اوس د یاد پروګرام حاضري سیسټم ته نده اضافه کړل سوې!");
                 } else {
-                    return view('admin.pdc-program-attendance-report', compact('attendanceReport', 'programID'));
+                    return view('admin.pdc-program-attendance-report-new', compact('attendanceReport', 'programID'));
                 }
             } elseif ($request->path() === 'admin/pdcProgramAttendance/' . $id) {
                 $participants =  DB::table('users')
@@ -126,6 +151,7 @@ class userAttendanceController extends Controller
                         ['role_user.program_id', $id],
                         ['role_user.role_id', 3]
                     ])
+                    ->orderBy('name', 'asc')
                     ->get();
                 $programID = $id;
                 // return $participants;
@@ -149,6 +175,7 @@ class userAttendanceController extends Controller
                     ->whereNotIn('user_infos.user_id', function ($q) {
                         $q->select('user_id')->from('user_attendances');
                     })
+                    ->orderBy('name', 'asc')
                     ->get();
 
                 // return $unAttendancedParticipants;

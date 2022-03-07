@@ -9,10 +9,10 @@
         content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
-    <title>@yield('page-title')</title>
+    <title>as</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}">
+    {{-- <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}"> --}}
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
@@ -24,10 +24,10 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" /> -->
 
     <!-- Lineawesome CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/line-awesome.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/line-awesome.min.css') }}"> --}}
 
-    <!-- Chart CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/morris/morris.css') }}">
+    {{-- <!-- Chart CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/morris/morris.css') }}"> --}}
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -36,17 +36,28 @@
     <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}">
 
     <!-- Datetimepicker CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}"> --}}
 
     <!-- Tagsinput CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}"> --}}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
    <script src="assets/js/html5shiv.min.js"></script>
    <script src="assets/js/respond.min.js"></script>
   <![endif]-->
+    <style type="text/css" media="print">
+        @page {
+            size: landscape;
+        }
+
+    </style>
     <style>
+        body {
+            background: white;
+            margin: 0;
+        }
+
         td {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
             text-align: center !important;
@@ -89,7 +100,8 @@
 
 <body>
     <!-- Main Wrapper -->
-    <div class="main-wrapper">
+    <div class="main-wrapper m-0">
+        <a href="/admin/pdcProgramInfo/{{ $programID }}" class="btn btn-primary apply-btn " id="back"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
 
         <!-- Header -->
 
@@ -100,15 +112,15 @@
         <!-- /Sidebar -->
 
         <!-- Page Wrapper -->
-        <div class="m-3">
-            <div class="content container-fluid col-12" id="ignorePDF">
+        <div class="m-0">
+            <div class="content container-fluid " id="ignorePDF">
 
                 {{-- Page Header --> --}}
                 <div class=" mt-5">
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
+                    <div class="row m-0">
+                        <div class="col-sm-12 m-0 text-center">
 
-                            <h4 class="page-title" onclick="pdf()">د لوړو زده کړو وزارت</h4>
+                            <h4 class="page-title">د لوړو زده کړو وزارت</h4>
                             <h4 class="page-title">کندهار پوهنتون</h4>
                             <h4 class="page-title">مسلکي پرختیائي مرکز</h4>
                             <h4 class="page-title">د مکتوب لیکني او (ې) ګانو پېږندلګلوي ورکشاپ د ګډون حاضري</h4>
@@ -135,28 +147,30 @@
                                         </th>
                                         <th class=" border border-dark bg-gradient-info px-1" style="width:100px">تخلص
                                         </th>
-                                        <th class=" border border-dark bg-gradient-info px-1" style="width:100px">ولد
-                                        </th>
-                                        <th class=" border border-dark bg-gradient-info px-0">د بست عنوان</th>
-                                        <th class=" border border-dark bg-gradient-info px-0">محل وظیفه</th>
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">د
+                                        {{-- <th class=" border border-dark bg-gradient-info px-1" style="width:100px">ولد
+                                        </th> --}}
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">د بست
+                                            عنوان</th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">وظیفې
+                                            محل </th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">
                                             ټلیفون شمېره</th>
                                         <!-- <th class=" border border-dark bg-gradient-info px-0">برېښنالیک</th> -->
                                         @for ($index = 0; $index < $program[0]->days_duration; $index++)
                                             @if ($index + 1 < 10)
-                                                <th class=" border border-dark bg-gradient-info p-1">
-                                                    {{ $index + 1 }}</th>
+                                                <th class=" border border-dark bg-gradient-info p-1" colspan="2">
+                                                    {{ $index + 1 }} <br> O - I</th>
                                             @endif
                                             @if ($index + 1 >= 10)
-                                                <th class=" border border-dark bg-gradient-info p-0">
-                                                    {{ $index + 1 }}</th>
+                                                <th class=" border border-dark bg-gradient-info p-0" colspan="2">
+                                                    {{ $index + 1 }} <br> O - I</th>
                                             @endif
                                         @endfor
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">کتني
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:50px">کتني
                                         </th>
                                         <!-- <th class="col-md-1">8</th>
-          <th class="col-md-1">9</th>
-          <th class="col-md-1">10</th> -->
+                            <th class="col-md-1">9</th>
+                            <th class="col-md-1">10</th> -->
 
                                     </tr>
 
@@ -169,7 +183,7 @@
                                             </td>
                                             <td class="border border-dark px-0"> {{ $participant->name }} </td>
                                             <td class="border border-dark px-0">{{ $participant->last_name }}</td>
-                                            <td class="border border-dark px-0">عبدالصبور</td>
+                                            {{-- <td class="border border-dark px-0">عبدالصبور</td> --}}
                                             <td class="border border-dark px-0">{{ $participant->office_position }}
                                             </td>
                                             <td class="border border-dark px-0">{{ $participant->office_building }}
@@ -177,6 +191,7 @@
                                             <td class="border border-dark px-0">{{ $participant->phone_number }}</td>
                                             <!-- <td class="border border-dark px-0 text-right">{{ $participant->email }}</td> -->
                                             @for ($index = 0; $index < $program[0]->days_duration; $index++)
+                                                <td class="border border-dark p-0"></td>
                                                 <td class="border border-dark p-0"></td>
                                             @endfor
 
@@ -191,118 +206,10 @@
                     </div>
                 </div>
             </div>
-            <button type="button" onclick="convertHTMLToPDF()"
-                style="margin-left: 350px;padding: 7px; color: white; background-color: darkslategrey;">PDF olarak
-                Kaydet</button>
-            <!-- /Page Content -->
+            <div class="">
 
-            <!-- Attendance Modal -->
-            {{-- <div class="modal custom-modal fade" id="attendance_info" role="dialog">
-				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">Attendance Info</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="card punch-status">
-										<div class="card-body">
-											<h5 class="card-title">Timesheet <small class="text-muted">11 Mar
-													2019</small></h5>
-											<div class="punch-det">
-												<h6>Punch In at</h6>
-												<p>Wed, 11th Mar 2019 10.00 AM</p>
-											</div>
-											<div class="punch-info">
-												<div class="punch-hours">
-													<span>3.45 hrs</span>
-												</div>
-											</div>
-											<div class="punch-det">
-												<h6>Punch Out at</h6>
-												<p>Wed, 20th Feb 2019 9.00 PM</p>
-											</div>
-											<div class="statistics">
-												<div class="row">
-													<div class="col-md-6 col-6 text-center">
-														<div class="stats-box">
-															<p>Break</p>
-															<h6>1.21 hrs</h6>
-														</div>
-													</div>
-													<div class="col-md-6 col-6 text-center">
-														<div class="stats-box">
-															<p>Overtime</p>
-															<h6>3 hrs</h6>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="card recent-activity">
-										<div class="card-body">
-											<h5 class="card-title">Activity</h5>
-											<ul class="res-activity-list">
-												<li>
-													<p class="mb-0">Punch In at</p>
-													<p class="res-activity-time">
-														<i class="fa fa-clock-o"></i>
-														10.00 AM.
-													</p>
-												</li>
-												<li>
-													<p class="mb-0">Punch Out at</p>
-													<p class="res-activity-time">
-														<i class="fa fa-clock-o"></i>
-														11.00 AM.
-													</p>
-												</li>
-												<li>
-													<p class="mb-0">Punch In at</p>
-													<p class="res-activity-time">
-														<i class="fa fa-clock-o"></i>
-														11.15 AM.
-													</p>
-												</li>
-												<li>
-													<p class="mb-0">Punch Out at</p>
-													<p class="res-activity-time">
-														<i class="fa fa-clock-o"></i>
-														1.30 PM.
-													</p>
-												</li>
-												<li>
-													<p class="mb-0">Punch In at</p>
-													<p class="res-activity-time">
-														<i class="fa fa-clock-o"></i>
-														2.00 PM.
-													</p>
-												</li>
-												<li>
-													<p class="mb-0">Punch Out at</p>
-													<p class="res-activity-time">
-														<i class="fa fa-clock-o"></i>
-														7.30 PM.
-													</p>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> --}}
-            <!-- /Attendance Modal -->
-
+                <button onclick="printfile()" id="p" class="btn btn-primary submit-btn m-auto d-block">print</button>
+            </div>
         </div>
         <!-- Page Wrapper -->
 
@@ -312,60 +219,39 @@
     <!-- jQuery -->
     <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
     <!-- Bootstrap Core JS -->
-    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script> --}}
     <!-- Slimscroll JS -->
-    <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script> --}}
     <!-- Chart JS -->
     {{-- <script src="{{ asset('assets/plugins/morris/morris.min.js') }}"></script> --}}
-    <script src="{{ asset('assets/plugins/raphael/raphael.min.js') }}"></script>
-    <script src="{{ asset('assets/js/chart.js') }}"></script>
+    {{-- <script src="{{ asset('assets/plugins/raphael/raphael.min.js') }}"></script>
+    <script src="{{ asset('assets/js/chart.js') }}"></script> --}}
     <!-- Custom JS -->
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/app.js') }}"></script> --}}
     <!-- Datetimepicker JS -->
-    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script> --}}
     <!-- Select2 JS -->
-    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/select2.min.js') }}"></script> --}}
     <!-- Tagsinput JS -->
-    <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jspdf.umd.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jspdf.umd.min.js') }}"></script> --}}
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.2.0/jspdf.umd.min.js"></script> --}}
-    <script src="<https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js>"></script>
-    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
 
 
     <script>
-        // import html2PDF from 'jspdf-html2canvas';
-        function convertHTMLToPDF() {
-            // const {
-            //     jsPDF
-            // } = window.jspdf;
-            html2canvas(document.body, {
-                onrendered: function(canvas)
-                {
-                    var img = canvas.toDataURL("image/png");
-                    var doc = new jsPDF();
-
-                    doc.addImage(img, 'JPEG', 20, 20);
-                    doc.save("output.pdf");
+        function printfile() {
+            $('#p').removeClass('d-block');
+            $('#back').addClass('d-none');
+            $('#p').addClass('d-none');
+            window.print();
+            $('#p').removeClass('d-none');
+            $('#p').addClass('d-block');
+            $('#back').removeClass('d-none');
 
 
-                }
-            } );
-            // var doc = new jsPDF('l', 'mm', [1200, 1810]);
-            // var pdfjs = document.querySelector('#ignorePDF');
 
-            // doc.html(pdfjs, {
-            //     callback: function(doc) {
-            //         doc.save("output.pdf");
-            //     },
-            //     x: 10,
-            //     y: 10
-            // });
-
-            // doc.output('dataurlnewwindow');
         }
     </script>
 

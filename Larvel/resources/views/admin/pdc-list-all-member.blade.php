@@ -417,43 +417,6 @@
 
             }
 
-            // else
-            // {
-            // 	var content =
-            // 	`
-        // 	<div class="form-group form-focus">
-        // 		<input type="text" class="form-control floating disable" name="search_content" readonly id="searchInput">
-        // 		<label class="focus-label">تسهیلونکی وپلټی</label>
-        // 	</div>
-        // 	`;
-            // 	$("#search_content").before(content);
-
-            // }
-            // if ((state === "2" || state === "3") && s === true) {
-            // 	var txt1 =
-            // 		`<div class="col-md-12" id="temp">
-        // 			<div class="form-group">
-        // 				<label class="col-form-label">علمي رتبه<span class="text-danger">*</span></label>
-        // 					<select class="form-control" name="educational_rank">
-        // 					<!-- <option selected="">جنسیت</option> -->
-        // 					<option value="پوهایالی">پوهایالی</option>
-        // 					<option value="پوهنیار">پوهنیار</option>
-        // 					<option value="پوهنمل">پوهنمل</option>
-        // 					<option value="پوهاند">پوهاند</option>
-        // 					<!-- <option value="3">اداري کارمند</option> -->
-        // 				</select>
-
-        // 			</div>
-        // 		</div>`;
-
-            // $("#rank").after(txt1);
-            // s = false;
-            // }
-            // else if (state === "1" && s === false) {
-            // 	$("#temp").remove();
-            // 	s = true
-            // }
-
         });
     </script>
 @endsection

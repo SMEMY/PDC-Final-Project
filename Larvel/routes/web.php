@@ -28,6 +28,7 @@ use App\Http\Controllers\facilitatorandparticipantController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\admin_infoController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\reportController;
 use App\Http\Controllers\adminInfosCntroller;
 
 /*
@@ -76,6 +77,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     // done
 
     Route::resource('/profile', adminController::class);
+    Route::resource('/monthlyReport', reportController::class);
+    Route::resource('/quarterReport', reportController::class);
+    Route::resource('/manualReport', reportController::class);
     Route::resource('/passwordChange', adminController::class);
     Route::resource('/questionsChange', adminController::class);
     Route::resource('/dashboard', dashboardController::class);
@@ -102,6 +106,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('/searchPdcProgram', programController::class);
     Route::resource('/educationalProgramList', eduprogramController::class);
     Route::resource('/participantList', programparticipantController::class);
+    Route::resource('/searchProgramParticipant', programparticipantController::class);
     Route::resource('/facilitatorList', programfacilitatorController::class);
     Route::resource('/participantAllList', programparticipantController::class);
     Route::resource('/memberList', userController::class);
@@ -110,6 +115,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('/specificeProgramParticipants', programparticipantController::class);
     Route::resource('/pdcProgramAttendancePaper', userAttendanceController::class);
     Route::resource('/pdcProgramAttendanceReport', userAttendanceController::class);
+    Route::resource('/searchUserAttendance', userAttendanceController::class);
     Route::resource('/pdcProgramFeedbackReport', fquestionnaireController::class);
     Route::resource('/materials', materialController::class);
     Route::resource('/pdcProgramAttendanceEntry', userAttendanceController::class);

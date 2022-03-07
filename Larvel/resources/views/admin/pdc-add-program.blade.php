@@ -86,19 +86,20 @@
                         <hr !important>
                         <!-- Account Form -->
 
-                        <!-- @if ($errors->any())
-    <div class="mb-5" id="alertMassege">
-                                    <ul style="list-style-type:none" class="p-0 m-0">
-                                        @foreach ($errors->all() as $error)
-    <li class="rounded p-2 m-1 alert alert-danger" >
-                                            {{ $error }}
-                                        </li>
-    @endforeach
-                                    </ul>
-                                </div>
-    @endif -->
+
                         <form action="/admin/pdcProgramList" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @if ($errors->any())
+                                <div class="mb-2" id="alertMassege">
+                                    <ul style="list-style-type:none" class="p-0 m-0">
+                                        @foreach ($errors->all() as $error)
+                                            <li class="rounded p-2 m-1 alert alert-danger">
+                                                {{ $error }}
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -243,6 +244,20 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label> <span class="text-danger">*</span> د پروګرام ګډونکونکي ډلي</label>
+                                        <input placeholder="" class="form-control" type="text" name="for"
+                                            value="{{ old('for') }}">
+                                        @error('for')
+                                            <span class="invalid-feedback" role="alert" style="display:block">
+                                                <strong>
+                                                    {{ $message }}
+                                                </strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label><span class="text-danger">*</span> د پروګرام د ګډون والو کچه</label>
                                         <input placeholder="" class="form-control" type="number" name="participant_amount"
@@ -477,38 +492,69 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label><span class="text-danger">*</span> د پېل کېدو ورځ</label>
-                                            <input placeholder="" class="form-control" type="number" name="start_day" value="{{ old('start_day') }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label> <span class="text-danger">*</span> د ختم کېدو ورځ</label>
-                                            <input placeholder="" class="form-control" type="number" name="end_day" value="{{ old('end_day') }}">
-                                        </div>
-                                    </div> -->
-                                <!-- <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label> <span class="text-danger">*</span>د پروګرام د ورځو شمېر</label>
-                                            <input placeholder="" class="form-control" type="number" name="days_duration" value="{{ old('days_duration') }}">
-                                        </div>
-                                    </div> -->
-                                <!-- <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label> <span class="text-danger">*</span> دشروع کېدو ساعت</label>
-                                            <input placeholder="" class="form-control" type="time" name="start_time" value="{{ old('start_time') }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label style=""><span class="text-danger">*</span> د ختم کېدو ساعت</label>
-                                            <input placeholder="" class="form-control" type="time" name="end_time" value="{{ old('end_time') }}">
-                                        </div>
-                                    </div> -->
                             </div>
                             <hr !important>
+
+                            <div class="row">
+                                <label class="col-md-12">د پروګرام سهولتونه</label>
+                                <div class="form-group col-md-12" id="facilities">
+                                    <div class="form-group">
+                                        <input placeholder="د پروګرام سهولت" class="form-control" type="text"
+                                            name="facility[0]" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group m-auto" id="ad">
+                                    <button type="button" id="remove_facility"
+                                        class="btn btn-info mx-auto rounded-circle d-none" style="font-size: 20px;"
+                                        onclick="removeFacility()">&times;</button>
+                                    <button type="button" class="btn btn-info mx-auto rounded-circle"
+                                        style="font-size: 20px;;" onclick="addFacility()">&plus;</button>
+                                    <!-- <label class="ml-5 col-form-label col-lg-2" style="display: block;">add more questions!</label> -->
+                                </div>
+                            </div>
+                            <hr !important>
+                            {{-- <hr !important> --}}
+
+                            <div class="row">
+                                <label class="col-md-12">د پروګرام اجنډاوي</label>
+                                <div class="form-group col-md-12" id="agendas">
+                                    <div class="form-group">
+                                        <input placeholder="د پروګرام اجنډا" class="form-control" type="text"
+                                            name="agenda[0]" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group m-auto" id="ad">
+                                    <button type="button" id="remove_agenda"
+                                        class="btn btn-info mx-auto rounded-circle d-none" style="font-size: 20px;"
+                                        onclick="removeAgenda()">&times;</button>
+                                    <button type="button" class="btn btn-info mx-auto rounded-circle"
+                                        style="font-size: 20px;;" onclick="addAgenda()">&plus;</button>
+                                    <!-- <label class="ml-5 col-form-label col-lg-2" style="display: block;">add more questions!</label> -->
+                                </div>
+                            </div>
+
+                            <hr !important>
+                            {{-- <hr !important> --}}
+
+                            <div class="row">
+                                <label class="col-md-12">د پروګرام پایلي</label>
+                                <div class="form-group col-md-12" id="results">
+                                    <div class="form-group">
+                                        <input placeholder="د پروګرام پایله" class="form-control" type="text"
+                                            name="result[0]" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group m-auto" id="ad">
+                                    <button type="button" id="remove_result"
+                                        class="btn btn-info mx-auto rounded-circle d-none" style="font-size: 20px;"
+                                        onclick="removeResult()">&times;</button>
+                                    <button type="button" class="btn btn-info mx-auto rounded-circle"
+                                        style="font-size: 20px;;" onclick="addResult()">&plus;</button>
+                                    <!-- <label class="ml-5 col-form-label col-lg-2" style="display: block;">add more questions!</label> -->
+                                </div>
+                            </div>
+                            <hr !important>
+
                             <div class="row mt-5">
                                 <div class="input-group col-md-12">
                                     <div class="input-group-prepend" id="info">
@@ -586,75 +632,26 @@
             }
 
         });
-        console.log();
-        if ($('#rank').children("option:selected").val() === "1") {
-            $("#fee").removeClass('d-none');
-            $("#fee_type").removeClass('d-none');
-        }
-        // function nameShow() {
-        // 	console.log(this.value);
-        // 	var fileName = $(this).val().split("\\").pop();
-        // 	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        // console.log();
+        // if ($('#rank').children("option:selected").val() === "1") {
+        //     $("#fee").removeClass('d-none');
+        //     $("#fee_type").removeClass('d-none');
         // }
-        function el() {
-            $(".custom-file-input").on("change", function() {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });
-        }
 
-        $(".custom-file-input").on("change", function() {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
+        // function el() {
+        //     $(".custom-file-input").on("change", function() {
+        //         var fileName = $(this).val().split("\\").pop();
+        //         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        //     });
+        // }
 
-        var count4 = 2;
-        var indexFile = 1;
+        // $(".custom-file-input").on("change", function() {
+        //     var fileName = $(this).val().split("\\").pop();
+        //     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        // });
 
-        function addFile() {
-            var txt1 =
-                `	<div class=" col-md-6" >
-												<div class="form-group custom-file ">
-													<input type="file" class="custom-file-input" id="customFile"
-														name="filename[${indexFile}]">
-													<label class="custom-file-label" for="customFile">د پروګرام اړونده
-														فایل
-														انتخاب کړی</label>
-												</div>
-											</div>
-											<div class=" col-md-6 mb-3" id="">
-												<div class="form-group">
-													<select class="custom-select"
-														style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;" name="filetype[${indexFile}]">
-                                                        <option selected></option>
-                                    <option value="پریشینټېشن">پریشینټېشن</option>
-                                    <option value="وډیو">وډیو</option>
-                                    <option value="آډیو">آډیو</option>
-													</select>
-
-												</div>
-											</div>`;
-
-            $("#files").children().last().after(txt1);
-            $('#file-remover').removeClass('d-none');
-            count4++; // Insert new elements after img
-            indexFile++;
-        }
-
-        function removeFile() {
-
-            if (count4 != 2) {
-                $('#files').children().last().remove();
-                $('#files').children().last().remove();
-
-                count4--;
-            }
-            if (count4 == 2) {
-                $('#file-remover').addClass('d-none');
-
-            }
-
-        }
+        // var count4 = 2;
+        // var indexFile = 1;
 
 
         $("#toggle_btn").click(function() {
@@ -667,5 +664,92 @@
                 $("#for").css("margin-right", "140px");
             }
         });
+
+        var count4 = 2;
+        var count5 = 2;
+        var count6 = 2;
+        var indexFacility = 1;
+        var indexAgenda = 1;
+        var indexResult = 1;
+
+        function addFacility() {
+            var txt1 =
+                `<div class="form-group" id="facilities">
+                                    <div class="form-group">
+                                        <input placeholder="د پروګرام سهولت" class="form-control" type="text"
+                                            name="facility[${indexFacility}]" value="">
+                                    </div>
+                                </div>`;
+            $("#facilities").children().last().after(txt1);
+            $('#remove_facility').removeClass('d-none');
+            count4++;
+            indexFacility++; // Insert new elements after img
+        }
+
+        function removeFacility() {
+            if ($("#facilities").children().length > 1) {
+                $('#facilities').children().last().remove();
+                indexFacility--;
+            }
+            if ($("#facilities").children().length == 1) {
+                $('#remove_facility').addClass('d-none');
+            }
+        }
+
+        function addAgenda() {
+            var txt1 =
+                `<div class="form-group" id="facilities">
+                                <div class="form-group">
+                                    <input placeholder="د پروګرام سهولت" class="form-control" type="text"
+                                        name="agenda[${indexAgenda}]" value="">
+                                </div>
+                            </div>`;
+
+            $("#agendas").children().last().after(txt1);
+            $('#remove_agenda').removeClass('d-none');
+            count5++;
+            indexAgenda++; // Insert new elements after img
+        }
+
+        function removeAgenda() {
+
+            if ($("#agendas").children().length > 1) {
+                $('#agendas').children().last().remove();
+                indexAgenda--;
+
+            }
+            if ($("#agendas").children().length == 1) {
+                $('#remove_agenda').addClass('d-none');
+            }
+
+        }
+
+        function addResult() {
+            var txt1 =
+                `<div class="form-group" id="result">
+                                <div class="form-group">
+                                    <input placeholder="د پروګرام پایله" class="form-control" type="text"
+                                        name="result[${indexResult}]" value="">
+                                </div>
+                            </div>`;
+
+            $("#results").children().last().after(txt1);
+            $('#remove_result').removeClass('d-none');
+            count5++;
+            indexResult++; // Insert new elements after img
+        }
+
+        function removeResult() {
+
+            if ($("#results").children().length > 1) {
+                $('#results').children().last().remove();
+                indexResult--;
+
+            }
+            if ($("#results").children().length == 1) {
+                $('#remove_result').addClass('d-none');
+            }
+
+        }
     </script>
 @endsection

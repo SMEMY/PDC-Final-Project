@@ -1,4 +1,4 @@
-@extends('master.master')
+@extends('master.masterInfo')
 
 <!-- @section('page-title', 'hahahahah') -->
 @section('page-title')
@@ -52,8 +52,13 @@
 @endsection
 
 <!-- here we add dynamic content -->
+
 @section('content')
+    <a href="/admin/pdcProgramInfo/{{ $programID }}" class="btn btn-primary apply-btn mt-5" style="z-index: 100;"><i
+            class="fa fa-arrow-left" aria-hidden="true"></i> </a>
     <!-- Page Wrapper -->
+    {{-- <br> --}}
+
     <div class="page-wrapper">
 
         <!-- Page Content -->
@@ -72,11 +77,13 @@
                     <div class="col-md-8">
                         <div class="job-info job-widget" style=" box-shadow:0px 0px 0px 1px #00beff; border-radius: 5px; ">
                             <div class="dropdown-file">
-                                <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                                <a href="" class="dropdown-link" data-toggle="dropdown"><i
+                                        class="fa fa-ellipsis-v"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="/admin/facilitatorProfileForProgram/{{ $profile->id }}/edit"
+                                    <a href="/admin/facilitatorProfileForProgram/{{ $profile->user_id }}/edit"
                                         class="dropdown-item"><i class="fa fa-download m-r-5"></i>معلومات اصلاح کول</a>
-                                    <a class="dropdown-item" href="/admin/deleteFacilitatorForProgram/{{ $profile->id }}"
+                                    <a class="dropdown-item"
+                                        href="/admin/deleteFacilitatorForProgram/{{ $profile->user_id }}"
                                         data-toggle="modal" data-target="#delete_client" id="path"
                                         onclick="pathFinder(this)"><i class="fa fa-trash-o m-r-5"></i>معلومات له منځه یې
                                         اوسی</a>
@@ -86,14 +93,16 @@
                             <br>
                             <ul class="job-post-det col-md-12">
                                 <li class="col-md-12"><i class="pr-2 fa fa-user-o"></i>د {{ $name }} نوم: <span
-                                        class="text-blue">{{ $profile->name }} {{ $profile->last_name }}</span></li>
+                                        class="text-blue">{{ $profile->name }} {{ $profile->last_name }}</span>
+                                </li>
                                 <li class="col-md-12"><i class="pr-2 fa fa-phone"></i>د {{ $name }} د ټلیفوم
                                     شمېره: <span class="text-blue">{{ $profile->phone_number }}</span></li>
                                 <li class="col-md-12"><i class="pr-2 fa fa-mail-forward"></i>د {{ $name }}
                                     برېښنالیک: <span class="text-blue">{{ $profile->email }}</span></li>
                                 @if ($profile->gender == 'نارینه')
                                     <li class="col-md-12"><i class="pr-2 fa fa-male"></i>د {{ $name }} جنسیت:
-                                        <span class="text-blue">{{ $profile->gender }}</span></li>
+                                        <span class="text-blue">{{ $profile->gender }}</span>
+                                    </li>
                                 @else
                                     <li class="col-md-12"><i class="pr-2 fa fa-female"></i>د {{ $name }}
                                         جنسیت: <span class="text-blue">{{ $profile->gender }}</span></li>
@@ -119,10 +128,11 @@
                             style=" box-shadow:0px 0px 0px 1px #00beff; border-radius: 5px; " id="small">
                             <h4 class="account-title">د {{ $name }} اړونده کړني</h4>
                             <a class="btn job-btn mt-3 p-2 "
-                                href="/admin/facilitatorEnrolledPrograms/{{ $profile->id }}">د {{ $name }}
+                                href="/admin/facilitatorEnrolledPrograms/{{ $profile->user_id }}">د {{ $name }}
                                 پروګرامونه</a>
                             <a class="btn job-btn mt-3 p-2 "
-                                href="/admin/programEnrollmentForFacilitator/{{ $profile->id }}"> {{ $name }}
+                                href="/admin/programEnrollmentForFacilitator/{{ $profile->user_id }}">
+                                {{ $name }}
                                 پروګرام ته شاملول</a>
                         </div>
                     </div>

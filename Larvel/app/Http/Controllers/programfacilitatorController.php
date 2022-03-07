@@ -121,8 +121,11 @@ class programfacilitatorController extends Controller
                     ->get();
                 $name = 'تسهیلونکی';
                 $program_id = $id;
+                $programID = $id;
+                // $programs = [{'sdf''sdf'}];
+                $programs = Program::find($id);
                 if (count($userProfile) !== 0) {
-                    return view('admin.pdc-program-user-info', compact('userProfile', 'name', 'program_id'));
+                    return view('admin.pdc-program-user-info', compact('userProfile', 'name', 'program_id', 'programs', 'programID'));
                 } else {
                     return back()->with('warn', "د پروګرام لپاره تر اوسه تسهیلونکي ندی اضافه کړل سوی!");
                 }
@@ -188,7 +191,8 @@ class programfacilitatorController extends Controller
                     ])
                     ->get();
                 $path = 'facilitatorProfileForProgram';
-                return view('pdc-edit-member', compact('member', 'path'));
+
+                return view('admin.pdc-edit-member', compact('member', 'path'));
             }
         } else {
             dd('you need to be admin');
@@ -219,24 +223,56 @@ class programfacilitatorController extends Controller
                     'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
                     'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
                 ]);
+
                 $member = User::with('userInfos')->find($id);
-                $user = User_info::find($id);
+                $member->name = $request->member_name;
+                $member->email = $request->email;
+                $member->save();
+                if ($request->office_position_category === 'اداري') {
+                    $user = User_info::where('user_id', $id)
+                        ->update([
+                            'last_name' => $request->last_name,
+                            'phone_number' => $request->phone_number,
+                            'gender' => $request->gender,
+                            'office_campus' => $request->office_campus,
+                            'office_building' =>  $request->office_building,
+                            'office_department' =>  $request->office_department,
+                            'office_position' =>  $request->office_position,
+                            'office_position_category' =>  $request->office_position_category,
+                            'educational_rank' => ""
+                        ]);
+                } else {
+                    $user = User_info::where('user_id', $id)
+                        ->update([
+                            'last_name' => $request->last_name,
+                            'phone_number' => $request->phone_number,
+                            'gender' => $request->gender,
+                            'office_campus' => $request->office_campus,
+                            'office_building' =>  $request->office_building,
+                            'office_department' =>  $request->office_department,
+                            'office_position' =>  $request->office_position,
+                            'office_position_category' =>  $request->office_position_category,
+                            'educational_rank' => $request->educational_rank
+                        ]);
+                }
                 // return $user;
                 // return $user->last_name;
                 // return $request->last_name;
-                $member->name = $request->member_name;
-                $member->email = $request->email;
-                $user->last_name = $request->last_name;
-                $user->phone_number = $request->phone_number;
-                $user->gender = $request->gender;
-                $user->office_campus = $request->office_campus;
-                $user->office_building = $request->office_building;
-                $user->office_department = $request->office_department;
-                $user->office_position = $request->office_position;
-                $user->office_position_category = $request->office_position_category;
-                $user->educational_rank = $request->educational_rank;
-                $member->save();
-                $user->save();
+                // return $request->office_position_category === 'اداري';
+                // $user->last_name = $request->last_name;
+                // $user->phone_number = $request->phone_number;
+                // $user->gender = $request->gender;
+                // $user->office_campus = $request->office_campus;
+                // $user->office_building = $request->office_building;
+                // $user->office_department = $request->office_department;
+                // $user->office_position = $request->office_position;
+                // $user->office_position_category = $request->office_position_category;
+                // if ($request->office_position_category === 'اداري') {
+                //     $user->educational_rank = "";
+                // } else {
+                //     $user->educational_rank = $request->educational_rank;
+                // }
+                // $user->save();
                 // return redirect('admin/facilitatorProfileForProgram/' . $request->program_id)->with('member_edited', 'د یاد غړي معلومات په کامیابۍ سره په سیسټم کي اصلاح کړل سو!');
 
                 // if ($request->path() === 'admin/facilitatorList/' . $id) {

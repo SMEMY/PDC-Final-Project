@@ -150,7 +150,8 @@ class fquestionnaireController extends Controller
                 if (count($first) === 0 && count($second) === 0 && count($third) === 0 && count($fourth) === 0) {
                     return back()->with('warn', 'د یاد پروګرام د پوښتنلیک راپور تر اوسه سیسټم کي وجود نلري!');
                 } else {
-                    return view('admin.chart', compact('questions', 'first', 'second', 'third', 'fourth',  'comments'));
+                    $programID = $id;
+                    return view('admin.pdc-program-feedback-report', compact('questions', 'first', 'second', 'third', 'fourth',  'comments', 'programID'));
                 }
             }
         } else {

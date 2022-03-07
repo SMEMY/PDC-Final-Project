@@ -1,4 +1,4 @@
-@extends('master.master')
+@extends('master.masterInfo')
 
 <!-- @section('page-title', 'hahahahah') -->
 @section('page-title')
@@ -93,6 +93,7 @@
 
 <!-- here we add dynamic content -->
 @section('content')
+<a href="/admin/pdcProgramList" class="btn btn-primary apply-btn mt-5" style="z-index: 100;"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
     <!-- Page Wrapper -->
     <div class="page-wrapper">
 
@@ -198,7 +199,7 @@
                                 @endforeach
                             </ul>
                         </div>
-                        <div class="job-desc-title">
+                        {{-- <div class="job-desc-title">
                             <h4 class="text-center mt-4 p-3 rounded">د پروګرام ارزوني: </h4>
                         </div>
                         <div class="job-description">
@@ -209,7 +210,7 @@
                                     <li> {{ $evaluation->evaluation }} </li>
                                 @endforeach
                             </ul>
-                        </div>
+                        </div> --}}
                         <div class="job-desc-title">
                             <h4 class="text-center mt-4 p-3 rounded">د پروګرام انځورونه: </h4>
                         </div>
@@ -289,7 +290,7 @@
                             <!-- <a class="btn job-btn" href="#" data-toggle="modal" data-target="#apply_job">Enroll</a> -->
                         </div>
                     </div>
-                    <div class="col-md-6" Style="padding:0px !important; padding-left:20px !important;">
+                    {{-- <div class="col-md-6" Style="padding:0px !important; padding-left:20px !important;">
                         <div class="job-det-info job-widget col-md-12"
                             style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; text-align: right !important;"
                             id="save_info">
@@ -297,14 +298,18 @@
 
                             <a class="btn job-btn  p-2 col-md-3" href="/admin/pdcProgramAttendance/{{ $programs->id }}"
                                 onclick="audio.play()"> <i class="fa fa-database" aria-hidden="true"></i> حاضري </a>
-                            <a class="btn job-btn  p-2 col-md-3" href="/admin/pdcProgramFacility/{{ $programs->id }}"
-                                onclick="audio.play()"><i class="fa fa-database" aria-hidden="true"></i> سهولت </a>
-                            <a class="btn job-btn  p-2 col-md-3" href="/admin/pdcProgramAgenda/{{ $programs->id }}"
-                                onclick="audio.play()"><i class="fa fa-database" aria-hidden="true"></i> اجنډا </a>
-                            <a class="btn job-btn  p-2 col-md-3" href="/admin/pdcProgramEvaluation/{{ $programs->id }}"
-                                onclick="audio.play()"><i class="fa fa-database" aria-hidden="true"></i> ارزوني </a>
-                            <a class="btn job-btn  p-2 col-md-3" href="/admin/pdcProgramResult/{{ $programs->id }}"
-                                onclick="audio.play()"><i class="fa fa-database" aria-hidden="true"></i> پایلي </a>
+                            <a class="btn job-btn  p-2 col-md-3 bg-danger"
+                                href="/admin/pdcProgramFacility/{{ $programs->id }}" onclick="audio.play()"><i
+                                    class="fa fa-database" aria-hidden="true"></i> سهولت </a>
+                            <a class="btn job-btn  p-2 col-md-3 bg-danger"
+                                href="/admin/pdcProgramAgenda/{{ $programs->id }}" onclick="audio.play()"><i
+                                    class="fa fa-database" aria-hidden="true"></i> اجنډا </a>
+                            <a class="btn job-btn  p-2 col-md-3 bg-danger"
+                                href="/admin/pdcProgramEvaluation/{{ $programs->id }}" onclick="audio.play()"><i
+                                    class="fa fa-database" aria-hidden="true"></i> ارزوني </a>
+                            <a class="btn job-btn  p-2 col-md-3 bg-danger"
+                                href="/admin/pdcProgramResult/{{ $programs->id }}" onclick="audio.play()"><i
+                                    class="fa fa-database" aria-hidden="true"></i> پایلي </a>
                             <a class="btn job-btn  p-2 col-md-3" href="/admin/pdcProgramPhoto/{{ $programs->id }}"
                                 onclick="audio.play()"> <i class="fa fa-database" aria-hidden="true"></i> تفرقه </a>
                             <a class="btn job-btn p-2 col-md-3" href="/admin/storeMaterials/{{ $programs->id }}"
@@ -315,8 +320,8 @@
                                     aria-hidden="true"></i>
                                 پوښتنلیک </a>
                         </div>
-                    </div>
-                    <div class=" col-md-6" Style="padding:0px !important; padding-right:20px !important;">
+                    </div> --}}
+                    {{-- <div class=" col-md-6" Style="padding:0px !important; padding-right:20px !important;">
                         <div class="job-det-info job-widget col-md-12"
                             style=" box-shadow:1px 0px 5px 0px #00beff; border-radius: 5px; " id="save_info">
                             <h4 class="account-title"> د پروګرام معلومات کتل </h4>
@@ -340,11 +345,11 @@
                             <a class="btn job-btn  p-2 col-md-3 "
                                 href="/admin/pdcProgramFeedbackReport/{{ $programs->id }}" onclick="audio.play()"> <i
                                     class="fa fa-file" aria-hidden="true"></i> پوښتنلیک راپور</a>
-                            <a class="btn job-btn  p-2 col-md-3" href="/admin/materials/{{ $programs->id }}"
+                            <a class="btn job-btn  p-2 col-md-3" href="/admin/pdcProgramFeedbackReport/{{ $programs->id }}"
                                 onclick="audio.play()"><i class="fa fa-download" aria-hidden="true"></i> تدریسي مواد</a>
 
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

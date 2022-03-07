@@ -89,11 +89,15 @@
             width: 600px;
         }
 
+        a {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
+        }
+
         .bootstrap-growl {
             font-size: 30px !important;
             padding: 40px !important;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-
         }
 
 
@@ -134,8 +138,8 @@
 
 <body>
     <!-- Main Wrapper -->
-    <a href="/user/pdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
-    <div class="main-wrapper m-auto col-md-8">
+    <a href="/admin/pdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn">شاته تګ</a>
+    <div class="main-wrapper m-auto col-md-11">
 
 
         <!-- Logo -->
@@ -166,36 +170,40 @@
                             </ul>
                         </div>
                     @endif
-                    <div class="row mt-5" id="files">
-                        <div class=" col-md-6">
-                            <div class="form-group custom-file ">
-                                <input type="file" class="custom-file-input" id="customFile" name="materials[0]">
-                                <label class="custom-file-label" for="customFile">د پروګرام اړونده
-                                    فایل
-                                    انتخاب کړی</label>
+                    <div style="border: 1px solid rgba(110, 99, 99, 0.571); padding: 20px; border-radius:10px;"
+                        class="my-4">
+                        <div class="row mt-5" id="files">
+                            <div class=" col-md-6">
+                                <div class="form-group custom-file ">
+                                    <input type="file" class="custom-file-input" id="customFile" name="materials[0]">
+                                    <label class="custom-file-label" for="customFile">د پروګرام اړونده
+                                        فایل
+                                        انتخاب کړی</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class=" col-md-3">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="material" placeholder="د فایل نوم"
-                                    name="file_name[0]">
+                            <div class=" col-md-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="material" placeholder="د فایل نوم"
+                                        name="file_name[0]">
+                                </div>
                             </div>
-                        </div>
-                        <div class=" col-md-3 mb-3" id="">
-                            <div class="form-group">
-                                <select class="custom-select"
-                                    style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;"
-                                    name="file_type[0]">
-                                    <option selected value="">د فایل ډول </option>
-                                    <option value="لکچر">لکچر</option>
-                                    <option value="کتاب">کتاب</option>
-                                    <option value="انځور">انځور</option>
-                                    <option value="وډیو">وډیو</option>
-                                    <option value="آډیو">آډیو</option>
-                                </select>
+                            <div class=" col-md-3 mb-3" id="">
+                                <div class="form-group">
+                                    <select class="custom-select"
+                                        style="height: 44px; border-radius: 3px; outline: none;background-color:#f0fcff; border:1px solid #e3e3e3;"
+                                        name="file_type[0]">
+                                        <option selected value="">د فایل ډول </option>
+                                        <option value="لکچر">لکچر</option>
+                                        <option value="کتاب">کتاب</option>
+                                        <option value="انځور">انځور</option>
+                                        <option value="وډیو">وډیو</option>
+                                        <option value="آډیو">آډیو</option>
+                                    </select>
 
+                                </div>
                             </div>
                         </div>
+
                     </div>
                     <div class="row mb-5">
                         <div class="form-group m-auto ">
@@ -214,8 +222,6 @@
                     <div class="m-auto" style="width: fit-content;">
                         <button type="submit" class="btn btn-primary p-2" style="width: 300px; text-align: center;"
                             id="btn">ثبت کړی</button>
-                        <!-- <button type="submit" class="btn btn-primary p-2" style="width: 300px; text-align: center;" >ثبت
-       کړی</button> -->
                     </div>
                 </form>
             </div>

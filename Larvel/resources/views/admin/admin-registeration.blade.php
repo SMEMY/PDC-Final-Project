@@ -183,7 +183,7 @@
                                     <div class="form-group form-focus select-focus">
                                         <label>لمړي پوښتنه</label>
 
-                                        <select class="custom-select p-2 h-100 searchInput" name="first_question">
+                                        <select class="custom-select p-2 h-100 searchInput" name="f_q">
                                             <option selected value="">پوښتنه مو انتخاب کړی!</option>
                                             <option value="ستاسي د خوښي خواړه کوم دي؟">ستاسي د خوښي خواړه کوم دي؟
                                             </option>
@@ -201,8 +201,8 @@
                                 </div>
                                 <div class="form-group col-md-12 p-3">
                                     <label>ځواب</label>
-                                    <input class="form-control" name="first_answer" type="text"
-                                        placeholder="داډمېن تخلص" value="{{ old('first_answer') }}">
+                                    <input class="form-control" name="f_a" type="text" placeholder="داډمېن تخلص"
+                                        value="{{ old('f_a') }}">
                                 </div>
                             </div>
                             <hr style="width:70%">
@@ -211,7 +211,7 @@
                                     <div class="form-group form-focus select-focus">
                                         <label>دویمه پوښتنه</label>
 
-                                        <select class="custom-select p-2 h-100 searchInput" name="second_question">
+                                        <select class="custom-select p-2 h-100 searchInput" name="s_q">
                                             <option selected value="">پوښتنه مو انتخاب کړی!</option>
                                             <option value="ستاسي د خوښي خواړه کوم دي؟">ستاسي د خوښي خواړه کوم دي؟
                                             </option>
@@ -229,8 +229,8 @@
                                 </div>
                                 <div class="form-group col-md-12 p-3">
                                     <label>ځواب</label>
-                                    <input class="form-control" name="second_answer" type="text"
-                                        placeholder="داډمېن تخلص" value="{{ old('second_answer') }}">
+                                    <input class="form-control" name="s_a" type="text" placeholder="داډمېن تخلص"
+                                        value="{{ old('s_a') }}">
                                 </div>
                             </div>
                             <hr style="width:70%">
@@ -240,7 +240,7 @@
                                     <div class="form-group form-focus select-focus">
                                         <label>دریمه پوښتنه</label>
 
-                                        <select class="custom-select p-2 h-100 searchInput" name="third_question">
+                                        <select class="custom-select p-2 h-100 searchInput" name="t_q">
                                             <option selected value="">پوښتنه مو انتخاب کړی!</option>
                                             <option value="ستاسي د خوښي خواړه کوم دي؟">ستاسي د خوښي خواړه کوم دي؟
                                             </option>
@@ -258,8 +258,8 @@
                                 </div>
                                 <div class="form-group col-md-12 p-3">
                                     <label>ځواب</label>
-                                    <input class="form-control" name="third_answer" type="text"
-                                        placeholder="داډمېن تخلص" value="{{ old('third_answer') }}">
+                                    <input class="form-control" name="t_a" type="text" placeholder="داډمېن تخلص"
+                                        value="{{ old('t_a') }}">
                                 </div>
 
                                 <div class="form-group text-center col-md-4 m-auto">

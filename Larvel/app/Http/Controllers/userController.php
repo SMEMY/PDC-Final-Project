@@ -10,6 +10,7 @@ use App\Models\User_info;
 use App\Models\Role_user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Fortify\Rules\Password;
 
 
 class userController extends Controller
@@ -62,69 +63,78 @@ class userController extends Controller
         if (Gate::allows(ability: 'is-admin')) {
             if ($request->path() === 'admin/memberStoreTwo') {
                 // return "slkdfj";
-                if ($request->member_type != null) {
+                // if ($request->member_type != null) {
+                // return "dkjfhsd";
+                $validate = $request->validate([
+                    'member_name' => 'bail|required|string|max:30',
+                    'last_name' => 'bail|required|string|max:30',
+                    'phone_number' => 'bail|required|string|max:13',
+                    'email' => 'bail|required|email|max:50',
+                    'gender' => 'bail|required|string|in:نارینه,ښځینه',
+                    'office_campus' => 'bail|nullable|string|in:کندهار پوهتون',
+                    'office_building' => 'bail|required|string|in:ساینس,ادبیات,شرعیات,اقتصاد,زراعت,ژورنالیزم,حقوق,ساینس,انجنیري,طب,اداري معاونیت,ریاست مقام,محصلینو چارو معاونیت,تعلیم او تربیه,اداره ئې عامه,کمپیوټر ساینس',
+                    'office_department' => 'bail|required|string|max:30',
+                    'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
+                    'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
+                    'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
+                    'password' => ['required', 'string', new Password, 'confirmed'],
+                    'password_confirmation' => 'bail|string|min:8|max:20|',
+                    'member_type' => 'bail|string|in:تسهیلونکی,ګډونوال|required',
+                    'f_q' => 'required|string',
+                    'f_a' => 'required|string',
+                    's_q' => 'required|string',
+                    's_a' => 'required|string',
+                    't_q' => 'required|string',
+                    't_a' => 'required|string',
+                ]);
+                $member = new User;
+                $member->name = $request->member_name;
+                $member->email = $request->email;
+                $member->password = Hash::make($request->password);
+                $member->f_q = $request->f_q;
+                $member->s_q = $request->s_q;
+                $member->t_q = $request->t_q;
+                $member->f_a = $request->f_a;
+                $member->s_a = $request->s_a;
+                $member->t_a = $request->t_a;
+                $member->save();
 
-                    $validate = $request->validate([
-                        'member_name' => 'bail|required|string|max:30',
-                        'last_name' => 'bail|required|string|max:30',
-                        'phone_number' => 'bail|required|string|max:13',
-                        'email' => 'bail|required|email|max:50',
-                        'gender' => 'bail|required|string|in:نارینه,ښځینه',
-                        'office_campus' => 'bail|nullable|string|in:کندهار پوهتون',
-                        'office_building' => 'bail|required|string|in:ساینس,ادبیات,شرعیات,اقتصاد,زراعت,ژورنالیزم,حقوق,ساینس,انجنیري,طب,اداري معاونیت,ریاست مقام,محصلینو چارو معاونیت,تعلیم او تربیه,اداره ئې عامه,کمپیوټر ساینس',
-                        'office_department' => 'bail|required|string|max:30',
-                        'office_position' => 'bail|required|string|in:اداري کارمند,ښوونکی,مرستیال,رئیس',
-                        'office_position_category' => 'bail|required|string|in:اداري,تدریسي,اداري او تدریسي',
-                        'educational_rank' => 'bail|required_if:office_position_category,=,تدریسي,اداري او تدریسي|string|in:پوهاند,پوهنمل,پوهنیار,پوهایالی',
-                        'password' => 'bail|string|min:8|max:20|confirmed:password_confirmation',
-                        'password_confirmation' => 'bail|string|min:8|max:20|',
-                        'member_type' => 'bail|string|in:تسهیلونکی,ګډونوال|required',
-                    ]);
+                DB::table('user_infos')->insert([
+                    'user_id' => $member->id,
+                    'last_name' => $request->last_name,
+                    'phone_number' => $request->phone_number,
+                    'gender' => $request->gender,
+                    'office_campus' => $request->office_campus,
+                    'office_building' =>   $request->office_building,
+                    'office_department' => $request->office_department,
+                    'office_position' => $request->office_position,
+                    'office_position_category' => $request->office_position_category,
+                    'educational_rank' =>  $request->educational_rank,
+                ]);
 
 
 
-                    $member = new User;
-                    $member->name = $request->member_name;
-                    $member->email = $request->email;
-                    $member->password = Hash::make($request->password);
-                    $member->save();
-
-                    DB::table('user_infos')->insert([
+                if ($request->member_type === 'ګډونوال') {
+                    // $participant_id = DB::table('users')->max('id');
+                    DB::table('role_user')->insert([
                         'user_id' => $member->id,
-                        'last_name' => $request->last_name,
-                        'phone_number' => $request->phone_number,
-                        'gender' => $request->gender,
-                        'office_campus' => $request->office_campus,
-                        'office_building' =>   $request->office_building,
-                        'office_department' => $request->office_department,
-                        'office_position' => $request->office_position,
-                        'office_position_category' => $request->office_position_category,
-                        'educational_rank' =>  $request->educational_rank,
+                        'program_id' => $request->program_id,
+                        'role_id' => 3
                     ]);
-
-
-
-                    if ($request->member_type === 'ګډونوال') {
-                        // $participant_id = DB::table('users')->max('id');
-                        DB::table('role_user')->insert([
-                            'user_id' => $member->id,
-                            'program_id' => $request->program_id,
-                            'role_id' => 3
-                        ]);
-                        return redirect('admin/pdcProgramList')->with('member_added', 'پروګرام ته ګډونکوونکی اضافه کړل سو!');
-                    } elseif ($request->member_type === 'تسهیلونکی') {
-                        DB::table('role_user')->insert([
-                            'user_id' => $member->id,
-                            'program_id' => $request->program_id,
-                            'role_id' => 2
-                        ]);
-                        return redirect('admin/pdcProgramList')->with('member_added', 'پروګرام ته تسهیلونکی اضافه کړل سو!');
-                    } else {
-                        return "nullllllllllll member registration!";
-                    }
+                    return redirect('admin/pdcProgramList')->with('member_added', 'پروګرام ته ګډونکوونکی اضافه کړل سو!');
+                } elseif ($request->member_type === 'تسهیلونکی') {
+                    DB::table('role_user')->insert([
+                        'user_id' => $member->id,
+                        'program_id' => $request->program_id,
+                        'role_id' => 2
+                    ]);
+                    return redirect('admin/pdcProgramList')->with('member_added', 'پروګرام ته تسهیلونکی اضافه کړل سو!');
                 } else {
-                    return "facil and part controller has faced with error in store function!";
+                    return "nullllllllllll member registration!";
                 }
+                // } else {
+                //     return "facil and part controller has faced with error in store function!";
+                // }
             } elseif ($request->path() === 'admin/memberStore') {
                 $validate = $request->validate([
                     'member_name' => 'bail|required|string|max:30',
@@ -232,7 +242,9 @@ class userController extends Controller
         if (Gate::allows(ability: 'is-admin')) {
             if ($request->path() === 'admin/memberRegisterationTwo/' . $id) {
                 $program_id = $id;
-                return view('admin.pdc-add-member-two', compact('program_id'));
+                $user_password = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@$%&"), 0, 8);
+                // return $user_password;
+                return view('admin.pdc-add-member-two', compact('program_id', 'user_password'));
             } elseif ($request->path() === 'admin/memberProfile/' . $id) {
                 $userProfile = User::join('user_infos', 'users.id', '=', 'user_infos.user_id')
                     ->where('user_infos.user_id', $id)

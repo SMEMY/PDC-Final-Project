@@ -21,11 +21,12 @@ class CreatePDCPrograms extends Migration
             $table->string('supporter', 30);
             $table->string('facilitator', 30)->nullable();
             $table->string('manager', 30);
+            $table->string('for');
             $table->bigInteger('fund');
             $table->string('fund_type', 15);
             $table->boolean('fee_able');
             $table->bigInteger('fee')->nullable();
-            $table->string('fee_type',20)->nullable();
+            $table->string('fee_type', 20)->nullable();
             $table->string('info_mobile_number');
             $table->longText('program_description');
             $table->bigInteger('participant_amount');

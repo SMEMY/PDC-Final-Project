@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta name="description" content="Smarthr - Bootstrap Admin Template">
     <meta name="keywords"
-        content="user, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
+        content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
     <title>feedback</title>
@@ -93,15 +93,12 @@
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-        <a href="/admin/pdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn"><i
-                class="fa fa-arrow-left" aria-hidden="true"></i></a>
+        <a href="/admin/pdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn">پروګرام ووینی</a>
 
 
-        <div class="account-logo mt-5">
-            <a href="index.html"><img src="{{ asset('assets/img/logo2.png') }}" alt="Dreamguy's Technologies"></a>
-        </div>
+
         <!-- Page Wrapper -->
-        <div style="position: relative; top:0px">
+        <div style="position: relative; top:40px">
 
             <!-- Page Content -->
             <div class="content container-fluid">
@@ -136,10 +133,17 @@
                                                                                     class="fa fa-ellipsis-v"></i></a>
                                                                             <div
                                                                                 class="dropdown-menu dropdown-menu-right">
-                                                                                <a href="/user/downloadMaterial/{{ $material->path }}"
+                                                                                <a href="/admin/downloadMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"><i
                                                                                         class="fa fa-download m-r-5"></i>Download</a>
-
+                                                                                <a class="dropdown-item"
+                                                                                    href="/admin/deleteMaterial/{{ $material->path }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#delete_client"
+                                                                                    id="path"
+                                                                                    onclick="pathFinder(this)"><i
+                                                                                        class="fa fa-trash-o m-r-5"></i>
+                                                                                    له منځه یې اوسی</a>
                                                                             </div>
                                                                         </div>
                                                                         <div class="card-file-thumb">
@@ -188,10 +192,17 @@
                                                                                     class="fa fa-ellipsis-v"></i></a>
                                                                             <div
                                                                                 class="dropdown-menu dropdown-menu-right">
-                                                                                <a href="/user/downloadMaterial/{{ $material->path }}"
+                                                                                <a href="/admin/downloadMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"><i
                                                                                         class="fa fa-download m-r-5"></i>Download</a>
-
+                                                                                <a class="dropdown-item"
+                                                                                    href="/admin/deleteMaterial/{{ $material->path }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#delete_client"
+                                                                                    id="path"
+                                                                                    onclick="pathFinder(this)"><i
+                                                                                        class="fa fa-trash-o m-r-5"></i>
+                                                                                    له منځه یې اوسی</a>
                                                                             </div>
                                                                         </div>
                                                                         <div class="card-file-thumb">
@@ -228,34 +239,28 @@
                                                                                     class="fa fa-ellipsis-v"></i></a>
                                                                             <div
                                                                                 class="dropdown-menu dropdown-menu-right">
-                                                                                <a href="/user/downloadMaterial/{{ $material->path }}"
+                                                                                <a href="/admin/downloadMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"><i
                                                                                         class="fa fa-download m-r-5"></i>Download</a>
-
+                                                                                <a class="dropdown-item"
+                                                                                    href="/admin/deleteMaterial/{{ $material->path }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#delete_client"
+                                                                                    id="path"
+                                                                                    onclick="pathFinder(this)"><i
+                                                                                        class="fa fa-trash-o m-r-5"></i>
+                                                                                    له منځه یې اوسی</a>
                                                                             </div>
                                                                         </div>
                                                                         <div class="card-file-thumb">
                                                                             @if ($material->extension === 'jpeg' || $material->extension === 'png' || $material->extension === 'jpg' || $material->extension === 'gif' || $material->extension === 'svg')
-                                                                                {{-- <i class="fa fa-file-image-o"
-                                                                                    style="color: rgb(81, 182, 255);"></i> --}}
-                                                                                <a href="{{ asset('storage/programFiles/' . $material->path) }}"
-                                                                                    target="_blank"
-                                                                                    rel="noopener noreferrer"
-                                                                                    style="width:100%">
-
-                                                                                    <img src="{{ asset('storage/programFiles/' . $material->path) }}"
-                                                                                        alt="none"
-                                                                                        class="img-fluid rounded  mx-auto  rounded mt-4 mb-3"
-                                                                                        srcset="" height="202"
-                                                                                        width="100%"
-                                                                                        style="height: 128px !important">
-                                                                                </a>
+                                                                                <i class="fa fa-file-image-o"
+                                                                                    style="color: rgb(81, 182, 255);"></i>
                                                                             @else
                                                                             @endif
                                                                         </div>
                                                                         <div class="card-body">
-                                                                            <h6 class=" mt-3">
-                                                                                {{ $material->name }}</h6>
+                                                                            <h6>{{ $material->name }}</h6>
                                                                             <span class="float-right d-block"
                                                                                 dir="ltr">{{ $material->size }} MB
                                                                             </span>
@@ -281,26 +286,26 @@
                                                                                     class="fa fa-ellipsis-v"></i></a>
                                                                             <div
                                                                                 class="dropdown-menu dropdown-menu-right">
-                                                                                <a href="/user/downloadMaterial/{{ $material->path }}"
+                                                                                <a href="/admin/downloadMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"><i
                                                                                         class="fa fa-download m-r-5"></i>Download</a>
-                                                                                <a href="/user/viewMaterial/{{ $material->path }}"
-                                                                                    class="dropdown-item"
-                                                                                    target="__blank"><i
+                                                                                <a href="/admin/viewMaterial/{{ $material->path }}"
+                                                                                    class="dropdown-item"><i
                                                                                         class="fa fa-download m-r-5"></i>view</a>
-
+                                                                                <a class="dropdown-item"
+                                                                                    href="/admin/deleteMaterial/{{ $material->path }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#delete_client"
+                                                                                    id="path"
+                                                                                    onclick="pathFinder(this)"><i
+                                                                                        class="fa fa-trash-o m-r-5"></i>
+                                                                                    له منځه یې اوسی</a>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="card-file-thumb"
-                                                                            style="height: 150px !important">
+                                                                        <div class="card-file-thumb">
                                                                             @if ($material->extension === 'mp4')
-                                                                                {{-- <i class="fa fa-file-movie-o"
-                                                                                    style="color: rgb(81, 182, 255);"></i> --}}
-                                                                                <video
-                                                                                    src="{{ asset('storage/programFiles/' . $material->path) }}"
-                                                                                    controls="" height="100"
-                                                                                    width="100%"
-                                                                                    style="height: 128px !important"></video>
+                                                                                <i class="fa fa-file-movie-o"
+                                                                                    style="color: rgb(81, 182, 255);"></i>
                                                                             @else
                                                                             @endif
                                                                         </div>
@@ -329,27 +334,23 @@
                                                                                     class="fa fa-ellipsis-v"></i></a>
                                                                             <div
                                                                                 class="dropdown-menu dropdown-menu-right">
-                                                                                <a href="/user/downloadMaterial/{{ $material->path }}"
+                                                                                <a href="/admin/downloadMaterial/{{ $material->path }}"
                                                                                     class="dropdown-item"><i
                                                                                         class="fa fa-download m-r-5"></i>Download</a>
-
+                                                                                <a class="dropdown-item"
+                                                                                    href="/admin/deleteMaterial/{{ $material->path }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#delete_client"
+                                                                                    id="path"
+                                                                                    onclick="pathFinder(this)"><i
+                                                                                        class="fa fa-trash-o m-r-5"></i>
+                                                                                    له منځه یې اوسی</a>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="card-file-thumb"
-                                                                            style="height:50px !important">
+                                                                        <div class="card-file-thumb">
                                                                             @if ($material->extension === 'mp3' || $material->extension === 'wav' || $material->extension === 'm4a')
-                                                                                {{-- <i class="fa fa-file-audio-o d-block"
-                                                                                    style="color: rgb(81, 182, 255);"></i> --}}
-                                                                                {{-- <br !important> --}}
-                                                                                <audio
-                                                                                    src="{{ asset('storage/programFiles/' . $material->path) }}"
-                                                                                    controls width="100%"
-                                                                                    style="height: 30px !important"></audio>
-                                                                                {{-- <audio controls
-                                                                                    src="/media/cc0-audio/t-rex-roar.mp3">
-                                                                                    Your browser does not support the
-                                                                                    <code>audio</code> element.
-                                                                                </audio> --}}
+                                                                                <i class="fa fa-file-audio-o"
+                                                                                    style="color: rgb(81, 182, 255);"></i>
                                                                             @else
                                                                             @endif
                                                                         </div>
@@ -391,8 +392,8 @@
                                         <form action="" method="post" id="pathGetter">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
-                                            <input class="d-none" type="number" name="program_id" id="file_name"
-                                                value="{{ $program_id }}">
+                                            <input class="d-none" type="number" name="program_id"
+                                                id="file_name" value="{{ $program_id }}">
                                             <button type="submit" class="btn btn-primary continue-btn col-md-12">له
                                                 منځه یې اوسی</button>
                                         </form>
