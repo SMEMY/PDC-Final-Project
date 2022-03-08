@@ -331,30 +331,33 @@
                                 </thead>
                                 <tbody>
                                     {{-- @foreach ($participants as $participant) --}}
-                                    @for ($index = 0; $index < count($eduPrograms); $index++)
-                                        <tr>
+                                    {{-- @if ($eduPrograms != null) --}}
+                                        @for ($index = 0; $index < $countEduPrograms; $index++)
+                                            <tr>
 
-                                            <td class="border border-dark">{{ $index + 1 }}</td>
-                                            <td class="border border-dark px-0"> {{ $eduPrograms[$index]->faculty }}
-                                            </td>
-                                            <td class="border border-dark px-0">
-                                                {{ $eduPrograms[$index]->department }} </td>
-                                            <td class="border border-dark px-0">
-                                                {{ $eduPrograms[$index]->teacher_name }}{{ $eduPrograms[$index]->teacher_last_name }}
-                                            </td>
-                                            <td class="border border-dark px-0">{{ $eduPrograms[$index]->topic }}
-                                            </td>
-                                            <td class="border border-dark px-0">
-                                                {{ $eduPrograms[$index]->participant_amount }}
-                                            </td>
+                                                <td class="border border-dark">{{ $index + 1 }}</td>
+                                                <td class="border border-dark px-0">
+                                                    {{ $eduPrograms[$index]->faculty }}
+                                                </td>
+                                                <td class="border border-dark px-0">
+                                                    {{ $eduPrograms[$index]->department }} </td>
+                                                <td class="border border-dark px-0">
+                                                    {{ $eduPrograms[$index]->teacher_name }}{{ $eduPrograms[$index]->teacher_last_name }}
+                                                </td>
+                                                <td class="border border-dark px-0">{{ $eduPrograms[$index]->topic }}
+                                                </td>
+                                                <td class="border border-dark px-0">
+                                                    {{ $eduPrograms[$index]->participant_amount }}
+                                                </td>
 
 
 
 
-                                            <td class="border border-dark p-0"> </td>
+                                                <td class="border border-dark p-0"> </td>
 
-                                        </tr>
-                                    @endfor
+                                            </tr>
+                                        @endfor
+                                    {{-- @endif --}}
                                     {{-- @endforeach --}}
 
                                 </tbody>

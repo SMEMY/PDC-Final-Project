@@ -12,7 +12,9 @@
     font-size: 16px !important;
 
     }
-
+    i{
+    color:white !important;
+    }
     h3 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
     font-size: 25px !important;
@@ -43,6 +45,7 @@
     width: fit-content;
     margin: 0 auto;
     }
+
 @endsection
 
 <!-- here we add dynamic content -->
@@ -82,55 +85,225 @@
                 <div class="row tab-pane fade  show active" id="nav-enroll" role="tabpanel"
                     aria-labelledby="nav-enroll-tab">
                     @foreach ($enrolledPrograms as $program)
-                        <div class="col-md-12">
-                            <a class="job-list  border border-info"
-                                href="/user/enrolledPdcProgramInfo/{{ $program->id }}">
-                                <div class="job-list-det">
-                                    <div class="job-list-desc">
-                                        <h3 class="job-list-title">{{ $program->name }}</h3>
-                                        <br>
-                                        <h4 class="job-department"><strong>د پروګرام ډول:
-                                            </strong>{{ $program->type }}</h4>
-                                        <br !important>
-                                        <p class="text-muted"><strong>د پروګرام معلومات:
-                                            </strong>{{ $program->program_description }}</p>
-                                    </div>
+                        <form action="/user/enrolledPdcProgramInfo/{{ $program->program_id }}" method="get"
+                            id="my_form{{ $program->program_id }}">
+                            <input type="hidden" name="role_id" id="" value="{{ $program->role_id }}">
 
-                                </div>
-                                <div class="job-list-footer" style="background:#bde3fdc7;">
-                                    <ul>
-                                        <li class="mb-2 ml-3"><i class="fa fa-map-signs text-info"></i>
-                                            <strong>ادرس: </strong>{{ $program->campus_name }}
-                                        </li>
-                                        <li class="mb-2 ml-3"><i class="fa fa-money text-info"></i> <strong>د
-                                                پروګرام فیس: </strong>{{ $program->fee }} {{ $program->fee_type }}
-                                        </li>
-                                        <li class="mb-2 ml-3"><i class="fa fa-calendar text-info"></i><strong>د جوړېدو
-                                                نېټه:
-                                            </strong>{{ date('d - m - Y ', strtotime($program->start_date)) }} </li>
-                                        <li class="mb-2 ml-3"><i class="fa fa-clock-o text-info"></i> <strong>د
-                                                پروګرام دوام: </strong>{{ $program->days_duration }} ورځي</li>
-                                        @if ($program->start_date <= Carbon\Carbon::today() && $program->end_date >= Carbon\Carbon::today())
-                                            <li class="ml-2 text-dark d-inline-block"><i
-                                                    class="fa fa-unlock text-danger"></i>
-                                                <strong>حالت:
-                                                </strong> جاري
+                            {{-- <input type="text" name="role_id{{ $program->program_id }}" id=""
+                           value="{{ $program->program_id }}"> --}}
+                            <div class="col-md-12">
+                                <a class="job-list  border border-info" href="#" href="javascript:{}"
+                                    onclick="document.getElementById('my_form{{ $program->program_id }}').submit();">
+                                    <div class="job-list-det">
+                                        <div class="job-list-desc">
+                                            <h3 class="job-list-title">{{ $program->name }}</h3>
+                                            <br>
+                                            <h4 class="job-department"><strong>د پروګرام ډول:
+                                                </strong>{{ $program->type }}</h4>
+                                            <br !important>
+                                            <p class="text-muted"><strong>د پروګرام معلومات:
+                                                </strong>{{ $program->program_description }}</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="job-list-footer" style="background:#bde3fdc7;">
+                                        <ul>
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #ffffff !important;"><i
+                                                    class="fa fa-map-signs text-info"></i>
+                                                <strong>ادرس: </strong>{{ $program->campus_name }}
                                             </li>
-                                        @elseif(Carbon\Carbon::today() < $program->start_date)
-                                            <li class="ml-2 text-dark d-inline-block"><i class="fa fa-lock text-danger"></i>
-                                                <strong>حالت:
-                                                </strong>راتلونکی
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #ffffff !important;"><i
+                                                    class="fa fa-money text-info"></i> <strong>
+                                                    فیس: </strong>{{ $program->fee }} {{ $program->fee_type }}
                                             </li>
-                                        @else
-                                            <li class="ml-2 text-dark d-inline-block"><i class="fa fa-lock text-danger"></i>
-                                                <strong>حالت:
-                                                </strong>ختم
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #ffffff !important;"><i
+                                                    class="fa fa-calendar text-info"></i><strong>
+                                                    نېټه:
+                                                </strong>{{ date('d - m - Y ', strtotime($program->start_date)) }}
                                             </li>
-                                        @endif
-                                    </ul>
-                                </div>
-                            </a>
-                        </div>
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #ffffff !important;"><i
+                                                    class="fa fa-clock-o text-info"></i> <strong>
+                                                    دوام: </strong>{{ $program->days_duration }} ورځي</li>
+                                            @if ($program->start_date <= Carbon\Carbon::today() && $program->end_date >= Carbon\Carbon::today())
+                                                <li class="ml-2 text-dark d-inline-block p-2 rounded"
+                                                    style="background: #ffffff !important;"><i
+                                                        class="fa fa-unlock text-info"></i>
+                                                    <strong>حالت:
+                                                    </strong> جاري
+                                                </li>
+                                            @elseif(Carbon\Carbon::today() < $program->start_date)
+                                                <li class="ml-2 text-dark d-inline-block p-2 rounded"
+                                                    style="background: #ffffff !important;"><i
+                                                        class="fa fa-lock text-info"></i>
+                                                    <strong>حالت:
+                                                    </strong>راتلونکی
+                                                </li>
+                                            @else
+                                                <li class="ml-2 text-dark d-inline-block p-2 rounded"
+                                                    style="background: #ffffff !important;"><i
+                                                        class="fa fa-lock text-info"></i>
+                                                    <strong>حالت:
+                                                    </strong>ختم
+                                                </li>
+                                            @endif
+                                            @if ($program->role_id == 3)
+                                                <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                    style="background: #345aff !important; color:#FFFFff !important"><i
+                                                        class="fa fa-user-o text-success"></i> <strong>
+                                                        رول: </strong>ګډونوال</li>
+                                            @else
+                                                <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                    style="background: #345aff !important; color:#FFFFff !important"><i
+                                                        class="fa fa-user-o text-success"></i> <strong>
+                                                        رول: </strong>تسهیلونکی</li>
+                                            @endif
+
+                                        </ul>
+                                    </div>
+                                </a>
+                            </div>
+                        </form>
+                        {{-- <form action="/user/enrolledPdcProgramInfo/{{ $program->id }}" method="get" id="my_form1">
+                            <input type="hidden" name="role_id" id="" value="{{ $program->role_id }}">
+                            <div class="col-md-12">
+                                <a class="job-list  border border-info" href="#" href="javascript:{}"
+                                    onclick="document.getElementById('my_form1').submit();">
+                                    <div class="job-list-det">
+                                        <div class="job-list-desc">
+                                            <h3 class="job-list-title">{{ $program->name }}</h3>
+                                            <br>
+                                            <h4 class="job-department"><strong>د پروګرام ډول:
+                                                </strong>{{ $program->type }}</h4>
+                                            <br !important>
+                                            <p class="text-muted"><strong>د پروګرام معلومات:
+                                                </strong>{{ $program->program_description }}</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="job-list-footer" style="background:#bde3fdc7;">
+                                        <ul>
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #ffffff !important;"><i
+                                                    class="fa fa-map-signs text-info"></i>
+                                                <strong>ادرس: </strong>{{ $program->campus_name }}
+                                            </li>
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #ffffff !important;"><i
+                                                    class="fa fa-money text-info"></i> <strong>
+                                                    فیس: </strong>{{ $program->fee }} {{ $program->fee_type }}
+                                            </li>
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #ffffff !important;"><i
+                                                    class="fa fa-calendar text-info"></i><strong>
+                                                    نېټه:
+                                                </strong>{{ date('d - m - Y ', strtotime($program->start_date)) }}
+                                            </li>
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #ffffff !important;"><i
+                                                    class="fa fa-clock-o text-info"></i> <strong>
+                                                    دوام: </strong>{{ $program->days_duration }} ورځي</li>
+                                            @if ($program->start_date <= Carbon\Carbon::today() && $program->end_date >= Carbon\Carbon::today())
+                                                <li class="ml-2 text-dark d-inline-block p-2 rounded"
+                                                    style="background: #ffffff !important;"><i
+                                                        class="fa fa-unlock text-info"></i>
+                                                    <strong>حالت:
+                                                    </strong> جاري
+                                                </li>
+                                            @elseif(Carbon\Carbon::today() < $program->start_date)
+                                                <li class="ml-2 text-dark d-inline-block p-2 rounded"
+                                                    style="background: #ffffff !important;"><i
+                                                        class="fa fa-lock text-info"></i>
+                                                    <strong>حالت:
+                                                    </strong>راتلونکی
+                                                </li>
+                                            @else
+                                                <li class="ml-2 text-dark d-inline-block p-2 rounded"
+                                                    style="background: #ffffff !important;"><i
+                                                        class="fa fa-lock text-info"></i>
+                                                    <strong>حالت:
+                                                    </strong>ختم
+                                                </li>
+                                            @endif
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #345aff !important; color:#FFFFff !important"><i
+                                                    class="fa fa-user-o text-success"></i> <strong>
+                                                    رول: </strong>تسهیلونکی</li>
+                                        </ul>
+                                    </div>
+                                </a>
+                            </div>
+                        </form> --}}
+                        {{-- <div class="col-md-12">
+                                <a class="job-list  border border-info"
+                                    href="/user/enrolledPdcProgramInfo/{{ $program->id }}">
+                                    <div class="job-list-det">
+                                        <div class="job-list-desc">
+                                            <h3 class="job-list-title">{{ $program->name }}</h3>
+                                            <br>
+                                            <h4 class="job-department"><strong>د پروګرام ډول:
+                                                </strong>{{ $program->type }}</h4>
+                                            <br !important>
+                                            <p class="text-muted"><strong>د پروګرام معلومات:
+                                                </strong>{{ $program->program_description }}</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="job-list-footer" style="background:#bde3fdc7;">
+                                        <ul>
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #ffffff !important;"><i
+                                                    class="fa fa-map-signs text-info"></i>
+                                                <strong>ادرس: </strong>{{ $program->campus_name }}
+                                            </li>
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #ffffff !important;"><i
+                                                    class="fa fa-money text-info"></i> <strong>
+                                                    فیس: </strong>{{ $program->fee }} {{ $program->fee_type }}
+                                            </li>
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #ffffff !important;"><i
+                                                    class="fa fa-calendar text-info"></i><strong>
+                                                    نېټه:
+                                                </strong>{{ date('d - m - Y ', strtotime($program->start_date)) }} </li>
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #ffffff !important;"><i
+                                                    class="fa fa-clock-o text-info"></i> <strong>
+                                                    دوام: </strong>{{ $program->days_duration }} ورځي</li>
+                                            @if ($program->start_date <= Carbon\Carbon::today() && $program->end_date >= Carbon\Carbon::today())
+                                                <li class="ml-2 text-dark d-inline-block p-2 rounded"
+                                                    style="background: #ffffff !important;"><i
+                                                        class="fa fa-unlock text-info"></i>
+                                                    <strong>حالت:
+                                                    </strong> جاري
+                                                </li>
+                                            @elseif(Carbon\Carbon::today() < $program->start_date)
+                                                <li class="ml-2 text-dark d-inline-block p-2 rounded"
+                                                    style="background: #ffffff !important;"><i
+                                                        class="fa fa-lock text-info"></i>
+                                                    <strong>حالت:
+                                                    </strong>راتلونکی
+                                                </li>
+                                            @else
+                                                <li class="ml-2 text-dark d-inline-block p-2 rounded"
+                                                    style="background: #ffffff !important;"><i
+                                                        class="fa fa-lock text-info"></i>
+                                                    <strong>حالت:
+                                                    </strong>ختم
+                                                </li>
+                                            @endif
+                                            <li class="mb-2 ml-3 text-dark p-2 rounded"
+                                                style="background: #345aff !important; color:#FFFFff !important"><i
+                                                    class="fa fa-user-o text-success"></i> <strong>
+                                                    رول: </strong>تسهیلونکی</li>
+                                        </ul>
+                                    </div>
+                                </a>
+                            </div> --}}
+                        {{-- @endif --}}
                     @endforeach
                     {{-- {{ $enrolledPrograms->links() }} --}}
                 </div>
@@ -164,18 +337,17 @@
                                         <li class="mb-2 ml-3"><i class="fa fa-clock-o text-info"></i> <strong>د
                                                 پروګرام دوام: </strong>{{ $program->days_duration }} ورځي</li>
                                         @if ($program->start_date <= Carbon\Carbon::today() && $program->end_date >= Carbon\Carbon::today())
-                                            <li class="ml-2 text-dark d-inline-block"><i
-                                                    class="fa fa-unlock text-danger"></i>
+                                            <li class="ml-2 text-dark d-inline-block"><i class="fa fa-unlock text-info"></i>
                                                 <strong>حالت:
                                                 </strong> جاري
                                             </li>
                                         @elseif(Carbon\Carbon::today() < $program->start_date)
-                                            <li class="ml-2 text-dark d-inline-block"><i class="fa fa-lock text-danger"></i>
+                                            <li class="ml-2 text-dark d-inline-block"><i class="fa fa-lock text-info"></i>
                                                 <strong>حالت:
                                                 </strong>راتلونکی
                                             </li>
                                         @else
-                                            <li class="ml-2 text-dark d-inline-block"><i class="fa fa-lock text-danger"></i>
+                                            <li class="ml-2 text-dark d-inline-block"><i class="fa fa-lock text-info"></i>
                                                 <strong>حالت:
                                                 </strong>ختم
                                             </li>

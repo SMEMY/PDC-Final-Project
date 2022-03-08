@@ -2,7 +2,7 @@
 
 <!-- @section('page-title', 'hahahahah')
 @section('page-title')
-        hahahaha
+                hahahaha
 @endsection
 <!-- here we add css custom style -->
 @section('custom-css') -->
@@ -96,11 +96,13 @@
                         </div>
                         <div class="job-description">
                             <ul class="square-list">
+                                @if (count($facilities) != 0)
 
+                                    @foreach ($facilities as $facil)
+                                        <li> {{ $facil->facility }} </li>
+                                    @endforeach
+                                @endif
 
-                                @foreach ($facilities as $facil)
-                                    <li> {{ $facil->facility }} </li>
-                                @endforeach
                             </ul>
                         </div>
                         <div class="job-desc-title">
@@ -109,10 +111,11 @@
                         <div class="job-description">
                             <ul class="square-list">
 
-
-                                @foreach ($results as $result)
-                                    <li> {{ $result->result }} </li>
-                                @endforeach
+                                @if (count($results))
+                                    @foreach ($results as $result)
+                                        <li> {{ $result->result }} </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                         <div class="job-desc-title">
@@ -121,10 +124,12 @@
                         <div class="job-description">
                             <ul class="square-list">
 
+                                @if (count($evaluations))
+                                    @foreach ($evaluations as $evaluation)
+                                        <li> {{ $evaluation->evaluation }} </li>
+                                    @endforeach
 
-                                @foreach ($evaluations as $evaluation)
-                                    <li> {{ $evaluation->evaluation }} </li>
-                                @endforeach
+                                @endif
                             </ul>
                         </div>
 
@@ -149,8 +154,8 @@
                                 </strong><span class="text-blue"
                                     dir="ltr">{{ date('H:i A', strtotime($programs[0]->start_date)) }}</span></li>
                             <li class="col-md-12"><i class="pr-2 fa fa-clock-o"></i><strong>د ختمېدو وخت:
-                                </strong><span
-                                    class="text-blue" dir="ltr">{{ date('H:i A', strtotime($programs[0]->start_date)) }}</span>
+                                </strong><span class="text-blue"
+                                    dir="ltr">{{ date('H:i A', strtotime($programs[0]->start_date)) }}</span>
                             </li>
 
                         </ul>

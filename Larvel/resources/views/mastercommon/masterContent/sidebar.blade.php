@@ -15,7 +15,7 @@
                              class="fa fa-pencil-square-o"></i> </span></a>
                  </li>
 
-                 @if ($u_role === 2)
+                 @if ($u_role == 2)
                      <li class="">
                          <a href="/user/facilitatorMaterials/{{ $programs[0]->id }}"> <span> د پروګرام لپاره مواد
                                  پورته

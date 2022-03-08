@@ -169,9 +169,9 @@ class commonUserController extends Controller
             if (Gate::denies(ability: 'logged-in')) {
                 return "no access allowed!";
             }
-            $enrolledPrograms = DB::table('programs')
+             $enrolledPrograms = DB::table('programs')
                 ->join('role_user', 'programs.id', '=', 'role_user.program_id')
-                ->select('programs.*')
+                ->select('programs.*', 'role_user.*')
                 ->where('role_user.user_id', auth()->user()->id)
                 ->get();
             $programs = DB::table('role_user')
@@ -192,30 +192,29 @@ class commonUserController extends Controller
             //     ->simplePaginate(10);
             $notEnrolledPrograms = Program::whereNotIn('id', $programs_ids)->paginate(5);
             // dd($programs_ids);
-            // return $notEnrolledPrograms;
+            // return count($enrolledPrograms) ;
             return view('check.facilitator-participant-enrolled-programs', compact('enrolledPrograms', 'notEnrolledPrograms'));
         } elseif ($request->path() == 'user/enrolledPdcProgramInfo/' . $id) {
             if (Gate::denies(ability: 'logged-in')) {
                 return "no access allowed!";
             }
-            $u_role = null;
             // if (Gate::allows(ability: 'is-admin')) {
             //     $user_role = 1;
             // }
             if (Gate::allows(ability: 'is-facilitator') || Gate::allows(ability: 'is-participant')) {
 
-                $prog_role_user = DB::table('programs')
-                    ->join('role_user', 'programs.id', '=', 'role_user.program_id')
-                    ->select('role_user.role_id')
-                    ->where([['role_user.program_id', $id], ['role_user.user_id', auth()->user()->id]])
-                    ->get();
-                if ($prog_role_user[0]->role_id == 2) {
-                    $u_role = 2;
-                } elseif ($prog_role_user[0]->role_id == 3) {
-                    $u_role = 3;
-                }
-                // return $u_role;
-                $programs = DB::table('programs')->where('programs.id', $id)->get();
+                // $prog_role_user = DB::table('programs')
+                //     ->join('role_user', 'programs.id', '=', 'role_user.program_id')
+                //     ->select('role_user.role_id')
+                //     ->where([['role_user.program_id', $id], ['role_user.user_id', auth()->user()->id]])
+                //     ->get();
+                // if ($prog_role_user[0]->role_id == 2) {
+                //     $u_role = 2;
+                // } elseif ($prog_role_user[0]->role_id == 3) {
+                //     $u_role = 3;
+                // }
+                // return $id;
+                 $programs = DB::table('programs')->where('programs.id', $id)->get();
                 $results = DB::table('programs')
                     ->join('results', 'programs.id', '=', 'results.program_id')
                     ->where('programs.id', $id)->get();
@@ -230,10 +229,11 @@ class commonUserController extends Controller
                 $materials = DB::table('programs')
                     ->join('materials', 'programs.id', '=', 'materials.program_id')
                     ->where('programs.id', $id)->get();
-                $programs = DB::table('programs')->where('programs.id', $id)->get();
-                $programs = DB::table('programs')->where('programs.id', $id)->get();
-                $programs = DB::table('programs')->where('programs.id', $id)->get();
+                // $programs = DB::table('programs')->where('programs.id', $id)->get();
+                // $programs = DB::table('programs')->where('programs.id', $id)->get();
+                // $programs = DB::table('programs')->where('programs.id', $id)->get();
                 $user_role = auth()->user()->id;
+                 $u_role = $request->role_id;
 
                 return view('users.facil-part-enroll-program-info', compact('programs', 'results', 'evaluations', 'facilities', 'u_role'));
             }
@@ -303,7 +303,7 @@ class commonUserController extends Controller
                 ->join('user_infos', 'users.id', '=', "user_infos.user_id")
                 ->join('role_user', 'users.id', '=', 'role_user.user_id')
                 ->where([
-                    ['role_user.role_id', [2, 3]],
+                    // ['role_user.role_id', [2, 3]],
                     ['role_user.user_id',  $request->user()->id]
                 ])
                 ->get();
