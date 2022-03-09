@@ -93,9 +93,12 @@
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-        <a href="/user/enrolledPdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn">پروګرام ووینی</a>
+        <form action="/user/enrolledPdcProgramInfo/{{ $program_id }}" method="get" id="my_form">
+            <input type="hidden" name="role_id" id="" value="{{ $u_role }}">
+            <a href="#" class="btn btn-primary apply-btn" onclick="document.getElementById('my_form').submit();"><i
+                    class="fa fa-arrow-left" aria-hidden="true"></i></a>
 
-
+        </form>
 
         <!-- Page Wrapper -->
         <div style="position: relative; top:40px">
@@ -332,11 +335,12 @@
 
                                                                             </div>
                                                                         </div>
-                                                                        <div class="card-file-thumb" style="height:50px !important">
+                                                                        <div class="card-file-thumb"
+                                                                            style="height:50px !important">
                                                                             @if ($material->extension === 'mp3' || $material->extension === 'wav' || $material->extension === 'm4a')
                                                                                 {{-- <i class="fa fa-file-audio-o d-block"
                                                                                     style="color: rgb(81, 182, 255);"></i> --}}
-                                                                                    {{-- <br !important> --}}
+                                                                                {{-- <br !important> --}}
                                                                                 <audio
                                                                                     src="{{ asset('storage/programFiles/' . $material->path) }}"
                                                                                     controls width="100%"
@@ -387,8 +391,8 @@
                                         <form action="" method="post" id="pathGetter">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
-                                            <input class="d-none" type="number" name="program_id"
-                                                id="file_name" value="{{ $program_id }}">
+                                            <input class="d-none" type="number" name="program_id" id="file_name"
+                                                value="{{ $program_id }}">
                                             <button type="submit" class="btn btn-primary continue-btn col-md-12">له
                                                 منځه یې اوسی</button>
                                         </form>

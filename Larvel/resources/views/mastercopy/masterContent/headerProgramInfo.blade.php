@@ -10,18 +10,17 @@
         </div>
         <!-- /Logo -->
 
-        {{-- <a id="toggle_btn" href="javascript:void(0);">
+        <a id="toggle_btn" href="javascript:void(0);">
             <span class="bar-icon">
                 <span></span>
                 <span></span>
                 <span></span>
             </span>
-        </a> --}}
+        </a>
 
         <!-- Header Title -->
         <div class="page-title-box">
-            <h3
-                style="font-size:25px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;">
+            <h3 style="font-size:25px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;">
                 مسلکي پرمختائي مرکز</h3>
         </div>
         <!-- /Header Title -->
@@ -33,13 +32,12 @@
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                     <span class="user-img"><img src="{{ asset('assets/img/profiles/avatar-21.jpg') }}" alt="">
                         <span class="status online"></span></span>
-                    <span>اکونټ معلومات</span>
+                    <span>Admin</span>
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="/admin/profile/{{ auth()->user()->id }}">My Profile</a>
                     {{-- <a class="dropdown-item" href="settings.html">Settings</a> --}}
-                    <a class="dropdown-item" href="/logout"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="/logout" method="POST">
                         @csrf
                     </form>
@@ -50,8 +48,7 @@
 
         <!-- Mobile Menu -->
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                    class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="profile.html">My Profile</a>
                 <a class="dropdown-item" href="settings.html">Settings</a>

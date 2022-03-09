@@ -117,7 +117,7 @@ class materialController extends Controller
                         return back()->with('warn', "د فایل ډول باید وجود ولري!");
                     }
                 }
-                return redirect('user/enrolledPdcProgramInfo/' . $request->program_id)->with('program_materials_added', "پروګرام اړونده فایلونه په کامیابۍ سره سیسټم ته داخل کړل سوه!");
+                return redirect('user/facilitatorMaterials/' . $request->program_id)->with('program_materials_added', "پروګرام اړونده فایلونه په کامیابۍ سره سیسټم ته داخل کړل سوه!");
             }
         } else {
             dd('you need to be facilitator!');
@@ -170,7 +170,8 @@ class materialController extends Controller
         if (Gate::allows(ability: 'is-facilitator')) {
             if ($request->path() === 'user/facilitatorMaterials/' . $id) {
                 $program_id = $id;
-                return view('users.pdc-add-programs-materials', compact('program_id'));
+                $u_role = $request->role_id;
+                return view('users.pdc-add-programs-materials', compact('program_id', 'u_role'));
             }
         } else {
             dd('you need to be facilitator!');

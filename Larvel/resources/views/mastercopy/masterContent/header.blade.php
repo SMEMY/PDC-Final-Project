@@ -10,13 +10,13 @@
         </div>
         <!-- /Logo -->
 
-        {{-- <a id="toggle_btn" href="javascript:void(0);">
+        <a id="toggle_btn" href="javascript:void(0);">
             <span class="bar-icon">
                 <span></span>
                 <span></span>
                 <span></span>
             </span>
-        </a> --}}
+        </a>
 
         <!-- Header Title -->
         <div class="page-title-box">
@@ -33,7 +33,7 @@
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                     <span class="user-img"><img src="{{ asset('assets/img/profiles/avatar-21.jpg') }}" alt="">
                         <span class="status online"></span></span>
-                    <span>اکونټ معلومات</span>
+                    <span>اکونټ</span>
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="/admin/profile/{{ auth()->user()->id }}">My Profile</a>

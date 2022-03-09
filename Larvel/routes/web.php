@@ -56,6 +56,11 @@ Route::resource('/user/programs', programController::class);
 
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+    Route::resource('/passwordChange', commonUserController::class);
+    Route::resource('/questionsChange', commonUserController::class);
+
+
+
     Route::resource('/profile', commonUserController::class);
 
     Route::resource('/programEnrolment', programEnrollmentController::class);

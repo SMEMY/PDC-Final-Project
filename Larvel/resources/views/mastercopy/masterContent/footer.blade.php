@@ -24,13 +24,11 @@
  <script src="{{ asset('assets/sweet-alert/sweetalert.min.js') }}"></script>
  <!-- chart-js -->
  <script src="{{ asset('assets/chart-js/dist/chart.min.js') }}"></script>
- {{-- <!-- <script src="{{ asset('node_modules/jspdf/dist/jspdf.umd.min.js') }}"></script> --> --}}
+ <!-- <script src="{{ asset('node_modules/jspdf/dist/jspdf.umd.min.js') }}"></script> -->
  <script>
      const audio = new Audio();
      audio.src = "{{ asset('assets/clickSounds/click.mp3') }}";
  </script>
-
-
  @yield('custom-js')
 
  </body>

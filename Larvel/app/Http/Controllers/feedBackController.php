@@ -44,7 +44,7 @@ class feedBackController extends Controller
     public function store(Request $request)
     {
         //
-        if (Gate::allows(ability: 'is-admin')) {
+        if (Gate::allows(ability: 'is-facilitator') || Gate::allows(ability: 'is-participant')) {
             $request->validate([
                 'materials_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
                 'facilities_answer.*' => 'bail|string|in:ډېر ښه,ښه,متوسط,بد',
@@ -86,8 +86,10 @@ class feedBackController extends Controller
                 $questionAnswer->question_id = $request->opinions[$i];
                 $questionAnswer->save();
             }
+            $id =  $request->role_id;
             if ($request->path() == 'user/feedback') {
-                return redirect('user/enrolledPdcProgramInfo/' . $request->program_id)->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
+                return redirect('user/enrolledPdcProgramInfo/' . $request->program_id)->with('u_role', $id);
+                // return redirect('user/enrolledPdcProgramInfo/' . $request->program_id)->with([['success_questionnaire' => 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!'], ['u_role' => $request->role_id]]);
             } elseif ($request->path() == 'admin/feedback') {
                 return redirect('admin/pdcProgramInfo/' . $request->program_id)->with('success_questionnaire', 'د یاد پروګرام پوښتنلیک په کامیابۍ سره ډک کړل سو!');
             } else {
@@ -107,6 +109,8 @@ class feedBackController extends Controller
      */
     public function show(Request $request, $id)
     {
+        // return "hasdkjadh";
+
         // return Feedback::all();
         if (Gate::allows(ability: 'is-admin')) {
             if ($request->path() === 'admin/feedback/' . $id) {
@@ -154,7 +158,6 @@ class feedBackController extends Controller
                     return view('admin.pdc-feedback', compact('materials', 'facilities', 'locations', 'comments', 'program_id'));
                 }
             } elseif ($request->path() === 'admin/feedbackAnswer/' . $id) {
-                // return "hasdkjadh";
                 $materials =  DB::table('feedbacks')
                     ->join('fquestionnaires', 'feedbacks.id', '=', 'fquestionnaires.feedback_form_id')
                     ->select('feedbacks.id as feedbackFormId', 'fquestionnaires.*')
@@ -193,11 +196,17 @@ class feedBackController extends Controller
                 // return $facilities;
                 // $program_id = $id;
                 if (count($materials) === 0 && count($facilities) === 0 && count($locations) === 0 && count($comments) === 0) {
+                    // dd('you need to be admin');
+
                     return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
                 }
                 if (count($materials) === 0 || count($facilities) === 0 || count($locations) === 0 || count($comments) === 0) {
+                    // dd('you need to be admin');
+
                     return back()->with('warn', "د یاد سیسټم لپاره تر اوسه پوښتتنلیک سیسټم ته ندی اضافه کړل سوی!");
                 } else {
+            // dd('you need to be admin');
+
                     return view('admin.pdc-feedback-answer', compact('materials', 'facilities', 'locations', 'comments', 'program_id'));
                 }
             }

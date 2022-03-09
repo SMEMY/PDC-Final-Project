@@ -96,6 +96,15 @@
 
         }
 
+        .swal-button {
+            background: white !important;
+            display: none;
+        }
+
+        .swal-button-container {
+            border: none !important;
+        }
+
 
         .progress {
             position: relative;
@@ -138,9 +147,15 @@
 
 <body>
     <!-- Main Wrapper -->
-    <a href="/user/enrolledPdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
+    {{-- <a href="/user/enrolledPdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a> --}}
+    {{-- <a href="/user/enrolledPdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn " id="back"><i class="fa fa-arrow-left"
+        aria-hidden="true"></i></a> --}}
+    <form action="/user/enrolledPdcProgramInfo/{{ $program_id }}" method="get" id="my_form">
+        <input type="hidden" name="role_id" id="" value="{{ $u_role }}">
+        <a href="#" class="btn btn-primary apply-btn" onclick="document.getElementById('my_form').submit();">پروګرام
+            ووینی</a>
+    </form>
     <div class="main-wrapper m-auto col-md-8">
-
 
         <!-- Logo -->
         <div class="account-logo mt-5">
@@ -268,33 +283,40 @@
             $('#show').removeClass('d-none');
         }
 
-        function bootstrapAlert() {
-            $('.bootstrap-growl').remove();
+        // function bootstrapAlert() {
+        //     $('.bootstrap-growl').remove();
 
-            $.bootstrapGrowl("د پروګرام فایلونه په کامیابۍ سره سیسټم ته اضافه کړل سول!", {
-                type: "success",
-                offset: {
-                    from: "top",
-                    amount: 200
-                },
-                align: "center",
-                width: 1000,
-                delay: 3000,
-                allow_dismiss: true,
-                stackup_spacing: 20
-            });
-        }
+        //     $.bootstrapGrowl("د پروګرام فایلونه په سسسسسسسسسسسسسسسسسسسسسسسسسسس سره سیسټم ته اضافه کړل سول!", {
+        //         type: "success",
+        //         offset: {
+        //             from: "top",
+        //             amount: 200
+        //         },
+        //         align: "center",
+        //         width: 1000,
+        //         delay: 30000,
+        //         allow_dismiss: true,
+        //         stackup_spacing: 20
+        //     });
+        // }
 
         function bootstrapAlert1() {
-            swal('وبخښئ!', "د یاد پروګرام لپاره فایلونه سیسټم ته داخل کړل سوه!", "success", {
-                button: "مننه",
+            swal('مبارک!', "د یاد پروګرام لپاره فایلونه سیسټم ته داخل کړل سوه!", "success", {
+                button: "",
             }).then(function() {
                 var program = $('#prog').val();
                 console.log(program);
-                window.location = `/user/enrolledPdcProgramInfo/${program}`;
+                // window.location = `/user/enrolledPdcProgramInfo/${program}`;
             });
         }
     </script>
+    {{-- @if (Session::has('program_materials_added'))
+        <script>
+            swal('مبارک', "{!! Session::get('program_materials_added') !!}", "success", {
+                button: "مننه",
+            });
+        </script>
+    @endif --}}
     <script type="text/javascript">
         $(function() {
             $(document).ready(function() {
@@ -327,7 +349,7 @@
                         window.setTimeout(function() {
                             var program = $('#prog').val();
                             console.log(program);
-                            window.location = `/user/enrolledPdcProgramInfo/${program}`;
+                            window.location = `/user/facilitatorMaterials/${program}`;
                         }, 1000);
                     }
                 });

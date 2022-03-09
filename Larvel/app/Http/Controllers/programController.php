@@ -85,7 +85,7 @@ class programController extends Controller
                     return back()->with('warn_search', 'یاد پروګرام په سیسټم کي ونه موندل سو!');
                 } else {
                     // redirect('admin/searchPdcProgram')->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
-                    return view('admin.pdc-list-all-program', compact('programs', 'path'))->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');;
+                    return view('admin.pdc-list-all-program', compact('programs', 'path'))->with('success_search', 'لاندي ستاسي پلټل سوی پروګرام دی!');
                 }
                 // $path = '/pdcProgramList';
                 // $programs =  Program::where($request->search_type, $request->search_content)->get();

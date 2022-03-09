@@ -156,36 +156,37 @@
 
                         <div class="col-sm-12 m-0 text-center">
 
-                            <div class="col-md-12">
-                                <div class="account-logo"
-                                    style="display: inline-block !important; margin-right: 0px !important; float: right">
-                                    <img class="" style="float: right"
-                                        src="{{ asset('assets/img/kandahar.png') }}" alt="Dreamguy's Technologies">
-                                </div>
-                                <div style="display: inline-block !important">
-                                    <h4 class="page-title">د لوړو زده کړو وزارت</h4>
-                                    <h4 class="page-title">کندهار پوهنتون</h4>
-                                    <h4 class="page-title">مسلکي پرختیائي مرکز</h4>
-                                    <h4 class="page-title m-auto"
-                                        style="width:fit-content ;margin: 20px auto !important">د
-                                        مسلکي پرمختیائي مرکز د (. . . .) ل کال راپور</h4>
+                           
+                                <div class="col-md-12">
+                                    <div class="account-logo"
+                                        style="display: inline-block !important; margin-right: 0px !important; float: right">
+                                        <img class="" style="float: right"
+                                            src="{{ asset('assets/img/kandahar.png') }}" alt="Dreamguy's Technologies">
+                                    </div>
+                                    <div style="display: inline-block !important">
+                                        <h4 class="page-title">د لوړو زده کړو وزارت</h4>
+                                        <h4 class="page-title">کندهار پوهنتون</h4>
+                                        <h4 class="page-title">مسلکي پرختیائي مرکز</h4>
+                                        <h4 class="page-title m-auto"
+                                            style="width:fit-content ;margin: 20px auto !important">د
+                                            مسلکي پرمختیائي مرکز د (. . . . ) ربعي راپور</h4>
 
-                                </div>
+                                    </div>
 
-                                <div class="account-logo" style="display: inline-block !important ;float: left">
-                                    <img class="" style="float: left"
-                                        src="{{ asset('assets/img/logo2.png') }}" alt="Dreamguy's Technologies">
+                                    <div class="account-logo" style="display: inline-block !important ;float: left">
+                                        <img class="" style="float: left"
+                                            src="{{ asset('assets/img/logo2.png') }}" alt="Dreamguy's Technologies">
+                                    </div>
                                 </div>
-                            </div>
-                            {{-- <div class="col-md-4 ">
-                            </div> --}}
-                            {{-- <h5 class="text-left pl-4">د شروع نېټه:
-                            </h5>
-                            <h5 class="text-left pl-4">د ختم نېټه:
-                            </h5> --}}
-                            <div class="row mt-5 col-md-12" id="reportSearch">
+                                {{-- <div class="col-md-4 ">
+                                </div> --}}
+                                {{-- <h5 class="text-left pl-4">د شروع نېټه:
+                                </h5>
+                                <h5 class="text-left pl-4">د ختم نېټه:
+                                </h5> --}}
+                                <div class="row mt-5 col-md-12" id="reportSearch">
                                 <div class="col-md-12 m-auto " style="border: 1px solid #ffffff; border-radius:10px;">
-                                    <form action="/admin/monthlyReport" method="POST">
+                                    {{-- <form action="/admin/monthlyReport" method="POST">
                                         {{ method_field('POST') }}
                                         {{ csrf_field() }}
                                         @if ($errors->any())
@@ -198,9 +199,9 @@
                                                     @endforeach
                                                 </ul>
                                             </div>
-                                        @endif
-                                        <div class="row filter-row " id="search_parts">
-                                            <div class="col-sm-6 col-md-5" id="search_content" onclick="audio.play()">
+                                        @endif --}}
+                                    <div class="row filter-row " id="search_parts">
+                                        {{-- <div class="col-sm-6 col-md-5" id="search_content" onclick="audio.play()">
                                                 <div class="form-group form-focus select-focus" onclick="audio.play()">
                                                     <select class="custom-select p-2 h-100 searchInput" name="month"
                                                         style="border:1px solid rgb(113, 113, 113); background:#d0deff85;">
@@ -222,22 +223,24 @@
                                                     </select>
                                                     <!-- <label class="focus-label">پروګرام انتخاب کړی</label> -->
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
-                                            <div class="col-sm-6 col-md-5" id="search_input">
-                                                <div class="form-group ">
-                                                    <input type="number" class="form-control floating p-4" name="year"
-                                                        id="searchInput"
-                                                        style="border:1px solid rgb(113, 113, 113);background:#d0deff85;"
-                                                        placeholder="کال انتخاب کړی">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-2">
-                                                <!-- <a href="#" class="">پلټنه </a> -->
-                                                <button type="submit" class="btn btn-success btn-block h3 p-1"
-                                                    onclick="audio.play()">پلټنه</button>
+                                        <div class="col-sm-6 col-md-10" id="search_input">
+                                            <div class="form-group ">
+                                                <input type="number" class="form-control floating p-4" name="year"
+                                                    id="rowCount"
+                                                    style="border:1px solid rgb(113, 113, 113);background:#d0deff85;"
+                                                    placeholder="د سترونو تعداد داخل کړی!">
                                             </div>
                                         </div>
+                                        <div class="col-sm-6 col-md-2">
+                                            <!-- <a href="#" class="">پلټنه </a> -->
+                                            <button id="btn" type="" class="btn btn-success btn-block h3 p-1"
+                                                onclick="audio.play()"
+                                                style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;">جوړ
+                                                کړی</button>
+                                        </div>
+                                    </div>
                                     </form>
 
                                 </div>
@@ -257,138 +260,103 @@
                                 <thead>
                                     <tr>
                                         <th class=" border border-dark bg-gradient-info" style="width:30px">
-                                            شــ
+                                            لومړی
                                         </th>
-                                        <th class=" border border-dark bg-gradient-info px-1" style="width:100px">د
-                                            روزنيزي برنامې ډول </th>
+                                        <th class=" border border-dark bg-gradient-info px-1" style="width:100px"
+                                            colspan="2">هدف</th>
 
 
 
-                                        <th class=" border border-dark bg-gradient-info px-1" style="width:100px">د
-                                            برنامې عنوان
-                                        </th>
+                                        <th class=" border border-dark bg-gradient-info p-3" style="width:100px"
+                                            colspan="3">د
+                                            اجراء وړ موده<br><br>
+                                            ( . . . . .) ربعه</th>
                                         {{-- <th class=" border border-dark bg-gradient-info px-1" style="width:100px">ولد
                                         </th> --}}
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">په
-                                            لاره اچونکی</th>
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px"> برخه
-                                            وال </th>
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">نېټه
-                                        </th>
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">شروع
-                                            وخت</th>
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">ختم
-                                            وخت</th>
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">موده
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">
-                                            برخوالو شمېر</th>
-                                        </th>
+
+                                        <th class=" border border-dark bg-gradient-info p-1" style="width:100px"
+                                            rowspan="2">د کېدنکو کړنو<br> اټکل سوې سلنه</th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px"
+                                            rowspan="2">د اجراء سویو<br> کړنو سلنه </th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px"
+                                            rowspan="2">اجراء کوونکي<br> مسؤلین</th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px"
+                                            rowspan="2">امکانات</th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px"
+                                            rowspan="2">څارونکی</th>
+
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px"
+                                            rowspan="2">پایلي</th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px"
+                                            rowspan="2">د نه اجراء<br> کېدو سببونه</th>
+
 
                                     </tr>
-
-                                </thead>
-                                <tbody>
-                                    {{-- @foreach ($participants as $participant) --}}
-                                    @for ($index = 0; $index < $countPrograms; $index++)
-                                        <tr>
-
-                                            <td class="border border-dark">{{ $index + 1 }}</td>
-                                            <td class="border border-dark px-0"> {{ $programs[$index]->type }}</td>
-                                            <td class="border border-dark px-0">{{ $programs[$index]->name }} </td>
-                                            <td class="border border-dark px-0">{{ $programs[$index]->supporter }}
-                                            </td>
-                                            <td class="border border-dark px-0">{{ $programs[$index]->for }} </td>
-                                            <td class="border border-dark px-0">
-                                                {{ date('d - m - Y ', strtotime($programs[$index]->start_date)) }}
-                                            </td>
-                                            <td class="border border-dark px-0" dir="ltr">
-
-                                                {{ date('g:i A', strtotime($programs[$index]->start_date)) }}
-                                            </td>
-                                            <td class="border border-dark px-0" dir="ltr">
-
-
-
-                                                {{ date('g:i A', strtotime($programs[$index]->end_date)) }}
-
-                                            </td>
-
-                                            <td class="border border-dark px-0">
-                                                {{ $programs[$index]->days_duration }} </td>
-                                            <!-- <td class="border border-dark px-0 text-right"></td> -->
-
-                                            <td class="border border-dark p-0">
-                                                {{ $programs[$index]->participant_amount }} </td>
-
-                                        </tr>
-                                    @endfor
-                                    {{-- @endforeach --}}
-
-                                </tbody>
-                            </table>
-                            <h4 class="page-title mt-5" style="width:fit-content ;margin: 20px auto !important">علمي
-                                کنفراسونه</h4>
-                            <table class="table table-striped custom-table table-nowrap m-0">
-                                <thead>
                                     <tr>
-                                        <th class=" border border-dark bg-gradient-info" style="width:30px">
-                                            شــ
+                                        <th class=" border border-dark bg-gradient-info" style="width:30px" rowspan="2">
+                                            ګڼه
                                         </th>
-                                        <th class=" border border-dark bg-gradient-info px-1" style="width:100px">پوهنځۍ
+                                        <th class=" border border-dark bg-gradient-info px-1" style="width:100px">موخي
                                         </th>
 
 
 
-                                        <th class=" border border-dark bg-gradient-info px-1" style="width:100px">څانګه
-                                        </th>
-                                        {{-- <th class=" border border-dark bg-gradient-info px-1" style="width:100px">ولد
-                                        </th> --}}
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">استاد
-                                        </th>
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px"> موضوع
-                                        </th>
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">د
-                                            برخوالو شمېر</th>
-                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px">د ثبت
-                                            ګڼه</th>
+                                        <th class=" border border-dark bg-gradient-info px-1" style="width:100px">لازمي
+                                            کړني</th>
+
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px"></th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px"></th>
+                                        <th class=" border border-dark bg-gradient-info px-0" style="width:100px"></th>
 
 
                                     </tr>
-
                                 </thead>
-                                <tbody>
+                                <tbody id="tbl">
                                     {{-- @foreach ($participants as $participant) --}}
-                                    {{-- @if ($eduPrograms != null) --}}
-                                    @for ($index = 0; $index < $countEduPrograms; $index++)
-                                        <tr>
+                                    {{-- @for ($index = 0; $index < $countPrograms; $index++) --}}
+                                    <tr>
 
-                                            <td class="border border-dark">{{ $index + 1 }}</td>
-                                            <td class="border border-dark px-0">
-                                                {{ $eduPrograms[$index]->faculty }}
-                                            </td>
-                                            <td class="border border-dark px-0">
-                                                {{ $eduPrograms[$index]->department }} </td>
-                                            <td class="border border-dark px-0">
-                                                {{ $eduPrograms[$index]->teacher_name }}{{ $eduPrograms[$index]->teacher_last_name }}
-                                            </td>
-                                            <td class="border border-dark px-0">{{ $eduPrograms[$index]->topic }}
-                                            </td>
-                                            <td class="border border-dark px-0">
-                                                {{ $eduPrograms[$index]->participant_amount }}
-                                            </td>
+                                        <td class="border border-dark" style="height: 200px">1</td>
+                                        <td class="border border-dark px-0"> </td>
+                                        <td class="border border-dark px-0"> </td>
+                                        <td class="border border-dark px-0">
+                                        </td>
+                                        <td class="border border-dark px-0"> </td>
+                                        <td class="border border-dark px-0">
 
+                                        </td>
+                                        <td class="border border-dark px-0" dir="ltr">
+
+
+                                        </td>
+                                        <td class="border border-dark px-0" dir="ltr">
 
 
 
-                                            <td class="border border-dark p-0"> </td>
 
-                                        </tr>
-                                    @endfor
-                                    {{-- @endif --}}
+
+                                        </td>
+
+                                        <td class="border border-dark px-0">
+                                        </td>
+                                        <!-- <td class="border border-dark px-0 text-right"></td> -->
+
+                                        <td class="border border-dark p-0">
+                                        </td>
+                                        <td class="border border-dark p-0">
+                                        </td>
+                                        <td class="border border-dark p-0">
+                                        </td>
+                                        <td class="border border-dark p-0">
+                                        </td>
+
+                                    </tr>
+                                    {{-- @endfor --}}
                                     {{-- @endforeach --}}
 
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
@@ -426,13 +394,6 @@
     <script src="{{ asset('assets/js/jspdf.umd.min.js') }}"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.2.0/jspdf.umd.min.js"></script> --}}
     <script src="{{ asset('assets/sweet-alert/sweetalert.min.js') }}"></script>
-    @if (Session::has('not-report-found'))
-        <script>
-            swal('وبخښی', "{!! Session::get('not-report-found') !!}", "warning", {
-                button: "مننه",
-            });
-        </script>
-    @endif
 
     <script>
         function printfile() {
@@ -450,6 +411,43 @@
 
 
         }
+        $('#btn').click(function() {
+            if ($('#rowCount').val() == "") {
+                alert("رقم داخل کړئ!")
+            } else {
+                for (let index = 0; index < $('#rowCount').val(); index++) {
+                    var txt1 =
+                        `<tr>
+                            <td class="border border-dark" style="height: 200px">${index+2}</td>
+                            <td class="border border-dark px-0"> </td>
+                            <td class="border border-dark px-0"> </td>
+                            <td class="border border-dark px-0">
+                            </td>
+                            <td class="border border-dark px-0"> </td>
+                            <td class="border border-dark px-0">
+                            </td>
+                            <td class="border border-dark px-0" dir="ltr">
+                            </td>
+                            <td class="border border-dark px-0" dir="ltr">   </td>
+                            <td class="border border-dark px-0">
+                            </td>
+                            <td class="border border-dark p-0">
+                            </td>
+                            <td class="border border-dark p-0">
+                            </td>
+                            <td class="border border-dark p-0">
+                            </td>
+                            <td class="border border-dark p-0">
+                            </td>
+                        </tr>`;
+                    $("#tbl").children().last().after(txt1);
+
+                }
+                $('#tbl').children().last().remove();
+
+            }
+            // alert("Handler for .click() called.");
+        });
     </script>
 
 

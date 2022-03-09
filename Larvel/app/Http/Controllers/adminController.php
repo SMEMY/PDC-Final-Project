@@ -29,6 +29,7 @@ class adminController extends Controller
     public function create()
     {
         //
+        // return view('change-forgotten-password');
     }
 
     /**

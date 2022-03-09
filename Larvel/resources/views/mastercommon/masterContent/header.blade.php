@@ -29,9 +29,9 @@
         <ul class="nav user-menu">
             <li class="nav-item dropdown has-arrow main-drop">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                    <span class="user-img"><img src="assets/img/profiles/avatar-21.jpg" alt="">
+                    <span class="user-img"><img src="{{asset('assets/img/profiles/avatar-21.jpg')}}" alt="">
                         <span class="status online"></span></span>
-                    <span>Admin</span>
+                    <span>اکونټ معلومات</span>
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="/user/profile/{{ auth()->user()->id }}">My Profile</a>

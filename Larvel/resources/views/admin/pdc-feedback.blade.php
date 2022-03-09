@@ -346,8 +346,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <a class="btn btn-primary continue-btn col-md-12"
-                                        href="/admin/deleteQuestionnaire/{{ $program_id }}"
-                                        >پوښتنلیک له منځه یوسی</a>
+                                        href="/admin/deleteQuestionnaire/{{ $program_id }}">پوښتنلیک له منځه یوسی</a>
                                 </div>
                                 <div class="col-6">
                                     <a href="javascript:void(0);" data-dismiss="modal"
@@ -402,6 +401,13 @@
     @if (Session::has('question_not_found'))
         <script>
             swal(' وبخښئ!', "{!! Session::get('question_not_found') !!}", "warning", {
+                button: "بیاځلي امتحان کړی",
+            });
+        </script>
+    @endif
+    @if (Session::has('success_questionnaire'))
+        <script>
+            swal(' وبخښئ!', "{!! Session::get('success_questionnaire') !!}", "warning", {
                 button: "بیاځلي امتحان کړی",
             });
         </script>

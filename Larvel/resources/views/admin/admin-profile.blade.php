@@ -119,18 +119,19 @@
                 button: "مننه",
             });
         </script>
-        @endif @if (Session::has('password_changed'))
-            <script>
-                swal('مبارک', "{!! Session::get('password_changed') !!}", "success", {
-                    button: "مننه",
-                });
-            </script>
-        @endif
-        @if (Session::has('questions_changed'))
-            <script>
-                swal('مبارک', "{!! Session::get('questions_changed') !!}", "success", {
-                    button: "مننه",
-                });
-            </script>
-        @endif
-    @endsection
+    @endif
+    @if (Session::has('password_changed'))
+        <script>
+            swal('مبارک', "{!! Session::get('password_changed') !!}", "success", {
+                button: "مننه",
+            });
+        </script>
+    @endif
+    @if (Session::has('questions_changed'))
+        <script>
+            swal('مبارک', "{!! Session::get('questions_changed') !!}", "success", {
+                button: "مننه",
+            });
+        </script>
+    @endif
+@endsection

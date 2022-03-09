@@ -2,7 +2,7 @@
 
 <!-- @section('page-title', 'hahahahah')
 @section('page-title')
-                hahahaha
+                                                                                                                                                                                            hahahaha
 @endsection
 <!-- here we add css custom style -->
 @section('custom-css') -->
@@ -41,22 +41,41 @@
     transform: scale(1.04);
     transition: all 0.4s;
     }
+    #alertMassege ul li
+    {
+    transition: all 2s !important;
+    }
 @endsection
 
 <!-- here we add dynamic content -->
 @section('content')
     <!-- Page Wrapper -->
     <div class="page-wrapper">
+        <a href="/user/userEnroledPrograms/{{ auth()->user()->id }}" class="btn btn-primary apply-btn mt-5" id="back"><i
+                class="fa fa-arrow-left" aria-hidden="true"></i></a>
         <!-- Account Logo -->
+
         <div class="content">
             <!-- /Account Logo -->
             <div class="row col-md-12">
+                @if ($errors->any())
+                    <div class="mb-2 col-md-12" id="alertMassege">
+                        <ul style="list-style-type:none" class="p-0 m-0">
+                            @foreach ($errors->all() as $error)
+                                <li class="rounded p-2 m-1 alert alert-danger">
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="col-md-7">
                     <div class="job-info job-widget">
                         <h4 class="m-auto " style="width: fit-content"><i class="pr-2 fa fa-"></i>د اړونده پروګرام
                             په اړه معلومات</h4>
                         <br>
                         <br>
+                        <input type="hidden" name="role_id" id="" value="{{ $programs[0]->role_id }}">
                         <ul class="job-post-det col-md-12">
                             <li class="col-md-12"><i class="pr-2 fa fa-user-o"></i>د پروګرام نوم: : <span
                                     class="text-blue">{{ $programs[0]->name }}</span></li>
@@ -188,13 +207,46 @@
     <!-- /Page Wrapper -->
 @endsection
 
+<script>
+    const myTimeout = setTimeout(myGreeting, 3000);
+
+    function myGreeting() {
+        console.log("sadflkjsdf");
+        $('#alertMassege').addClass('d-none');
+        clearTimeout(myTimeout);
+    }
+</script>
+
+@if (Session::has('null_form'))
+    <script>
+        swal('وبخښئ!', "{!! Session::get('null_form') !!}", "warning", {
+            button: "وروسته کوښښ وکړئ",
+        });
+    </script>
+@endif
+@if (Session::has('program_materials_added'))
+    <script>
+        swal('ډېر ښه!', "{!! Session::get('program_materials_added') !!}", "success", {
+            button: "مننه",
+        });
+    </script>
+@endif
+
+@if (Session::has('warn'))
+    <script>
+        swal('وبخښئ!', "{!! Session::get('warn') !!}", "warning", {
+            button: "وروسته کوښښ وکړئ",
+        });
+    </script>
+@endif
+@if (Session::has('success_questionnaire'))
+    <script>
+        swal('ډېر ښه!', "{!! Session::get('success_questionnaire') !!}", "success", {
+            button: "مننه",
+        });
+    </script>
+@endif
 @section('cutom-js')
-    @if (Session::has('program_materials_added'))
-        <script>
-            swal('ډېر ښه!', "{!! Session::get('program_materials_added') !!}", "success", {
-                button: "مننه",
-            });
-        </script>
-    @endif
+    {{-- <script src="{{ asset('assets/sweet-alert/sweetalert.min.js') }}"></script> --}}
 
 @endsection

@@ -124,7 +124,12 @@
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-        <a href="/user/enrolledPdcProgramInfo/{{ $program_id }}" class="btn btn-primary apply-btn">پروګرامونه ووینی</a>
+        <form action="/user/enrolledPdcProgramInfo/{{ $program_id }}" method="get" id="my_form">
+            <input type="hidden" name="role_id" id="" value="{{ $u_role }}">
+            <a href="#" class="btn btn-primary apply-btn" onclick="document.getElementById('my_form').submit();">پروګرام
+                ووینی</a>
+
+        </form>
         <div class="account-content">
             <!-- <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a> -->
             <div class="container ">
@@ -149,6 +154,8 @@
                         <form action="/user/feedback" method="POST">
                             {{ method_field('POST') }}
                             {{ csrf_field() }}
+                            <input type="hidden" name="role_id" id="" value="{{ $u_role }}">
+
                             @if ($errors->any())
                                 <div class="mb-5" id="alertMassege">
                                     <ul style="list-style-type:none" class="p-0 m-0">
@@ -398,7 +405,7 @@
             });
         </script>
     @endif
-    
+
     <script>
         function colorChanger(option) {
             $(option).addClass('bg-primary');
