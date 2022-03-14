@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Feedback;;
+use App\Models\Feedback;
 
 use App\Models\Fquestionnaire;
 use App\Models\Feedbackcomment;
@@ -49,8 +49,11 @@ class fquestionnaireController extends Controller
                     'feedback_question_category.*' => 'bail|required|string|in:د ورکشاپ/ټرېنینګ مواد,آسانتیاوي,ځاي,عمومي نظر',
                     'feedback_question.*' => 'bail|required|string|max:100',
                 ]);
-                DB::table('feedbacks')->insert(['program_id' => $request->program_id]);
-                $programID =  DB::table('feedbacks')->select('feedbacks.id')->where('created_at', DB::table('feedbacks')->max('created_at'))->get();
+                $newFeedback = DB::table('feedbacks')->insert(['program_id' => $request->program_id]);
+
+                $programID =  DB::table('feedbacks')->where('program_id', $request->program_id)->get();
+                // return $programID[0]->program_id;
+                //  =  DB::table('feedbacks')->select('feedbacks.id')->where('created_at', DB::table('feedbacks')->max('created_at'))->get();
                 for ($index = 0; $index < count($request->feedback_question); $index++) {
                     $questionnairQuestion = new Fquestionnaire;
                     $questionnairQuestion->question_category = $request->feedback_question_category[$index];

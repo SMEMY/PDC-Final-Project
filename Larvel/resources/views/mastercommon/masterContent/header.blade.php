@@ -29,14 +29,18 @@
         <ul class="nav user-menu">
             <li class="nav-item dropdown has-arrow main-drop">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                    <span class="user-img"><img src="{{asset('assets/img/profiles/avatar-21.jpg')}}" alt="">
+                    <span class="user-img"><img src="{{ asset('assets/img/profiles/avatar-21.jpg') }}" alt="">
                         <span class="status online"></span></span>
                     <span>اکونټ معلومات</span>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/user/profile/{{ auth()->user()->id }}">My Profile</a>
+                    <a class="dropdown-item" href="/user/profile/{{ auth()->user()->id }}">زما معلومات</a>
                     {{-- <a class="dropdown-item" href="settings.html">Settings</a> --}}
-                    <a class="dropdown-item" href="/logout">Logout</a>
+                    <a class="dropdown-item" href="/logout"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">د سیسټم څخه وتل</a>
+                    <form id="logout-form" action="/logout" method="POST">
+                        @csrf
+                    </form>
                 </div>
             </li>
         </ul>

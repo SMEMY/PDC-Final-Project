@@ -26,6 +26,7 @@ class reportController extends Controller
                 // return "quarter";
                 $countPrograms = 0;
                 $countEduPrograms = 0;
+
                 return view('admin.pdc-program-quarter-report', compact('countPrograms', 'countEduPrograms'));
             } elseif ($request->path() === 'admin/manualReport') {
                 return view('admin.pdc-program-manual-report');
@@ -70,6 +71,8 @@ class reportController extends Controller
                     return back()->with('not-report-found', 'دا میاشت کي هیڅ پروګرام ندی رامنځته سوی!');
                 }
                 return view('admin.pdc-program-monthly-report-test', compact('programs', 'countPrograms', 'eduPrograms', 'countEduPrograms'));
+            } elseif ($request->path() == 'admin/quarterReport') {
+                return "skdfhsdkjfhsadfa";
             }
         }
     }
